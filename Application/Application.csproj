@@ -6,10 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Mapping\" />
-    <Folder Include="DTO\" />
-    <Folder Include="Services\" />
+    <Folder Include="Common\Interfaces\" />
+    <Folder Include="Common\Mapping\" />
+    <Folder Include="Common\" />
+    <Folder Include="Courses\Commands\" />
+    <Folder Include="Courses\Queries\" />
   </ItemGroup>
 
 </Project>
