@@ -4,7 +4,7 @@ using System.Text;
 
 namespace E_Learning.Domain.Model
 {
-    class Courses
+   public class Courses
     {
         public int Id { get; set; }
 

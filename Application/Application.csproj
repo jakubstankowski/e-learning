@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+	  <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>E_Learning.Application</RootNamespace>
   </PropertyGroup>
 
@@ -11,6 +11,11 @@
     <Folder Include="Common\" />
     <Folder Include="Courses\Commands\" />
     <Folder Include="Courses\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\WebUI\WebUI.csproj" />
   </ItemGroup>
 
 </Project>

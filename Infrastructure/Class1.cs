@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace E_Learning.Infrastructure
+namespace Infrastructure
 {
     public class Class1
     {
