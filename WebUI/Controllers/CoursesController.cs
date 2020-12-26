@@ -2,13 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Infrastructure.Persistance;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Learning.Controllers
 {
+    
     public class CoursesController : Controller
     {
+        private Context _context;
+
+        public CoursesController(Context context)
+        {
+            _context = context;
+        }
+
         // GET: CoursesController
         public ActionResult Index()
         {
