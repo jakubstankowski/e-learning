@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using E_Learning.Domain.Model;
 
 namespace E_Learning.Application.Common.Interfaces
 {
-   public  interface ICoursesServices
+    public interface ICoursesServices
     {
         public IEnumerable<Courses> GetAllCourses();
 
