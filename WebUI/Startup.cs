@@ -1,6 +1,8 @@
 using System.Text;
+using E_Learning.Application.Common.Interfaces;
 using Infrastructure.Identity;
 using Infrastructure.Persistance;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +27,7 @@ namespace E_Learning
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Context>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ELearningConnection")));
+            services.AddTransient<ICoursesServices, CoursesServices>();
 
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<Context>();
