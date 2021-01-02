@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Threading.Tasks;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Domain.Model;
 using Infrastructure.Persistance;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Learning.Controllers
@@ -15,14 +11,11 @@ namespace E_Learning.Controllers
     [Route("api/[controller]")]
     public class CoursesController : ControllerBase
     {
-        private Context _context;
-        private ICoursesServices _coursesServices;
+        private readonly ICoursesServices _coursesServices;
 
-        public CoursesController(Context context, ICoursesServices coursesServices)
+        public CoursesController(ICoursesServices coursesServices)
         {
-            _context = context;
             _coursesServices = coursesServices;
-
         }
 
         // GET: CoursesController

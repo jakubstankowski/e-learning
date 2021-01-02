@@ -13,7 +13,7 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            services.AddSingleton<ICoursesServices, CoursesServices>();
+            services.AddTransient<ICoursesServices, CoursesServices>();
 
             return services;
         }
