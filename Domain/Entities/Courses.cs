@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace E_Learning.Domain.Model
+﻿namespace E_Learning.Domain.Entities
 {
-   public class Courses
+    public  class Courses
     {
         public int Id { get; set; }
 
@@ -13,6 +9,5 @@ namespace E_Learning.Domain.Model
         public string Description { get; set; }
 
         public string VideoUrl { get; set; }
-
     }
 }

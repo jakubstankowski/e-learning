@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Threading.Tasks;
 using E_Learning.Application.Common.Interfaces;
-using E_Learning.Domain.Model;
-using Infrastructure.Persistance;
+using E_Learning.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Learning.Controllers

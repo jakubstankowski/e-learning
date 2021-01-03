@@ -4,6 +4,7 @@ using Infrastructure;
 using Infrastructure.Identity;
 using Infrastructure.Persistance;
 using Infrastructure.Services;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -50,6 +51,7 @@ namespace E_Learning
 
             services.AddControllers();
             services.AddInfrastructure();
+            services.AddMediatR(typeof(Startup));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "E_Learning", Version = "v1" });

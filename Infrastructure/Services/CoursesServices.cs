@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using E_Learning.Application.Common.Interfaces;
-using E_Learning.Domain.Model;
+using E_Learning.Domain.Entities;
 using Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 

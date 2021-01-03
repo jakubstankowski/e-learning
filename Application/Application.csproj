@@ -6,12 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\Mapping\" />
     <Folder Include="Courses\Commands\" />
-    <Folder Include="Courses\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="MediatR" Version="9.0.0" />
   </ItemGroup>
 
