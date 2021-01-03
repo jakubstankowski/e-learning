@@ -1,5 +1,6 @@
 using System.Text;
 using E_Learning.Application.Common.Interfaces;
+using E_Learning.Application.Common.Mapping;
 using Infrastructure;
 using Infrastructure.Identity;
 using Infrastructure.Persistance;
@@ -14,6 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using AutoMapper;
+
 
 namespace E_Learning
 {
@@ -29,7 +32,9 @@ namespace E_Learning
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Context>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ELearningConnection")));
-          
+
+            services.AddAutoMapper(typeof(MappingProfiles));
+
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<Context>();
 
