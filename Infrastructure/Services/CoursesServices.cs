@@ -11,19 +11,20 @@ namespace Infrastructure.Services
     {
         private readonly Context _context;
 
+
         public CoursesServices(Context context)
         {
             _context = context;
         }
 
-        public async Task AddNewCourses(Courses courses)
+        public async Task AddNewCourses(Course courses)
         {
             _context.Courses.Add(courses);
            await  _context.SaveChangesAsync();
         }
 
 
-        public async Task<IEnumerable<Courses>> GetAllCourses()
+        public async Task<IEnumerable<Course>> GetAllCourses()
         {
             return await _context.Courses.ToListAsync();
         }

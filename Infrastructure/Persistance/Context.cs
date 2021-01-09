@@ -7,7 +7,7 @@ namespace Infrastructure.Persistance
 {
     public class Context : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Courses> Courses { get; set; }
+        public DbSet<Course> Courses { get; set; }
 
         public Context(DbContextOptions options) : base(options)
         {

@@ -1,6 +1,6 @@
 ﻿namespace E_Learning.Domain.Entities
 {
-    public  class Courses
+    public  class Course
     {
         public int Id { get; set; }
 

@@ -33,6 +33,7 @@ namespace E_Learning
         {
             services.AddDbContext<Context>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ELearningConnection")));
 
+
             services.AddAutoMapper(typeof(MappingProfiles));
 
             services.AddDefaultIdentity<ApplicationUser>()
@@ -57,6 +58,7 @@ namespace E_Learning
             services.AddControllers();
             services.AddInfrastructure();
             services.AddMediatR(typeof(Startup));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "E_Learning", Version = "v1" });

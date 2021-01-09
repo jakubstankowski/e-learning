@@ -7,8 +7,8 @@ namespace E_Learning.Application.Common.Interfaces
     public interface ICoursesServices
     {
        
-        public Task<IEnumerable<Courses>> GetAllCourses();
+        public Task<IEnumerable<Course>> GetAllCourses();
 
-        public Task AddNewCourses(Courses courses);
+        public Task AddNewCourses(Course courses);
     }
 }
