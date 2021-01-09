@@ -6,6 +6,7 @@ using AutoMapper;
 using E_Learning.Application.Common.Dto;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Common.Mapping;
+using E_Learning.Application.Courses.Commands;
 using E_Learning.Application.Courses.Queries;
 using E_Learning.Application.Courses1.Queries;
 using E_Learning.Domain.Entities;
@@ -55,10 +56,11 @@ namespace E_Learning.Controllers
 
         [HttpPost]
         [Description("Add new courses")]
-        public async Task<IActionResult> Create(Course courses)
+        public async Task<IActionResult> Create(CreateCourseCommand command)
         {
-            await _coursesServices.AddNewCourses(courses);
-            return Ok(200);
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
         }
 
 
