@@ -20,7 +20,7 @@ namespace Infrastructure.Services
         public async Task AddNewCourses(Course courses)
         {
             _context.Courses.Add(courses);
-           await  _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
 
@@ -29,5 +29,9 @@ namespace Infrastructure.Services
             return await _context.Courses.ToListAsync();
         }
 
+        public async Task<Course> GetCourseById(int id)
+        {
+            return await _context.Courses.FirstOrDefaultAsync(c => c.Id == id);
+        }
     }
 }

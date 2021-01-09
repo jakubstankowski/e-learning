@@ -10,5 +10,7 @@ namespace E_Learning.Application.Common.Interfaces
         public Task<IEnumerable<Course>> GetAllCourses();
 
         public Task AddNewCourses(Course courses);
+
+        public Task<Course> GetCourseById(int id);
     }
 }

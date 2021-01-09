@@ -47,5 +47,15 @@ namespace E_Learning.Controllers
             await _coursesServices.AddNewCourses(courses);
             return Ok(200);
         }
+
+
+        [HttpGet("{id}")]
+        [Description("Get course")]
+        public async Task<ActionResult<CourseDto>> GetCourse(int id)
+        {
+            var course = await _coursesServices.GetCourseById(id);
+
+            return Ok(_mapper.Map<Course, CourseDto>(course));
+        }
     }
 }
