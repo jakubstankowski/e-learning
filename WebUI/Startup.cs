@@ -65,6 +65,8 @@ namespace E_Learning
                 typeof(GetAllCoursesQuery)
             });
 
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "E_Learning", Version = "v1" });
