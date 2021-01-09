@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -24,7 +25,7 @@ namespace E_Learning.Controllers
         {
             _coursesServices = coursesServices;
             _mapper = mapper;
-            _mediator = mediator;
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
         // GET: CoursesController
@@ -36,6 +37,7 @@ namespace E_Learning.Controllers
             var result = await _mediator.Send(query);
 
             return Ok(result);
+
         }
 
         [HttpPost]

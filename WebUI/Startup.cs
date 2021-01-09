@@ -16,7 +16,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using AutoMapper;
-
+using System;
+using E_Learning.Application.Courses1.Queries;
 
 namespace E_Learning
 {
@@ -57,7 +58,12 @@ namespace E_Learning
 
             services.AddControllers();
             services.AddInfrastructure();
-            services.AddMediatR(typeof(Startup));
+          
+
+            services.AddMediatR(new Type[]
+            {
+                typeof(GetAllCoursesQuery)
+            });
 
             services.AddSwaggerGen(c =>
             {
