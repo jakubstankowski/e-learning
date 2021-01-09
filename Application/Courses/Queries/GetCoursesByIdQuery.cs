@@ -7,9 +7,9 @@ namespace E_Learning.Application.Courses.Queries
     {
         public int Id { get; set; }
 
-        public GetCoursesByIdQuery(int Id)
+        public GetCoursesByIdQuery(int id)
         {
-            this.Id = Id;
+            this.Id = id;
         }
 
     }

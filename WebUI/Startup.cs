@@ -18,6 +18,7 @@ using Microsoft.OpenApi.Models;
 using AutoMapper;
 using System;
 using E_Learning.Application.Courses1.Queries;
+using E_Learning.Application.Courses.Queries;
 
 namespace E_Learning
 {
@@ -62,7 +63,8 @@ namespace E_Learning
 
             services.AddMediatR(new Type[]
             {
-                typeof(GetAllCoursesQuery)
+                typeof(GetAllCoursesQuery),
+                typeof(GetCoursesByIdQuery)
             });
 
 

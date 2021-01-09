@@ -6,6 +6,7 @@ using AutoMapper;
 using E_Learning.Application.Common.Dto;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Common.Mapping;
+using E_Learning.Application.Courses.Queries;
 using E_Learning.Application.Courses1.Queries;
 using E_Learning.Domain.Entities;
 using MediatR;
@@ -40,6 +41,18 @@ namespace E_Learning.Controllers
 
         }
 
+
+        [HttpGet("{id}")]
+        [Description("Get course")]
+        public async Task<ActionResult<CourseDto>> GetCourse(int id)
+        {
+            var query = new GetCoursesByIdQuery(id);
+
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
+
         [HttpPost]
         [Description("Add new courses")]
         public async Task<IActionResult> Create(Course courses)
@@ -49,13 +62,5 @@ namespace E_Learning.Controllers
         }
 
 
-        [HttpGet("{id}")]
-        [Description("Get course")]
-        public async Task<ActionResult<CourseDto>> GetCourse(int id)
-        {
-            var course = await _coursesServices.GetCourseById(id);
-
-            return Ok(_mapper.Map<Course, CourseDto>(course));
-        }
     }
 }
