@@ -19,13 +19,11 @@ namespace E_Learning.Controllers
     [Route("api/[controller]")]
     public class CoursesController : ControllerBase
     {
-        private readonly ICoursesServices _coursesServices;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
 
-        public CoursesController(ICoursesServices coursesServices, IMapper mapper, IMediator mediator)
+        public CoursesController( IMapper mapper, IMediator mediator)
         {
-            _coursesServices = coursesServices;
             _mapper = mapper;
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
@@ -48,7 +46,6 @@ namespace E_Learning.Controllers
         public async Task<ActionResult<CourseDto>> GetCourse(int id)
         {
             var query = new GetCoursesByIdQuery(id);
-
             var result = await _mediator.Send(query);
 
             return Ok(result);

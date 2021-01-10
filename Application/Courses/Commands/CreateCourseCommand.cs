@@ -23,12 +23,12 @@ namespace E_Learning.Application.Courses.Commands
 
     public class CreateCourseHandler : IRequestHandler<CreateCourseCommand, CourseDto>
     {
-        private readonly ICoursesServices _coursesServices;
+        private readonly IContext _context;
         private readonly IMapper _mapper;
 
-        public CreateCourseHandler(ICoursesServices coursesServices, IMapper mapper)
+        public CreateCourseHandler(IContext context, IMapper mapper)
         {
-            _coursesServices = coursesServices;
+            _context = context;
             _mapper = mapper;
         }
 
@@ -41,9 +41,10 @@ namespace E_Learning.Application.Courses.Commands
                 VideoUrl = request.VideoUrl
             };
 
-          
 
-            await _coursesServices.AddNewCourses(course);
+
+            _context.Courses.Add(course);
+            await _context.SaveChangesAsync();
 
             return _mapper.Map<Course, CourseDto>(course);
         }

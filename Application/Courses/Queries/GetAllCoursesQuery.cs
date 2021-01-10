@@ -6,6 +6,7 @@ using E_Learning.Application.Common.Dto;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.Courses1.Queries
 {
@@ -15,18 +16,18 @@ namespace E_Learning.Application.Courses1.Queries
 
     public class GetAllCoursesHandler : IRequestHandler<GetAllCoursesQuery, IEnumerable<CourseDto>>
     {
-        private readonly ICoursesServices _coursesServices;
+        private readonly IContext _context;
         private readonly IMapper _mapper;
 
-        public GetAllCoursesHandler(ICoursesServices coursesServices, IMapper mapper)
+        public GetAllCoursesHandler(IContext context, IMapper mapper)
         {
-            _coursesServices = coursesServices;
+            _context = context;
             _mapper = mapper;
         }
 
         public async Task<IEnumerable<CourseDto>> Handle(GetAllCoursesQuery request, CancellationToken cancellationToken)
         {
-            var courses = await _coursesServices.GetAllCourses();
+            var courses = await _context.Courses.ToListAsync();
             return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
         }
     }

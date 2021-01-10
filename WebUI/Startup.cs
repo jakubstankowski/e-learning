@@ -4,7 +4,6 @@ using E_Learning.Application.Common.Mapping;
 using Infrastructure;
 using Infrastructure.Identity;
 using Infrastructure.Persistance;
-using Infrastructure.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
