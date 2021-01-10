@@ -56,7 +56,7 @@ namespace E_Learning.Controllers
 
         [HttpPost]
         [Description("Add new courses")]
-        public async Task<IActionResult> Create(CreateCourseCommand command)
+        public async Task<ActionResult<CourseDto>> Create(CreateCourseCommand command)
         {
             var result = await _mediator.Send(command);
 
