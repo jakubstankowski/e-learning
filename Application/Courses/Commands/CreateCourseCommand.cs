@@ -36,15 +36,12 @@ namespace E_Learning.Application.Courses.Commands
         {
             var course = new Course
             {
-                Id = request.Id,
                 Title = request.Title,
                 Description = request.Description,
                 VideoUrl = request.VideoUrl
             };
 
-            course.Title = request.Title;
-            course.VideoUrl = request.VideoUrl;
-            course.Description = request.Description;
+          
 
             await _coursesServices.AddNewCourses(course);
 
