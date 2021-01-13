@@ -70,6 +70,13 @@ namespace E_Learning.Controllers
        [HttpPut("{id}")]
         public async Task<ActionResult<CourseDto>> Update(int id, UpdateCourseCommand command)
         {
+            if (id != command.Id)
+            {
+                return BadRequest();
+            }
+
+
+
             var result = await _mediator.Send(command);
 
             return Ok(result);
