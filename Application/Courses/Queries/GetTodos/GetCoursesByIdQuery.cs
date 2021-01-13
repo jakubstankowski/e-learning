@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using E_Learning.Application.Common.Dto;
+using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Domain.Entities;
 using MediatR;
@@ -37,7 +38,7 @@ namespace E_Learning.Application.Courses.Queries
 
                 if (course == null)
                 {
-                    return null;
+                    throw new NotFoundException(nameof(Course), request.Id);
                 }
 
                 return _mapper.Map<Course, CourseDto>(course);

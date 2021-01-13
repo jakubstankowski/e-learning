@@ -1,6 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
+using E_Learning.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,7 +30,7 @@ namespace E_Learning.Application.Courses.Commands.DeleteCourse
 
             if (course == null)
             {
-                throw new NotFoundException(nameof(TodoList), request.Id);
+                throw new NotFoundException(nameof(Course), request.Id);
             }
 
             _context.Courses.Remove(course);
