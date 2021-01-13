@@ -7,6 +7,7 @@ using E_Learning.Application.Common.Dto;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Common.Mapping;
 using E_Learning.Application.Courses.Commands;
+using E_Learning.Application.Courses.Commands.DeleteCourse;
 using E_Learning.Application.Courses.Queries;
 using E_Learning.Application.Courses1.Queries;
 using E_Learning.Domain.Entities;
@@ -22,7 +23,7 @@ namespace E_Learning.Controllers
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
 
-        public CoursesController( IMapper mapper, IMediator mediator)
+        public CoursesController(IMapper mapper, IMediator mediator)
         {
             _mapper = mapper;
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
@@ -30,7 +31,6 @@ namespace E_Learning.Controllers
 
         // GET: CoursesController
         [HttpGet]
-        [Description("Get courses list")]
         public async Task<ActionResult<IEnumerable<CourseDto>>> Get()
         {
             var query = new GetAllCoursesQuery();
@@ -42,7 +42,6 @@ namespace E_Learning.Controllers
 
 
         [HttpGet("{id}")]
-        [Description("Get course")]
         public async Task<ActionResult<CourseDto>> GetCourse(int id)
         {
             var query = new GetCoursesByIdQuery(id);
@@ -52,10 +51,17 @@ namespace E_Learning.Controllers
         }
 
         [HttpPost]
-        [Description("Add new courses")]
         public async Task<ActionResult<CourseDto>> Create(CreateCourseCommand command)
         {
             var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<CourseDto>> Delete(int id)
+        {
+            var result = await _mediator.Send(new DeleteCourseCommand { Id = id });
 
             return Ok(result);
         }
