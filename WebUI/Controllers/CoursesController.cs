@@ -8,6 +8,7 @@ using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Common.Mapping;
 using E_Learning.Application.Courses.Commands;
 using E_Learning.Application.Courses.Commands.DeleteCourse;
+using E_Learning.Application.Courses.Commands.UpdateCourse;
 using E_Learning.Application.Courses.Queries;
 using E_Learning.Application.Courses1.Queries;
 using E_Learning.Domain.Entities;
@@ -29,7 +30,7 @@ namespace E_Learning.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        // GET: CoursesController
+      
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CourseDto>>> Get()
         {
@@ -62,6 +63,14 @@ namespace E_Learning.Controllers
         public async Task<ActionResult<int>> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteCourseCommand { Id = id });
+
+            return Ok(result);
+        }
+
+       [HttpPut("{id}")]
+        public async Task<ActionResult<CourseDto>> Update(int id, UpdateCourseCommand command)
+        {
+            var result = await _mediator.Send(command);
 
             return Ok(result);
         }

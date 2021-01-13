@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using E_Learning.Application.Common.Dto;
+using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
+using E_Learning.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.Courses.Commands.UpdateCourse
 {
@@ -25,21 +29,32 @@ namespace E_Learning.Application.Courses.Commands.UpdateCourse
     public class UpdateCourseCommandHandler : IRequestHandler<UpdateCourseCommand, CourseDto>
     {
         private readonly IContext _context;
+        private readonly IMapper _mapper;
 
-        public UpdateCourseCommandHandler(IContext context)
+        public UpdateCourseCommandHandler(IContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
 
-        public Task<CourseDto> Handle(UpdateCourseCommand request, CancellationToken cancellationToken)
+        public async Task<CourseDto> Handle(UpdateCourseCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == request.Id);
 
 
+            if (course == null)
+            {
+                throw new NotFoundException(nameof(Course), request.Id);
+            }
 
+            course.Title = request.Title;
+            course.VideoUrl = request.VideoUrl;
+            course.Description = request.Description;
 
+            await _context.SaveChangesAsync();
 
+            return _mapper.Map<Course, CourseDto>(course);
         }
     }
 }
