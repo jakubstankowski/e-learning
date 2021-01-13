@@ -8,14 +8,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.Courses.Commands.DeleteCourse
 {
-    public class DeleteCourseCommand : IRequest
+    public class DeleteCourseCommand : IRequest<int>
     {
         public int Id { get; set; }
 
     }
 
 
-    public class DeleteCourseHandler : IRequestHandler<DeleteCourseCommand>
+    public class DeleteCourseHandler : IRequestHandler<DeleteCourseCommand, int>
     {
         private readonly IContext _context;
 
@@ -24,7 +24,7 @@ namespace E_Learning.Application.Courses.Commands.DeleteCourse
             _context = context;
         }
 
-        public async Task<Unit> Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
         {
             var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == request.Id);
 
@@ -34,10 +34,13 @@ namespace E_Learning.Application.Courses.Commands.DeleteCourse
             }
 
             _context.Courses.Remove(course);
+           
             await _context.SaveChangesAsync();
 
 
-            return Unit.Value;
+            return course.Id;
         }
+
+       
     }
 }
