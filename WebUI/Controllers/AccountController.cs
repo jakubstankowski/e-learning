@@ -30,6 +30,7 @@ namespace E_Learning.Controllers
             var user = new ApplicationUser
             {
                 Email = registerDto.Email,
+                UserName = registerDto.Email
             };
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
