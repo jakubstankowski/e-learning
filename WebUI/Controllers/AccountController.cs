@@ -17,11 +17,13 @@ namespace E_Learning.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IIdentityService _identityService;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager, IIdentityService identityService)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IIdentityService identityService)
         {
             _userManager = userManager;
             _identityService = identityService;
+            _signInManager = signInManager;
         }
 
         [HttpPost("register")]
@@ -40,16 +42,41 @@ namespace E_Learning.Controllers
                 return BadRequest();
             }
 
-            /*  return new UserDto
-              {
-                  Token = _identityService.GenerateToken(user),
-                  Email = user.Email
-              };*/
+            /*     return new UserDto
+                 {
+                     Token = _identityService.GenerateToken(user),
+                     Email = user.Email
+                 };*/
 
             return new UserDto
             {
                 Token = "token",
                 Email = user.Email
+            };
+
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        {
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+
+            if(user == null)
+            {
+                return Unauthorized();
+            }
+
+            var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
+
+            if (!result.Succeeded)
+            {
+                return Unauthorized();
+            }
+
+            return new UserDto
+            {
+                Email = user.Email,
+                Token = "token"
             };
 
         }
