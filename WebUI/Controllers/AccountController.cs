@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using E_Learning.Application.Common.Interfaces;
 using Infrastructure.Identity;
 using Infrastructure.Identity.dto;
 using Microsoft.AspNetCore.Http;
@@ -15,10 +16,12 @@ namespace E_Learning.Controllers
     public class AccountController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IIdentityService _identityService;
 
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public AccountController(UserManager<ApplicationUser> userManager, IIdentityService identityService)
         {
             _userManager = userManager;
+            _identityService = identityService;
         }
 
         [HttpPost("register")]
@@ -35,6 +38,12 @@ namespace E_Learning.Controllers
             {
                 return BadRequest();
             }
+
+            /*  return new UserDto
+              {
+                  Token = _identityService.GenerateToken(user),
+                  Email = user.Email
+              };*/
 
             return new UserDto
             {
