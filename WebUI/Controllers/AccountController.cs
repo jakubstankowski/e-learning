@@ -42,17 +42,13 @@ namespace E_Learning.Controllers
                 return BadRequest();
             }
 
-            /*     return new UserDto
-                 {
-                     Token = _identityService.GenerateToken(user),
-                     Email = user.Email
-                 };*/
-
-            return new UserDto
+          return new UserDto
             {
-                Token = "token",
+                Token = _identityService.GenerateToken(user),
                 Email = user.Email
             };
+
+          
 
         }
 
@@ -61,7 +57,7 @@ namespace E_Learning.Controllers
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
-            if(user == null)
+            if (user == null)
             {
                 return Unauthorized();
             }
@@ -75,11 +71,13 @@ namespace E_Learning.Controllers
 
             return new UserDto
             {
-                Email = user.Email,
-                Token = "token"
+                Token = _identityService.GenerateToken(user),
+                Email = user.Email
             };
 
         }
+
+      
     }
 
 

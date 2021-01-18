@@ -59,7 +59,7 @@ namespace E_Learning
 
             services.AddControllers();
             services.AddInfrastructure();
-          
+
 
             services.AddMediatR(new Type[]
             {
