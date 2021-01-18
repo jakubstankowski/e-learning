@@ -24,6 +24,7 @@ namespace Infrastructure.Identity
 
         public string GenerateToken(ApplicationUser user)
         {
+
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
 
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -31,16 +32,19 @@ namespace Infrastructure.Identity
                 Expires = DateTime.UtcNow.AddHours(3),
                 Subject = new ClaimsIdentity(new[]
            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email)
-            }),
-                SigningCredentials = new SigningCredentials(key: securityKey, algorithm: SecurityAlgorithms.HmacSha256Signature)
+                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                 new Claim(ClaimTypes.Email, user.Email)
+             }),
+                SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature),
+                Audience = _config["Jwt:Issuer"],
+                Issuer = _config["Jwt:Issuer"],
             };
 
-            var Securitytoken = new JwtSecurityTokenHandler().CreateToken(tokenDescriptor);
+
+            var token = new JwtSecurityTokenHandler().CreateToken(tokenDescriptor);
 
 
-            return new JwtSecurityTokenHandler().WriteToken(Securitytoken);
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
