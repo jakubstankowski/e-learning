@@ -2,7 +2,7 @@
 
 namespace E_Learning.Domain.Entities
 {
-    public  class Course
+    public class Course
     {
         public int Id { get; set; }
 
@@ -10,7 +10,7 @@ namespace E_Learning.Domain.Entities
 
         public string Description { get; set; }
 
-        public string VideoUrl { get; set; }
+        public ICollection<Lesson> Lessons { get; set; }
 
         public ICollection<ApplicationUser> ApplicationUser { get; set; }
     }

@@ -22,7 +22,7 @@ namespace E_Learning.Application.Courses.Commands.UpdateCourse
 
         public string Description { get; set; }
 
-        public string VideoUrl { get; set; }
+        public ICollection<Lesson> Lessons { get; set; }
 
     }
 
@@ -49,7 +49,6 @@ namespace E_Learning.Application.Courses.Commands.UpdateCourse
             }
 
             course.Title = request.Title;
-            course.VideoUrl = request.VideoUrl;
             course.Description = request.Description;
 
             await _context.SaveChangesAsync();

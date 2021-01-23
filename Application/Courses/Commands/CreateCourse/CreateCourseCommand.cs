@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using E_Learning.Application.Common.Dto;
@@ -16,7 +17,7 @@ namespace E_Learning.Application.Courses.Commands
 
         public string Description { get; set; }
 
-        public string VideoUrl { get; set; }
+        public ICollection<Lesson> Lessons { get; set; }
 
     }
 
@@ -38,7 +39,6 @@ namespace E_Learning.Application.Courses.Commands
             {
                 Title = request.Title,
                 Description = request.Description,
-                VideoUrl = request.VideoUrl
             };
 
 
