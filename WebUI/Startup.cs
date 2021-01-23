@@ -19,6 +19,7 @@ using System;
 using E_Learning.Application.Courses1.Queries;
 using E_Learning.Application.Courses.Queries;
 using E_Learning.Application.Courses.Commands;
+using E_Learning.Domain.Entities;
 
 namespace E_Learning
 {

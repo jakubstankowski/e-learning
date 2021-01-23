@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using E_Learning.Application.Common.Interfaces;
+using E_Learning.Domain.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;

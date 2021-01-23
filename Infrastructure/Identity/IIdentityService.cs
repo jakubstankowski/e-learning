@@ -1,4 +1,5 @@
 ﻿
+using E_Learning.Domain.Entities;
 using Infrastructure.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
