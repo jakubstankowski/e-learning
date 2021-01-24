@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using E_Learning.Application.Common.Dto;
+using E_Learning.Application.Lessons.Queries.GetLessons;
 using E_Learning.Domain.Entities;
 
 namespace E_Learning.Application.Common.Mapping
@@ -9,7 +10,8 @@ namespace E_Learning.Application.Common.Mapping
         public MappingProfiles()
         {
             CreateMap<Course, CourseDto>();
+            CreateMap<Lesson, LessonDto>();
         }
-      
+
     }
 }
