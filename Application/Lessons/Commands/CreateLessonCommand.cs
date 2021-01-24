@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Lessons.Queries.GetLessons;
+using E_Learning.Domain.Entities;
 using MediatR;
 
 namespace E_Learning.Application.Lessons.Commands
@@ -29,6 +30,14 @@ namespace E_Learning.Application.Lessons.Commands
 
         public Task<LessonDto> Handle(CreateLessonCommand request, CancellationToken cancellationToken)
         {
+            var lesson = new Lesson
+            {
+                CourseId = request.CourseId,
+                Description = request.Description,
+                Title  = request.Title,
+                VideoUrl = request.VideoUrl
+            };
+
 
 
 

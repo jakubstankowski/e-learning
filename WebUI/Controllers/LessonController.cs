@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using E_Learning.Application.Common.Interfaces;
+using E_Learning.Application.Lessons.Commands;
+using E_Learning.Application.Lessons.Queries.GetLessons;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Learning.Controllers
@@ -10,10 +14,19 @@ namespace E_Learning.Controllers
     [Route("api/[controller]")]
     public class LessonController : ControllerBase
     {
-        [HttpPost]
-        public IActionResult Index()
+        private readonly IMediator _mediator;
+
+        public LessonController(IMediator mediator)
         {
-            return View();
+            _mediator = mediator;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<LessonDto>> Create(CreateLessonCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
         }
     }
 }
