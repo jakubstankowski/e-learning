@@ -11,13 +11,11 @@ namespace E_Learning.Application.Courses.Commands
 {
     public class CreateCourseCommand : IRequest<CourseDto>
     {
-        public int Id { get; set; }
 
         public string Title { get; set; }
 
         public string Description { get; set; }
 
-        public ICollection<Lesson> Lessons { get; set; }
 
     }
 
