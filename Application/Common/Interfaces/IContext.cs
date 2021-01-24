@@ -9,6 +9,8 @@ namespace E_Learning.Application.Common.Interfaces
     {
         public DbSet<Course> Courses { get; set; }
 
+        public DbSet<Lesson> Lessons { get; set; }
+
         Task<int> SaveChangesAsync();
     }
 }

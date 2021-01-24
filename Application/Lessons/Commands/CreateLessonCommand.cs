@@ -6,6 +6,7 @@ using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Lessons.Queries.GetLessons;
 using E_Learning.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.Lessons.Commands
 {
@@ -23,25 +24,36 @@ namespace E_Learning.Application.Lessons.Commands
 
     public class CreateLessonHandler : IRequestHandler<CreateLessonCommand, LessonDto>
     {
+        private readonly IContext _context;
+        private readonly IMapper _mapper;
+
         public CreateLessonHandler(IContext context, IMapper mapper)
         {
-
+            _context = context;
+            _mapper = mapper;
         }
 
-        public Task<LessonDto> Handle(CreateLessonCommand request, CancellationToken cancellationToken)
+        public async Task<LessonDto> Handle(CreateLessonCommand request, CancellationToken cancellationToken)
         {
             var lesson = new Lesson
             {
                 CourseId = request.CourseId,
                 Description = request.Description,
-                Title  = request.Title,
+                Title = request.Title,
                 VideoUrl = request.VideoUrl
             };
 
+           
+            var course = await _context.Courses
+                .Include(c => c.Lessons)
+                .FirstOrDefaultAsync(c => c.Id == request.CourseId);
+
+            course.Lessons.Add(lesson);
+
+            await _context.SaveChangesAsync();
 
 
-
-            throw new NotImplementedException();
+            return _mapper.Map<Lesson, LessonDto>(lesson);
         }
     }
 
