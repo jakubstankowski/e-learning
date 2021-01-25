@@ -28,5 +28,15 @@ namespace E_Learning.Controllers
 
             return Ok(result);
         }
+
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<LessonDto>>> GetAll()
+        {
+            var query = new GetAllLessonsQuery();
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
     }
 }
