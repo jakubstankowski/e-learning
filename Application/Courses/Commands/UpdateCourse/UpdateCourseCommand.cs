@@ -22,7 +22,6 @@ namespace E_Learning.Application.Courses.Commands.UpdateCourse
 
         public string Description { get; set; }
 
-        public ICollection<Lesson> Lessons { get; set; }
 
     }
 
