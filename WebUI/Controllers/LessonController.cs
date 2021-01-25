@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Lessons.Commands;
+using E_Learning.Application.Lessons.Commands.DeleteLesson;
 using E_Learning.Application.Lessons.Queries.GetLessons;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -44,6 +45,14 @@ namespace E_Learning.Controllers
         {
             var query = new GetLessonByIdQuery(id);
             var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<int>> Delete(int id)
+        {
+            var result = await _mediator.Send(new DeleteLessonCommand { Id = id });
 
             return Ok(result);
         }
