@@ -6,20 +6,33 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using E_Learning.Application.Common.Interfaces;
+using E_Learning.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.Lessons.Queries.GetLessons
 {
     public class GetAllLessonsQuery : IRequest<IEnumerable<LessonDto>>
     {
-      
+     
     }
 
     public class GetAllLessonsHandler : IRequestHandler<GetAllLessonsQuery, IEnumerable<LessonDto>>
     {
-        public Task<IEnumerable<LessonDto>> Handle(GetAllLessonsQuery request, CancellationToken cancellationToken)
+        private readonly IMapper _mapper;
+        private readonly IContext _context;
+
+        public GetAllLessonsHandler(IMapper mapper, IContext context)
         {
-            throw new NotImplementedException();
+            _mapper = mapper;
+            _context = context;
+        }
+        public async Task<IEnumerable<LessonDto>> Handle(GetAllLessonsQuery request, CancellationToken cancellationToken)
+        {
+            var lessons = await _context.Lessons.ToListAsync();
+
+            return _mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons);
+
         }
     }
 
