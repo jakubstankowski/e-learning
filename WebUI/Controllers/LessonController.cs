@@ -38,5 +38,14 @@ namespace E_Learning.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<LessonDto>> GetLesson(int id)
+        {
+            var query = new GetLessonByIdQuery(id);
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
     }
 }

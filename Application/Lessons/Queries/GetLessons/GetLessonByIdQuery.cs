@@ -39,7 +39,7 @@ namespace E_Learning.Application.Lessons.Queries.GetLessons
         {
             var lesson = await _context.Lessons.FirstOrDefaultAsync(l => l.Id == request.Id);
 
-            if(lesson == null)
+            if (lesson == null)
             {
                 throw new NotFoundException(nameof(Course), request.Id);
             }
