@@ -20,6 +20,7 @@ using E_Learning.Application.Courses1.Queries;
 using E_Learning.Application.Courses.Queries;
 using E_Learning.Application.Courses.Commands;
 using E_Learning.Domain.Entities;
+using StackExchange.Redis;
 
 namespace E_Learning
 {
@@ -36,6 +37,11 @@ namespace E_Learning
         {
             services.AddDbContext<Context>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ELearningConnection")));
 
+            services.AddSingleton<IConnectionMultiplexer>(c => {
+                var configuration = ConfigurationOptions.Parse(Configuration
+                    .GetConnectionString("Redis"), true);
+                return ConnectionMultiplexer.Connect(configuration);
+            });
 
             services.AddAutoMapper(typeof(MappingProfiles));
 
