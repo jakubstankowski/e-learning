@@ -31,7 +31,7 @@ namespace E_Learning.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ActionResult<CustomerBasket>> Get(string id)
         {
             var query = new GetBasketByIdQuery(id);
