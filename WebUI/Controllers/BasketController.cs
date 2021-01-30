@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using E_Learning.Application.Basket.Command.DeleteBasket;
 using E_Learning.Application.Basket.Command.UpdateBasket;
 using E_Learning.Application.Basket.Queries.GetBasket;
 using E_Learning.Domain.Entities;
@@ -34,6 +35,15 @@ namespace E_Learning.Controllers
         public async Task<ActionResult<CustomerBasket>> Get(string id)
         {
             var query = new GetBasketByIdQuery(id);
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<bool>> Delete(string id)
+        {
+            var query = new DeleteBasketCommand(id);
             var result = await _mediator.Send(query);
 
             return Ok(result);
