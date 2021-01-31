@@ -6,7 +6,25 @@ using System.Threading.Tasks;
 
 namespace E_Learning.Domain.Entities.OrderAggregate
 {
-    class OrderItem
+    public class OrderItem
     {
+        public OrderItem()
+        {
+        }
+
+        public OrderItem(CourseItemOrdered itemOrdered, decimal price)
+        {
+            ItemOrdered = itemOrdered;
+            Price = price;
+        }
+
+        public int Id { get; set; }
+
+        public CourseItemOrdered ItemOrdered { get; set; }
+
+        public decimal Price { get; set; }
+
+
+
     }
 }

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace E_Learning.Domain.Entities.OrderAggregate
 {
-    class CourseItemOrdered
+    public class CourseItemOrdered
     {
+        public int CourseItemId { get; set; }
+
+        public string CourseTitle { get; set; }
+
     }
 }
