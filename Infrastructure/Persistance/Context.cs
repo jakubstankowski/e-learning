@@ -33,6 +33,7 @@ namespace Infrastructure.Persistance
         {
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
         }
 
 
