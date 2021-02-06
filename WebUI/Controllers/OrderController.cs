@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using E_Learning.Application.Order.Commands;
+using E_Learning.Application.Orders.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

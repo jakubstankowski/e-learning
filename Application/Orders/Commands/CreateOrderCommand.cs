@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using E_Learning.Application.Basket.Queries.GetBasket;
 using MediatR;
 
-namespace E_Learning.Application.Order.Commands
+namespace E_Learning.Application.Orders.Commands
 {
     public class CreateOrderCommand : IRequest<bool>
     {
