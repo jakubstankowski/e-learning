@@ -17,9 +17,17 @@ namespace E_Learning.Application.Orders.Commands
 
     public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, bool>
     {
-        public Task<bool> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+        private readonly IMediator _mediator;
+
+        public CreateOrderHandler(IMediator mediator)
         {
-            var basket = new GetBasketByIdQuery(request.BasketId);
+            _mediator = mediator;
+        }
+
+        public async Task<bool> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+        {
+            var query = new GetBasketByIdQuery(request.BasketId);
+            var result = await _mediator.Send(query);
 
 
 
