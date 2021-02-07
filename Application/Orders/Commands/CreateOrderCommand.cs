@@ -50,10 +50,15 @@ namespace E_Learning.Application.Orders.Commands
 
                 var itemOrdered = new CourseItemOrdered(courseItem.Id, courseItem.Title);
 
-              //  var orderItem = new OrderItem(itemOrdered, courseItem.Price);
+                var orderItem = new OrderItem(itemOrdered, courseItem.Price);
 
+                items.Add(orderItem);
 
             }
+
+            var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal);
+
+
 
             throw new NotImplementedException();
         }
