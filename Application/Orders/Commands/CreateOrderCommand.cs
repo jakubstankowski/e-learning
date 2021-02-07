@@ -38,7 +38,6 @@ namespace E_Learning.Application.Orders.Commands
 
 
 
-
             var items = new List<OrderItem>();
             foreach (var item in basket.Items)
             {
@@ -49,8 +48,11 @@ namespace E_Learning.Application.Orders.Commands
                     throw new NotFoundException(nameof(Course), item.Id);
                 }
 
+                var itemOrdered = new CourseItemOrdered(courseItem.Id, courseItem.Title);
 
-             
+              //  var orderItem = new OrderItem(itemOrdered, courseItem.Price);
+
+
             }
 
             throw new NotImplementedException();
