@@ -10,6 +10,8 @@ namespace E_Learning.Domain.Entities
 
         public string Description { get; set; }
 
+        public int Price { get; set; }
+
         public ICollection<Lesson> Lessons { get; set; }
 
         public ICollection<ApplicationUser> ApplicationUser { get; set; }
