@@ -18,6 +18,7 @@ namespace E_Learning.Application.Orders.Commands
     {
         public string BasketId { get; set; }
 
+
     }
 
     public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, bool>
@@ -56,9 +57,10 @@ namespace E_Learning.Application.Orders.Commands
 
             }
 
-            var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal);
+            var order = new Order(items, "email@email.com");
 
-
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
 
             throw new NotImplementedException();
         }
