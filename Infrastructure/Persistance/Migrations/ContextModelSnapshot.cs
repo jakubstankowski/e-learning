@@ -109,6 +109,9 @@ namespace Infrastructure.Persistance.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
