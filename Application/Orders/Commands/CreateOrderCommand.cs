@@ -34,6 +34,7 @@ namespace E_Learning.Application.Orders.Commands
 
         public async Task<bool> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
+            // TODO: is that ok to use CQRS in CQRS?
             var query = new GetBasketByIdQuery(request.BasketId);
             var basket = await _mediator.Send(query);
 
