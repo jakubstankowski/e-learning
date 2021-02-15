@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Reflection;
+using System.Threading.Tasks;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Domain.Entities;
 using E_Learning.Domain.Entities.OrderAggregate;
@@ -31,7 +32,7 @@ namespace Infrastructure.Persistance
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
 

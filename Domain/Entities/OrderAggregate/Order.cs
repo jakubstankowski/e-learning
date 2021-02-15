@@ -15,8 +15,8 @@ namespace E_Learning.Domain.Entities.OrderAggregate
 
         public Order(IReadOnlyList<OrderItem> orderItems, string buyerEmail)
         {
-            OrderItems = orderItems;
             BuyerEmail = buyerEmail;
+            OrderItems = orderItems;
         }
 
         public int Id { get; set; }

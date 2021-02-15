@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using E_Learning.Application.Common.Dto;
 using E_Learning.Application.Lessons.Queries.GetLessons;
-using E_Learning.Application.Orders.Queries.GetOrders;
 using E_Learning.Domain.Entities;
-using E_Learning.Domain.Entities.OrderAggregate;
 
 namespace E_Learning.Application.Common.Mapping
 {
@@ -13,7 +11,6 @@ namespace E_Learning.Application.Common.Mapping
         {
             CreateMap<Course, CourseDto>();
             CreateMap<Lesson, LessonDto>();
-            CreateMap<Order, OrderDto>();
         }
 
     }

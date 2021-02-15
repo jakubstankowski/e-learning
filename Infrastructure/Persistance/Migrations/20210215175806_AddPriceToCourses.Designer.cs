@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Persistance.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210201192145_AddOrderAggregates")]
-    partial class AddOrderAggregates
+    [Migration("20210215175806_AddPriceToCourses")]
+    partial class AddPriceToCourses
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -111,6 +111,9 @@ namespace Infrastructure.Persistance.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -145,24 +148,6 @@ namespace Infrastructure.Persistance.Migrations
                     b.ToTable("Lessons");
                 });
 
-            modelBuilder.Entity("E_Learning.Domain.Entities.OrderAggregate.CourseItemOrdered", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("CourseItemId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CourseTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CourseItemOrdered");
-                });
-
             modelBuilder.Entity("E_Learning.Domain.Entities.OrderAggregate.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -179,8 +164,9 @@ namespace Infrastructure.Persistance.Migrations
                     b.Property<string>("PaymentIntentId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -194,9 +180,6 @@ namespace Infrastructure.Persistance.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("ItemOrderedId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
@@ -204,8 +187,6 @@ namespace Infrastructure.Persistance.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ItemOrderedId");
 
                     b.HasIndex("OrderId");
 
@@ -375,13 +356,30 @@ namespace Infrastructure.Persistance.Migrations
 
             modelBuilder.Entity("E_Learning.Domain.Entities.OrderAggregate.OrderItem", b =>
                 {
-                    b.HasOne("E_Learning.Domain.Entities.OrderAggregate.CourseItemOrdered", "ItemOrdered")
-                        .WithMany()
-                        .HasForeignKey("ItemOrderedId");
-
                     b.HasOne("E_Learning.Domain.Entities.OrderAggregate.Order", null)
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId");
+
+                    b.OwnsOne("E_Learning.Domain.Entities.OrderAggregate.CourseItemOrdered", "ItemOrdered", b1 =>
+                        {
+                            b1.Property<int>("OrderItemId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .UseIdentityColumn();
+
+                            b1.Property<int>("CourseItemId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("CourseTitle")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("OrderItemId");
+
+                            b1.ToTable("OrderItems");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderItemId");
+                        });
 
                     b.Navigation("ItemOrdered");
                 });

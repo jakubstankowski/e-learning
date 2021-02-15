@@ -52,7 +52,7 @@ namespace E_Learning.Application.Orders.Commands
 
                 var itemOrdered = new CourseItemOrdered(courseItem.Id, courseItem.Title);
 
-                var orderItem = new OrderItem(itemOrdered, courseItem.Price);
+                var orderItem = new OrderItem(itemOrdered, 0);
 
                 items.Add(orderItem);
 

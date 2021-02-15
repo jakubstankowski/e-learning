@@ -8,20 +8,16 @@ namespace E_Learning.Domain.Entities.OrderAggregate
 {
     public class CourseItemOrdered
     {
-
         public CourseItemOrdered()
         {
 
         }
-
 
         public CourseItemOrdered(int courseItemId, string courseTitle)
         {
             this.CourseItemId = courseItemId;
             this.CourseTitle = courseTitle;
         }
-
-        public int Id { get; set; }
 
         public int CourseItemId { get; set; }
 
