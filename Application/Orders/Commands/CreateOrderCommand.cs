@@ -17,7 +17,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.Orders.Commands
 {
-    public class CreateOrderCommand : IRequest<OrderDto>
+    public class CreateOrderCommand : IRequest<Order>
     {
         public string BasketId { get; set; }
 
@@ -25,7 +25,7 @@ namespace E_Learning.Application.Orders.Commands
 
     }
 
-    public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, OrderDto>
+    public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Order>
     {
         private readonly IMediator _mediator;
         private readonly IContext _context;
@@ -38,7 +38,7 @@ namespace E_Learning.Application.Orders.Commands
             _mapper = mapper;
         }
 
-        public async Task<OrderDto> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<Order> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             // TODO: is that ok to use CQRS in CQRS?
             var query = new GetBasketByIdQuery(request.BasketId);
@@ -68,7 +68,7 @@ namespace E_Learning.Application.Orders.Commands
             await _context.SaveChangesAsync();
 
 
-            return _mapper.Map<Order, OrderDto>(order);
+            return order;
 
         }
     }
