@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using E_Learning.Application.Basket.Queries.GetBasket;
 using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
+using E_Learning.Application.Orders.Queries.GetOrders;
 using E_Learning.Domain.Entities;
 using E_Learning.Domain.Entities.OrderAggregate;
 using MediatR;
@@ -15,7 +17,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.Orders.Commands
 {
-    public class CreateOrderCommand : IRequest<bool>
+    public class CreateOrderCommand : IRequest<OrderDto>
     {
         public string BasketId { get; set; }
 
@@ -23,18 +25,20 @@ namespace E_Learning.Application.Orders.Commands
 
     }
 
-    public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, bool>
+    public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, OrderDto>
     {
         private readonly IMediator _mediator;
         private readonly IContext _context;
+        private readonly IMapper _mapper;
 
-        public CreateOrderHandler(IMediator mediator, IContext context)
+        public CreateOrderHandler(IMediator mediator, IContext context, IMapper mapper)
         {
             _mediator = mediator;
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<bool> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<OrderDto> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             // TODO: is that ok to use CQRS in CQRS?
             var query = new GetBasketByIdQuery(request.BasketId);
@@ -63,7 +67,9 @@ namespace E_Learning.Application.Orders.Commands
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
-            throw new NotImplementedException();
+
+            return _mapper.Map<Order, OrderDto>(order);
+
         }
     }
 
