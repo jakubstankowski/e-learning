@@ -19,6 +19,7 @@ namespace E_Learning.Application.Orders.Commands
     {
         public string BasketId { get; set; }
 
+        public string Email { get; set; }
 
     }
 
@@ -39,10 +40,6 @@ namespace E_Learning.Application.Orders.Commands
             var query = new GetBasketByIdQuery(request.BasketId);
             var basket = await _mediator.Send(query);
 
-           // var email = HttpContext.User.RetrieveEmailFromPrincipal();
-
-
-
             var items = new List<OrderItem>();
             foreach (var item in basket.Items)
             {
@@ -61,7 +58,7 @@ namespace E_Learning.Application.Orders.Commands
 
             }
 
-            var order = new Order(items, "email@email.com");
+            var order = new Order(items, request.Email);
 
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
