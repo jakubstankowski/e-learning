@@ -10,6 +10,7 @@ using E_Learning.Application.Common.Interfaces;
 using E_Learning.Domain.Entities;
 using E_Learning.Domain.Entities.OrderAggregate;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.Orders.Commands
@@ -38,6 +39,8 @@ namespace E_Learning.Application.Orders.Commands
             var query = new GetBasketByIdQuery(request.BasketId);
             var basket = await _mediator.Send(query);
 
+           // var email = HttpContext.User.RetrieveEmailFromPrincipal();
+
 
 
             var items = new List<OrderItem>();
@@ -52,7 +55,7 @@ namespace E_Learning.Application.Orders.Commands
 
                 var itemOrdered = new CourseItemOrdered(courseItem.Id, courseItem.Title);
 
-                var orderItem = new OrderItem(itemOrdered, 0);
+                var orderItem = new OrderItem(itemOrdered, courseItem.Price);
 
                 items.Add(orderItem);
 
