@@ -15,6 +15,7 @@ node_modules
 ssl
 wwwroot
 
+WebUI/ClientApp/e-learning-ui/node_modules
 
 # User-specific files
 *.rsuser
