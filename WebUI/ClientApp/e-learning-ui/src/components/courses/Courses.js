@@ -1,23 +1,29 @@
 import * as React from "react";
+import axios from "axios";
 
 class Courses extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            courses: [
-                {
-                    'id': 0
-                }
-            ]
+            courses: []
         }
 
+    }
+
+    componentDidMount() {
+        axios
+            .get('https://localhost:44367/api/Courses')
+            .then((res) => {
+                console.log('res: ', res);
+            })
+            .catch((error) => console.error('error:', error));
     }
 
     render() {
         return (
             <pre>
-               {this.state.courses}
+
            </pre>
         )
 

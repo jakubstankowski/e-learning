@@ -37,7 +37,8 @@ namespace E_Learning
         {
             services.AddDbContext<Context>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ELearningConnection")));
 
-            services.AddSingleton<IConnectionMultiplexer>(c => {
+            services.AddSingleton<IConnectionMultiplexer>(c =>
+            {
                 var configuration = ConfigurationOptions.Parse(Configuration
                     .GetConnectionString("Redis"), true);
                 return ConnectionMultiplexer.Connect(configuration);
@@ -64,6 +65,7 @@ namespace E_Learning
                }
                );
 
+            services.AddCors();
             services.AddControllers();
             services.AddInfrastructure();
 
@@ -93,6 +95,7 @@ namespace E_Learning
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "E_Learning v1"));
             }
 
+            app.UseCors();
             app.UseHttpsRedirection();
 
             app.UseRouting();
