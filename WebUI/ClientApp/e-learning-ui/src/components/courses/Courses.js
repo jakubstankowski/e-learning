@@ -13,7 +13,7 @@ class Courses extends React.Component {
 
     componentDidMount() {
         axios
-            .get('https://localhost:44367/api/Courses')
+            .get('https://localhost:44367/api/courses')
             .then((res) => {
                 console.log('res: ', res);
             })
