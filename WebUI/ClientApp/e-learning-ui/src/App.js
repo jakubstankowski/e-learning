@@ -9,7 +9,7 @@ function App() {
     return (
         <div>
             <Header/>
-            <Container maxWidth="sm">
+            <Container>
                 <Courses/>
             </Container>
         </div>

@@ -33,7 +33,7 @@ class Courses extends React.Component {
             <div>
                 <h3>Courses:</h3>
                 <Grid container>
-                    <Grid item xs={3}>
+                    <Grid item>
                         {
                             this.state.courses.map((course) =>
                                 <Course
