@@ -1,6 +1,7 @@
 import * as React from "react";
 import axios from "axios";
 import Course from "./Course";
+import Grid from "@material-ui/core/Grid";
 
 class Courses extends React.Component {
     constructor(props) {
@@ -31,13 +32,18 @@ class Courses extends React.Component {
         return (
             <div>
                 <h3>Courses:</h3>
-                {
-                    this.state.courses.map((course) =>
-                        <Course
-                            key={course.id}
-                            course={course}/>
-                    )
-                }
+                <Grid container>
+                    <Grid item xs={3}>
+                        {
+                            this.state.courses.map((course) =>
+                                <Course
+                                    key={course.id}
+                                    course={course}/>
+                            )
+                        }
+                    </Grid>
+                </Grid>
+
             </div>
         )
 
