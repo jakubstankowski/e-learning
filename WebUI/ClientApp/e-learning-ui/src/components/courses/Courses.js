@@ -32,8 +32,7 @@ class Courses extends React.Component {
         return (
             <div>
                 <h3>Courses:</h3>
-                <Grid container>
-                    <Grid item>
+                <Grid container  spacing={3}>
                         {
                             this.state.courses.map((course) =>
                                 <Course
@@ -41,8 +40,8 @@ class Courses extends React.Component {
                                     course={course}/>
                             )
                         }
-                    </Grid>
                 </Grid>
+
 
             </div>
         )
