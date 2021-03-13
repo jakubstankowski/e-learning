@@ -35,6 +35,10 @@ namespace E_Learning.Application.Lessons.Commands
 
         public async Task<LessonDto> Handle(CreateLessonCommand request, CancellationToken cancellationToken)
         {
+           
+            
+            
+            
             var lesson = new Lesson
             {
                 CourseId = request.CourseId,
