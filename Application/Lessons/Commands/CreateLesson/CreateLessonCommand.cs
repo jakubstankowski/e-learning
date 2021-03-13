@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Lessons.Queries.GetLessons;
 using E_Learning.Domain.Entities;
@@ -35,10 +36,17 @@ namespace E_Learning.Application.Lessons.Commands
 
         public async Task<LessonDto> Handle(CreateLessonCommand request, CancellationToken cancellationToken)
         {
-           
-            
-            
-            
+
+            var course = await _context.Courses
+                .Include(c => c.Lessons)
+                .FirstOrDefaultAsync(c => c.Id == request.CourseId);
+
+            if (course == null)
+            {
+                throw new NotFoundException(nameof(Course), request.CourseId);
+            }
+
+
             var lesson = new Lesson
             {
                 CourseId = request.CourseId,
@@ -47,10 +55,6 @@ namespace E_Learning.Application.Lessons.Commands
                 VideoUrl = request.VideoUrl
             };
 
-           
-            var course = await _context.Courses
-                .Include(c => c.Lessons)
-                .FirstOrDefaultAsync(c => c.Id == request.CourseId);
 
             course.Lessons.Add(lesson);
 
