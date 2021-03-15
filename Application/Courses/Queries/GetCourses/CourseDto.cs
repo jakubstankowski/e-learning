@@ -14,7 +14,5 @@ namespace E_Learning.Application.Common.Dto
 
         public string Description { get; set; }
 
-        public IEnumerable<LessonDto> Lessons { get; set; }
-
     }
 }
