@@ -3,8 +3,8 @@ import Header from "./components/layout/Header";
 import React from "react";
 import Container from "@material-ui/core/Container";
 import Courses from "./components/courses/Courses";
-import Router from "react-router-dom";
-import Route from "react-router-dom";
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import Course from "./components/courses/Course";
 
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
                 <Header/>
                 <Container>
                     <Route path="/" exact component={Courses}/>
+                    <Route path="/course/:id" exact component={Course}/>
                 </Container>
             </div>
         </Router>

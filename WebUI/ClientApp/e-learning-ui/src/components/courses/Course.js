@@ -1,44 +1,43 @@
+import axios from "axios";
 import React from "react";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import Grid from "@material-ui/core/Grid";
 
+class Course extends React.Component {
+    constructor(props) {
+        super(props);
 
-const useStyles = makeStyles({
-    root: {
-        minWidth: 275,
-    },
-    pos: {
-        marginBottom: 12,
-    },
-});
+        this.state = {
+            course: []
+        };
 
+    }
 
-function Course(props) {
-    const classes = useStyles();
-    const {title, description, price} = props.course;
+    componentDidMount() {
+        axios
+            .get(`https://localhost:44367/api/courses/${this.props.match.params.id}`)
+            .then((response) => {
+                console.log('response: ', response);
+                /*this.setState({
+                    holidayOffer: {
+                        ...response.data
+                    }
+                });*/
+            })
+            .catch((e) => {
+                console.error('error', e);
+            })
+    }
 
+    render() {
+        return (
+            <div>
+                course !
+            </div>
+        )
 
-    return (
-        <Grid item xs={4}>
-            <Card className={classes.root}>
-                <CardContent>
-                    <Typography variant="h5" component="h2">
-                        {title}
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                        {price} $
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        {description}
-                    </Typography>
-                </CardContent>
-            </Card>
-        </Grid>
-    )
+    }
+
 
 }
+
 
 export default Course;
