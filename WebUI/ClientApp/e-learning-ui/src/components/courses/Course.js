@@ -15,23 +15,30 @@ class Course extends React.Component {
         axios
             .get(`https://localhost:44367/api/courses/${this.props.match.params.id}`)
             .then((response) => {
-                console.log('response: ', response);
-                /*this.setState({
-                    holidayOffer: {
-                        ...response.data
-                    }
-                });*/
+                this.setCourse(response.data);
+
+                console.log('course: ', this.state.course.lessons)
+
+
             })
             .catch((e) => {
                 console.error('error', e);
             })
     }
 
+    setCourse(data) {
+        this.setState({
+            course: data
+        })
+    }
+
+
     render() {
         return (
             <div>
-                course !
+                title: {this.state.course.title}
             </div>
+
         )
 
     }
