@@ -33,11 +33,11 @@ class Courses extends React.Component {
         return (
             <div>
                 <h3>Courses:</h3>
-                <Grid container spacing={3}>
+                <Grid container spacing={1}>
 
                     {
                         this.state.courses.map((course) =>
-                            <Link to={`/course/${course.id}`}>
+                            <Link to={`/course/${course.id}`}  style={{ textDecoration: 'none' }}>
                                 <CourseItem key={course.id}
                                             course={course}/>
                             </Link>

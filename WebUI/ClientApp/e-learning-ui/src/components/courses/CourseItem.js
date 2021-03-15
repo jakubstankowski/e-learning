@@ -20,7 +20,7 @@ function CourseItem(props) {
     const {title, description, price} = props.course;
 
     return (
-        <Grid item xs={4}>
+        <Grid item xs={4} spacing={1}>
             <Card className={classes.root}>
                 <CardContent>
                     <Typography variant="h5" component="h2">
