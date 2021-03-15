@@ -2,7 +2,7 @@ import * as React from "react";
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import CourseItem from "./CourseItem";
-import Link from "@material-ui/core/Link";
+import {Link} from "react-router-dom";
 
 class Courses extends React.Component {
     constructor(props) {

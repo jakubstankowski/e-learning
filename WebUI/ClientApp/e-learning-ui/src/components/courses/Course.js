@@ -16,10 +16,6 @@ class Course extends React.Component {
             .get(`https://localhost:44367/api/courses/${this.props.match.params.id}`)
             .then((response) => {
                 this.setCourse(response.data);
-
-                console.log('course: ', this.state.course.lessons)
-
-
             })
             .catch((e) => {
                 console.error('error', e);
