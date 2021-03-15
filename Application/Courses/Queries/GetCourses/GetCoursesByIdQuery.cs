@@ -34,7 +34,9 @@ namespace E_Learning.Application.Courses.Queries
 
             public async Task<CourseDto> Handle(GetCoursesByIdQuery request, CancellationToken cancellationToken)
             {
-                var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == request.Id);
+                var course = await _context
+                    .Courses.Include(c => c.Lessons)
+                    .FirstOrDefaultAsync(c => c.Id == request.Id);
 
                 if (course == null)
                 {

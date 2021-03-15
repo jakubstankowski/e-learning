@@ -28,6 +28,7 @@ namespace E_Learning.Application.Courses1.Queries
         public async Task<IEnumerable<CourseDto>> Handle(GetAllCoursesQuery request, CancellationToken cancellationToken)
         {
             var courses = await _context.Courses.ToListAsync();
+
             return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
         }
     }
