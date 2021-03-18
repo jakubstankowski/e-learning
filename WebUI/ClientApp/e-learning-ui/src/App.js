@@ -8,10 +8,10 @@ import Course from "./components/courses/Course";
 import axios from "axios";
 
 
-
 class App extends React.Component {
     state = {
         courses: [],
+        course: []
     };
 
     componentDidMount() {
@@ -28,9 +28,19 @@ class App extends React.Component {
             .catch((error) => console.error('error:', error));
     }
 
+    getCourse(id) {
+        axios
+            .get(`https://localhost:44367/api/courses/${id}`)
+            .then((response) => {
+               this.setState({course: res.data});
+            })
+            .catch((e) => {
+                console.error('error', e);
+            })
+    }
 
     render() {
-        const {courses} = this.state;
+        const {courses, course} = this.state;
 
         return (
             <Router>
@@ -47,6 +57,17 @@ class App extends React.Component {
                                 />
                             )}/>
                             <Route path="/course/:id" exact component={Course}/>
+                            <Route
+                                exact
+                                path="/course/:id"
+                                render={props => (
+                                    <Course
+                                        {...props}
+                                        getCourse={this.getCourse}
+                                        course={course}
+                                    />
+                                )}
+                            />
                         </Switch>
                     </Container>
                 </div>
