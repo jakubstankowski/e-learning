@@ -4,6 +4,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import {Container} from "@material-ui/core";
 
 const useStyles = makeStyles({
     root: {
@@ -20,21 +21,23 @@ function CourseItem(props) {
     const {title, description, price} = props.course;
 
     return (
-        <Grid item xs={4} spacing={1}>
-            <Card className={classes.root}>
-                <CardContent>
-                    <Typography variant="h5" component="h2">
-                        {title}
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                        {price} $
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        {description}
-                    </Typography>
-                </CardContent>
-            </Card>
-        </Grid>
+        <Container>
+            <Grid item xs={4} spacing={3}>
+                <Card className={classes.root}>
+                    <CardContent>
+                        <Typography variant="h5" component="h2">
+                            {title}
+                        </Typography>
+                        <Typography className={classes.pos} color="textSecondary">
+                            {price} $
+                        </Typography>
+                        <Typography variant="body2" component="p">
+                            {description}
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </Grid>
+        </Container>
     )
 }
 

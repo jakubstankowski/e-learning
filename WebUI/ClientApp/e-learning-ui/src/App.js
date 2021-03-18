@@ -3,21 +3,51 @@ import Header from "./components/layout/Header";
 import React from "react";
 import Container from "@material-ui/core/Container";
 import Courses from "./components/courses/Courses";
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 import Course from "./components/courses/Course";
+import axios from "axios";
+
 
 
 class App extends React.Component {
+    state = {
+        courses: [],
+    };
+
+    componentDidMount() {
+        this.getCourses();
+    }
 
 
-    render(){
+    getCourses() {
+        axios
+            .get('https://localhost:44367/api/courses')
+            .then((res) => {
+                this.setState({courses: res.data});
+            })
+            .catch((error) => console.error('error:', error));
+    }
+
+
+    render() {
+        const {courses} = this.state;
+
         return (
             <Router>
                 <div>
                     <Header/>
                     <Container>
-                        <Route path="/" exact component={Courses}/>
-                        <Route path="/course/:id" exact component={Course}/>
+                        <Switch>
+                            <Route
+                                path="/"
+                                exact render={props => (
+                                <Courses
+                                    {...props}
+                                    courses={courses}
+                                />
+                            )}/>
+                            <Route path="/course/:id" exact component={Course}/>
+                        </Switch>
                     </Container>
                 </div>
             </Router>
