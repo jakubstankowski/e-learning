@@ -1,24 +1,29 @@
 import axios from "axios";
-import React, {Fragment} from "react";
+import React, {Fragment, Component} from "react";
 import {Link} from "react-router-dom";
 import CourseItem from "./CourseItem";
 import Grid from "@material-ui/core/Grid";
 import LessonItem from "../lessons/LessonItem";
 import Typography from "@material-ui/core/Typography";
+import PropTypes from 'prop-types';
 import {Container} from "@material-ui/core";
 
-class Course extends React.Component {
+class Course extends Component {
     componentDidMount() {
-       this.props.getCourse(this.props.match.params.id);
+        this.props.getCourse(this.props.match.params.id);
     }
 
+    static propTypes = {
+        course: PropTypes.object.isRequired,
+        getCourse: PropTypes.func.isRequired
+    };
 
     render() {
-        const {course} = this.props.course;
+        const {title} = this.props.course;
         return (
             <Fragment>
-                title: {course.title}
-               {/* <Typography variant="h5" component="h2">
+                title: {title}
+                {/* <Typography variant="h5" component="h2">
                     {this.state.course.title}
                 </Typography>
                 <Grid container spacing={1}>

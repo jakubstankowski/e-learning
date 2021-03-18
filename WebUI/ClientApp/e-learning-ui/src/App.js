@@ -11,7 +11,7 @@ import axios from "axios";
 class App extends React.Component {
     state = {
         courses: [],
-        course: []
+        course: {}
     };
 
     componentDidMount() {
@@ -19,24 +19,14 @@ class App extends React.Component {
     }
 
 
-    getCourses() {
-        axios
-            .get('https://localhost:44367/api/courses')
-            .then((res) => {
-                this.setState({courses: res.data});
-            })
-            .catch((error) => console.error('error:', error));
+    getCourses = async () => {
+        const res = axios.get('https://localhost:44367/api/courses');
+        this.setState({courses: res.data});
     }
 
-    getCourse(id) {
-        axios
-            .get(`https://localhost:44367/api/courses/${id}`)
-            .then((response) => {
-               this.setState({course: res.data});
-            })
-            .catch((e) => {
-                console.error('error', e);
-            })
+    getCourse = async (id) => {
+        const res = await axios.get(`https://localhost:44367/api/courses/${id}`);
+        this.setState({course: res.data});
     }
 
     render() {
@@ -56,7 +46,6 @@ class App extends React.Component {
                                     courses={courses}
                                 />
                             )}/>
-                            <Route path="/course/:id" exact component={Course}/>
                             <Route
                                 exact
                                 path="/course/:id"
