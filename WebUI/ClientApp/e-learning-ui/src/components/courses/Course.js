@@ -7,6 +7,7 @@ import LessonItem from "../lessons/LessonItem";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from 'prop-types';
 import {Container} from "@material-ui/core";
+import Lessons from "../lessons/Lessons";
 
 class Course extends Component {
     componentDidMount() {
@@ -15,27 +16,19 @@ class Course extends Component {
 
     static propTypes = {
         course: PropTypes.object.isRequired,
+        lessons: PropTypes.array.isRequired,
         getCourse: PropTypes.func.isRequired
     };
 
     render() {
-        const {title, lessons} = this.props.course;
+        const {title} = this.props.course;
         return (
             <Fragment>
-                title: {title}
                  <Typography variant="h5" component="h2">
-                    {title}
+                    Course {title}
                 </Typography>
-                <Grid container spacing={1}>
-                    {
-                        lessons.map((lesson) =>
-                            <LessonItem key={lesson.id}
-                                        lesson={lesson}/>
-                        )
-                    }
-                </Grid>
+                <Lessons lessons={this.props.lessons}/>
             </Fragment>
-
         )
 
     }

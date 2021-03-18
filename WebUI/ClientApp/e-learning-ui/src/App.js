@@ -11,7 +11,8 @@ import axios from "axios";
 class App extends React.Component {
     state = {
         courses: [],
-        course: {}
+        course: {},
+        lessons: []
     };
 
     componentDidMount() {
@@ -21,16 +22,26 @@ class App extends React.Component {
 
     getCourses = async () => {
         const res = axios.get('https://localhost:44367/api/courses');
-        this.setState({courses: res.data});
+        this.setState({
+            courses: res.data
+        });
     }
 
     getCourse = async (id) => {
         const res = await axios.get(`https://localhost:44367/api/courses/${id}`);
-        this.setState({course: res.data});
+        this.setState({
+            course: {
+                id: res.data.id,
+                description: res.data.description,
+                price: res.data.price,
+                title: res.data.title
+            },
+            lessons: res.data.lessons
+        });
     }
 
     render() {
-        const {courses, course} = this.state;
+        const {courses, course, lessons} = this.state;
 
         return (
             <Router>
@@ -54,6 +65,7 @@ class App extends React.Component {
                                         {...props}
                                         getCourse={this.getCourse}
                                         course={course}
+                                        lessons={lessons}
                                     />
                                 )}
                             />
