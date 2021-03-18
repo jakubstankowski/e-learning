@@ -19,21 +19,21 @@ class Course extends Component {
     };
 
     render() {
-        const {title} = this.props.course;
+        const {title, lessons} = this.props.course;
         return (
             <Fragment>
                 title: {title}
-                {/* <Typography variant="h5" component="h2">
-                    {this.state.course.title}
+                 <Typography variant="h5" component="h2">
+                    {title}
                 </Typography>
                 <Grid container spacing={1}>
                     {
-                        this.state.lessons.map((lesson) =>
+                        lessons.map((lesson) =>
                             <LessonItem key={lesson.id}
                                         lesson={lesson}/>
                         )
                     }
-                </Grid>*/}
+                </Grid>
             </Fragment>
 
         )
