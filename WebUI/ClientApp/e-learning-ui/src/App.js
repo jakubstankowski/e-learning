@@ -22,7 +22,7 @@ class App extends React.Component {
 
 
     getCourses = async () => {
-        const res = axios.get('https://localhost:44367/api/courses');
+        const res = await axios.get('https://localhost:44367/api/courses');
         this.setState({
             courses: res.data
         });
