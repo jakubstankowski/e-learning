@@ -73,6 +73,7 @@ class App extends React.Component {
                                     <Course
                                         {...props}
                                         getCourse={this.getCourse}
+                                        getLesson={this.getLesson}
                                         course={course}
                                         lessons={lessons}
                                     />

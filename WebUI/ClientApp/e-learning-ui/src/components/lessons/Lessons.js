@@ -3,10 +3,12 @@ import React, {Fragment} from "react";
 import Grid from "@material-ui/core/Grid";
 import LessonItem from "./LessonItem";
 import {Container} from "@material-ui/core";
+import {Link} from "react-router-dom";
 
 function Lessons({lessons}) {
     return (
         <div>
+
             <Typography variant="h5" component="h2">
                 Lessons:
             </Typography>
@@ -14,8 +16,10 @@ function Lessons({lessons}) {
                 <Grid container spacing={1}>
                     {
                         lessons.map((lesson, i) =>
-                            <LessonItem key={i}
-                                        lesson={lesson}/>
+                            <Link to={`/course/1/lesson/${lesson.id}`} style={{textDecoration: 'none'}} key={i}>
+                                <LessonItem key={i}
+                                            lesson={lesson}/>
+                            </Link>
                         )
                     }
                 </Grid>

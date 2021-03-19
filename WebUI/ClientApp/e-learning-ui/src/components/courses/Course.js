@@ -2,6 +2,9 @@ import React, {Fragment, Component} from "react";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from 'prop-types';
 import Lessons from "../lessons/Lessons";
+import {Route, Switch} from "react-router-dom";
+import Courses from "./Courses";
+import Lesson from "../lessons/Lesson";
 
 class Course extends Component {
     componentDidMount() {
@@ -15,13 +18,25 @@ class Course extends Component {
     };
 
     render() {
-        const {title} = this.props.course;
+        const {id, title} = this.props.course;
         return (
             <Fragment>
-                 <Typography variant="h5" component="h2">
-                    Course {title}
+                <Typography variant="h5" component="h2">
+                    Course {title}, id: {id}
                 </Typography>
-                <Lessons lessons={this.props.lessons}/>
+                <Switch>
+                    <Route
+                        path="/course/:id"
+                        exact render={props => (
+                        <Lessons
+                            lessons={this.props.lessons}/>
+                    )}/>
+                    <Route
+                        exact
+                        path="/course/:id/lesson/:id"
+                        component={Lesson}
+                    />
+                </Switch>
             </Fragment>
         )
 

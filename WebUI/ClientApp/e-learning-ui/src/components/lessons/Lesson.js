@@ -1,7 +1,7 @@
-import axios from "axios";
+import React, {Fragment, Component} from "react";
 
 
-class Lesson extends React.Component {
+class Lesson extends Component {
     constructor(props) {
         super(props);
 
@@ -10,15 +10,12 @@ class Lesson extends React.Component {
         }
     }
 
-    componentDidMount() {
-        axios
-            .get(`https://localhost:44367/api/lesson/${this.props.match.params.id}`)
-            .then((response) => {
-                console.log('response: ', response.data);
-            })
-            .catch((e) => {
-                console.error('error', e);
-            })
+    render() {
+        return (
+            <div>
+                LESSSON
+            </div>
+        )
     }
 
 
