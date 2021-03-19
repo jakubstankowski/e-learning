@@ -12,7 +12,8 @@ class App extends React.Component {
     state = {
         courses: [],
         course: {},
-        lessons: []
+        lessons: [],
+        lesson: {}
     };
 
     componentDidMount() {
@@ -39,6 +40,14 @@ class App extends React.Component {
             lessons: res.data.lessons
         });
     }
+
+    getLesson = async (id) => {
+        const res = await axios.get(`https://localhost:44367/api/lesson/${id}`);
+        this.setState({
+            lesson: res.data
+        });
+    }
+
 
     render() {
         const {courses, course, lessons} = this.state;
