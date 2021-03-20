@@ -54,8 +54,7 @@ class App extends React.Component {
 
         return (
             <Router>
-                <div>
-                    <Header/>
+                <Header/>
                     <Container>
                         <Switch>
                             <Route
@@ -81,7 +80,6 @@ class App extends React.Component {
                             />
                         </Switch>
                     </Container>
-                </div>
             </Router>
         );
     }
