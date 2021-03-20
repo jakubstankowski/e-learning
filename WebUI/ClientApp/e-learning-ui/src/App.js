@@ -3,7 +3,7 @@ import Header from "./components/layout/Header";
 import React from "react";
 import Container from "@material-ui/core/Container";
 import Courses from "./components/courses/Courses";
-import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Course from "./components/courses/Course";
 import axios from "axios";
 
@@ -50,7 +50,7 @@ class App extends React.Component {
 
 
     render() {
-        const {courses, course, lessons} = this.state;
+        const {courses, course, lessons, lesson} = this.state;
 
         return (
             <Router>
@@ -74,6 +74,7 @@ class App extends React.Component {
                                         getLesson={this.getLesson}
                                         course={course}
                                         lessons={lessons}
+                                        lesson={lesson}
                                     />
                                 )}
                             />

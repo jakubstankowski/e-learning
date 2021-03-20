@@ -1,16 +1,24 @@
-import React, {Fragment, Component} from "react";
+import React, {Component} from "react";
+import PropTypes from "prop-types";
 
 
 class Lesson extends Component {
-    constructor(props) {
-        super(props);
+    componentDidMount() {
+        this.props.getLesson(this.props.match.params.lessonId);
     }
 
+    static propTypes = {
+        lesson: PropTypes.object.isRequired,
+        getLesson: PropTypes.func.isRequired
+    };
+
     render() {
+        const {title} = this.props.lesson;
+
         return (
-            <div>
-                lesson id: {this.props.match.params.lessonId}
-            </div>
+            <article>
+                lesson title: {title}
+            </article>
         )
     }
 

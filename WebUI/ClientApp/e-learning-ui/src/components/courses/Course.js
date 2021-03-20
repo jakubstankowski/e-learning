@@ -3,7 +3,6 @@ import Typography from "@material-ui/core/Typography";
 import PropTypes from 'prop-types';
 import Lessons from "../lessons/Lessons";
 import {Route, Switch} from "react-router-dom";
-import Courses from "./Courses";
 import Lesson from "../lessons/Lesson";
 
 class Course extends Component {
@@ -18,7 +17,7 @@ class Course extends Component {
     };
 
     render() {
-        const {id, title} = this.props.course;
+        const {title} = this.props.course;
 
         return (
             <Fragment>
@@ -36,7 +35,10 @@ class Course extends Component {
                         path="/course/:courseId/lesson/:lessonId"
                         render={props => (
                             <Lesson
-                                {...props}/>
+                                {...props}
+                                getLesson={this.props.getLesson}
+                                lesson={this.props.lesson}
+                            />
                         )}/>
                 </Switch>
             </Fragment>

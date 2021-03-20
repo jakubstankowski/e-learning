@@ -6,7 +6,7 @@ import {Container} from "@material-ui/core";
 
 function Courses({courses}) {
     return (
-        <div>
+        <article>
             <h3>Courses:</h3>
             <Container>
                 <Grid container spacing={1}>
@@ -21,7 +21,7 @@ function Courses({courses}) {
                     }
                 </Grid>
             </Container>
-        </div>
+        </article>
     )
 }
 
