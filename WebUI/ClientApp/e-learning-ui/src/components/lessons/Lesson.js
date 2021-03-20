@@ -1,24 +1,13 @@
-import React, {Fragment, Component} from "react";
 
 
-class Lesson extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            lesson: [],
-        }
-    }
-
-    render() {
-        return (
-            <div>
-                LESSSON
-            </div>
-        )
-    }
-
-
+function Lesson() {
+    return (
+        <div>
+            <p>
+                lesson!
+            </p>
+        </div>
+    )
 }
 
 export default Lesson;

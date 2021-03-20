@@ -19,6 +19,7 @@ class Course extends Component {
 
     render() {
         const {id, title} = this.props.course;
+
         return (
             <Fragment>
                 <Typography variant="h5" component="h2">
@@ -32,8 +33,7 @@ class Course extends Component {
                             lessons={this.props.lessons}/>
                     )}/>
                     <Route
-                        exact
-                        path="/course/:id/lesson/:id"
+                        path="/course/:id/lesson/:lessonId"
                         component={Lesson}
                     />
                 </Switch>

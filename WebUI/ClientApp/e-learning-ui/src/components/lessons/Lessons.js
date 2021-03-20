@@ -8,7 +8,6 @@ import {Link} from "react-router-dom";
 function Lessons({lessons}) {
     return (
         <div>
-
             <Typography variant="h5" component="h2">
                 Lessons:
             </Typography>

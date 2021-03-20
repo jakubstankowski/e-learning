@@ -66,7 +66,6 @@ class App extends React.Component {
                                 />
                             )}/>
                             <Route
-                                exact
                                 path="/course/:id"
                                 render={props => (
                                     <Course
