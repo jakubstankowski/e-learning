@@ -8,7 +8,7 @@ import Lesson from "../lessons/Lesson";
 
 class Course extends Component {
     componentDidMount() {
-        this.props.getCourse(this.props.match.params.id);
+        this.props.getCourse(this.props.match.params.courseId);
     }
 
     static propTypes = {
@@ -23,19 +23,21 @@ class Course extends Component {
         return (
             <Fragment>
                 <Typography variant="h5" component="h2">
-                    Course {title}, id: {id}
+                    Course {title}
                 </Typography>
                 <Switch>
                     <Route
-                        path="/course/:id"
+                        path="/course/:courseId"
                         exact render={props => (
                         <Lessons
                             lessons={this.props.lessons}/>
                     )}/>
                     <Route
-                        path="/course/:id/lesson/:lessonId"
-                        component={Lesson}
-                    />
+                        path="/course/:courseId/lesson/:lessonId"
+                        render={props => (
+                            <Lesson
+                                {...props}/>
+                        )}/>
                 </Switch>
             </Fragment>
         )

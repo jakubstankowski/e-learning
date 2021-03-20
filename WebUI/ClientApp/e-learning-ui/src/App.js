@@ -66,7 +66,7 @@ class App extends React.Component {
                                 />
                             )}/>
                             <Route
-                                path="/course/:id"
+                                path="/course/:courseId"
                                 render={props => (
                                     <Course
                                         {...props}
