@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Lessons from "../lessons/Lessons";
 import {Route, Switch} from "react-router-dom";
 import Lesson from "../lessons/Lesson";
+import Grid from "@material-ui/core/Grid";
 
 class Course extends Component {
     componentDidMount() {
@@ -24,7 +25,24 @@ class Course extends Component {
                 <Typography variant="h5" component="h2">
                     Course {title}
                 </Typography>
-                <Switch>
+                <Grid container spacing={2}>
+                    <Grid item lg={10}>
+                        <Route
+                                path="/course/:courseId/lesson/:lessonId"
+                                render={props => (
+                                    <Lesson
+                                        {...props}
+                                        getLesson={this.props.getLesson}
+                                        lesson={this.props.lesson}
+                                    />
+                                )}/>
+                    </Grid>
+                    <Grid item lg={2}>
+                        <Lessons
+                            lessons={this.props.lessons}/>
+                    </Grid>
+                </Grid>
+                {/*<Switch>
                     <Route
                         path="/course/:courseId"
                         exact render={props => (
@@ -40,7 +58,7 @@ class Course extends Component {
                                 lesson={this.props.lesson}
                             />
                         )}/>
-                </Switch>
+                </Switch>*/}
             </Fragment>
         )
 

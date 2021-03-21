@@ -6,9 +6,6 @@ import {Link} from "react-router-dom";
 function Lessons({lessons}) {
     return (
         <article>
-            <Typography variant="h5" component="h2">
-                Lessons:
-            </Typography>
             <ul>
                    {
                        lessons.map((lesson, i) =>

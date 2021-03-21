@@ -8,8 +8,7 @@ function Courses({courses}) {
     return (
         <article>
             <h3>Courses:</h3>
-            <Container>
-                <Grid container spacing={1}>
+            <Grid container spacing={1}>
 
                     {
                         courses.map((course, i) =>
@@ -19,8 +18,7 @@ function Courses({courses}) {
                             </Link>
                         )
                     }
-                </Grid>
-            </Container>
+            </Grid>
         </article>
     )
 }
