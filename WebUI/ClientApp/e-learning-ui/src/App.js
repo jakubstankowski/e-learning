@@ -67,6 +67,7 @@ class App extends React.Component {
                                 />
                             )}/>
                             <Route
+                                exact
                                 path="/course/:courseId"
                                 render={props => (
                                     <Course
@@ -81,7 +82,7 @@ class App extends React.Component {
                             />
                             <Route
                                 exact
-                                path="/course/create"
+                                path="/course/admin/create"
                                 component={CreateCourse}
                             />
                         </Switch>
