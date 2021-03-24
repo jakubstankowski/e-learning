@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import CourseItem from "./CourseItem";
 import {Link} from "react-router-dom";
 import {Container} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
 function Courses({courses}) {
     return (
@@ -19,6 +20,9 @@ function Courses({courses}) {
                         )
                     }
             </Grid>
+            <Button variant="contained" color="primary">
+               Create new course
+            </Button>
         </article>
     )
 }
