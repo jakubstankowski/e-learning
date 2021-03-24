@@ -6,6 +6,7 @@ import Courses from "./components/courses/Courses";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Course from "./components/courses/Course";
 import axios from "axios";
+import CreateCourse from "./components/courses/CreateCourse";
 
 
 class App extends React.Component {
@@ -77,6 +78,11 @@ class App extends React.Component {
                                         lesson={lesson}
                                     />
                                 )}
+                            />
+                            <Route
+                                exact
+                                path="/course/create"
+                                component={CreateCourse}
                             />
                         </Switch>
                     </Container>

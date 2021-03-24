@@ -20,9 +20,11 @@ function Courses({courses}) {
                         )
                     }
             </Grid>
-            <Button variant="contained" color="primary">
-               Create new course
-            </Button>
+            <Link to="/course/create">
+                <Button variant="contained" color="primary">
+                    Create new course
+                </Button>
+            </Link>
         </article>
     )
 }
