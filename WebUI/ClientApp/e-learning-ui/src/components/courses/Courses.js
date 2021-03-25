@@ -20,7 +20,7 @@ function Courses({courses}) {
                         )
                     }
             </Grid>
-            <Link to="/course/admin/create">
+            <Link to="/admin/course/create">
                 <Button variant="contained" color="primary">
                     Create new course
                 </Button>

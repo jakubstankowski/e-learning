@@ -82,7 +82,7 @@ class App extends React.Component {
                             />
                             <Route
                                 exact
-                                path="/course/admin/create"
+                                path="/admin/course/create"
                                 component={CreateCourse}
                             />
                         </Switch>
