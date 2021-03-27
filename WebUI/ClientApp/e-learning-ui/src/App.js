@@ -3,10 +3,11 @@ import Header from "./components/layout/Header";
 import React from "react";
 import Container from "@material-ui/core/Container";
 import Courses from "./components/courses/Courses";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {Router, Route, Switch} from "react-router-dom";
 import Course from "./components/courses/Course";
 import axios from "axios";
 import CreateCourse from "./components/courses/CreateCourse";
+import history from './helpers/history';
 
 
 class App extends React.Component {
@@ -16,6 +17,7 @@ class App extends React.Component {
         lessons: [],
         lesson: {}
     };
+
 
     componentDidMount() {
         this.getCourses();
@@ -42,6 +44,11 @@ class App extends React.Component {
         });
     }
 
+    postCourse = async (course) => {
+        await axios.post('https://localhost:44367/api/courses', course)
+        history.push('/Courses/1');
+    }
+
     getLesson = async (id) => {
         const res = await axios.get(`https://localhost:44367/api/lesson/${id}`);
         this.setState({
@@ -54,39 +61,44 @@ class App extends React.Component {
         const {courses, course, lessons, lesson} = this.state;
 
         return (
-            <Router>
+            <Router history={history}>
                 <Header/>
-                    <Container>
-                        <Switch>
-                            <Route
-                                path="/"
-                                exact render={props => (
-                                <Courses
+                <Container>
+                    <Switch>
+                        <Route
+                            path="/"
+                            exact render={props => (
+                            <Courses
+                                {...props}
+                                courses={courses}
+                            />
+                        )}/>
+                        <Route
+                            exact
+                            path="/course/:courseId"
+                            render={props => (
+                                <Course
                                     {...props}
-                                    courses={courses}
+                                    getCourse={this.getCourse}
+                                    getLesson={this.getLesson}
+                                    course={course}
+                                    lessons={lessons}
+                                    lesson={lesson}
                                 />
-                            )}/>
-                            <Route
-                                exact
-                                path="/course/:courseId"
-                                render={props => (
-                                    <Course
-                                        {...props}
-                                        getCourse={this.getCourse}
-                                        getLesson={this.getLesson}
-                                        course={course}
-                                        lessons={lessons}
-                                        lesson={lesson}
-                                    />
-                                )}
-                            />
-                            <Route
-                                exact
-                                path="/admin/course/create"
-                                component={CreateCourse}
-                            />
-                        </Switch>
-                    </Container>
+                            )}
+                        />
+                        <Route
+                            exact
+                            path="/admin/course/create"
+                            render={props => (
+                                <CreateCourse
+                                    {...props}
+                                    postCourse={this.postCourse}
+                                />
+                            )}
+                        />
+                    </Switch>
+                </Container>
             </Router>
         );
     }

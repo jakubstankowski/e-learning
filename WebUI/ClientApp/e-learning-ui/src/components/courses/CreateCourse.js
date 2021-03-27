@@ -1,19 +1,23 @@
 import * as React from "react";
 import {Button} from "@material-ui/core";
+import PropTypes from 'prop-types';
 
 
 class CreateCourse extends React.Component {
     state = {
         title: '',
         description: '',
-        price: null
+        price: ''
     }
+
+    static propTypes = {
+        postCourse: PropTypes.func.isRequired
+    };
 
     onSubmit = (e) => {
         e.preventDefault();
-        console.log('this state: ', this.state);
-
-        this.setState({title: '', description: '', price: null});
+        this.props.postCourse(this.state);
+        this.setState({title: '', description: '', price:''});
     }
 
     onChange = (e) => {

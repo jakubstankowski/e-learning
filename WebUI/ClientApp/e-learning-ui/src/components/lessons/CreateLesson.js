@@ -7,7 +7,7 @@ class CreateLesson extends React.Component {
         title: "",
         description: "",
         videoUrl: "",
-        courseId: null
+        courseId: ''
     }
 
 

@@ -2,7 +2,7 @@ import React, {Fragment, Component} from "react";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from 'prop-types';
 import Lessons from "../lessons/Lessons";
-import {Route, Switch} from "react-router-dom";
+import {Route} from "react-router-dom";
 import Lesson from "../lessons/Lesson";
 import Grid from "@material-ui/core/Grid";
 

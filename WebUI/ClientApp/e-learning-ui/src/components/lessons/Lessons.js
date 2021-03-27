@@ -1,4 +1,3 @@
-import Typography from "@material-ui/core/Typography";
 import React from "react";
 import LessonItem from "./LessonItem";
 import {Link} from "react-router-dom";
