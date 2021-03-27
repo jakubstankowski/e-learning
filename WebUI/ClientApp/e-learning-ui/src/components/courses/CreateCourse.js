@@ -3,48 +3,54 @@ import {Button} from "@material-ui/core";
 
 
 class CreateCourse extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            title: '',
-            description: '',
-            price: null
-        }
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-
+    state = {
+        title: '',
+        description: '',
+        price: null
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
+    onSubmit = (e) => {
+        e.preventDefault();
         console.log('this state: ', this.state);
+
+        this.setState({title: '', description: '', price: null});
     }
 
+    onChange = (e) => {
+        this.setState({[e.target.name]: e.target.value});
+    }
 
     render() {
         return (
-            <article className="text-center">
+            <article onSubmit={this.onSubmit}>
                 <h3>
                     Create Course
                 </h3>
-                <form  className='form'>
+                <form className='form'>
                     <input
                         type='text'
                         name='title'
+                        value={this.state.title}
+                        onChange={this.onChange}
                         placeholder='Title'
                     />
                     <input
                         type='text'
                         name='description'
+                        value={this.state.description}
+                        onChange={this.onChange}
                         placeholder='Description'
                     />
                     <input
                         type='number'
-                        name='number'
-                        placeholder='Number'
+                        name='price'
+                        value={this.state.price}
+                        onChange={this.onChange}
+                        placeholder='Price'
                     />
-                    <Button variant="contained" color="primary">
+                    <Button type="submit"
+                            variant="contained"
+                            color="primary">
                         Add
                     </Button>
                 </form>

@@ -3,25 +3,22 @@ import {Button} from "@material-ui/core";
 
 
 class CreateLesson extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            title: "",
-            description: "",
-            videoUrl: "",
-            courseId: null
-        }
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-
+    state = {
+        title: "",
+        description: "",
+        videoUrl: "",
+        courseId: null
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
+
+    onSubmit = (e) => {
+        e.preventDefault();
         console.log('this state: ', this.state);
     }
 
+    onChange = (e) => {
+        this.setState({[e.target.name]: e.target.value});
+    }
 
     render() {
         return (
@@ -29,23 +26,31 @@ class CreateLesson extends React.Component {
                 <h3>
                     Create Lesson
                 </h3>
-                <form className='form'>
+                <form onSubmit={this.onSubmit}>
                     <input
                         type='text'
                         name='title'
+                        value={this.state.title}
+                        onChange={this.onChange}
                         placeholder='Title'
                     />
                     <input
                         type='text'
                         name='description'
+                        value={this.state.description}
+                        onChange={this.onChange}
                         placeholder='Description'
                     />
                     <input
                         type='text'
                         name='video url'
+                        value={this.state.videoUrl}
+                        onChange={this.onChange}
                         placeholder='Video URL'
                     />
-                    <Button variant="contained" color="primary">
+                    <Button type="submit"
+                            variant="contained"
+                            color="primary">
                         Add
                     </Button>
                 </form>
