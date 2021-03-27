@@ -1,4 +1,5 @@
 import * as React from "react";
+import {Button} from "@material-ui/core";
 
 
 class CreateCourse extends React.Component {
@@ -27,6 +28,26 @@ class CreateCourse extends React.Component {
                 <h3>
                     Create Course
                 </h3>
+                <form  className='form'>
+                    <input
+                        type='text'
+                        name='title'
+                        placeholder='Title'
+                    />
+                    <input
+                        type='text'
+                        name='description'
+                        placeholder='Description'
+                    />
+                    <input
+                        type='number'
+                        name='number'
+                        placeholder='Number'
+                    />
+                    <Button variant="contained" color="primary">
+                        Add
+                    </Button>
+                </form>
             </article>
         )
     }
