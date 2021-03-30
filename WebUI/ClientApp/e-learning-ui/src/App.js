@@ -7,6 +7,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Course from "./components/courses/Course";
 import axios from "axios";
 import CreateCourse from "./components/courses/CreateCourse";
+import Admin from "./components/admin/Admin";
 
 
 class App extends React.Component {
@@ -90,13 +91,8 @@ class App extends React.Component {
                         />
                         <Route
                             exact
-                            path="/admin/course/create"
-                            render={props => (
-                                <CreateCourse
-                                    {...props}
-                                    postCourse={this.postCourse}
-                                />
-                            )}
+                            path="/admin"
+                            component={Admin}
                         />
                     </Switch>
                 </Container>

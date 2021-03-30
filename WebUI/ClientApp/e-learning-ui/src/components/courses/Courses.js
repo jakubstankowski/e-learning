@@ -10,18 +10,18 @@ function Courses({courses}) {
             <h3>Courses:</h3>
             <Grid container spacing={1}>
 
-                    {
-                        courses.map((course, i) =>
-                            <Link to={`/course/${course.id}`} style={{textDecoration: 'none'}} key={i}>
-                                <CourseItem key={i}
-                                            course={course}/>
-                            </Link>
-                        )
-                    }
+                {
+                    courses.map((course, i) =>
+                        <Link to={`/course/${course.id}`} style={{textDecoration: 'none'}} key={i}>
+                            <CourseItem key={i}
+                                        course={course}/>
+                        </Link>
+                    )
+                }
             </Grid>
-            <Link to="/admin/course/create">
+            <Link to="/admin" style={{textDecoration: 'none'}}>
                 <Button variant="contained" color="primary">
-                    Create new course
+                    Admin
                 </Button>
             </Link>
         </article>
