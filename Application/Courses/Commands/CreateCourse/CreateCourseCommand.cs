@@ -6,10 +6,11 @@ using E_Learning.Application.Common.Dto;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.Courses.Commands
 {
-    public class CreateCourseCommand : IRequest<CourseDto>
+    public class CreateCourseCommand : IRequest<IEnumerable<CourseDto>>
     {
 
         public string Title { get; set; }
@@ -21,7 +22,7 @@ namespace E_Learning.Application.Courses.Commands
     }
 
 
-    public class CreateCourseHandler : IRequestHandler<CreateCourseCommand, CourseDto>
+    public class CreateCourseHandler : IRequestHandler<CreateCourseCommand, IEnumerable<CourseDto>>
     {
         private readonly IContext _context;
         private readonly IMapper _mapper;
@@ -32,8 +33,9 @@ namespace E_Learning.Application.Courses.Commands
             _mapper = mapper;
         }
 
-        public async Task<CourseDto> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<CourseDto>> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
         {
+
             var course = new Course
             {
                 Title = request.Title,
@@ -45,7 +47,10 @@ namespace E_Learning.Application.Courses.Commands
             _context.Courses.Add(course);
             await _context.SaveChangesAsync();
 
-            return _mapper.Map<Course, CourseDto>(course);
+            var courses = await _context.Courses.ToListAsync();
+
+            return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
+
         }
     }
 
