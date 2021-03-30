@@ -3,7 +3,8 @@ import Header from "./components/layout/Header";
 import React from "react";
 import Container from "@material-ui/core/Container";
 import Courses from "./components/courses/Courses";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";import Course from "./components/courses/Course";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Course from "./components/courses/Course";
 import axios from "axios";
 import CreateCourse from "./components/courses/CreateCourse";
 
@@ -43,7 +44,10 @@ class App extends React.Component {
     }
 
     postCourse = async (course) => {
-        await axios.post('https://localhost:44367/api/courses', course)
+        const res = await axios.post('https://localhost:44367/api/courses', course)
+        this.setState({
+            courses: res.data
+        })
     }
 
     getLesson = async (id) => {
