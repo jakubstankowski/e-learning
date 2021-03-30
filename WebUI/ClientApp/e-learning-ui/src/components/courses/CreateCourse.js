@@ -18,6 +18,7 @@ class CreateCourse extends React.Component {
         e.preventDefault();
         this.props.postCourse(this.state);
         this.setState({title: '', description: '', price:''});
+        this.props.history.push('/');
     }
 
     onChange = (e) => {
