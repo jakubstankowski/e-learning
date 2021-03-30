@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -11,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.Lessons.Commands
 {
-    public class CreateLessonCommand : IRequest<LessonDto>
+    public class CreateLessonCommand : IRequest<IEnumerable<LessonDto>>
     {
         public string Title { get; set; }
 
@@ -23,7 +24,7 @@ namespace E_Learning.Application.Lessons.Commands
 
     }
 
-    public class CreateLessonHandler : IRequestHandler<CreateLessonCommand, LessonDto>
+    public class CreateLessonHandler : IRequestHandler<CreateLessonCommand, IEnumerable<LessonDto>>
     {
         private readonly IContext _context;
         private readonly IMapper _mapper;
@@ -34,12 +35,11 @@ namespace E_Learning.Application.Lessons.Commands
             _mapper = mapper;
         }
 
-        public async Task<LessonDto> Handle(CreateLessonCommand request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<LessonDto>> Handle(CreateLessonCommand request, CancellationToken cancellationToken)
         {
-
             var course = await _context.Courses
-                .Include(c => c.Lessons)
-                .FirstOrDefaultAsync(c => c.Id == request.CourseId);
+                   .Include(c => c.Lessons)
+                   .FirstOrDefaultAsync(c => c.Id == request.CourseId);
 
             if (course == null)
             {
@@ -60,9 +60,11 @@ namespace E_Learning.Application.Lessons.Commands
 
             await _context.SaveChangesAsync();
 
+            var lessons = await _context.Lessons.ToListAsync();
 
-            return _mapper.Map<Lesson, LessonDto>(lesson);
+            return _mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons);
         }
+
     }
 
 
