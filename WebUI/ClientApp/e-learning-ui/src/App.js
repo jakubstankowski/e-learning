@@ -6,8 +6,8 @@ import Courses from "./components/courses/Courses";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Course from "./components/courses/Course";
 import axios from "axios";
-import CreateCourse from "./components/courses/CreateCourse";
 import Admin from "./components/admin/Admin";
+import CreateCourse from "./components/courses/CreateCourse";
 import CreateLesson from "./components/lessons/CreateLesson";
 
 
@@ -18,7 +18,6 @@ class App extends React.Component {
         lessons: [],
         lesson: {}
     };
-
 
     componentDidMount() {
         this.getCourses();
@@ -45,6 +44,13 @@ class App extends React.Component {
         });
     }
 
+    getLesson = async (id) => {
+        const res = await axios.get(`https://localhost:44367/api/lesson/${id}`);
+        this.setState({
+            lesson: res.data
+        });
+    }
+
     postCourse = async (course) => {
         const res = await axios.post('https://localhost:44367/api/courses', course)
         this.setState({
@@ -59,14 +65,6 @@ class App extends React.Component {
          })*/
         console.log('res: ', res);
     }
-
-    getLesson = async (id) => {
-        const res = await axios.get(`https://localhost:44367/api/lesson/${id}`);
-        this.setState({
-            lesson: res.data
-        });
-    }
-
 
     render() {
         const {courses, course, lessons, lesson} = this.state;
@@ -85,7 +83,6 @@ class App extends React.Component {
                             />
                         )}/>
                         <Route
-                            exact
                             path="/course/:courseId"
                             render={props => (
                                 <Course

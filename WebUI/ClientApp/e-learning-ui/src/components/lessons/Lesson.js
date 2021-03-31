@@ -5,8 +5,6 @@ import PropTypes from "prop-types";
 class Lesson extends Component {
     componentDidMount() {
         this.props.getLesson(this.props.match.params.lessonId);
-
-        alert('lesson id: ' +  this.props.match.params.lessonId);
     }
 
     static propTypes = {
@@ -15,11 +13,11 @@ class Lesson extends Component {
     };
 
     render() {
-        const {title, id} = this.props.lesson;
+        const {title} = this.props.lesson;
 
         return (
             <article>
-                lesson title: {title} ID: {id}
+                lesson title: {title}
             </article>
         )
     }
