@@ -8,6 +8,7 @@ import Course from "./components/courses/Course";
 import axios from "axios";
 import CreateCourse from "./components/courses/CreateCourse";
 import Admin from "./components/admin/Admin";
+import CreateLesson from "./components/lessons/CreateLesson";
 
 
 class App extends React.Component {
@@ -49,6 +50,14 @@ class App extends React.Component {
         this.setState({
             courses: res.data
         })
+    }
+
+    postLesson = async (id, lesson) => {
+        const res = await axios.post(`https://localhost:44367/api/courses/${id}/lesson`, lesson)
+        /* this.setState({
+             courses: res.data
+         })*/
+        console.log('res: ', res);
     }
 
     getLesson = async (id) => {
@@ -93,6 +102,26 @@ class App extends React.Component {
                             exact
                             path="/admin"
                             component={Admin}
+                        />
+                        <Route
+                            exact
+                            path="/admin/course/create"
+                            render={props => (
+                                <CreateCourse
+                                    {...props}
+                                    postCourse={this.postCourse}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path="/admin/lesson/create"
+                            render={props => (
+                                <CreateLesson
+                                    {...props}
+                                    postLesson={this.postLesson}
+                                />
+                            )}
                         />
                     </Switch>
                 </Container>
