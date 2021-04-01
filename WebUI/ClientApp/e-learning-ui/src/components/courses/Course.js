@@ -29,6 +29,7 @@ class Course extends Component {
                         path="/course/:courseId"
                         exact render={props => (
                         <Lessons
+                            {...props}
                             lessons={this.props.lessons}/>
                     )}/>
                     <Route
