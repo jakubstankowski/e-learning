@@ -10,10 +10,6 @@ class Lessons extends React.Component {
         lessons: PropTypes.array.isRequired
     };
 
-    componentDidMount() {
-        console.log('props: ', this.props);
-    }
-
     render() {
         return (
             <article>
@@ -32,32 +28,8 @@ class Lessons extends React.Component {
                 </ul>
             </article>
         )
-
     }
 
 }
-
-
-/*
-function Lessons({lessons}) {
-    return (
-        <article>
-            <Typography variant="h5" component="h2">
-                Lessons:
-            </Typography>
-            <ul>
-                {
-                    lessons.map((lesson, i) =>
-                        <Link to={`/course/1/lesson/${lesson.id}`} style={{textDecoration: 'none'}} key={i}>
-                            <LessonItem key={i}
-                                        lesson={lesson}/>
-                        </Link>
-                    )
-                }
-            </ul>
-        </article>
-    )
-}
-*/
 
 export default Lessons;
