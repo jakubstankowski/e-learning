@@ -7,9 +7,9 @@ import {Link} from "react-router-dom";
 class Header extends React.Component {
     render() {
         return (
-            <AppBar position="static">
+            <AppBar position="static" className='navbar'>
                 <Toolbar variant="dense">
-                    <Link to="/" style={{textDecoration: 'none'}}>
+                    <Link to="/">
                         <Typography variant="h6" color="inherit">
                             E-Learning
                         </Typography>

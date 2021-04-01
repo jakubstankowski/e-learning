@@ -19,7 +19,7 @@ class Lessons extends React.Component {
                 <ul>
                     {
                         this.props.lessons.map((lesson, i) =>
-                            <Link to={`/course/${this.props.match.params.courseId}/lesson/${lesson.id}`} style={{textDecoration: 'none'}} key={i}>
+                            <Link to={`/course/${this.props.match.params.courseId}/lesson/${lesson.id}`}  key={i}>
                                 <LessonItem key={i}
                                             lesson={lesson}/>
                             </Link>
