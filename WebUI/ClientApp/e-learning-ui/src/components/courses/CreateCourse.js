@@ -32,7 +32,7 @@ class CreateCourse extends React.Component {
 
     render() {
         return (
-            <article style={{padding: 16, margin: 'auto', maxWidth: 600}}>
+            <article className='form-container'>
                 <h3>
                     Create Course
                 </h3>
@@ -43,7 +43,7 @@ class CreateCourse extends React.Component {
                         <form onSubmit={handleSubmit} noValidate>
                             <Paper style={{padding: 16}}>
                                 <Grid container alignItems="flex-start" spacing={2}>
-                                    <Grid item md={12}>
+                                    <Grid item xs={12}>
                                         <Field
                                             fullWidth
                                             required
@@ -53,7 +53,7 @@ class CreateCourse extends React.Component {
                                             label="Title"
                                         />
                                     </Grid>
-                                    <Grid item md={12}>
+                                    <Grid item xs={12}>
                                         <Field
                                             fullWidth
                                             required
@@ -63,7 +63,7 @@ class CreateCourse extends React.Component {
                                             label="Description"
                                         />
                                     </Grid>
-                                    <Grid item md={12}>
+                                    <Grid item xs={12}>
                                         <Field
                                             fullWidth
                                             required
@@ -73,7 +73,7 @@ class CreateCourse extends React.Component {
                                             label="Price"
                                         />
                                     </Grid>
-                                    <Grid item md={12}>
+                                    <Grid item xs={12}>
                                         <Button type="submit"
                                                 style={{width: '100%', marginTop: '1rem'}}
                                                 color="primary"

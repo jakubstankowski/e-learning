@@ -50,7 +50,7 @@ class CreateLesson extends React.Component {
 
     render() {
         return (
-            <article style={{padding: 16, margin: 'auto', maxWidth: 600}}>
+            <article className='form-container'>
                 <h3>
                     Create Lesson
                 </h3>
