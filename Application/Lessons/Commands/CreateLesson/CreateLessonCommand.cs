@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -60,7 +61,9 @@ namespace E_Learning.Application.Lessons.Commands
 
             await _context.SaveChangesAsync();
 
-            var lessons = await _context.Lessons.ToListAsync();
+            var lessons = await _context.Lessons
+                .Where(l => l.CourseId == request.CourseId)
+                .ToListAsync();
 
             return _mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons);
         }
