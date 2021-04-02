@@ -20,7 +20,7 @@ class CreateLesson extends React.Component {
 
 
     onSubmit = (values) => {
-        this.props.postLesson(parseInt(values.courseId), values);
+        this.props.postLesson(values);
         this.props.history.push(`/course/${values.courseId}`);
     };
 
@@ -101,8 +101,8 @@ class CreateLesson extends React.Component {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Button type="submit"
-                                                style={{width: '100%', marginTop: '1rem'}}
                                                 color="primary"
+                                                className="form-button"
                                                 disabled={submitting}
                                                 variant="contained">
                                             Create

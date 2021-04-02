@@ -58,7 +58,7 @@ class App extends React.Component {
         })
     }
 
-    postLesson = async (courseId, lesson) => {
+    postLesson = async (lesson) => {
         const res = await axios.post(`https://localhost:44367/api/lesson`, lesson);
         this.setState({
             lessons: res.data

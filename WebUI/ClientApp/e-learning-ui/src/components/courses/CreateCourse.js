@@ -75,7 +75,7 @@ class CreateCourse extends React.Component {
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Button type="submit"
-                                                style={{width: '100%', marginTop: '1rem'}}
+                                                className="form-button"
                                                 color="primary"
                                                 disabled={submitting}
                                                 variant="contained">
