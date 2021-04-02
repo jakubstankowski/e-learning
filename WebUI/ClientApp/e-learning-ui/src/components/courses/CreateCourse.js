@@ -11,8 +11,10 @@ class CreateCourse extends React.Component {
     };
 
     onSubmit = (values) => {
-        this.props.postCourse(values);
-        this.props.history.push('/');
+        this.props.postCourse(values)
+            .then(() => {
+                this.props.history.push('/');
+            })
     };
 
     validate = (values) => {

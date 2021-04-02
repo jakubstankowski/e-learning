@@ -20,7 +20,7 @@ class Header extends React.Component {
                             Create new course
                         </Button>
                     </Link>
-                    <Link to="/admin/course/lesson">
+                    <Link to="/admin/lesson/create">
                         <Button>
                             Create new lesson
                         </Button>

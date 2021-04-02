@@ -20,8 +20,10 @@ class CreateLesson extends React.Component {
 
 
     onSubmit = (values) => {
-        this.props.postLesson(values);
-        this.props.history.push(`/course/${values.courseId}`);
+        this.props.postLesson(values)
+            .then(() => {
+                this.props.history.push(`/course/${values.courseId}`);
+            })
     };
 
     validate = (values) => {
