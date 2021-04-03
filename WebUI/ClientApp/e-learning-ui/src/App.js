@@ -65,6 +65,11 @@ class App extends React.Component {
         })
     }
 
+    deleteCourse = async (id) => {
+        const res = await axios.delete(`https://localhost:44367/api/courses/${id}`)
+        console.log('res: ', res);
+    }
+
     render() {
         const {courses, course, lessons, lesson} = this.state;
 
@@ -79,6 +84,7 @@ class App extends React.Component {
                             <Courses
                                 {...props}
                                 courses={courses}
+                                deleteCourse={this.deleteCourse}
                             />
                         )}/>
                         <Route
