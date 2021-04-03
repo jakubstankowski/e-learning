@@ -21,7 +21,7 @@ function CourseItem(props) {
 
     return (
         <article>
-            <Grid  container item xs={4} spacing={3}>
+            <Grid  item xs={3}>
                 <Card className={classes.root}>
                     <CardContent>
                         <Typography variant="h5" component="h2">
