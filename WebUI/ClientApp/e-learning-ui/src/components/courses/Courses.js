@@ -13,10 +13,7 @@ class Courses extends React.Component {
         deleteCourse: PropTypes.func.isRequired
     };
 
-
-
-
-      render() {
+    render() {
         return (
             <section>
                 <Typography variant="h5" component="h2">

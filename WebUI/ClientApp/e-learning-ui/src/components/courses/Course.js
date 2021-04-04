@@ -17,12 +17,12 @@ class Course extends Component {
     };
 
     render() {
-        const {title} = this.props.course;
+        const {title, id} = this.props.course;
 
         return (
             <Fragment>
                 <Typography variant="h5" component="h2">
-                    Course {title}
+                    Course {title} ID: {id}
                 </Typography>
                 <Switch>
                     <Route
