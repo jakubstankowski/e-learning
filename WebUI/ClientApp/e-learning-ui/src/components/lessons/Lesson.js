@@ -16,9 +16,9 @@ class Lesson extends Component {
         const {title} = this.props.lesson;
 
         return (
-            <article>
+            <section>
                 lesson title: {title}
-            </article>
+            </section>
         )
     }
 

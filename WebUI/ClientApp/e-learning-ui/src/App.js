@@ -66,10 +66,9 @@ class App extends React.Component {
     }
 
     deleteCourse = async (id) => {
+        console.log('id: ', id);
        /* const res = await axios.delete(`https://localhost:44367/api/courses/${id}`)
         console.log('res: ', res);*/
-        console.log('id: ', id);
-
     }
 
     render() {

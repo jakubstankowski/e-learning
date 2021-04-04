@@ -50,7 +50,7 @@ class CreateLesson extends React.Component {
 
     render() {
         return (
-            <article className='form-container'>
+            <section className='form-container'>
                 <h3>
                     Create Lesson
                 </h3>
@@ -115,7 +115,7 @@ class CreateLesson extends React.Component {
                         </form>
                     )}
                 />
-            </article>
+            </section>
         )
     }
 

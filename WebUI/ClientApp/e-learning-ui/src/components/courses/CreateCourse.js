@@ -34,7 +34,7 @@ class CreateCourse extends React.Component {
 
     render() {
         return (
-            <article className='form-container'>
+            <section className='form-container'>
                 <h3>
                     Create Course
                 </h3>
@@ -89,7 +89,7 @@ class CreateCourse extends React.Component {
                         </form>
                     )}
                 />
-            </article>
+            </section>
         )
     }
 

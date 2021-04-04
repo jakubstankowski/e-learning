@@ -12,7 +12,7 @@ class Lessons extends React.Component {
 
     render() {
         return (
-            <article>
+            <section>
                 <Typography variant="h5" component="h2">
                     Lessons:
                 </Typography>
@@ -26,7 +26,7 @@ class Lessons extends React.Component {
                         )
                     }
                 </ul>
-            </article>
+            </section>
         )
     }
 

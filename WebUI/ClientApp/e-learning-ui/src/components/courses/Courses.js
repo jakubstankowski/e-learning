@@ -4,6 +4,7 @@ import CourseItem from "./CourseItem";
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import PropTypes from 'prop-types';
+import Typography from "@material-ui/core/Typography";
 
 
 class Courses extends React.Component {
@@ -13,35 +14,37 @@ class Courses extends React.Component {
     };
 
 
-    handleDeleteCourse = (id) => {
-        console.log('id:', id);
-    };
 
 
-    render() {
+      render() {
         return (
-            <article>
-                <h3>Courses:</h3>
+            <section>
+                <Typography variant="h5" component="h2">
+                    Courses:
+                </Typography>
                 <Grid container spacing={2}>
 
                     {
                         this.props.courses.map((course, i) =>
-                            <Link to={`/course/${course.id}`}
-                                  style={{textDecoration: 'none'}}
-                                  key={i}>
-                                <CourseItem key={i}
-                                            course={course}/>
+                            <article key={i}>
+                                <Link to={`/course/${course.id}`}
+                                      style={{textDecoration: 'none'}}
+                                      >
+                                    <CourseItem key={i}
+                                                course={course}/>
+                                </Link>
                                 <Button variant="contained"
+                                        style={{marginTop: '1rem', width: '100%'}}
                                         color="primary"
-                                        onClick={this.handleDeleteCourse(course.id)}
+                                        onClick={() => this.props.deleteCourse(course.id) }
                                 >
                                     Delete
                                 </Button>
-                            </Link>
+                            </article>
                         )
                     }
                 </Grid>
-            </article>
+            </section>
         )
     }
 }
