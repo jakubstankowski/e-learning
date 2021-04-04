@@ -51,21 +51,6 @@ namespace E_Learning.Application.Lessons.Commands.DeleteLesson
                 .ToListAsync();
 
 
-            if (lessons.Count <= 0)
-            {
-                var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == courseId);
-
-                if (course == null)
-                {
-                    throw new NotFoundException(nameof(Course), request.Id);
-                }
-
-                _context.Courses.Remove(course);
-
-                await _context.SaveChangesAsync();
-            }
-
-
             return _mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons);
         }
 
