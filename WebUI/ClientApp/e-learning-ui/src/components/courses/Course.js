@@ -30,6 +30,7 @@ class Course extends Component {
                         exact render={props => (
                         <Lessons
                             {...props}
+                            deleteLesson={this.props.deleteLesson}
                             lessons={this.props.lessons}/>
                     )}/>
                     <Route

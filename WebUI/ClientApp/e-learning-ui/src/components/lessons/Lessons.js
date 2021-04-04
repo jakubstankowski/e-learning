@@ -3,11 +3,13 @@ import React from "react";
 import LessonItem from "./LessonItem";
 import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
+import {Button} from "@material-ui/core";
 
 
 class Lessons extends React.Component {
     static propTypes = {
-        lessons: PropTypes.array.isRequired
+        lessons: PropTypes.array.isRequired,
+        deleteLesson: PropTypes.func.isRequired
     };
 
     render() {
@@ -19,10 +21,18 @@ class Lessons extends React.Component {
                 <ul>
                     {
                         this.props.lessons.map((lesson, i) =>
-                            <Link to={`/course/${this.props.match.params.courseId}/lesson/${lesson.id}`}  key={i}>
-                                <LessonItem key={i}
-                                            lesson={lesson}/>
-                            </Link>
+                            <article key={i}>
+                                <Link to={`/course/${this.props.match.params.courseId}/lesson/${lesson.id}`} key={i}>
+                                    <LessonItem key={i}
+                                                lesson={lesson}/>
+                                </Link>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => this.props.deleteLesson(lesson.id)}>
+                                    Delete
+                                </Button>
+                            </article>
                         )
                     }
                 </ul>

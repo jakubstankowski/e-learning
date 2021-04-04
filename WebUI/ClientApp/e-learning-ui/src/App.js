@@ -46,6 +46,7 @@ class App extends React.Component {
 
     getLesson = async (id) => {
         const res = await axios.get(`https://localhost:44367/api/lesson/${id}`);
+
         this.setState({
             lesson: res.data
         });
@@ -53,16 +54,18 @@ class App extends React.Component {
 
     postCourse = async (course) => {
         const res = await axios.post('https://localhost:44367/api/courses', course)
+
         this.setState({
             courses: res.data
-        })
+        });
     }
 
     postLesson = async (lesson) => {
         const res = await axios.post(`https://localhost:44367/api/lesson`, lesson);
+
         this.setState({
             lessons: res.data
-        })
+        });
     }
 
     deleteCourse = async (id) => {
@@ -70,7 +73,15 @@ class App extends React.Component {
 
         this.setState({
             courses: res.data
-        })
+        });
+    }
+
+    deleteLesson = async (id) => {
+        const res = await axios.delete(`https://localhost:44367/api/lesson/${id}`)
+
+        this.setState({
+            lessons: res.data
+        });
     }
 
     render() {
@@ -97,6 +108,7 @@ class App extends React.Component {
                                     {...props}
                                     getCourse={this.getCourse}
                                     getLesson={this.getLesson}
+                                    deleteLesson={this.deleteLesson}
                                     course={course}
                                     lessons={lessons}
                                     lesson={lesson}
