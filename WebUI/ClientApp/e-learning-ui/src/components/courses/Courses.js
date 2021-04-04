@@ -27,6 +27,7 @@ class Courses extends React.Component {
                     {
                         this.props.courses.map((course, i) =>
                             <article key={i}>
+                                course.id: {course.id}
                                 <Link to={`/course/${course.id}`}
                                       style={{textDecoration: 'none'}}
                                       >
