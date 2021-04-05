@@ -9,6 +9,7 @@ import axios from "axios";
 import Admin from "./components/admin/Admin";
 import CreateCourse from "./components/courses/CreateCourse";
 import CreateLesson from "./components/lessons/CreateLesson";
+import EditCourse from "./components/courses/EditCourse";
 
 
 class App extends React.Component {
@@ -16,7 +17,9 @@ class App extends React.Component {
         courses: [],
         course: {},
         lessons: [],
-        lesson: {}
+        lesson: {},
+        courseEditing: false,
+        lessonEditing: false
     };
 
     componentDidMount() {
@@ -84,17 +87,36 @@ class App extends React.Component {
         });
     }
 
+    setCourseEditing(value) {
+        if (typeof value !== 'boolean') {
+            throw " This value must either be true or false"
+        }
+        this.setState({
+            courseEditing: value
+        })
+    }
+
+    setLessonEditing(value) {
+        if (typeof value !== 'boolean') {
+            throw " This value must either be true or false"
+        }
+        this.setState({
+            lessonEditing: value
+        })
+    }
+
+
     updateCourse = async (id) => {
         console.log('id: ', id);
-       /* const res = await axios.delete(`https://localhost:44367/api/courses/${id}`)
+        /* const res = await axios.delete(`https://localhost:44367/api/courses/${id}`)
 
-        this.setState({
-            courses: res.data
-        });*/
+         this.setState({
+             courses: res.data
+         });*/
     }
 
     render() {
-        const {courses, course, lessons, lesson} = this.state;
+        const {courses, course, lessons, lesson, courseEditing, lessonEditing} = this.state;
 
         return (
             <Router>
@@ -108,7 +130,6 @@ class App extends React.Component {
                                 {...props}
                                 courses={courses}
                                 deleteCourse={this.deleteCourse}
-                                updateCourse={this.updateCourse}
                             />
                         )}/>
                         <Route
@@ -130,16 +151,30 @@ class App extends React.Component {
                             path="/admin"
                             component={Admin}
                         />
-                        <Route
-                            exact
-                            path="/admin/course/create"
-                            render={props => (
-                                <CreateCourse
-                                    {...props}
-                                    postCourse={this.postCourse}
+                        {
+                            courseEditing ? (
+                                <Route
+                                    exact
+                                    path="/admin/course/create"
+                                    render={props => (
+                                        <CreateCourse
+                                            {...props}
+                                            postCourse={this.postCourse}
+                                        />
+                                    )}
                                 />
-                            )}
-                        />
+                            ) : (
+                                <Route
+                                    exact
+                                    path="/admin/course/edit/:courseId"
+                                    render={props => (
+                                        <EditCourse
+                                            updateCourse={this.updateCourse}
+                                        />
+                                    )}
+                                />
+                            )
+                        }
                         <Route
                             exact
                             path="/admin/lesson/create"

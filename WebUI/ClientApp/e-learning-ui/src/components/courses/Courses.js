@@ -42,7 +42,6 @@ class Courses extends React.Component {
                                 <Button variant="contained"
                                         style={{marginTop: '1rem', width: '100%'}}
                                         color="primary"
-                                        onClick={() => this.props.updateCourse(course.id)}
                                 >
                                     Edit
                                 </Button>
