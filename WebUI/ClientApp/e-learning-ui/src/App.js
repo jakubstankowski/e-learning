@@ -84,6 +84,15 @@ class App extends React.Component {
         });
     }
 
+    updateCourse = async (id) => {
+        console.log('id: ', id);
+       /* const res = await axios.delete(`https://localhost:44367/api/courses/${id}`)
+
+        this.setState({
+            courses: res.data
+        });*/
+    }
+
     render() {
         const {courses, course, lessons, lesson} = this.state;
 
@@ -99,6 +108,7 @@ class App extends React.Component {
                                 {...props}
                                 courses={courses}
                                 deleteCourse={this.deleteCourse}
+                                updateCourse={this.updateCourse}
                             />
                         )}/>
                         <Route

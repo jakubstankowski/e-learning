@@ -10,7 +10,8 @@ import Typography from "@material-ui/core/Typography";
 class Courses extends React.Component {
     static propTypes = {
         courses: PropTypes.array.isRequired,
-        deleteCourse: PropTypes.func.isRequired
+        deleteCourse: PropTypes.func.isRequired,
+        updateCourse: PropTypes.func.isRequired
     };
 
     render() {
@@ -27,16 +28,23 @@ class Courses extends React.Component {
                                 course.id: {course.id}
                                 <Link to={`/course/${course.id}`}
                                       style={{textDecoration: 'none'}}
-                                      >
+                                >
                                     <CourseItem key={i}
                                                 course={course}/>
                                 </Link>
                                 <Button variant="contained"
                                         style={{marginTop: '1rem', width: '100%'}}
                                         color="primary"
-                                        onClick={() => this.props.deleteCourse(course.id) }
+                                        onClick={() => this.props.deleteCourse(course.id)}
                                 >
                                     Delete
+                                </Button>
+                                <Button variant="contained"
+                                        style={{marginTop: '1rem', width: '100%'}}
+                                        color="primary"
+                                        onClick={() => this.props.updateCourse(course.id)}
+                                >
+                                    Edit
                                 </Button>
                             </article>
                         )
