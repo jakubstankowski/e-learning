@@ -87,13 +87,12 @@ class App extends React.Component {
 
 
     updateCourse = async (id, course) => {
-        console.log('id: ', id);
-        console.log('course: ', course);
-        /* const res = await axios.delete(`https://localhost:44367/api/courses/${id}`)
+        const res = await axios.put(`https://localhost:44367/api/courses/${id}`, course)
 
-         this.setState({
-             courses: res.data
-         });*/
+        console.log('rest: ', res);
+        this.setState({
+            courses: res.data
+        });
     }
 
     render() {

@@ -10,8 +10,7 @@ import Typography from "@material-ui/core/Typography";
 class Courses extends React.Component {
     static propTypes = {
         courses: PropTypes.array.isRequired,
-        deleteCourse: PropTypes.func.isRequired,
-        updateCourse: PropTypes.func.isRequired
+        deleteCourse: PropTypes.func.isRequired
     };
 
     render() {

@@ -20,12 +20,11 @@ class EditCourse extends React.Component {
         deleteLesson: PropTypes.func.isRequired
     };
 
-    onSubmit = (values) => {
-        console.log('values: ', values);
-        /*this.props.postCourse(values)
+    onSubmit = (course) => {
+        this.props.updateCourse(this.props.match.params.courseId, course)
             .then(() => {
                 this.props.history.push('/');
-            })*/
+            })
     };
 
     validate = (values) => {
