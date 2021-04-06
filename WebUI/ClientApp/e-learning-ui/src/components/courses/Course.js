@@ -22,7 +22,7 @@ class Course extends Component {
         return (
             <Fragment>
                 <Typography variant="h5" component="h2">
-                    Course {title} ID: {id}
+                    Course <strong>{title}</strong> ID: <strong>{id}</strong>
                 </Typography>
                 <Switch>
                     <Route

@@ -3,21 +3,13 @@ import {Button, Grid, Paper} from "@material-ui/core";
 import {TextField} from 'final-form-material-ui';
 import PropTypes from 'prop-types';
 import {Form, Field} from 'react-final-form'
+import Typography from "@material-ui/core/Typography";
 
 
 class CreateLesson extends React.Component {
     static propTypes = {
         postLesson: PropTypes.func.isRequired
     };
-
-
-    state = {
-        title: "",
-        description: "",
-        videoUrl: "",
-        courseId: ''
-    }
-
 
     onSubmit = (values) => {
         this.props.postLesson(values)
@@ -51,9 +43,9 @@ class CreateLesson extends React.Component {
     render() {
         return (
             <section className='form-container'>
-                <h3>
+                <Typography variant="h5" component="h2">
                     Create Lesson
-                </h3>
+                </Typography>
                 <Form
                     onSubmit={this.onSubmit}
                     validate={this.validate}
