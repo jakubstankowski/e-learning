@@ -17,9 +17,7 @@ class App extends React.Component {
         courses: [],
         course: {},
         lessons: [],
-        lesson: {},
-        courseEditing: false,
-        lessonEditing: false
+        lesson: {}
     };
 
     componentDidMount() {
@@ -87,23 +85,6 @@ class App extends React.Component {
         });
     }
 
-    setCourseEditing(value) {
-        if (typeof value !== 'boolean') {
-            throw " This value must either be true or false"
-        }
-        this.setState({
-            courseEditing: value
-        })
-    }
-
-    setLessonEditing(value) {
-        if (typeof value !== 'boolean') {
-            throw " This value must either be true or false"
-        }
-        this.setState({
-            lessonEditing: value
-        })
-    }
 
 
     updateCourse = async (id) => {
@@ -151,30 +132,27 @@ class App extends React.Component {
                             path="/admin"
                             component={Admin}
                         />
-                        {
-                            courseEditing ? (
-                                <Route
-                                    exact
-                                    path="/admin/course/create"
-                                    render={props => (
-                                        <CreateCourse
-                                            {...props}
-                                            postCourse={this.postCourse}
-                                        />
-                                    )}
+                        <Route
+                            exact
+                            path="/admin/course/create"
+                            render={props => (
+                                <CreateCourse
+                                    {...props}
+                                    postCourse={this.postCourse}
                                 />
-                            ) : (
-                                <Route
-                                    exact
-                                    path="/admin/course/edit/:courseId"
-                                    render={props => (
-                                        <EditCourse
-                                            updateCourse={this.updateCourse}
-                                        />
-                                    )}
+                            )}
+                        />
+
+                        <Route
+                            exact
+                            path="/admin/course/edit/:courseId"
+                            render={props => (
+                                <EditCourse
+                                    {...props}
+                                    updateCourse={this.updateCourse}
                                 />
-                            )
-                        }
+                            )}
+                        />
                         <Route
                             exact
                             path="/admin/lesson/create"
