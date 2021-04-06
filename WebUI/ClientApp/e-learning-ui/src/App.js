@@ -86,9 +86,9 @@ class App extends React.Component {
     }
 
 
-
-    updateCourse = async (id) => {
+    updateCourse = async (id, course) => {
         console.log('id: ', id);
+        console.log('course: ', course);
         /* const res = await axios.delete(`https://localhost:44367/api/courses/${id}`)
 
          this.setState({
@@ -97,7 +97,7 @@ class App extends React.Component {
     }
 
     render() {
-        const {courses, course, lessons, lesson, courseEditing, lessonEditing} = this.state;
+        const {courses, course, lessons, lesson} = this.state;
 
         return (
             <Router>
@@ -149,7 +149,12 @@ class App extends React.Component {
                             render={props => (
                                 <EditCourse
                                     {...props}
+                                    getCourse={this.getCourse}
+                                    deleteLesson={this.deleteLesson}
                                     updateCourse={this.updateCourse}
+                                    course={course}
+                                    lessons={lessons}
+                                    lesson={lesson}
                                 />
                             )}
                         />
