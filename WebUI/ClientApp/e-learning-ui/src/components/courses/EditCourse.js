@@ -44,7 +44,7 @@ class EditCourse extends React.Component {
 
 
     render() {
-        const {title, id} = this.props.course;
+        const {id, title, description, price} = this.props.course;
 
         return (
             <section className='form-container'>
@@ -52,6 +52,12 @@ class EditCourse extends React.Component {
                     Edit Course <strong>{title}</strong> ID: <strong>{id}</strong>
                 </Typography>
                 <Form
+                    initialValues={{
+                        id: id,
+                        title: title,
+                        description: description,
+                        price: price
+                    }}
                     onSubmit={this.onSubmit}
                     validate={this.validate}
                     render={({handleSubmit, submitting}) => (
