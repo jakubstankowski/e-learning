@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
+import {Link} from "react-router-dom";
+import {Button} from "@material-ui/core";
 
 
 class Lesson extends Component {
@@ -24,6 +26,13 @@ class Lesson extends Component {
                     Description: <strong>{description}</strong>,
                     videoUrl: <strong>{videoUrl}</strong>
                 </Typography>
+                <Link to={`/admin/lesson/${id}/edit`}>
+                    <Button
+                        variant="contained"
+                        color="primary">
+                        Edit Lesson
+                    </Button>
+                </Link>
             </section>
         )
     }

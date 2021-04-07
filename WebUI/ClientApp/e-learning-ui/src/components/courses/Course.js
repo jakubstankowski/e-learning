@@ -2,8 +2,9 @@ import React, {Fragment, Component} from "react";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from 'prop-types';
 import Lessons from "../lessons/Lessons";
-import {Route, Switch} from "react-router-dom";
+import {Link, Route, Switch} from "react-router-dom";
 import Lesson from "../lessons/Lesson";
+import Button from "@material-ui/core/Button";
 
 class Course extends Component {
     componentDidMount() {
@@ -24,6 +25,16 @@ class Course extends Component {
                 <Typography variant="h5" component="h2">
                     Course <strong>{title}</strong> ID: <strong>{id}</strong>
                 </Typography>
+                <Link to={`/admin/course/${id}/edit`}
+                      style={{textDecoration: 'none'}}
+                >
+                    <Button variant="contained"
+                            style={{marginTop: '1rem', width: '100%'}}
+                            color="primary"
+                    >
+                        Edit Course
+                    </Button>
+                </Link>
                 <Switch>
                     <Route
                         path="/course/:courseId"

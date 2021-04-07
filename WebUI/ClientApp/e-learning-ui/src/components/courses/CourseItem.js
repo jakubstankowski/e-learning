@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 
 function CourseItem(props) {
     const classes = useStyles();
-    const {title, description, price} = props.course;
+    const {id, title, description, price} = props.course;
 
     return (
         <article>
@@ -25,7 +25,7 @@ function CourseItem(props) {
                 <Card className={classes.root}>
                     <CardContent>
                         <Typography variant="h5" component="h2">
-                            {title}
+                            title: {title} ID: {id}
                         </Typography>
                         <Typography className={classes.pos} color="textSecondary">
                             {price} $
