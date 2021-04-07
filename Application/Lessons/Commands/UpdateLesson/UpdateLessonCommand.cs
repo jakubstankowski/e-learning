@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.Lessons.Commands.UpdateLesson
 {
-    public class UpdateLessonCommand : IRequest<LessonDto>
+    public class UpdateLessonCommand : IRequest<IEnumerable<LessonDto>>
     {
         public int Id { get; set; }
 
@@ -28,7 +28,7 @@ namespace E_Learning.Application.Lessons.Commands.UpdateLesson
 
     }
 
-    public class UpdateLessonHandler : IRequestHandler<UpdateLessonCommand, LessonDto>
+    public class UpdateLessonHandler : IRequestHandler<UpdateLessonCommand, IEnumerable<LessonDto>>
     {
         private readonly IContext _context;
         private readonly IMapper _mapper;
@@ -39,8 +39,17 @@ namespace E_Learning.Application.Lessons.Commands.UpdateLesson
             _mapper = mapper;
         }
 
-        public async Task<LessonDto> Handle(UpdateLessonCommand request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<LessonDto>> Handle(UpdateLessonCommand request, CancellationToken cancellationToken)
         {
+            var course = await _context.Courses
+                     .FirstOrDefaultAsync(c => c.Id == request.CourseId);
+
+            if (course == null)
+            {
+                throw new NotFoundException(nameof(Course), request.CourseId);
+            }
+
+
             var lesson = await _context.Lessons.FirstOrDefaultAsync(c => c.Id == request.Id);
 
 
@@ -52,11 +61,16 @@ namespace E_Learning.Application.Lessons.Commands.UpdateLesson
             lesson.Title = request.Title;
             lesson.Description = request.Description;
             lesson.VideoUrl = request.VideoUrl;
+            lesson.CourseId = request.CourseId;
+
 
             await _context.SaveChangesAsync();
 
-            return _mapper.Map<Lesson, LessonDto>(lesson);
+            var lessons = await _context.Lessons
+               .Where(l => l.CourseId == request.CourseId)
+               .ToListAsync();
 
+            return _mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons);
 
         }
     }
