@@ -17,7 +17,8 @@ class EditCourse extends React.Component {
         lessons: PropTypes.array.isRequired,
         getCourse: PropTypes.func.isRequired,
         updateCourse: PropTypes.func.isRequired,
-        deleteLesson: PropTypes.func.isRequired
+        deleteLesson: PropTypes.func.isRequired,
+        updateLesson: PropTypes.func.isRequired
     };
 
     onSubmit = (course) => {
@@ -110,6 +111,7 @@ class EditCourse extends React.Component {
                 <Lessons
                     {...this.props}
                     deleteLesson={this.props.deleteLesson}
+                    updateLesson={this.props.updateLesson}
                     lessons={this.props.lessons}/>
             </section>
         )

@@ -32,6 +32,14 @@ class Lessons extends React.Component {
                                     onClick={() => this.props.deleteLesson(lesson.id)}>
                                     Delete
                                 </Button>
+                                <Link to={`/course/${this.props.match.params.courseId}/lesson/${lesson.id}`} key={i}>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={() => this.props.deleteLesson(lesson.id)}>
+                                        Delete
+                                    </Button>
+                                </Link>
                             </article>
                         )
                     }

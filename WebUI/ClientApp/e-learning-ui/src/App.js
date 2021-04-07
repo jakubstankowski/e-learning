@@ -88,12 +88,20 @@ class App extends React.Component {
 
     updateCourse = async (id, course) => {
         const res = await axios.put(`https://localhost:44367/api/courses/${id}`, course)
-
-        console.log('rest: ', res);
         this.setState({
             courses: res.data
         });
     }
+
+    updateLesson = async (id, lesson) => {
+        console.log('id: ', id);
+        console.log('lesson: ', lesson);
+        /*const res = await axios.put(`https://localhost:44367/api/courses/${id}`, course)
+        this.setState({
+            courses: res.data
+        });*/
+    }
+
 
     render() {
         const {courses, course, lessons, lesson} = this.state;
@@ -141,7 +149,6 @@ class App extends React.Component {
                                 />
                             )}
                         />
-
                         <Route
                             exact
                             path="/admin/course/edit/:courseId"
@@ -151,6 +158,7 @@ class App extends React.Component {
                                     getCourse={this.getCourse}
                                     deleteLesson={this.deleteLesson}
                                     updateCourse={this.updateCourse}
+                                    updateLesson={this.updateLesson}
                                     course={course}
                                     lessons={lessons}
                                     lesson={lesson}
