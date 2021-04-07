@@ -9,14 +9,20 @@ import {TextField} from "final-form-material-ui";
 
 class EditLesson extends React.Component {
     componentDidMount() {
-
+        this.props.getLesson(this.props.match.params.lessonId);
     }
 
-    render() {
+    static propTypes = {
+        lesson: PropTypes.object.isRequired,
+        getLesson: PropTypes.func.isRequired,
+        updateLesson: PropTypes.func.isRequired,
+    };
 
+    render() {
+        const {title, description, videoUrl, courseId} = this.props.lesson;
         return (
             <section className='form-container'>
-                EDIT LESSON
+                {title} {description} {videoUrl} {courseId}
             </section>
         )
     }

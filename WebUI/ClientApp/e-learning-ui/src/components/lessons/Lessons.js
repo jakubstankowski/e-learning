@@ -22,7 +22,7 @@ class Lessons extends React.Component {
                     {
                         this.props.lessons.map((lesson, i) =>
                             <article key={i}>
-                                <Link to={`/course/${this.props.match.params.courseId}/lesson/${lesson.id}`} key={i}>
+                                <Link to={`/course/${this.props.match.params.courseId}/lesson/${lesson.id}`}>
                                     <LessonItem key={i}
                                                 lesson={lesson}/>
                                 </Link>
@@ -32,7 +32,7 @@ class Lessons extends React.Component {
                                     onClick={() => this.props.deleteLesson(lesson.id)}>
                                     Delete
                                 </Button>
-                                <Link to={`/admin/lesson/${lesson.id}/edit`} key={i}>
+                                <Link to={`/admin/lesson/${lesson.id}/edit`}>
                                     <Button
                                         variant="contained"
                                         color="primary">
