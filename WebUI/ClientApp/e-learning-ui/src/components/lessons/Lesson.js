@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import Typography from "@material-ui/core/Typography";
 
 
 class Lesson extends Component {
@@ -13,11 +14,16 @@ class Lesson extends Component {
     };
 
     render() {
-        const {title} = this.props.lesson;
+        const {title, id, description, videoUrl} = this.props.lesson;
 
         return (
             <section>
-                lesson title: {title}
+                <Typography variant="h5" component="h2">
+                    Lesson <strong>{title}</strong>
+                    ID: <strong>{id}</strong>,
+                    Description: <strong>{description}</strong>,
+                    videoUrl: <strong>{videoUrl}</strong>
+                </Typography>
             </section>
         )
     }

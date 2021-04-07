@@ -1,7 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
-import {Fragment} from "react";
 import Lessons from "../lessons/Lessons";
 import {Field, Form} from "react-final-form";
 import {Button, Grid, Paper} from "@material-ui/core";

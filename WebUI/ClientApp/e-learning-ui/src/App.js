@@ -95,12 +95,11 @@ class App extends React.Component {
     }
 
     updateLesson = async (id, lesson) => {
-        console.log('id: ', id);
-        console.log('lesson: ', lesson);
-        /*const res = await axios.put(`https://localhost:44367/api/courses/${id}`, course)
+        const res = await axios.put(`https://localhost:44367/api/lesson/${id}`, lesson)
+
         this.setState({
-            courses: res.data
-        });*/
+            lessons: res.data
+        });
     }
 
 
