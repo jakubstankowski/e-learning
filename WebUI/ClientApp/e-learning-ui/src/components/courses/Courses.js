@@ -38,7 +38,7 @@ class Courses extends React.Component {
                                 >
                                     Delete
                                 </Button>
-                                <Link to={`/admin/course/edit/${course.id}`}
+                                <Link to={`/admin/course/${course.id}/edit`}
                                       style={{textDecoration: 'none'}}
                                 >
                                     <Button variant="contained"

@@ -10,6 +10,7 @@ import Admin from "./components/admin/Admin";
 import CreateCourse from "./components/courses/CreateCourse";
 import CreateLesson from "./components/lessons/CreateLesson";
 import EditCourse from "./components/courses/EditCourse";
+import EditLesson from "./components/lessons/EditLesson";
 
 
 class App extends React.Component {
@@ -151,16 +152,28 @@ class App extends React.Component {
                         />
                         <Route
                             exact
-                            path="/admin/course/edit/:courseId"
+                            path="/admin/course/:courseId/edit"
                             render={props => (
                                 <EditCourse
                                     {...props}
                                     getCourse={this.getCourse}
                                     deleteLesson={this.deleteLesson}
                                     updateCourse={this.updateCourse}
-                                    updateLesson={this.updateLesson}
                                     course={course}
                                     lessons={lessons}
+                                    lesson={lesson}
+                                />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path="/admin/lesson/:lessonId/edit"
+                            render={props => (
+                                <EditLesson
+                                    {...props}
+                                    getLesson={this.getLesson}
+                                    deleteLesson={this.deleteLesson}
+                                    updateLesson={this.updateLesson}
                                     lesson={lesson}
                                 />
                             )}
