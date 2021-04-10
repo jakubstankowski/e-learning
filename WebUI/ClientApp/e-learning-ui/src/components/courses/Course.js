@@ -1,4 +1,4 @@
-import React, {Fragment, Component} from "react";
+import React, {Fragment, Component, useEffect} from "react";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from 'prop-types';
 import Lessons from "../lessons/Lessons";
@@ -6,60 +6,56 @@ import {Link, Route, Switch} from "react-router-dom";
 import Lesson from "../lessons/Lesson";
 import Button from "@material-ui/core/Button";
 
-class Course extends Component {
-    componentDidMount() {
-        this.props.getCourse(this.props.match.params.courseId);
-    }
+function Course({getCourse, getLesson, deleteLesson, lessons, lesson, course, match}) {
 
-    static propTypes = {
-        course: PropTypes.object.isRequired,
-        lessons: PropTypes.array.isRequired,
-        getCourse: PropTypes.func.isRequired
-    };
+    useEffect(() => {
+        getCourse(match.params.courseId);
+    });
 
-    render() {
-        const {title, id} = this.props.course;
 
-        return (
-            <Fragment>
-                <Typography variant="h5" component="h2">
-                    Course <strong>{title}</strong> ID: <strong>{id}</strong>
-                </Typography>
-                <Link to={`/admin/course/${id}/edit`}
-                      style={{textDecoration: 'none'}}
+    return (
+        <Fragment>
+            <Typography variant="h5" component="h2">
+                Course <strong>{course.title}</strong> ID: <strong>{course.id}</strong>
+            </Typography>
+            <Link to={`/admin/course/${course.id}/edit`}
+                  style={{textDecoration: 'none'}}
+            >
+                <Button variant="contained"
+                        style={{marginTop: '1rem', width: '100%'}}
+                        color="primary"
                 >
-                    <Button variant="contained"
-                            style={{marginTop: '1rem', width: '100%'}}
-                            color="primary"
-                    >
-                        Edit Course
-                    </Button>
-                </Link>
-                <Switch>
-                    <Route
-                        path="/course/:courseId"
-                        exact render={props => (
-                        <Lessons
+                    Edit Course
+                </Button>
+            </Link>
+            <Switch>
+                <Route
+                    path="/course/:courseId"
+                    exact render={props => (
+                    <Lessons
+                        {...props}
+                        deleteLesson={deleteLesson}
+                        lessons={lessons}/>
+                )}/>
+                <Route
+                    path="/course/:courseId/lesson/:lessonId"
+                    render={props => (
+                        <Lesson
                             {...props}
-                            deleteLesson={this.props.deleteLesson}
-                            lessons={this.props.lessons}/>
+                            getLesson={getLesson}
+                            lesson={lesson}
+                        />
                     )}/>
-                    <Route
-                        path="/course/:courseId/lesson/:lessonId"
-                        render={props => (
-                            <Lesson
-                                {...props}
-                                getLesson={this.props.getLesson}
-                                lesson={this.props.lesson}
-                            />
-                        )}/>
-                </Switch>
-            </Fragment>
-        )
+            </Switch>
+        </Fragment>
+    )
 
-    }
+}
 
-
+Course.propTypes = {
+    course: PropTypes.object.isRequired,
+    lessons: PropTypes.array.isRequired,
+    getCourse: PropTypes.func.isRequired
 }
 
 
