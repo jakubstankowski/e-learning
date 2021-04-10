@@ -10,7 +10,8 @@ import {TextField} from "final-form-material-ui";
 function EditCourse({getCourse, updateCourse, deleteLesson, updateLesson, course, lessons, match, history, props}) {
     useEffect(() => {
         getCourse(match.params.courseId);
-    });
+        console.log('course: ', course);
+    }, []);
 
     const onSubmit = (course) => {
         updateCourse(match.params.courseId, course)
@@ -96,11 +97,9 @@ function EditCourse({getCourse, updateCourse, deleteLesson, updateLesson, course
                     </form>
                 )}
             />
-          {/*  <Lessons
-                {...props}
+            <Lessons
                 deleteLesson={deleteLesson}
-                updateLesson={updateLesson}
-                lessons={lessons}/>*/}
+                lessons={lessons}/>
         </section>
     )
 
