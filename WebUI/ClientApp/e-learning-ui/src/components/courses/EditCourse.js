@@ -7,7 +7,7 @@ import {Button, Grid, Paper} from "@material-ui/core";
 import {TextField} from "final-form-material-ui";
 
 
-function EditCourse({getCourse, updateCourse, deleteLesson, updateLesson, course, lessons, match, history, props}) {
+function EditCourse({getCourse, updateCourse, deleteLesson,  course, lessons, match, history, props}) {
     useEffect(() => {
         getCourse(match.params.courseId);
         console.log('course: ', course);
@@ -98,6 +98,7 @@ function EditCourse({getCourse, updateCourse, deleteLesson, updateLesson, course
                 )}
             />
             <Lessons
+                {...props}
                 deleteLesson={deleteLesson}
                 lessons={lessons}/>
         </section>
@@ -110,8 +111,7 @@ EditCourse.propTypes = {
     lessons: PropTypes.array.isRequired,
     getCourse: PropTypes.func.isRequired,
     updateCourse: PropTypes.func.isRequired,
-    deleteLesson: PropTypes.func.isRequired,
-    updateLesson: PropTypes.func.isRequired
+    deleteLesson: PropTypes.func.isRequired
 }
 
 export default EditCourse;
