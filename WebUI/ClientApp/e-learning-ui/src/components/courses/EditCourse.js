@@ -7,10 +7,11 @@ import {Button, Grid, Paper} from "@material-ui/core";
 import {TextField} from "final-form-material-ui";
 
 
-function EditCourse({getCourse, updateCourse, deleteLesson,  course, lessons, match, history, props}) {
+function EditCourse({getCourse, updateCourse, deleteLesson, course, lessons, match, history}) {
     useEffect(() => {
         getCourse(match.params.courseId);
-        console.log('course: ', course);
+
+       // console.log('match: ', match);
     }, []);
 
     const onSubmit = (course) => {
@@ -98,7 +99,6 @@ function EditCourse({getCourse, updateCourse, deleteLesson,  course, lessons, ma
                 )}
             />
             <Lessons
-                {...props}
                 deleteLesson={deleteLesson}
                 lessons={lessons}/>
         </section>

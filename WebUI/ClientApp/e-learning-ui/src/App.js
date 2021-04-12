@@ -41,7 +41,6 @@ class App extends React.Component {
                 description: res.data.description,
                 price: res.data.price,
                 title: res.data.title,
-                lessons: res.data.lessons
             },
             lessons: res.data.lessons
         });
