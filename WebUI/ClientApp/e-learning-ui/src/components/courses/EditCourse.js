@@ -5,13 +5,15 @@ import Lessons from "../lessons/Lessons";
 import {Field, Form} from "react-final-form";
 import {Button, Grid, Paper} from "@material-ui/core";
 import {TextField} from "final-form-material-ui";
+import {Route, Switch} from "react-router-dom";
+import Lesson from "../lessons/Lesson";
 
 
 function EditCourse({getCourse, updateCourse, deleteLesson, course, lessons, match, history}) {
     useEffect(() => {
         getCourse(match.params.courseId);
 
-       // console.log('match: ', match);
+        // console.log('match: ', match);
     }, []);
 
     const onSubmit = (course) => {
@@ -98,9 +100,13 @@ function EditCourse({getCourse, updateCourse, deleteLesson, course, lessons, mat
                     </form>
                 )}
             />
-            <Lessons
-                deleteLesson={deleteLesson}
-                lessons={lessons}/>
+            <Route
+                render={props => (
+                    <Lessons
+                        {...props}
+                        deleteLesson={deleteLesson}
+                        lessons={lessons}/>
+                )}/>
         </section>
     )
 

@@ -6,19 +6,13 @@ import PropTypes from 'prop-types';
 import {Button} from "@material-ui/core";
 
 function Lessons({deleteLesson, lessons, match}) {
-
-    useEffect(() => {
-        console.log('match:: ', match);
-    }, []);
-
-
     return (
         <section>
             <Typography variant="h5" component="h2">
                 Lessons:
             </Typography>
             <ul>
-                {/*  {
+                {
                     lessons.map((lesson, i) =>
                         <article key={i}>
                             <Link to={`/course/${match.params.courseId}/lesson/${lesson.id}`}>
@@ -40,7 +34,7 @@ function Lessons({deleteLesson, lessons, match}) {
                             </Link>
                         </article>
                     )
-                }*/}
+                }
             </ul>
         </section>
     )
