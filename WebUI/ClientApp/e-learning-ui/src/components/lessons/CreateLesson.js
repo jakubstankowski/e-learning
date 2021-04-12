@@ -6,19 +6,16 @@ import {Form, Field} from 'react-final-form'
 import Typography from "@material-ui/core/Typography";
 
 
-class CreateLesson extends React.Component {
-    static propTypes = {
-        postLesson: PropTypes.func.isRequired
-    };
+function CreateLesson({postLesson, history}) {
 
-    onSubmit = (values) => {
-        this.props.postLesson(values)
+    const onSubmit = (values) => {
+        postLesson(values)
             .then(() => {
-                this.props.history.push(`/course/${values.courseId}`);
+                history.push(`/course/${values.courseId}`);
             })
     };
 
-    validate = (values) => {
+    const validate = (values) => {
         const errors = {};
 
         if (!values.title) {
@@ -40,77 +37,79 @@ class CreateLesson extends React.Component {
         return errors;
     };
 
-    render() {
-        return (
-            <section className='form-container'>
-                <Typography variant="h5" component="h2">
-                    Create Lesson
-                </Typography>
-                <Form
-                    onSubmit={this.onSubmit}
-                    validate={this.validate}
-                    render={({handleSubmit, submitting}) => (
-                        <form onSubmit={handleSubmit} noValidate>
-                            <Paper style={{padding: 16}}>
-                                <Grid container alignItems="flex-start" spacing={2}>
-                                    <Grid item xs={12}>
-                                        <Field
-                                            fullWidth
-                                            required
-                                            name="title"
-                                            component={TextField}
-                                            type="text"
-                                            label="Title"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Field
-                                            fullWidth
-                                            required
-                                            name="description"
-                                            component={TextField}
-                                            type="text"
-                                            label="Description"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Field
-                                            fullWidth
-                                            required
-                                            name="videoUrl"
-                                            component={TextField}
-                                            type="text"
-                                            label="Video URL"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Field
-                                            fullWidth
-                                            required
-                                            name="courseId"
-                                            component={TextField}
-                                            type="number"
-                                            label="Course ID"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Button type="submit"
-                                                color="primary"
-                                                className="form-button"
-                                                disabled={submitting}
-                                                variant="contained">
-                                            Create
-                                        </Button>
-                                    </Grid>
+    return (
+        <section className='form-container'>
+            <Typography variant="h5" component="h2">
+                Create Lesson
+            </Typography>
+            <Form
+                onSubmit={onSubmit}
+                validate={validate}
+                render={({handleSubmit, submitting}) => (
+                    <form onSubmit={handleSubmit} noValidate>
+                        <Paper style={{padding: 16}}>
+                            <Grid container alignItems="flex-start" spacing={2}>
+                                <Grid item xs={12}>
+                                    <Field
+                                        fullWidth
+                                        required
+                                        name="title"
+                                        component={TextField}
+                                        type="text"
+                                        label="Title"
+                                    />
                                 </Grid>
-                            </Paper>
-                        </form>
-                    )}
-                />
-            </section>
-        )
-    }
+                                <Grid item xs={12}>
+                                    <Field
+                                        fullWidth
+                                        required
+                                        name="description"
+                                        component={TextField}
+                                        type="text"
+                                        label="Description"
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Field
+                                        fullWidth
+                                        required
+                                        name="videoUrl"
+                                        component={TextField}
+                                        type="text"
+                                        label="Video URL"
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Field
+                                        fullWidth
+                                        required
+                                        name="courseId"
+                                        component={TextField}
+                                        type="number"
+                                        label="Course ID"
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Button type="submit"
+                                            color="primary"
+                                            className="form-button"
+                                            disabled={submitting}
+                                            variant="contained">
+                                        Create
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Paper>
+                    </form>
+                )}
+            />
+        </section>
+    )
 
 }
+
+CreateLesson.propTypes = {
+    postLesson: PropTypes.func.isRequired
+};
 
 export default CreateLesson;
