@@ -12,8 +12,6 @@ import Lesson from "../lessons/Lesson";
 function EditCourse({getCourse, updateCourse, deleteLesson, course, lessons, match, history}) {
     useEffect(() => {
         getCourse(match.params.courseId);
-
-        // console.log('match: ', match);
     }, []);
 
     const onSubmit = (course) => {

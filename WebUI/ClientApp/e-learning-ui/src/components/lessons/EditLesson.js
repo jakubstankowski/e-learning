@@ -4,26 +4,23 @@ import Typography from "@material-ui/core/Typography";
 import {Field, Form} from "react-final-form";
 import {Button, Grid, Paper} from "@material-ui/core";
 import {TextField} from "final-form-material-ui";
+import {useEffect} from "react";
 
-class EditLesson extends React.Component {
-    componentDidMount() {
-        this.props.getLesson(this.props.match.params.lessonId);
-    }
+function EditLesson({getLesson, updateLesson, lesson, match, history}) {
 
-    static propTypes = {
-        lesson: PropTypes.object.isRequired,
-        getLesson: PropTypes.func.isRequired,
-        updateLesson: PropTypes.func.isRequired,
-    };
+    useEffect(() => {
+        getLesson(match.params.lessonId);
+    }, []);
 
-    onSubmit = (lesson) => {
-        this.props.updateLesson(this.props.match.params.lessonId, lesson)
+
+    const onSubmit = (lesson) => {
+        updateLesson(match.params.lessonId, lesson)
             .then(() => {
-                this.props.history.push(`/course/${lesson.courseId}/lesson/${this.props.match.params.lessonId}`);
+                history.push(`/course/${lesson.courseId}/lesson/${match.params.lessonId}`);
             })
     };
 
-    validate = (values) => {
+    const validate = (values) => {
         const errors = {};
 
         if (!values.title) {
@@ -42,87 +39,88 @@ class EditLesson extends React.Component {
         return errors;
     };
 
-    render() {
-        const {id, title, description, videoUrl, courseId} = this.props.lesson;
-
-        return (
-            <section className='form-container'>
-                <Typography variant="h5" component="h2">
-                    Edit Lesson <strong>{title}</strong> ID: <strong>{id}</strong>
-                </Typography>
-                <Form
-                    initialValues={{
-                        id: id,
-                        title: title,
-                        description: description,
-                        videoUrl: videoUrl,
-                        courseId: courseId
-                    }}
-                    onSubmit={this.onSubmit}
-                    validate={this.validate}
-                    render={({handleSubmit, submitting}) => (
-                        <form onSubmit={handleSubmit} noValidate>
-                            <Paper style={{padding: 16}}>
-                                <Grid container alignItems="flex-start" spacing={2}>
-                                    <Grid item xs={12}>
-                                        <Field
-                                            fullWidth
-                                            required
-                                            name="title"
-                                            component={TextField}
-                                            type="text"
-                                            label="Title"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Field
-                                            fullWidth
-                                            required
-                                            name="description"
-                                            component={TextField}
-                                            type="text"
-                                            label="Description"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Field
-                                            fullWidth
-                                            required
-                                            name="videoUrl"
-                                            component={TextField}
-                                            type="text"
-                                            label="Video URL"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Field
-                                            fullWidth
-                                            required
-                                            name="courseId"
-                                            component={TextField}
-                                            type="number"
-                                            label="Course ID"
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Button type="submit"
-                                                className="form-button"
-                                                color="primary"
-                                                disabled={submitting}
-                                                variant="contained">
-                                            Save
-                                        </Button>
-                                    </Grid>
+    return (
+        <section className='form-container'>
+            <Typography variant="h5" component="h2">
+                Edit Lesson <strong>{lesson.title}</strong> ID: <strong>{lesson.id}</strong>
+            </Typography>
+            <Form
+                initialValues={{
+                    id: lesson.id,
+                    title: lesson.title,
+                    description: lesson.description,
+                    videoUrl: lesson.videoUrl,
+                    courseId: lesson.courseId
+                }}
+                onSubmit={onSubmit}
+                validate={validate}
+                render={({handleSubmit, submitting}) => (
+                    <form onSubmit={handleSubmit} noValidate>
+                        <Paper style={{padding: 16}}>
+                            <Grid container alignItems="flex-start" spacing={2}>
+                                <Grid item xs={12}>
+                                    <Field
+                                        fullWidth
+                                        required
+                                        name="title"
+                                        component={TextField}
+                                        type="text"
+                                        label="Title"
+                                    />
                                 </Grid>
-                            </Paper>
-                        </form>
-                    )}
-                />
-            </section>
-        )
-    }
+                                <Grid item xs={12}>
+                                    <Field
+                                        fullWidth
+                                        required
+                                        name="description"
+                                        component={TextField}
+                                        type="text"
+                                        label="Description"
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Field
+                                        fullWidth
+                                        required
+                                        name="videoUrl"
+                                        component={TextField}
+                                        type="text"
+                                        label="Video URL"
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Field
+                                        fullWidth
+                                        required
+                                        name="courseId"
+                                        component={TextField}
+                                        type="number"
+                                        label="Course ID"
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Button type="submit"
+                                            className="form-button"
+                                            color="primary"
+                                            disabled={submitting}
+                                            variant="contained">
+                                        Save
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Paper>
+                    </form>
+                )}
+            />
+        </section>
+    )
 
 }
 
+EditLesson.propTypes = {
+    lesson: PropTypes.object.isRequired,
+    getLesson: PropTypes.func.isRequired,
+    updateLesson: PropTypes.func.isRequired,
+};
 
 export default EditLesson;
