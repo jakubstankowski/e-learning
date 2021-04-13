@@ -1,6 +1,6 @@
 import './App.css';
 import Header from "./components/layout/Header";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Container from "@material-ui/core/Container";
 import Courses from "./components/courses/Courses";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
@@ -13,98 +13,67 @@ import EditCourse from "./components/courses/EditCourse";
 import EditLesson from "./components/lessons/EditLesson";
 
 
-class App extends React.Component {
-    state = {
-        courses: [],
-        course: {},
-        lessons: [],
-        lesson: {}
-    };
+function App() {
+    const [courses, setCourses] = useState([]);
+    const [course, setCourse] = useState({});
+    const [lessons, setLessons] = useState([]);
+    const [lesson, setLesson] = useState({});
 
-    componentDidMount() {
-        this.getCourses();
-    }
+    useEffect(() => {
+        getCourses();
+    }, []);
 
-
-    getCourses = async () => {
+    const getCourses = async () => {
         const res = await axios.get('https://localhost:44367/api/courses');
-        this.setState({
-            courses: res.data
-        });
+        setCourses(res.data);
     }
 
-    getCourse = async (id) => {
+    const getCourse = async (id) => {
         const res = await axios.get(`https://localhost:44367/api/courses/${id}`);
-        this.setState({
-            course: {
-                id: res.data.id,
-                description: res.data.description,
-                price: res.data.price,
-                title: res.data.title,
-            },
-            lessons: res.data.lessons
-        });
+        setCourse({
+            id: res.data.id,
+            description: res.data.description,
+            price: res.data.price,
+            title: res.data.title
+        })
+        setLesson(res.data.lessons);
     }
 
-    getLesson = async (id) => {
+    const getLesson = async (id) => {
         const res = await axios.get(`https://localhost:44367/api/lesson/${id}`);
-
-        this.setState({
-            lesson: res.data
-        });
+        setLesson(res.data);
     }
 
-    postCourse = async (course) => {
+    const postCourse = async (course) => {
         const res = await axios.post('https://localhost:44367/api/courses', course)
-
-        this.setState({
-            courses: res.data
-        });
+        setCourses(res.data);
     }
 
-    postLesson = async (lesson) => {
+    const postLesson = async (lesson) => {
         const res = await axios.post(`https://localhost:44367/api/lesson`, lesson);
-
-        this.setState({
-            lessons: res.data
-        });
+        setLessons(res.data);
     }
 
-    deleteCourse = async (id) => {
+    const deleteCourse = async (id) => {
         const res = await axios.delete(`https://localhost:44367/api/courses/${id}`)
-
-        this.setState({
-            courses: res.data
-        });
+        setCourses(res.data);
     }
 
-    deleteLesson = async (id) => {
+    const deleteLesson = async (id) => {
         const res = await axios.delete(`https://localhost:44367/api/lesson/${id}`)
-
-        this.setState({
-            lessons: res.data
-        });
+        setLessons(res.data)
     }
 
 
-    updateCourse = async (id, course) => {
+    const updateCourse = async (id, course) => {
         const res = await axios.put(`https://localhost:44367/api/courses/${id}`, course)
-        this.setState({
-            courses: res.data
-        });
+        setCourses(res.data);
     }
 
-    updateLesson = async (id, lesson) => {
+    const updateLesson = async (id, lesson) => {
         const res = await axios.put(`https://localhost:44367/api/lesson/${id}`, lesson)
-
-        this.setState({
-            lessons: res.data
-        });
+        setLessons(res.data)
     }
-
-
-    render() {
-        const {courses, course, lessons, lesson} = this.state;
 
         return (
             <Router>
@@ -117,7 +86,7 @@ class App extends React.Component {
                             <Courses
                                 {...props}
                                 courses={courses}
-                                deleteCourse={this.deleteCourse}
+                                deleteCourse={deleteCourse}
                             />
                         )}/>
                         <Route
@@ -125,9 +94,9 @@ class App extends React.Component {
                             render={props => (
                                 <Course
                                     {...props}
-                                    getCourse={this.getCourse}
-                                    getLesson={this.getLesson}
-                                    deleteLesson={this.deleteLesson}
+                                    getCourse={getCourse}
+                                    getLesson={getLesson}
+                                    deleteLesson={deleteLesson}
                                     course={course}
                                     lessons={lessons}
                                     lesson={lesson}
@@ -145,7 +114,7 @@ class App extends React.Component {
                             render={props => (
                                 <CreateCourse
                                     {...props}
-                                    postCourse={this.postCourse}
+                                    postCourse={postCourse}
                                 />
                             )}
                         />
@@ -155,9 +124,9 @@ class App extends React.Component {
                             render={props => (
                                 <EditCourse
                                     {...props}
-                                    getCourse={this.getCourse}
-                                    deleteLesson={this.deleteLesson}
-                                    updateCourse={this.updateCourse}
+                                    getCourse={getCourse}
+                                    deleteLesson={deleteLesson}
+                                    updateCourse={updateCourse}
                                     course={course}
                                     lessons={lessons}
                                     lesson={lesson}
@@ -170,9 +139,9 @@ class App extends React.Component {
                             render={props => (
                                 <EditLesson
                                     {...props}
-                                    getLesson={this.getLesson}
-                                    deleteLesson={this.deleteLesson}
-                                    updateLesson={this.updateLesson}
+                                    getLesson={getLesson}
+                                    deleteLesson={deleteLesson}
+                                    updateLesson={updateLesson}
                                     lesson={lesson}
                                 />
                             )}
@@ -183,7 +152,7 @@ class App extends React.Component {
                             render={props => (
                                 <CreateLesson
                                     {...props}
-                                    postLesson={this.postLesson}
+                                    postLesson={postLesson}
                                 />
                             )}
                         />
@@ -191,7 +160,6 @@ class App extends React.Component {
                 </Container>
             </Router>
         );
-    }
 
 }
 

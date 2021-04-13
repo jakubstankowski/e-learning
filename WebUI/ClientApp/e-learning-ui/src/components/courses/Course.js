@@ -1,4 +1,4 @@
-import React, {Fragment, Component, useEffect} from "react";
+import React, {Fragment, useEffect} from "react";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from 'prop-types';
 import Lessons from "../lessons/Lessons";
@@ -10,7 +10,7 @@ function Course({getCourse, getLesson, deleteLesson, lessons, lesson, course, ma
 
     useEffect(() => {
         getCourse(match.params.courseId);
-    });
+    }, []);
 
 
     return (

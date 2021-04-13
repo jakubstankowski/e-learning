@@ -1,12 +1,11 @@
-import React, {Fragment, Component, useEffect} from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
 import Lessons from "../lessons/Lessons";
 import {Field, Form} from "react-final-form";
 import {Button, Grid, Paper} from "@material-ui/core";
 import {TextField} from "final-form-material-ui";
-import {Route, Switch} from "react-router-dom";
-import Lesson from "../lessons/Lesson";
+import {Route} from "react-router-dom";
 
 
 function EditCourse({getCourse, updateCourse, deleteLesson, course, lessons, match, history}) {
