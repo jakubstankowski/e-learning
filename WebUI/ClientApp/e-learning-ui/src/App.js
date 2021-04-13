@@ -36,7 +36,7 @@ function App() {
             price: res.data.price,
             title: res.data.title
         })
-        setLesson(res.data.lessons);
+        setLessons(res.data.lessons);
     }
 
     const getLesson = async (id) => {
