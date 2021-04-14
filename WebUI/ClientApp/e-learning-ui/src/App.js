@@ -11,6 +11,8 @@ import CreateCourse from "./components/courses/CreateCourse";
 import CreateLesson from "./components/lessons/CreateLesson";
 import EditCourse from "./components/courses/EditCourse";
 import EditLesson from "./components/lessons/EditLesson";
+import CoursesState from "./context/courses/CoursesState";
+import LessonsState from "./context/lessons/LessonsState";
 
 
 function App() {
@@ -76,89 +78,93 @@ function App() {
     }
 
         return (
-            <Router>
-                <Header/>
-                <Container>
-                    <Switch>
-                        <Route
-                            path="/"
-                            exact render={props => (
-                            <Courses
-                                {...props}
-                                courses={courses}
-                                deleteCourse={deleteCourse}
-                            />
-                        )}/>
-                        <Route
-                            path="/course/:courseId"
-                            render={props => (
-                                <Course
-                                    {...props}
-                                    getCourse={getCourse}
-                                    getLesson={getLesson}
-                                    deleteLesson={deleteLesson}
-                                    course={course}
-                                    lessons={lessons}
-                                    lesson={lesson}
+            <CoursesState>
+                <LessonsState>
+                    <Router>
+                        <Header/>
+                        <Container>
+                            <Switch>
+                                <Route
+                                    path="/"
+                                    exact render={props => (
+                                    <Courses
+                                        {...props}
+                                        courses={courses}
+                                        deleteCourse={deleteCourse}
+                                    />
+                                )}/>
+                                <Route
+                                    path="/course/:courseId"
+                                    render={props => (
+                                        <Course
+                                            {...props}
+                                            getCourse={getCourse}
+                                            getLesson={getLesson}
+                                            deleteLesson={deleteLesson}
+                                            course={course}
+                                            lessons={lessons}
+                                            lesson={lesson}
+                                        />
+                                    )}
                                 />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/admin"
-                            component={Admin}
-                        />
-                        <Route
-                            exact
-                            path="/admin/course/create"
-                            render={props => (
-                                <CreateCourse
-                                    {...props}
-                                    postCourse={postCourse}
+                                <Route
+                                    exact
+                                    path="/admin"
+                                    component={Admin}
                                 />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/admin/course/:courseId/edit"
-                            render={props => (
-                                <EditCourse
-                                    {...props}
-                                    getCourse={getCourse}
-                                    deleteLesson={deleteLesson}
-                                    updateCourse={updateCourse}
-                                    course={course}
-                                    lessons={lessons}
-                                    lesson={lesson}
+                                <Route
+                                    exact
+                                    path="/admin/course/create"
+                                    render={props => (
+                                        <CreateCourse
+                                            {...props}
+                                            postCourse={postCourse}
+                                        />
+                                    )}
                                 />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/admin/lesson/:lessonId/edit"
-                            render={props => (
-                                <EditLesson
-                                    {...props}
-                                    getLesson={getLesson}
-                                    deleteLesson={deleteLesson}
-                                    updateLesson={updateLesson}
-                                    lesson={lesson}
+                                <Route
+                                    exact
+                                    path="/admin/course/:courseId/edit"
+                                    render={props => (
+                                        <EditCourse
+                                            {...props}
+                                            getCourse={getCourse}
+                                            deleteLesson={deleteLesson}
+                                            updateCourse={updateCourse}
+                                            course={course}
+                                            lessons={lessons}
+                                            lesson={lesson}
+                                        />
+                                    )}
                                 />
-                            )}
-                        />
-                        <Route
-                            exact
-                            path="/admin/lesson/create"
-                            render={props => (
-                                <CreateLesson
-                                    {...props}
-                                    postLesson={postLesson}
+                                <Route
+                                    exact
+                                    path="/admin/lesson/:lessonId/edit"
+                                    render={props => (
+                                        <EditLesson
+                                            {...props}
+                                            getLesson={getLesson}
+                                            deleteLesson={deleteLesson}
+                                            updateLesson={updateLesson}
+                                            lesson={lesson}
+                                        />
+                                    )}
                                 />
-                            )}
-                        />
-                    </Switch>
-                </Container>
-            </Router>
+                                <Route
+                                    exact
+                                    path="/admin/lesson/create"
+                                    render={props => (
+                                        <CreateLesson
+                                            {...props}
+                                            postLesson={postLesson}
+                                        />
+                                    )}
+                                />
+                            </Switch>
+                        </Container>
+                    </Router>
+                </LessonsState>
+            </CoursesState>
         );
 
 }
