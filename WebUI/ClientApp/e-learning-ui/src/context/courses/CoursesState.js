@@ -7,6 +7,7 @@ import {
     GET_COURSE,
     GET_COURSES,
     DELETE_COURSE,
+    POST_LESSON,
     UPDATE_COURSE
 } from '../types'
 
@@ -14,7 +15,7 @@ import {
 function CoursesState(props) {
     const initialState = {
         courses: [],
-        course: []
+        course: {}
     }
 
     const [state, dispatch] = useReducer(CoursesReducer, initialState);
