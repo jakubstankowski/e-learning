@@ -28,12 +28,12 @@ function CoursesState(props) {
         const res = await axios.get('https://localhost:44367/api/courses');
 
 
-        setTimeout(() => {
+
             dispatch({
                 type: GET_COURSES,
                 payload: res.data
             })
-        }, 2000)
+
 
 
     }
@@ -44,22 +44,10 @@ function CoursesState(props) {
 
         const res = await axios.get(`https://localhost:44367/api/courses/${id}`);
 
-
-        setTimeout(() => {
-            dispatch({
+        dispatch({
                 type: GET_COURSE,
                 payload: res.data
-            })
-        }, 2000)
-
-
-        /* setCourse({
-             id: res.data.id,
-             description: res.data.description,
-             price: res.data.price,
-             title: res.data.title
-         })
-         setLessons(res.data.lessons);*/
+        })
     }
 
 

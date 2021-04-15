@@ -13,7 +13,6 @@ import {
 
 function LessonsState(props) {
     const initialState = {
-        lessons: [],
         lesson: {}
     }
 
@@ -22,7 +21,6 @@ function LessonsState(props) {
     return (
         <LessonsContext.Provider
             value={{
-                lessons: state.lessons,
                 lesson: state.lesson
             }}
         >

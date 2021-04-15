@@ -37,33 +37,17 @@ function Course({getLesson, deleteLesson, lessons, lesson, match}) {
                     Edit Course
                 </Button>
             </Link>
-            lesson:
-            {/* <ul>
-                {course.lessons.map((lesson, i) =>
-                    <LessonItem key={i}
-                                lesson={lesson}/>
-                )}
-            </ul>*/}
-            {/*  <ul>
-                {
-                    course.lessons.map((lesson, i) =>
-                    {
-                        <li>
-                            {lesson}
-                        </li>
-                    })
-                }
-            </ul>*/}
-            {/*<Switch>
+
+            <Switch>
                 <Route
                     path="/course/:courseId"
                     exact render={props => (
                     <Lessons
                         {...props}
                         deleteLesson={deleteLesson}
-                        lessons={lessons}/>
+                        lessons={course.lessons}/>
                 )}/>
-                <Route
+               {/* <Route
                     path="/course/:courseId/lesson/:lessonId"
                     render={props => (
                         <Lesson
@@ -71,16 +55,11 @@ function Course({getLesson, deleteLesson, lessons, lesson, match}) {
                             getLesson={getLesson}
                             lesson={lesson}
                         />
-                    )}/>
-            </Switch>*/}
+                    )}/>*/}
+            </Switch>
         </Fragment>
     )
 
 }
-
-Course.propTypes = {
-    lessons: PropTypes.array.isRequired,
-}
-
 
 export default Course;
