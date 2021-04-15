@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
 import Lessons from "../lessons/Lessons";
@@ -6,9 +6,15 @@ import {Field, Form} from "react-final-form";
 import {Button, Grid, Paper} from "@material-ui/core";
 import {TextField} from "final-form-material-ui";
 import {Route} from "react-router-dom";
+import CoursesContext from "../../context/courses/coursesContext";
+import Spinner from "../layout/Spinner";
 
 
-function EditCourse({getCourse, updateCourse, deleteLesson, course, lessons, match, history}) {
+function EditCourse({deleteLesson, match, history}) {
+    const coursesContext = useContext(CoursesContext);
+
+    const {getCourse, course, updateCourse, loading} = coursesContext;
+
     useEffect(() => {
         getCourse(match.params.courseId);
         // eslint-disable-next-line
@@ -35,6 +41,7 @@ function EditCourse({getCourse, updateCourse, deleteLesson, course, lessons, mat
         return errors;
     };
 
+    if (loading) return <Spinner/>;
 
     return (
         <section className='form-container'>
@@ -103,19 +110,12 @@ function EditCourse({getCourse, updateCourse, deleteLesson, course, lessons, mat
                     <Lessons
                         {...props}
                         deleteLesson={deleteLesson}
-                        lessons={lessons}/>
+                        lessons={course.lessons}/>
                 )}/>
         </section>
     )
 
 }
 
-EditCourse.propTypes = {
-    course: PropTypes.object.isRequired,
-    lessons: PropTypes.array.isRequired,
-    getCourse: PropTypes.func.isRequired,
-    updateCourse: PropTypes.func.isRequired,
-    deleteLesson: PropTypes.func.isRequired
-}
 
 export default EditCourse;

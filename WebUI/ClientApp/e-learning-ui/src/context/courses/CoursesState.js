@@ -66,6 +66,18 @@ function CoursesState(props) {
         })
     }
 
+    const updateCourse = async (id, course) => {
+        setLoading();
+
+        const res = await axios.put(`https://localhost:44367/api/courses/${id}`, course)
+
+        dispatch({
+            type: UPDATE_COURSE,
+            payload: res.data
+        })
+    }
+
+
 
     const setLoading = () => dispatch({type: SET_LOADING});
 
@@ -78,7 +90,8 @@ function CoursesState(props) {
                 getCourses,
                 getCourse,
                 postCourse,
-                deleteCourse
+                deleteCourse,
+                updateCourse
             }}
         >
             {props.children}

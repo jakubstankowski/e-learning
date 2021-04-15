@@ -39,11 +39,6 @@ function App() {
     }
 
 
-    const updateCourse = async (id, course) => {
-        const res = await axios.put(`https://localhost:44367/api/courses/${id}`, course)
-        //setCourses(res.data);
-    }
-
     const updateLesson = async (id, lesson) => {
         const res = await axios.put(`https://localhost:44367/api/lesson/${id}`, lesson)
         setLessons(res.data)
@@ -92,8 +87,6 @@ function App() {
                                         <EditCourse
                                             {...props}
                                             deleteLesson={deleteLesson}
-                                            updateCourse={updateCourse}
-                                            lessons={lessons}
                                             lesson={lesson}
                                         />
                                     )}

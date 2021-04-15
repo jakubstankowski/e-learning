@@ -3,7 +3,8 @@ import {
     GET_COURSE,
     SET_LOADING,
     POST_COURSE,
-    DELETE_COURSE
+    DELETE_COURSE,
+    UPDATE_COURSE
 } from '../types';
 
 export default (state, action) => {
@@ -27,6 +28,12 @@ export default (state, action) => {
                 loading: false
             };
         case DELETE_COURSE:
+            return {
+                ...state,
+                courses: action.payload,
+                loading: false
+            };
+        case UPDATE_COURSE:
             return {
                 ...state,
                 courses: action.payload,
