@@ -1,15 +1,20 @@
-import React, {Fragment, useEffect} from "react";
+import React, {Fragment, useContext, useEffect} from "react";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from 'prop-types';
 import Lessons from "../lessons/Lessons";
 import {Link, Route, Switch} from "react-router-dom";
 import Lesson from "../lessons/Lesson";
 import Button from "@material-ui/core/Button";
+import CoursesContext from "../../context/courses/coursesContext";
 
-function Course({getCourse, getLesson, deleteLesson, lessons, lesson, course, match}) {
+function Course({getLesson, deleteLesson, lessons, lesson, match}) {
+    const coursesContext = useContext(CoursesContext);
+
+    const {getCourse, course} = coursesContext;
 
     useEffect(() => {
         getCourse(match.params.courseId);
+        console.log('course: ', course);
         // eslint-disable-next-line
     }, []);
 
@@ -29,7 +34,7 @@ function Course({getCourse, getLesson, deleteLesson, lessons, lesson, course, ma
                     Edit Course
                 </Button>
             </Link>
-            <Switch>
+            {/*<Switch>
                 <Route
                     path="/course/:courseId"
                     exact render={props => (
@@ -47,16 +52,14 @@ function Course({getCourse, getLesson, deleteLesson, lessons, lesson, course, ma
                             lesson={lesson}
                         />
                     )}/>
-            </Switch>
+            </Switch>*/}
         </Fragment>
     )
 
 }
 
 Course.propTypes = {
-    course: PropTypes.object.isRequired,
     lessons: PropTypes.array.isRequired,
-    getCourse: PropTypes.func.isRequired
 }
 
 

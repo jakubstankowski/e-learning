@@ -31,12 +31,32 @@ function CoursesState(props) {
     }
 
 
+    const getCourse = async (id) => {
+        const res = await axios.get(`https://localhost:44367/api/courses/${id}`);
+
+
+        dispatch({
+            type: GET_COURSE,
+            payload: res.data
+        })
+
+       /* setCourse({
+            id: res.data.id,
+            description: res.data.description,
+            price: res.data.price,
+            title: res.data.title
+        })
+        setLessons(res.data.lessons);*/
+    }
+
+
     return (
         <CoursesContext.Provider
             value={{
                 courses: state.courses,
                 course: state.course,
-                getCourses
+                getCourses,
+                getCourse
             }}
         >
             {props.children}

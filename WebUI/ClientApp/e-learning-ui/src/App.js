@@ -17,11 +17,11 @@ import LessonsState from "./context/lessons/LessonsState";
 
 function App() {
 
-    const [course, setCourse] = useState({});
+   /* const [course, setCourse] = useState({});*/
     const [lessons, setLessons] = useState([]);
     const [lesson, setLesson] = useState({});
 
-    const getCourse = async (id) => {
+  /*  const getCourse = async (id) => {
         const res = await axios.get(`https://localhost:44367/api/courses/${id}`);
         setCourse({
             id: res.data.id,
@@ -30,7 +30,7 @@ function App() {
             title: res.data.title
         })
         setLessons(res.data.lessons);
-    }
+    }*/
 
     const getLesson = async (id) => {
         const res = await axios.get(`https://localhost:44367/api/lesson/${id}`);
@@ -88,10 +88,8 @@ function App() {
                                     render={props => (
                                         <Course
                                             {...props}
-                                            getCourse={getCourse}
                                             getLesson={getLesson}
                                             deleteLesson={deleteLesson}
-                                            course={course}
                                             lessons={lessons}
                                             lesson={lesson}
                                         />
@@ -118,10 +116,8 @@ function App() {
                                     render={props => (
                                         <EditCourse
                                             {...props}
-                                            getCourse={getCourse}
                                             deleteLesson={deleteLesson}
                                             updateCourse={updateCourse}
-                                            course={course}
                                             lessons={lessons}
                                             lesson={lesson}
                                         />
