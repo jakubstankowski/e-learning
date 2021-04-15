@@ -9,10 +9,10 @@ import {useContext, useEffect} from "react";
 import CoursesContext from '../../context/courses/coursesContext';
 import Spinner from "../layout/Spinner";
 
-function Courses({deleteCourse}) {
+function Courses() {
     const coursesContext = useContext(CoursesContext);
 
-    const {getCourses, courses, loading} = coursesContext;
+    const {getCourses, deleteCourse, courses, loading} = coursesContext;
 
     useEffect(() => {
         getCourses();
@@ -60,11 +60,6 @@ function Courses({deleteCourse}) {
             </Grid>
         </section>
     )
-}
-
-
-Courses.propTypes = {
-    deleteCourse: PropTypes.func.isRequired
 }
 
 export default Courses;

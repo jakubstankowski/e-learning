@@ -55,6 +55,17 @@ function CoursesState(props) {
         })
     }
 
+    const deleteCourse = async (id) => {
+        setLoading();
+
+        const res = await axios.delete(`https://localhost:44367/api/courses/${id}`)
+
+        dispatch({
+            type: DELETE_COURSE,
+            payload: res.data
+        })
+    }
+
 
     const setLoading = () => dispatch({type: SET_LOADING});
 
@@ -66,7 +77,8 @@ function CoursesState(props) {
                 loading: state.loading,
                 getCourses,
                 getCourse,
-                postCourse
+                postCourse,
+                deleteCourse
             }}
         >
             {props.children}

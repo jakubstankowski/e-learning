@@ -1,11 +1,19 @@
 import Typography from "@material-ui/core/Typography";
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import LessonItem from "./LessonItem";
 import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
 import {Button} from "@material-ui/core";
+import CoursesContext from "../../context/courses/coursesContext";
+import Spinner from "../layout/Spinner";
 
 function Lessons({deleteLesson, lessons, match}) {
+    const coursesContext = useContext(CoursesContext);
+
+    const {loading} = coursesContext;
+
+    if (loading) return <Spinner/>
+
     return (
         <section>
             <Typography variant="h5" component="h2">

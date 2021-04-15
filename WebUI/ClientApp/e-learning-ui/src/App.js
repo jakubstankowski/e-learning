@@ -31,10 +31,7 @@ function App() {
         setLessons(res.data);
     }
 
-    const deleteCourse = async (id) => {
-        const res = await axios.delete(`https://localhost:44367/api/courses/${id}`)
-       // setCourses(res.data);
-    }
+
 
     const deleteLesson = async (id) => {
         const res = await axios.delete(`https://localhost:44367/api/lesson/${id}`)
@@ -62,10 +59,7 @@ function App() {
                                 <Route
                                     path="/"
                                     exact render={props => (
-                                    <Courses
-                                        {...props}
-                                        deleteCourse={deleteCourse}
-                                    />
+                                    <Courses/>
                                 )}/>
                                 <Route
                                     path="/course/:courseId"
