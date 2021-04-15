@@ -7,7 +7,7 @@ import {
     GET_COURSE,
     GET_COURSES,
     DELETE_COURSE,
-    POST_LESSON,
+    POST_COURSE,
     UPDATE_COURSE,
     SET_LOADING
 } from '../types'
@@ -27,15 +27,10 @@ function CoursesState(props) {
 
         const res = await axios.get('https://localhost:44367/api/courses');
 
-
-
-            dispatch({
-                type: GET_COURSES,
-                payload: res.data
-            })
-
-
-
+        dispatch({
+            type: GET_COURSES,
+            payload: res.data
+        })
     }
 
 
@@ -45,8 +40,18 @@ function CoursesState(props) {
         const res = await axios.get(`https://localhost:44367/api/courses/${id}`);
 
         dispatch({
-                type: GET_COURSE,
-                payload: res.data
+            type: GET_COURSE,
+            payload: res.data
+        })
+    }
+
+    const postCourse = async (course) => {
+        setLoading();
+        const res = await axios.post('https://localhost:44367/api/courses', course)
+
+        dispatch({
+            type: POST_COURSE,
+            payload: res.data
         })
     }
 
@@ -60,7 +65,8 @@ function CoursesState(props) {
                 course: state.course,
                 loading: state.loading,
                 getCourses,
-                getCourse
+                getCourse,
+                postCourse
             }}
         >
             {props.children}

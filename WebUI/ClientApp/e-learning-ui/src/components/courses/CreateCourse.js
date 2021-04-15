@@ -4,9 +4,16 @@ import {TextField} from 'final-form-material-ui';
 import PropTypes from 'prop-types';
 import {Form, Field} from 'react-final-form'
 import Typography from "@material-ui/core/Typography";
+import {useContext} from "react";
+import CoursesContext from "../../context/courses/coursesContext";
+import { useHistory } from "react-router-dom";
 
+function CreateCourse() {
+    const coursesContext = useContext(CoursesContext);
 
-function CreateCourse({postCourse, history}) {
+    const {postCourse} = coursesContext;
+
+    const history = useHistory();
 
     const onSubmit = (values) => {
         postCourse(values)
@@ -88,9 +95,5 @@ function CreateCourse({postCourse, history}) {
         </section>
     )
 }
-
-CreateCourse.propTypes = {
-    postCourse: PropTypes.func.isRequired
-};
 
 export default CreateCourse;

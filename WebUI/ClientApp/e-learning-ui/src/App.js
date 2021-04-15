@@ -16,31 +16,15 @@ import LessonsState from "./context/lessons/LessonsState";
 
 
 function App() {
-
-   /* const [course, setCourse] = useState({});*/
     const [lessons, setLessons] = useState([]);
     const [lesson, setLesson] = useState({});
 
-  /*  const getCourse = async (id) => {
-        const res = await axios.get(`https://localhost:44367/api/courses/${id}`);
-        setCourse({
-            id: res.data.id,
-            description: res.data.description,
-            price: res.data.price,
-            title: res.data.title
-        })
-        setLessons(res.data.lessons);
-    }*/
 
     const getLesson = async (id) => {
         const res = await axios.get(`https://localhost:44367/api/lesson/${id}`);
         setLesson(res.data);
     }
 
-    const postCourse = async (course) => {
-        const res = await axios.post('https://localhost:44367/api/courses', course)
-       // setCourses(res.data);
-    }
 
     const postLesson = async (lesson) => {
         const res = await axios.post(`https://localhost:44367/api/lesson`, lesson);
@@ -104,10 +88,7 @@ function App() {
                                     exact
                                     path="/admin/course/create"
                                     render={props => (
-                                        <CreateCourse
-                                            {...props}
-                                            postCourse={postCourse}
-                                        />
+                                        <CreateCourse/>
                                     )}
                                 />
                                 <Route
