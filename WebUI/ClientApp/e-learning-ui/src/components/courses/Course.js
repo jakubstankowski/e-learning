@@ -7,6 +7,7 @@ import Lesson from "../lessons/Lesson";
 import Button from "@material-ui/core/Button";
 import CoursesContext from "../../context/courses/coursesContext";
 import LessonItem from "../lessons/LessonItem";
+import Spinner from "../layout/Spinner";
 
 function Course({getLesson, deleteLesson, lessons, lesson, match}) {
     const coursesContext = useContext(CoursesContext);
@@ -19,7 +20,7 @@ function Course({getLesson, deleteLesson, lessons, lesson, match}) {
         // eslint-disable-next-line
     }, []);
 
-    if (loading) return <h1>Loading...</h1>;
+    if (loading) return <Spinner/>;
 
     return (
         <Fragment>
@@ -37,7 +38,7 @@ function Course({getLesson, deleteLesson, lessons, lesson, match}) {
                 </Button>
             </Link>
             lesson:
-           {/* <ul>
+            {/* <ul>
                 {course.lessons.map((lesson, i) =>
                     <LessonItem key={i}
                                 lesson={lesson}/>

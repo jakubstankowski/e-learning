@@ -17,7 +17,7 @@ function CoursesState(props) {
     const initialState = {
         courses: [],
         course: {},
-        loading: false
+        loading: true
     }
 
     const [state, dispatch] = useReducer(CoursesReducer, initialState);
@@ -45,10 +45,13 @@ function CoursesState(props) {
         const res = await axios.get(`https://localhost:44367/api/courses/${id}`);
 
 
-        dispatch({
-            type: GET_COURSE,
-            payload: res.data
-        })
+        setTimeout(() => {
+            dispatch({
+                type: GET_COURSE,
+                payload: res.data
+            })
+        }, 2000)
+
 
         /* setCourse({
              id: res.data.id,
@@ -67,6 +70,7 @@ function CoursesState(props) {
             value={{
                 courses: state.courses,
                 course: state.course,
+                loading: state.loading,
                 getCourses,
                 getCourse
             }}
