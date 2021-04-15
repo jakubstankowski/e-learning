@@ -7,16 +7,19 @@ import PropTypes from 'prop-types';
 import Typography from "@material-ui/core/Typography";
 import {useContext, useEffect} from "react";
 import CoursesContext from '../../context/courses/coursesContext';
+import Spinner from "../layout/Spinner";
 
 function Courses({deleteCourse}) {
     const coursesContext = useContext(CoursesContext);
 
-    const {getCourses, courses} = coursesContext;
+    const {getCourses, courses, loading} = coursesContext;
 
     useEffect(() => {
         getCourses();
+        console.log('loading: ', loading);
     }, [])
 
+    if (loading) return <Spinner/>
 
     return (
         <section>

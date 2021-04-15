@@ -7,7 +7,7 @@ export const DELETE_COURSE = 'DELETE_COURSE';
 export const DELETE_LESSON = 'DELETE_LESSON';
 export const UPDATE_COURSE = 'UPDATE_COURSE';
 export const UPDATE_LESSON = 'UPDATE_LESSON';
-
+export const SET_LOADING = 'SET_LOADING';
 
 
 

@@ -6,11 +6,12 @@ import {Link, Route, Switch} from "react-router-dom";
 import Lesson from "../lessons/Lesson";
 import Button from "@material-ui/core/Button";
 import CoursesContext from "../../context/courses/coursesContext";
+import LessonItem from "../lessons/LessonItem";
 
 function Course({getLesson, deleteLesson, lessons, lesson, match}) {
     const coursesContext = useContext(CoursesContext);
 
-    const {getCourse, course} = coursesContext;
+    const {getCourse, course, loading} = coursesContext;
 
     useEffect(() => {
         getCourse(match.params.courseId);
@@ -18,6 +19,7 @@ function Course({getLesson, deleteLesson, lessons, lesson, match}) {
         // eslint-disable-next-line
     }, []);
 
+    if (loading) return <h1>Loading...</h1>;
 
     return (
         <Fragment>
@@ -34,6 +36,23 @@ function Course({getLesson, deleteLesson, lessons, lesson, match}) {
                     Edit Course
                 </Button>
             </Link>
+            lesson:
+           {/* <ul>
+                {course.lessons.map((lesson, i) =>
+                    <LessonItem key={i}
+                                lesson={lesson}/>
+                )}
+            </ul>*/}
+            {/*  <ul>
+                {
+                    course.lessons.map((lesson, i) =>
+                    {
+                        <li>
+                            {lesson}
+                        </li>
+                    })
+                }
+            </ul>*/}
             {/*<Switch>
                 <Route
                     path="/course/:courseId"
