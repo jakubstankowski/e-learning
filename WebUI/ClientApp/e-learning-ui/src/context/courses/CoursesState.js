@@ -20,11 +20,23 @@ function CoursesState(props) {
 
     const [state, dispatch] = useReducer(CoursesReducer, initialState);
 
+    const getCourses = async () => {
+        const res = await axios.get('https://localhost:44367/api/courses');
+
+        dispatch({
+            type: GET_COURSES,
+            payload: res.data
+        })
+
+    }
+
+
     return (
         <CoursesContext.Provider
             value={{
                 courses: state.courses,
-                course: state.course
+                course: state.course,
+                getCourses
             }}
         >
             {props.children}

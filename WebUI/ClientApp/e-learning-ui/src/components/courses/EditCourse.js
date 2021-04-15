@@ -11,6 +11,7 @@ import {Route} from "react-router-dom";
 function EditCourse({getCourse, updateCourse, deleteLesson, course, lessons, match, history}) {
     useEffect(() => {
         getCourse(match.params.courseId);
+        // eslint-disable-next-line
     }, []);
 
     const onSubmit = (course) => {

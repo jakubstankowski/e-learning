@@ -10,6 +10,7 @@ function Course({getCourse, getLesson, deleteLesson, lessons, lesson, course, ma
 
     useEffect(() => {
         getCourse(match.params.courseId);
+        // eslint-disable-next-line
     }, []);
 
 

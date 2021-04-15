@@ -7,6 +7,7 @@ import {Button} from "@material-ui/core";
 function Lesson({getLesson, lesson, match}) {
     useEffect(() => {
         getLesson(match.params.lessonId);
+        // eslint-disable-next-line
     }, [])
 
     return (

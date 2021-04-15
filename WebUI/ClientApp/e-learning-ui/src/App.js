@@ -16,19 +16,10 @@ import LessonsState from "./context/lessons/LessonsState";
 
 
 function App() {
-    const [courses, setCourses] = useState([]);
+
     const [course, setCourse] = useState({});
     const [lessons, setLessons] = useState([]);
     const [lesson, setLesson] = useState({});
-
-    useEffect(() => {
-        getCourses();
-    }, []);
-
-    const getCourses = async () => {
-        const res = await axios.get('https://localhost:44367/api/courses');
-        setCourses(res.data);
-    }
 
     const getCourse = async (id) => {
         const res = await axios.get(`https://localhost:44367/api/courses/${id}`);
@@ -48,7 +39,7 @@ function App() {
 
     const postCourse = async (course) => {
         const res = await axios.post('https://localhost:44367/api/courses', course)
-        setCourses(res.data);
+       // setCourses(res.data);
     }
 
     const postLesson = async (lesson) => {
@@ -58,7 +49,7 @@ function App() {
 
     const deleteCourse = async (id) => {
         const res = await axios.delete(`https://localhost:44367/api/courses/${id}`)
-        setCourses(res.data);
+       // setCourses(res.data);
     }
 
     const deleteLesson = async (id) => {
@@ -69,7 +60,7 @@ function App() {
 
     const updateCourse = async (id, course) => {
         const res = await axios.put(`https://localhost:44367/api/courses/${id}`, course)
-        setCourses(res.data);
+        //setCourses(res.data);
     }
 
     const updateLesson = async (id, lesson) => {
@@ -89,7 +80,6 @@ function App() {
                                     exact render={props => (
                                     <Courses
                                         {...props}
-                                        courses={courses}
                                         deleteCourse={deleteCourse}
                                     />
                                 )}/>

@@ -5,9 +5,19 @@ import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import PropTypes from 'prop-types';
 import Typography from "@material-ui/core/Typography";
+import {useContext, useEffect} from "react";
+import CoursesContext from '../../context/courses/coursesContext';
+
+function Courses({deleteCourse}) {
+    const coursesContext = useContext(CoursesContext);
+
+    const {getCourses, courses} = coursesContext;
+
+    useEffect(() => {
+        getCourses();
+    }, [])
 
 
-function Courses({deleteCourse, courses}) {
     return (
         <section>
             <Typography variant="h5" component="h2">
@@ -51,7 +61,6 @@ function Courses({deleteCourse, courses}) {
 
 
 Courses.propTypes = {
-    courses: PropTypes.array.isRequired,
     deleteCourse: PropTypes.func.isRequired
 }
 

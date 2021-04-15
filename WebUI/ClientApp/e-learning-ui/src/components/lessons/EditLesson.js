@@ -10,6 +10,7 @@ function EditLesson({getLesson, updateLesson, lesson, match, history}) {
 
     useEffect(() => {
         getLesson(match.params.lessonId);
+        // eslint-disable-next-line
     }, []);
 
 
