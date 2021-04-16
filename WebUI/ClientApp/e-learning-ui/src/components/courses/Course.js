@@ -16,7 +16,6 @@ function Course({getLesson, deleteLesson, lessons, lesson, match}) {
 
     useEffect(() => {
         getCourse(match.params.courseId);
-        console.log('course: ', course);
         // eslint-disable-next-line
     }, []);
 
@@ -44,10 +43,9 @@ function Course({getLesson, deleteLesson, lessons, lesson, match}) {
                     exact render={props => (
                     <Lessons
                         {...props}
-                        deleteLesson={deleteLesson}
-                        lessons={course.lessons}/>
+                        deleteLesson={deleteLesson}/>
                 )}/>
-               {/* <Route
+                {/* <Route
                     path="/course/:courseId/lesson/:lessonId"
                     render={props => (
                         <Lesson

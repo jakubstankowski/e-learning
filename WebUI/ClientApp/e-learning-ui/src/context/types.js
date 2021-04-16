@@ -1,5 +1,6 @@
 export const GET_COURSES = 'GET_COURSES';
 export const GET_COURSE = 'GET_COURSE';
+export const GET_COURSE_LESSONS = 'GET_COURSE_LESSONS';
 export const GET_LESSON = 'GET_LESSON';
 export const POST_COURSE = 'POST_COURSE';
 export const POST_LESSON = 'POST_LESSON';

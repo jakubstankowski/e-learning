@@ -4,13 +4,19 @@ import LessonItem from "./LessonItem";
 import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
 import {Button} from "@material-ui/core";
-import CoursesContext from "../../context/courses/coursesContext";
+import LessonsContext from "../../context/lessons/lessonsContext";
 import Spinner from "../layout/Spinner";
 
-function Lessons({deleteLesson, lessons, match}) {
-    const coursesContext = useContext(CoursesContext);
+function Lessons({deleteLesson,  match}) {
+    const lessonsContext = useContext(LessonsContext);
 
-    const {loading} = coursesContext;
+    const {getCourseLessons, lessons, loading} = lessonsContext;
+
+    useEffect(() => {
+        getCourseLessons(match.params.courseId);
+        // eslint-disable-next-line
+    }, []);
+
 
     if (loading) return <Spinner/>
 
@@ -46,11 +52,6 @@ function Lessons({deleteLesson, lessons, match}) {
             </ul>
         </section>
     )
-}
-
-Lessons.propTypes = {
-    lessons: PropTypes.array.isRequired,
-    deleteLesson: PropTypes.func.isRequired
 }
 
 

@@ -19,7 +19,6 @@ function App() {
     const [lessons, setLessons] = useState([]);
     const [lesson, setLesson] = useState({});
 
-
     const getLesson = async (id) => {
         const res = await axios.get(`https://localhost:44367/api/lesson/${id}`);
         setLesson(res.data);
@@ -63,7 +62,6 @@ function App() {
                                             {...props}
                                             getLesson={getLesson}
                                             deleteLesson={deleteLesson}
-                                            lessons={lessons}
                                             lesson={lesson}
                                         />
                                     )}
