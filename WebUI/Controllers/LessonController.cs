@@ -32,15 +32,6 @@ namespace E_Learning.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<LessonDto>>> GetAll()
-        {
-            var query = new GetAllLessonsQuery();
-            var result = await _mediator.Send(query);
-
-            return Ok(result);
-        }
-
 
         [HttpGet("{id}")]
         public async Task<ActionResult<LessonDto>> GetLesson(int id)

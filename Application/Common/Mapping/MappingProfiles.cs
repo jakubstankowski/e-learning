@@ -13,7 +13,6 @@ namespace E_Learning.Application.Common.Mapping
         public MappingProfiles()
         {
             CreateMap<Course, CourseDto>();
-            CreateMap<Course, CourseByIdDto>();
             CreateMap<Lesson, LessonDto>();
             CreateMap<Order, OrderDto>();
         }

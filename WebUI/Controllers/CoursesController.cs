@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using AutoMapper;
 using E_Learning.Application.Common.Dto;
-using E_Learning.Application.Common.Interfaces;
-using E_Learning.Application.Common.Mapping;
 using E_Learning.Application.Courses.Commands;
 using E_Learning.Application.Courses.Commands.DeleteCourse;
 using E_Learning.Application.Courses.Commands.UpdateCourse;
 using E_Learning.Application.Courses.Queries;
+using E_Learning.Application.Courses.Queries.GetCourses;
 using E_Learning.Application.Courses1.Queries;
-using E_Learning.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +27,7 @@ namespace E_Learning.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-      
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CourseDto>>> Get()
         {
@@ -51,6 +48,17 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
+
+        [HttpGet("{id}/Lessons")]
+        public async Task<ActionResult<CourseDto>> GetCourseLessons(int id)
+        {
+            var query = new GetCoursesLessonsQuery(id);
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
+
+
         [HttpPost]
         public async Task<ActionResult<CourseDto>> Create(CreateCourseCommand command)
         {
@@ -67,7 +75,7 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
-       [HttpPut("{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<CourseDto>> Update(int id, UpdateCourseCommand command)
         {
             if (id != command.Id)

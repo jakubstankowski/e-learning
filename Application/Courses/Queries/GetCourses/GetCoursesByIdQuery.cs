@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.Courses.Queries
 {
-    public class GetCoursesByIdQuery : IRequest<CourseByIdDto>
+    public class GetCoursesByIdQuery : IRequest<CourseDto>
     {
         public int Id { get; set; }
 
@@ -20,8 +20,7 @@ namespace E_Learning.Application.Courses.Queries
             this.Id = id;
         }
 
-
-        public class GetCourseByIdHandler : IRequestHandler<GetCoursesByIdQuery, CourseByIdDto>
+        public class GetCourseByIdHandler : IRequestHandler<GetCoursesByIdQuery, CourseDto>
         {
             private readonly IContext _context;
 
@@ -33,19 +32,21 @@ namespace E_Learning.Application.Courses.Queries
                 _mapper = mapper;
             }
 
-            public async Task<CourseByIdDto> Handle(GetCoursesByIdQuery request, CancellationToken cancellationToken)
+
+            public async Task<CourseDto> Handle(GetCoursesByIdQuery request, CancellationToken cancellationToken)
             {
                 var course = await _context
-                       .Courses.Include(c => c.Lessons)
-                       .FirstOrDefaultAsync(c => c.Id == request.Id);
+                         .Courses.FirstOrDefaultAsync(c => c.Id == request.Id);
 
                 if (course == null)
                 {
                     throw new NotFoundException(nameof(Course), request.Id);
                 }
 
-                return _mapper.Map<Course, CourseByIdDto>(course);
+                return _mapper.Map<Course, CourseDto>(course);
             }
+
+
 
         }
 
