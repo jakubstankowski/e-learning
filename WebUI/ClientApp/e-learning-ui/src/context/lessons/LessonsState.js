@@ -32,6 +32,17 @@ function LessonsState(props) {
         })
     }
 
+    const getLesson = async (id) => {
+        setLoading();
+
+        const res = await axios.get(`https://localhost:44367/api/lesson/${id}`);
+
+        dispatch({
+            type: GET_LESSON,
+            payload: res.data
+        })
+    }
+
     const setLoading = () => dispatch({type: SET_LOADING});
 
     return (
@@ -39,7 +50,8 @@ function LessonsState(props) {
             value={{
                 lesson: state.lesson,
                 lessons: state.lessons,
-                getCourseLessons
+                getCourseLessons,
+                getLesson
             }}
         >
             {props.children}

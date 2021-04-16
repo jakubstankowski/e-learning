@@ -45,15 +45,13 @@ function Course({getLesson, deleteLesson, lessons, lesson, match}) {
                         {...props}
                         deleteLesson={deleteLesson}/>
                 )}/>
-                {/* <Route
+                 <Route
                     path="/course/:courseId/lesson/:lessonId"
                     render={props => (
                         <Lesson
                             {...props}
-                            getLesson={getLesson}
-                            lesson={lesson}
                         />
-                    )}/>*/}
+                    )}/>
             </Switch>
         </Fragment>
     )

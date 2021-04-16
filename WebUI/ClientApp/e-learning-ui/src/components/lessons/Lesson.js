@@ -1,14 +1,21 @@
-import React, { useEffect} from "react";
-import PropTypes from "prop-types";
+import React, {useContext, useEffect} from "react";
 import Typography from "@material-ui/core/Typography";
 import {Link} from "react-router-dom";
 import {Button} from "@material-ui/core";
+import LessonsContext from "../../context/lessons/lessonsContext";
+import Spinner from "../layout/Spinner";
 
-function Lesson({getLesson, lesson, match}) {
+function Lesson({match}) {
+    const lessonsContext = useContext(LessonsContext);
+
+    const {getLesson, lesson, loading} = lessonsContext;
+
     useEffect(() => {
         getLesson(match.params.lessonId);
         // eslint-disable-next-line
     }, [])
+
+    if (loading) return <Spinner/>
 
     return (
         <section>
@@ -29,9 +36,5 @@ function Lesson({getLesson, lesson, match}) {
     )
 }
 
-Lesson.propTypes = {
-    lesson: PropTypes.object.isRequired,
-    getLesson: PropTypes.func.isRequired
-};
 
 export default Lesson;

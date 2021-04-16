@@ -19,11 +19,6 @@ function App() {
     const [lessons, setLessons] = useState([]);
     const [lesson, setLesson] = useState({});
 
-    const getLesson = async (id) => {
-        const res = await axios.get(`https://localhost:44367/api/lesson/${id}`);
-        setLesson(res.data);
-    }
-
 
     const postLesson = async (lesson) => {
         const res = await axios.post(`https://localhost:44367/api/lesson`, lesson);
@@ -60,7 +55,6 @@ function App() {
                                     render={props => (
                                         <Course
                                             {...props}
-                                            getLesson={getLesson}
                                             deleteLesson={deleteLesson}
                                             lesson={lesson}
                                         />
@@ -95,7 +89,6 @@ function App() {
                                     render={props => (
                                         <EditLesson
                                             {...props}
-                                            getLesson={getLesson}
                                             deleteLesson={deleteLesson}
                                             updateLesson={updateLesson}
                                             lesson={lesson}
