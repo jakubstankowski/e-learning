@@ -12,6 +12,7 @@ function Lessons({match}) {
     const {getCourseLessons, deleteLesson, lessons, loading} = lessonsContext;
 
     useEffect(() => {
+        console.log('use efect in lessons');
         getCourseLessons(match.params.courseId);
         // eslint-disable-next-line
     }, []);

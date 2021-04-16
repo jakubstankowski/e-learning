@@ -1,6 +1,6 @@
 import './App.css';
 import Header from "./components/layout/Header";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Container from "@material-ui/core/Container";
 import Courses from "./components/courses/Courses";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";

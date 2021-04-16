@@ -1,7 +1,6 @@
 import * as React from "react";
 import {Button, Grid, Paper} from "@material-ui/core";
 import {TextField} from 'final-form-material-ui';
-import PropTypes from 'prop-types';
 import {Form, Field} from 'react-final-form'
 import Typography from "@material-ui/core/Typography";
 import {useContext} from "react";

@@ -15,7 +15,7 @@ function Courses() {
 
     useEffect(() => {
         getCourses();
-        console.log('loading: ', loading);
+        // eslint-disable-next-line
     }, [])
 
     if (loading) return <Spinner/>
