@@ -43,6 +43,17 @@ function LessonsState(props) {
         })
     }
 
+    const postLesson = async (lesson) => {
+        setLoading();
+
+        const res = await axios.post(`https://localhost:44367/api/lesson`, lesson);
+
+        dispatch({
+            type: POST_LESSON,
+            payload: res.data
+        })
+    }
+
     const setLoading = () => dispatch({type: SET_LOADING});
 
     return (
@@ -51,7 +62,8 @@ function LessonsState(props) {
                 lesson: state.lesson,
                 lessons: state.lessons,
                 getCourseLessons,
-                getLesson
+                getLesson,
+                postLesson
             }}
         >
             {props.children}

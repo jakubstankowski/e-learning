@@ -4,9 +4,14 @@ import {TextField} from 'final-form-material-ui';
 import PropTypes from 'prop-types';
 import {Form, Field} from 'react-final-form'
 import Typography from "@material-ui/core/Typography";
+import {useContext} from "react";
+import LessonsContext from "../../context/lessons/lessonsContext";
 
 
-function CreateLesson({postLesson, history}) {
+function CreateLesson({history}) {
+    const lessonsContext = useContext(LessonsContext);
+
+    const {postLesson} = lessonsContext;
 
     const onSubmit = (values) => {
         postLesson(values)
@@ -108,8 +113,5 @@ function CreateLesson({postLesson, history}) {
 
 }
 
-CreateLesson.propTypes = {
-    postLesson: PropTypes.func.isRequired
-};
 
 export default CreateLesson;

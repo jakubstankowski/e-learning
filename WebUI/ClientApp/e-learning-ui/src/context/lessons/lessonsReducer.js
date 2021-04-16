@@ -1,6 +1,7 @@
 import {
     GET_COURSE_LESSONS,
     GET_LESSON,
+    POST_LESSON,
     SET_LOADING,
 } from '../types';
 
@@ -16,6 +17,12 @@ export default (state, action) => {
             return {
                 ...state,
                 lesson: action.payload,
+                loading: true
+            };
+        case POST_LESSON:
+            return {
+                ...state,
+                lessons: action.payload,
                 loading: true
             };
         case SET_LOADING:
