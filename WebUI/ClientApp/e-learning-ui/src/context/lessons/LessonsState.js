@@ -8,7 +8,8 @@ import {
     GET_LESSON,
     DELETE_LESSON,
     POST_LESSON,
-    UPDATE_LESSON, SET_LOADING, UPDATE_COURSE
+    UPDATE_LESSON,
+    SET_LOADING
 } from '../types'
 
 
@@ -66,6 +67,18 @@ function LessonsState(props) {
         })
     }
 
+    const updateLesson = async (id, lesson) => {
+        setLoading();
+
+        const res = await axios.put(`https://localhost:44367/api/lesson/${id}`, lesson)
+
+        dispatch({
+            type: UPDATE_LESSON,
+            payload: res.data
+        })
+    }
+
+
     const setLoading = () => dispatch({type: SET_LOADING});
 
     return (
@@ -76,7 +89,8 @@ function LessonsState(props) {
                 getCourseLessons,
                 getLesson,
                 postLesson,
-                deleteLesson
+                deleteLesson,
+                updateLesson
             }}
         >
             {props.children}

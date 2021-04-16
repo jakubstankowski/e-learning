@@ -3,7 +3,6 @@ import Grid from "@material-ui/core/Grid";
 import CourseItem from "./CourseItem";
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import PropTypes from 'prop-types';
 import Typography from "@material-ui/core/Typography";
 import {useContext, useEffect} from "react";
 import CoursesContext from '../../context/courses/coursesContext';

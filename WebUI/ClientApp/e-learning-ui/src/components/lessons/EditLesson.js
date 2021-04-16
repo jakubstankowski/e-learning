@@ -1,18 +1,23 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
 import {Field, Form} from "react-final-form";
 import {Button, Grid, Paper} from "@material-ui/core";
 import {TextField} from "final-form-material-ui";
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
+import LessonsContext from "../../context/lessons/lessonsContext";
+import Spinner from "../layout/Spinner";
 
-function EditLesson({getLesson, updateLesson, lesson, match, history}) {
+function EditLesson({match, history}) {
+    const lessonsContext = useContext(LessonsContext);
+
+    const {getLesson, updateLesson, lesson, loading} = lessonsContext;
 
     useEffect(() => {
         getLesson(match.params.lessonId);
         // eslint-disable-next-line
     }, []);
 
+    if (loading) return <Spinner/>
 
     const onSubmit = (lesson) => {
         updateLesson(match.params.lessonId, lesson)
@@ -117,11 +122,5 @@ function EditLesson({getLesson, updateLesson, lesson, match, history}) {
     )
 
 }
-
-EditLesson.propTypes = {
-    lesson: PropTypes.object.isRequired,
-    getLesson: PropTypes.func.isRequired,
-    updateLesson: PropTypes.func.isRequired,
-};
 
 export default EditLesson;

@@ -1,5 +1,4 @@
 import React, {useContext, useEffect} from "react";
-import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
 import Lessons from "../lessons/Lessons";
 import {Field, Form} from "react-final-form";

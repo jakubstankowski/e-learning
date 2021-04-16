@@ -5,7 +5,6 @@ import Container from "@material-ui/core/Container";
 import Courses from "./components/courses/Courses";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Course from "./components/courses/Course";
-import axios from "axios";
 import Admin from "./components/admin/Admin";
 import CreateCourse from "./components/courses/CreateCourse";
 import CreateLesson from "./components/lessons/CreateLesson";

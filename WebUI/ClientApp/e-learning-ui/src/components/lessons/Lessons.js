@@ -2,7 +2,6 @@ import Typography from "@material-ui/core/Typography";
 import React, {useContext, useEffect} from "react";
 import LessonItem from "./LessonItem";
 import {Link} from "react-router-dom";
-import PropTypes from 'prop-types';
 import {Button} from "@material-ui/core";
 import LessonsContext from "../../context/lessons/lessonsContext";
 import Spinner from "../layout/Spinner";
