@@ -16,93 +16,53 @@ import LessonsState from "./context/lessons/LessonsState";
 
 
 function App() {
-    const [lessons, setLessons] = useState([]);
-    const [lesson, setLesson] = useState({});
-
-
-    const deleteLesson = async (id) => {
-        const res = await axios.delete(`https://localhost:44367/api/lesson/${id}`)
-        setLessons(res.data)
-    }
-
-
-    const updateLesson = async (id, lesson) => {
-        const res = await axios.put(`https://localhost:44367/api/lesson/${id}`, lesson)
-        setLessons(res.data)
-    }
-
-        return (
-            <CoursesState>
-                <LessonsState>
-                    <Router>
-                        <Header/>
-                        <Container>
-                            <Switch>
-                                <Route
-                                    path="/"
-                                    exact render={props => (
-                                    <Courses/>
-                                )}/>
-                                <Route
-                                    path="/course/:courseId"
-                                    render={props => (
-                                        <Course
-                                            {...props}
-                                            deleteLesson={deleteLesson}
-                                            lesson={lesson}
-                                        />
-                                    )}
-                                />
-                                <Route
-                                    exact
-                                    path="/admin"
-                                    component={Admin}
-                                />
-                                <Route
-                                    exact
-                                    path="/admin/course/create"
-                                    render={props => (
-                                        <CreateCourse/>
-                                    )}
-                                />
-                                <Route
-                                    exact
-                                    path="/admin/course/:courseId/edit"
-                                    render={props => (
-                                        <EditCourse
-                                            {...props}
-                                            deleteLesson={deleteLesson}
-                                            lesson={lesson}
-                                        />
-                                    )}
-                                />
-                                <Route
-                                    exact
-                                    path="/admin/lesson/:lessonId/edit"
-                                    render={props => (
-                                        <EditLesson
-                                            {...props}
-                                            deleteLesson={deleteLesson}
-                                            updateLesson={updateLesson}
-                                            lesson={lesson}
-                                        />
-                                    )}
-                                />
-                                <Route
-                                    exact
-                                    path="/admin/lesson/create"
-                                    render={props => (
-                                        <CreateLesson
-                                            {...props}
-                                        />
-                                    )}
-                                />
-                            </Switch>
-                        </Container>
-                    </Router>
-                </LessonsState>
-            </CoursesState>
-        );
+    return (
+        <CoursesState>
+            <LessonsState>
+                <Router>
+                    <Header/>
+                    <Container>
+                        <Switch>
+                            <Route
+                                path="/"
+                                exact
+                                component={Courses}
+                            />
+                            <Route
+                                path="/course/:courseId"
+                                component={Course}
+                            />
+                            <Route
+                                exact
+                                path="/admin"
+                                component={Admin}
+                            />
+                            <Route
+                                exact
+                                path="/admin/course/create"
+                                component={CreateCourse}
+                            />
+                            <Route
+                                exact
+                                path="/admin/course/:courseId/edit"
+                                component={EditCourse}
+                            />
+                            <Route
+                                exact
+                                path="/admin/lesson/:lessonId/edit"
+                                component={EditLesson}
+                            />
+                            <Route
+                                exact
+                                path="/admin/lesson/create"
+                                component={CreateLesson}
+                            />
+                        </Switch>
+                    </Container>
+                </Router>
+            </LessonsState>
+        </CoursesState>
+    );
 
 }
 

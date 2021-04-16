@@ -10,7 +10,7 @@ import CoursesContext from "../../context/courses/coursesContext";
 import Spinner from "../layout/Spinner";
 
 
-function EditCourse({deleteLesson, match, history}) {
+function EditCourse({match, history}) {
     const coursesContext = useContext(CoursesContext);
 
     const {getCourse, course, updateCourse, loading} = coursesContext;
@@ -105,13 +105,7 @@ function EditCourse({deleteLesson, match, history}) {
                     </form>
                 )}
             />
-            <Route
-                render={props => (
-                    <Lessons
-                        {...props}
-                        deleteLesson={deleteLesson}
-                        lessons={course.lessons}/>
-                )}/>
+            <Route component={Lessons}/>
         </section>
     )
 

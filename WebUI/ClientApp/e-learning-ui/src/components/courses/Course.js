@@ -1,15 +1,13 @@
 import React, {Fragment, useContext, useEffect} from "react";
 import Typography from "@material-ui/core/Typography";
-import PropTypes from 'prop-types';
 import Lessons from "../lessons/Lessons";
 import {Link, Route, Switch} from "react-router-dom";
 import Lesson from "../lessons/Lesson";
 import Button from "@material-ui/core/Button";
 import CoursesContext from "../../context/courses/coursesContext";
-import LessonItem from "../lessons/LessonItem";
 import Spinner from "../layout/Spinner";
 
-function Course({getLesson, deleteLesson, lessons, lesson, match}) {
+function Course({match}) {
     const coursesContext = useContext(CoursesContext);
 
     const {getCourse, course, loading} = coursesContext;
@@ -40,18 +38,12 @@ function Course({getLesson, deleteLesson, lessons, lesson, match}) {
             <Switch>
                 <Route
                     path="/course/:courseId"
-                    exact render={props => (
-                    <Lessons
-                        {...props}
-                        deleteLesson={deleteLesson}/>
-                )}/>
-                 <Route
+                    exact
+                    component={Lessons}/>
+                <Route
                     path="/course/:courseId/lesson/:lessonId"
-                    render={props => (
-                        <Lesson
-                            {...props}
-                        />
-                    )}/>
+                    component={Lesson}
+                />
             </Switch>
         </Fragment>
     )

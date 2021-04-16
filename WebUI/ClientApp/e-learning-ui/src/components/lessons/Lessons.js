@@ -7,10 +7,10 @@ import {Button} from "@material-ui/core";
 import LessonsContext from "../../context/lessons/lessonsContext";
 import Spinner from "../layout/Spinner";
 
-function Lessons({deleteLesson,  match}) {
+function Lessons({match}) {
     const lessonsContext = useContext(LessonsContext);
 
-    const {getCourseLessons, lessons, loading} = lessonsContext;
+    const {getCourseLessons, deleteLesson, lessons, loading} = lessonsContext;
 
     useEffect(() => {
         getCourseLessons(match.params.courseId);
