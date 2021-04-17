@@ -12,6 +12,8 @@ import EditCourse from "./components/courses/EditCourse";
 import EditLesson from "./components/lessons/EditLesson";
 import CoursesState from "./context/courses/CoursesState";
 import LessonsState from "./context/lessons/LessonsState";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
 
 function App() {
@@ -56,6 +58,8 @@ function App() {
                                 path="/admin/lesson/create"
                                 component={CreateLesson}
                             />
+                            <Route exact path='/register' component={Register}/>
+                            <Route exact path='/login' component={Login}/>
                         </Switch>
                     </Container>
                 </Router>
