@@ -3,7 +3,9 @@ import React, {Fragment} from 'react'
 
 function Spinner() {
     return (
-        <Fragment/>
+        <Fragment>
+            <h4>Loading...</h4>
+        </Fragment>
     )
 }
 

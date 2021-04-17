@@ -1,4 +1,4 @@
-import React, {Fragment, useContext, useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import Typography from "@material-ui/core/Typography";
 import Lessons from "../lessons/Lessons";
 import {Link, Route, Switch} from "react-router-dom";
@@ -14,13 +14,15 @@ function Course({match}) {
 
     useEffect(() => {
         getCourse(match.params.courseId);
-        // eslint-disable-next-line
     }, []);
 
-    if (loading) return <Spinner/>;
+
+
+
+    if (loading) return <Spinner/>
 
     return (
-        <Fragment>
+        <section>
             <Typography variant="h5" component="h2">
                 Course <strong>{course.title}</strong> ID: <strong>{course.id}</strong>
             </Typography>
@@ -34,18 +36,17 @@ function Course({match}) {
                     Edit Course
                 </Button>
             </Link>
-
             <Switch>
                 <Route
-                    path="/course/:courseId"
                     exact
+                    path="/course/:courseId"
                     component={Lessons}/>
                 <Route
                     path="/course/:courseId/lesson/:lessonId"
                     component={Lesson}
                 />
             </Switch>
-        </Fragment>
+        </section>
     )
 
 }

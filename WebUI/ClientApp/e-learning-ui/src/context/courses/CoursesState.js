@@ -17,7 +17,7 @@ function CoursesState(props) {
     const initialState = {
         courses: [],
         course: {},
-        loading: true
+        loading: false
     }
 
     const [state, dispatch] = useReducer(CoursesReducer, initialState);
@@ -26,11 +26,10 @@ function CoursesState(props) {
         setLoading();
 
         const res = await axios.get('https://localhost:44367/api/courses');
-
         dispatch({
-            type: GET_COURSES,
-            payload: res.data
-        })
+                type: GET_COURSES,
+                payload: res.data
+            })
     }
 
 
@@ -40,9 +39,9 @@ function CoursesState(props) {
         const res = await axios.get(`https://localhost:44367/api/courses/${id}`);
 
         dispatch({
-            type: GET_COURSE,
-            payload: res.data
-        })
+                type: GET_COURSE,
+                payload: res.data
+            })
     }
 
     const postCourse = async (course) => {
@@ -76,7 +75,6 @@ function CoursesState(props) {
             payload: res.data
         })
     }
-
 
 
     const setLoading = () => dispatch({type: SET_LOADING});

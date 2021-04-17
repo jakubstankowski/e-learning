@@ -23,7 +23,6 @@ function LessonsState(props) {
     const [state, dispatch] = useReducer(LessonsReducer, initialState);
 
     const getCourseLessons = async (courseId) => {
-        alert('get course lessons');
         setLoading();
 
         const res = await axios.get(`https://localhost:44367/api/courses/${courseId}/lessons`);

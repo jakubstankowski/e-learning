@@ -4,16 +4,15 @@ import LessonItem from "./LessonItem";
 import {Link} from "react-router-dom";
 import {Button} from "@material-ui/core";
 import LessonsContext from "../../context/lessons/lessonsContext";
+import CoursesContext from "../../context/courses/coursesContext";
 import Spinner from "../layout/Spinner";
 
 function Lessons({match}) {
     const lessonsContext = useContext(LessonsContext);
-
     const {getCourseLessons, deleteLesson, lessons, loading} = lessonsContext;
 
     useEffect(() => {
-        console.log('use efect in lessons');
-        getCourseLessons(match.params.courseId);
+       getCourseLessons(match.params.courseId);
         // eslint-disable-next-line
     }, []);
 
