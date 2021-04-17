@@ -11,6 +11,7 @@
     "final-form": "^4.20.2",
     "final-form-material-ui": "^0.3.0",
     "history": "^5.0.0",
+    "mui-rff": "^3.0.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-final-form": "^6.5.3",

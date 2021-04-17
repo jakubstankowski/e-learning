@@ -12,8 +12,15 @@ export default function Lesson({match}) {
 
     useEffect(() => {
         getLesson(match.params.lessonId);
+
+
+        if (loading) {
+            alert('loading!');
+        }
+        console.log('loading: ', loading);
+
         // eslint-disable-next-line
-    }, [])
+    }, [loading])
 
     if (loading) return <Spinner/>
 

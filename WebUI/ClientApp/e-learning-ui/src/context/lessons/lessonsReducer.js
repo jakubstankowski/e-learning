@@ -19,25 +19,25 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 lesson: action.payload,
-                loading: true
+                loading: false
             };
         case POST_LESSON:
             return {
                 ...state,
                 lessons: action.payload,
-                loading: true
+                loading: false
             };
         case DELETE_LESSON:
             return {
                 ...state,
                 lessons: action.payload,
-                loading: true
+                loading: false
             };
         case UPDATE_LESSON:
             return {
                 ...state,
                 lessons: action.payload,
-                loading: true
+                loading: false
             };
         case SET_LOADING:
             return {

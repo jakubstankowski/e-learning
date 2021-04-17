@@ -1,10 +1,11 @@
 import * as React from "react";
-import {Button, Grid, Paper} from "@material-ui/core";
-import {TextField} from 'final-form-material-ui';
-import {Form, Field} from 'react-final-form'
+import {Button} from "@material-ui/core";
+import {TextField} from 'mui-rff';
+import {Form} from 'react-final-form'
 import Typography from "@material-ui/core/Typography";
 import {useContext} from "react";
 import LessonsContext from "../../context/lessons/lessonsContext";
+import Container from "@material-ui/core/Container";
 
 
 export default function CreateLesson({history}) {
@@ -42,72 +43,61 @@ export default function CreateLesson({history}) {
     };
 
     return (
-        <section className='form-container'>
-            <Typography variant="h5" component="h2">
-                Create Lesson
-            </Typography>
-            <Form
-                onSubmit={onSubmit}
-                validate={validate}
-                render={({handleSubmit, submitting}) => (
-                    <form onSubmit={handleSubmit} noValidate>
-                        <Paper style={{padding: 16}}>
-                            <Grid container alignItems="flex-start" spacing={2}>
-                                <Grid item xs={12}>
-                                    <Field
-                                        fullWidth
-                                        required
-                                        name="title"
-                                        component={TextField}
-                                        type="text"
-                                        label="Title"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Field
-                                        fullWidth
-                                        required
-                                        name="description"
-                                        component={TextField}
-                                        type="text"
-                                        label="Description"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Field
-                                        fullWidth
-                                        required
-                                        name="videoUrl"
-                                        component={TextField}
-                                        type="text"
-                                        label="Video URL"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Field
-                                        fullWidth
-                                        required
-                                        name="courseId"
-                                        component={TextField}
-                                        type="number"
-                                        label="Course ID"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Button type="submit"
-                                            color="primary"
-                                            className="form-button"
-                                            disabled={submitting}
-                                            variant="contained">
-                                        Create
-                                    </Button>
-                                </Grid>
-                            </Grid>
-                        </Paper>
-                    </form>
-                )}
-            />
-        </section>
+        <Container component="main" maxWidth="xs">
+            <article className="form-body">
+                <Typography component="h1" variant="h5">
+                    Create Lesson
+                </Typography>
+                <Form
+                    onSubmit={onSubmit}
+                    validate={validate}
+                    render={({handleSubmit, submitting}) => (
+                        <form onSubmit={handleSubmit} noValidate className="form">
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                name="title"
+                                fullWidth
+                                label="Title"
+                            />
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                name="description"
+                                fullWidth
+                                label="Description"
+                            />
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                name="videoUrl"
+                                fullWidth
+                                label="Video URL"
+                            />
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                type="number"
+                                name="courseId"
+                                fullWidth
+                                label="Course ID"
+                            />
+                            <Button type="submit"
+                                    color="primary"
+                                    className="form-button"
+                                    disabled={submitting}
+                                    variant="contained">
+                                Create
+                            </Button>
+                        </form>
+                    )}
+                />
+            </article>
+        </Container>
     )
 
 }
