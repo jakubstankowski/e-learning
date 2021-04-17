@@ -1,18 +1,17 @@
 import * as React from "react";
-import {Button, Grid, Paper} from "@material-ui/core";
-import {TextField} from 'final-form-material-ui';
-import {Form, Field} from 'react-final-form'
+import {Button} from "@material-ui/core";
+import {Form} from 'react-final-form'
 import Typography from "@material-ui/core/Typography";
 import {useContext} from "react";
 import CoursesContext from "../../context/courses/coursesContext";
-import { useHistory } from "react-router-dom";
+import {TextField} from 'mui-rff';
+import Container from "@material-ui/core/Container";
 
-export default function CreateCourse() {
+
+export default function CreateCourse({history}) {
     const coursesContext = useContext(CoursesContext);
 
     const {postCourse} = coursesContext;
-
-    const history = useHistory();
 
     const onSubmit = (values) => {
         postCourse(values)
@@ -36,62 +35,53 @@ export default function CreateCourse() {
     };
 
     return (
-        <section className='form-container'>
-            <Typography variant="h5" component="h2">
-                Create Course
-            </Typography>
-            <Form
-                onSubmit={onSubmit}
-                validate={validate}
-                render={({handleSubmit, submitting}) => (
-                    <form onSubmit={handleSubmit} noValidate>
-                        <Paper style={{padding: 16}}>
-                            <Grid container alignItems="flex-start" spacing={2}>
-                                <Grid item xs={12}>
-                                    <Field
-                                        fullWidth
-                                        required
-                                        name="title"
-                                        component={TextField}
-                                        type="text"
-                                        label="Title"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Field
-                                        fullWidth
-                                        required
-                                        name="description"
-                                        component={TextField}
-                                        type="text"
-                                        label="Description"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Field
-                                        fullWidth
-                                        required
-                                        name="price"
-                                        component={TextField}
-                                        type="number"
-                                        label="Price"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Button type="submit"
-                                            className="form-button"
-                                            color="primary"
-                                            disabled={submitting}
-                                            variant="contained">
-                                        Create
-                                    </Button>
-                                </Grid>
-                            </Grid>
-                        </Paper>
-                    </form>
-                )}
-            />
-        </section>
+        <Container component="main" maxWidth="xs">
+            <article className="form-body">
+                <Typography variant="h5" component="h2">
+                    Create Course
+                </Typography>
+                <Form
+                    onSubmit={onSubmit}
+                    validate={validate}
+                    render={({handleSubmit, submitting}) => (
+                        <form onSubmit={handleSubmit} noValidate className="form">
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                name="title"
+                                fullWidth
+                                label="Title"
+                            />
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                name="description"
+                                fullWidth
+                                label="Description"
+                            />
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                type="number"
+                                name="price"
+                                fullWidth
+                                label="Price"
+                            />
+                            <Button type="submit"
+                                    className="form-button"
+                                    color="primary"
+                                    disabled={submitting}
+                                    variant="contained">
+                                Create
+                            </Button>
+                        </form>
+                    )}
+                />
+            </article>
+        </Container>
     )
 }
 
