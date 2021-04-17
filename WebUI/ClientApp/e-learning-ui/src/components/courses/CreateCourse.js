@@ -7,7 +7,7 @@ import {useContext} from "react";
 import CoursesContext from "../../context/courses/coursesContext";
 import { useHistory } from "react-router-dom";
 
-function CreateCourse() {
+export default function CreateCourse() {
     const coursesContext = useContext(CoursesContext);
 
     const {postCourse} = coursesContext;
@@ -95,4 +95,3 @@ function CreateCourse() {
     )
 }
 
-export default CreateCourse;

@@ -1,7 +1,7 @@
 import React from "react";
 
 
-function LessonItem(props) {
+export default function LessonItem(props) {
     const {title, id} = props.lesson;
     return (
         <li>
@@ -9,6 +9,3 @@ function LessonItem(props) {
         </li>
     )
 }
-
-
-export default LessonItem;

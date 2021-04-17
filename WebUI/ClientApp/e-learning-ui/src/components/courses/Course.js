@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import CoursesContext from "../../context/courses/coursesContext";
 import Spinner from "../layout/Spinner";
 
-function Course({match}) {
+export default function Course({match}) {
     const coursesContext = useContext(CoursesContext);
 
     const {getCourse, course, loading} = coursesContext;
@@ -51,4 +51,3 @@ function Course({match}) {
 
 }
 
-export default Course;

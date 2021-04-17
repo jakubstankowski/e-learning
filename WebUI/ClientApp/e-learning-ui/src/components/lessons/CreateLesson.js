@@ -7,7 +7,7 @@ import {useContext} from "react";
 import LessonsContext from "../../context/lessons/lessonsContext";
 
 
-function CreateLesson({history}) {
+export default function CreateLesson({history}) {
     const lessonsContext = useContext(LessonsContext);
 
     const {postLesson} = lessonsContext;
@@ -111,6 +111,3 @@ function CreateLesson({history}) {
     )
 
 }
-
-
-export default CreateLesson;

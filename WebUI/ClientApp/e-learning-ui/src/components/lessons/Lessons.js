@@ -7,7 +7,7 @@ import LessonsContext from "../../context/lessons/lessonsContext";
 import CoursesContext from "../../context/courses/coursesContext";
 import Spinner from "../layout/Spinner";
 
-function Lessons({match}) {
+export default function Lessons({match}) {
     const lessonsContext = useContext(LessonsContext);
     const {getCourseLessons, deleteLesson, lessons, loading} = lessonsContext;
 
@@ -52,6 +52,3 @@ function Lessons({match}) {
         </section>
     )
 }
-
-
-export default Lessons;

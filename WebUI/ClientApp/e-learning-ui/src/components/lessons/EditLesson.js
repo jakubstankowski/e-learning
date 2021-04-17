@@ -7,7 +7,7 @@ import {useContext, useEffect} from "react";
 import LessonsContext from "../../context/lessons/lessonsContext";
 import Spinner from "../layout/Spinner";
 
-function EditLesson({match, history}) {
+export default function EditLesson({match, history}) {
     const lessonsContext = useContext(LessonsContext);
 
     const {getLesson, updateLesson, lesson, loading} = lessonsContext;
@@ -122,5 +122,3 @@ function EditLesson({match, history}) {
     )
 
 }
-
-export default EditLesson;

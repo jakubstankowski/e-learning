@@ -5,7 +5,7 @@ import {Button} from "@material-ui/core";
 import LessonsContext from "../../context/lessons/lessonsContext";
 import Spinner from "../layout/Spinner";
 
-function Lesson({match}) {
+export default function Lesson({match}) {
     const lessonsContext = useContext(LessonsContext);
 
     const {getLesson, lesson, loading} = lessonsContext;
@@ -35,6 +35,3 @@ function Lesson({match}) {
         </section>
     )
 }
-
-
-export default Lesson;

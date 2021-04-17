@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 });
 
 
-function CourseItem(props) {
+export default function CourseItem(props) {
     const classes = useStyles();
     const {id, title, description, price} = props.course;
 
@@ -40,4 +40,3 @@ function CourseItem(props) {
     )
 }
 
-export default CourseItem;

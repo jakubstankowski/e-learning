@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react'
 
 
-function Spinner() {
+export default function Spinner() {
     return (
         <Fragment>
             <h4>Loading...</h4>
@@ -9,5 +9,3 @@ function Spinner() {
     )
 }
 
-
-export default Spinner

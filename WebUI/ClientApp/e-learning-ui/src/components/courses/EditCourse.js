@@ -9,7 +9,7 @@ import CoursesContext from "../../context/courses/coursesContext";
 import Spinner from "../layout/Spinner";
 
 
-function EditCourse({match, history}) {
+export default function EditCourse({match, history}) {
     const coursesContext = useContext(CoursesContext);
 
     const {getCourse, course, updateCourse, loading} = coursesContext;
@@ -110,5 +110,3 @@ function EditCourse({match, history}) {
 
 }
 
-
-export default EditCourse;
