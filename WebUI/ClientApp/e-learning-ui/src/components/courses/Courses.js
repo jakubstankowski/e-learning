@@ -8,7 +8,7 @@ import {useContext, useEffect} from "react";
 import CoursesContext from '../../context/courses/coursesContext';
 import Spinner from "../layout/Spinner";
 
-function Courses() {
+export default function Courses() {
     const coursesContext = useContext(CoursesContext);
 
     const {getCourses, deleteCourse, courses, loading} = coursesContext;
@@ -61,4 +61,3 @@ function Courses() {
     )
 }
 
-export default Courses;
