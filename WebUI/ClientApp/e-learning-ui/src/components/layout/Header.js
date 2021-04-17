@@ -24,6 +24,16 @@ export default function Header() {
                         Create new lesson
                     </Button>
                 </Link>
+                <Link to="/login">
+                    <Button>
+                        Login
+                    </Button>
+                </Link>
+                <Link to="/register">
+                    <Button>
+                        Register
+                    </Button>
+                </Link>
             </Toolbar>
         </AppBar>
     )
