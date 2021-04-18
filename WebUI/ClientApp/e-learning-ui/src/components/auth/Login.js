@@ -1,5 +1,5 @@
 import './Auth.css';
-import React from 'react';
+import React, {useContext} from 'react';
 import Button from '@material-ui/core/Button';
 import {TextField} from 'mui-rff';
 import {Link} from "react-router-dom";
@@ -7,16 +7,20 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {Form} from "react-final-form";
 import {validateEmail} from "../../helpers/validateEmail";
+import AuthContext from "../../context/auth/authContext";
 
 
-export default function Login() {
+export default function Login({history}) {
+    const authContext = useContext(AuthContext);
+
+    const {login} = authContext;
+
 
     const onSubmit = (values) => {
-        console.log('values: ', values);
-        /* postCourse(values)
-             .then(() => {
-                 history.push('/');
-             })*/
+        login(values)
+            .then(() => {
+                history.push('/');
+            })
     };
 
     const validate = (values) => {
