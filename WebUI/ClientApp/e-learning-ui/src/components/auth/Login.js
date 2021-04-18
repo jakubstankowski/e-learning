@@ -1,5 +1,5 @@
 import './Auth.css';
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import {TextField} from 'mui-rff';
 import {Link} from "react-router-dom";
@@ -13,14 +13,24 @@ import AuthContext from "../../context/auth/authContext";
 export default function Login({history}) {
     const authContext = useContext(AuthContext);
 
-    const {login} = authContext;
+    const {login, error, isAuthenticated} = authContext;
+
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            history.push('/');
+        }
+
+        if (error === 'Invalid Credentials') {
+            //TODO : implement error alert #EL-32
+            console.log('error!');
+        }
+        // eslint-disable-next-line
+    }, [error, isAuthenticated, history]);
 
 
     const onSubmit = (values) => {
         login(values)
-            .then(() => {
-                history.push('/');
-            })
     };
 
     const validate = (values) => {
