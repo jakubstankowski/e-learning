@@ -6,6 +6,8 @@ import setAuthToken from '../../utils/setAuthToken';
 import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
+    REGISTER_SUCCESS,
+    REGISTER_FAIL
 } from '../types';
 
 const AuthState = props => {
@@ -36,30 +38,30 @@ const AuthState = props => {
      };*/
 
     // Register User
-    /* const register = async formData => {
-         const config = {
-             headers: {
-                 'Content-Type': 'application/json'
-             }
-         };
+    const register = async form => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
 
-         try {
-             const res = await axios.post('/api/users', formData, config);
+        try {
+            const res = await axios.post('/api/auth/register', form, config);
 
-             dispatch({
-                 type: REGISTER_SUCCESS,
-                 payload: res.data
-             });
+            dispatch({
+                type: REGISTER_SUCCESS,
+                payload: res.data
+            });
 
-             loadUser();
-         } catch (err) {
-             dispatch({
-                 type: REGISTER_FAIL,
-                 payload: err.response.data.msg
-             });
-         }
-     };
- */
+            // loadUser();
+        } catch (err) {
+            dispatch({
+                type: REGISTER_FAIL,
+                payload: err.response.data.title
+            });
+        }
+    };
+
     // Login User
     const login = async form => {
         const config = {
@@ -70,8 +72,6 @@ const AuthState = props => {
 
         try {
             const res = await axios.post('/api/auth/login', form, config);
-
-            console.log('res', res.data);
 
             dispatch({
                 type: LOGIN_SUCCESS,
@@ -101,7 +101,8 @@ const AuthState = props => {
                 loading: state.loading,
                 user: state.user,
                 error: state.error,
-                login
+                login,
+                register
             }}
         >
             {props.children}

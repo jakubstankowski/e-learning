@@ -21,7 +21,7 @@ export default function Login({history}) {
             history.push('/');
         }
 
-        if (error === 'Invalid Credentials') {
+        if (error) {
             //TODO : implement error alert #EL-32
             console.log('error!');
         }
