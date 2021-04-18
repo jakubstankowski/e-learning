@@ -28,6 +28,7 @@ export default function Register() {
         if (!validateEmail(values.email)) {
             errors.email = 'Email not valid';
         }
+
         if (!values.password) {
             errors.password = 'Required';
         }

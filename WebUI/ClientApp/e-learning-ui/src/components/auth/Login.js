@@ -2,11 +2,11 @@ import './Auth.css';
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import {TextField} from 'mui-rff';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
+import {Link} from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {Form} from "react-final-form";
+import {validateEmail} from "../../helpers/validateEmail";
 
 
 export default function Login() {
@@ -21,9 +21,15 @@ export default function Login() {
 
     const validate = (values) => {
         const errors = {};
+
         if (!values.email) {
             errors.email = 'Required';
         }
+
+        if (!validateEmail(values.email)) {
+            errors.email = 'Email not valid';
+        }
+
         if (!values.password) {
             errors.password = 'Required';
         }
@@ -73,18 +79,11 @@ export default function Login() {
                             >
                                 Sign In
                             </Button>
-                            <Grid container>
-                                <Grid item xs>
-                                    <Link href="#" variant="body2">
-                                        Forgot password?
-                                    </Link>
-                                </Grid>
-                                <Grid item>
-                                    <Link href="#" variant="body2">
-                                        {"Don't have an account? Sign Up"}
-                                    </Link>
-                                </Grid>
-                            </Grid>
+
+                            <Link to={`/register`}>
+                                {"Don't have an account? Sign Up"}
+                            </Link>
+
                         </form>
                     )}/>
             </article>
