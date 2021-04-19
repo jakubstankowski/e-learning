@@ -15,6 +15,7 @@ import LessonsState from "./context/lessons/LessonsState";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import AuthState from "./context/auth/AuthState";
+import PrivateRoute from './components/routing/PrivateRoute';
 
 
 function App() {
@@ -40,22 +41,22 @@ function App() {
                                     path="/admin"
                                     component={Admin}
                                 />
-                                <Route
+                                <PrivateRoute
                                     exact
                                     path="/admin/course/create"
                                     component={CreateCourse}
                                 />
-                                <Route
+                                <PrivateRoute
                                     exact
                                     path="/admin/course/:courseId/edit"
                                     component={EditCourse}
                                 />
-                                <Route
+                                <PrivateRoute
                                     exact
                                     path="/admin/lesson/:lessonId/edit"
                                     component={EditLesson}
                                 />
-                                <Route
+                                <PrivateRoute
                                     exact
                                     path="/admin/lesson/create"
                                     component={CreateLesson}
