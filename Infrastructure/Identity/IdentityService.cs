@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Domain.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -17,10 +18,14 @@ namespace Infrastructure.Identity
     public class IdentityService : IIdentityService
     {
         private readonly IConfiguration _config;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public IdentityService(IConfiguration config)
+        public IdentityService(IConfiguration config, IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager)
         {
             _config = config;
+            _httpContextAccessor = httpContextAccessor;
+            _userManager = userManager;
         }
 
         public string GenerateToken(ApplicationUser user)
@@ -47,5 +52,26 @@ namespace Infrastructure.Identity
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        public string GetUserId()
+        {
+            return _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
+
+        public async Task<bool> UserExist(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
     }
 }

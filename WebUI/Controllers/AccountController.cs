@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Domain.Entities;
 using Infrastructure.Identity;
 using Infrastructure.Identity.dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +33,13 @@ namespace E_Learning.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
+
+            if (await _identityService.UserExist(registerDto.Email))
+            {
+                return BadRequest("Username already exists");
+            }
+
+
             var user = new ApplicationUser
             {
                 Email = registerDto.Email,
@@ -43,13 +53,13 @@ namespace E_Learning.Controllers
                 return BadRequest();
             }
 
-          return new UserDto
+            return new UserDto
             {
                 Token = _identityService.GenerateToken(user),
                 Email = user.Email
             };
 
-          
+
 
         }
 
@@ -78,7 +88,29 @@ namespace E_Learning.Controllers
 
         }
 
-      
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+            var userId = _identityService.GetUserId();
+
+            var user = await _userManager.FindByIdAsync(userId);
+
+
+            if (user == null)
+            {
+                throw new NotFoundException(userId);
+            }
+
+
+            return new UserDto
+            {
+                Token = _identityService.GenerateToken(user),
+                Email = user.Email
+            };
+        }
+
+
     }
 
 
