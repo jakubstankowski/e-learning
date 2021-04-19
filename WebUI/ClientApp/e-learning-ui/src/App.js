@@ -61,8 +61,14 @@ function App() {
                                     path="/admin/lesson/create"
                                     component={CreateLesson}
                                 />
-                                <Route exact path='/register' component={Register}/>
-                                <Route exact path='/login' component={Login}/>
+                                <Route
+                                    exact
+                                    path='/register'
+                                    component={Register}/>
+                                <Route
+                                    exact
+                                    path='/login'
+                                    component={Login}/>
                             </Switch>
                         </Container>
                     </Router>

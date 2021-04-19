@@ -23,23 +23,34 @@ export default function Header() {
 
     const authLinks = (
         <Fragment>
-            <li>Hello {user && user.email}</li>
-            <li>
-                <Button onClick={onLogout}>
-                    Logout
+            <Link to="/admin/course/create">
+                <Button>
+                    Create new course
                 </Button>
-            </li>
+            </Link>
+            <Link to="/admin/lesson/create">
+                <Button>
+                    Create new lesson
+                </Button>
+            </Link>
+            <Button onClick={onLogout}>
+                Logout
+            </Button>
         </Fragment>
     );
 
     const guestLinks = (
         <Fragment>
-            <li>
-                <Link to='/register'>Register</Link>
-            </li>
-            <li>
-                <Link to='/login'>Login</Link>
-            </li>
+            <Link to="/register">
+                <Button>
+                    Register
+                </Button>
+            </Link>
+            <Link to="/login">
+                <Button>
+                    Login
+                </Button>
+            </Link>
         </Fragment>
     );
 
@@ -51,17 +62,7 @@ export default function Header() {
                         E-Learning
                     </Typography>
                 </Link>
-                <Link to="/admin/course/create">
-                    <Button>
-                        Create new course
-                    </Button>
-                </Link>
-                <Link to="/admin/lesson/create">
-                    <Button>
-                        Create new lesson
-                    </Button>
-                </Link>
-                <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
+                {isAuthenticated ? authLinks : guestLinks}
             </Toolbar>
         </AppBar>
     )
