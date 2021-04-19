@@ -9,7 +9,8 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     USER_LOADED,
-    AUTH_ERROR
+    AUTH_ERROR,
+    LOGOUT
 } from '../types';
 
 const AuthState = props => {
@@ -23,7 +24,6 @@ const AuthState = props => {
 
     const [state, dispatch] = useReducer(authReducer, initialState);
 
-    // Load User
     const loadUser = async () => {
         setAuthToken(localStorage.token);
 
@@ -39,7 +39,6 @@ const AuthState = props => {
         }
     };
 
-    // Register User
     const register = async form => {
         const config = {
             headers: {
@@ -64,7 +63,6 @@ const AuthState = props => {
         }
     };
 
-    // Login User
     const login = async form => {
         const config = {
             headers: {
@@ -89,7 +87,7 @@ const AuthState = props => {
         }
     };
 
-  //  const logout = () => dispatch({type: LOGOUT});
+    const logout = () => dispatch({type: LOGOUT});
 
 
     return (
@@ -102,7 +100,8 @@ const AuthState = props => {
                 error: state.error,
                 login,
                 register,
-                loadUser
+                loadUser,
+                logout
             }}
         >
             {props.children}

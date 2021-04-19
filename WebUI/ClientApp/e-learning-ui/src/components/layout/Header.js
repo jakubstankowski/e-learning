@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {Fragment, useContext, useEffect} from 'react';
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
@@ -16,6 +16,32 @@ export default function Header() {
         loadUser();
         // eslint-disable-next-line
     }, []);
+
+    const onLogout = () => {
+        logout();
+    };
+
+    const authLinks = (
+        <Fragment>
+            <li>Hello {user && user.email}</li>
+            <li>
+                <Button onClick={onLogout}>
+                    Logout
+                </Button>
+            </li>
+        </Fragment>
+    );
+
+    const guestLinks = (
+        <Fragment>
+            <li>
+                <Link to='/register'>Register</Link>
+            </li>
+            <li>
+                <Link to='/login'>Login</Link>
+            </li>
+        </Fragment>
+    );
 
     return (
         <AppBar position="static" className='navbar'>
@@ -35,16 +61,7 @@ export default function Header() {
                         Create new lesson
                     </Button>
                 </Link>
-                <Link to="/login">
-                    <Button>
-                        Login
-                    </Button>
-                </Link>
-                <Link to="/register">
-                    <Button>
-                        Register
-                    </Button>
-                </Link>
+                <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
             </Toolbar>
         </AppBar>
     )
