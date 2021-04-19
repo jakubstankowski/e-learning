@@ -7,7 +7,9 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     REGISTER_SUCCESS,
-    REGISTER_FAIL
+    REGISTER_FAIL,
+    USER_LOADED,
+    AUTH_ERROR
 } from '../types';
 
 const AuthState = props => {
@@ -22,20 +24,20 @@ const AuthState = props => {
     const [state, dispatch] = useReducer(authReducer, initialState);
 
     // Load User
-    /* const loadUser = async () => {
-         setAuthToken(localStorage.token);
+    const loadUser = async () => {
+        setAuthToken(localStorage.token);
 
-         try {
-             const res = await axios.get('/api/auth');
+        try {
+            const res = await axios.get('/api/auth');
 
-             dispatch({
-                 type: USER_LOADED,
-                 payload: res.data
-             });
-         } catch (err) {
-             dispatch({type: AUTH_ERROR});
-         }
-     };*/
+            dispatch({
+                type: USER_LOADED,
+                payload: res.data
+            });
+        } catch (err) {
+            dispatch({type: AUTH_ERROR});
+        }
+    };
 
     // Register User
     const register = async form => {
@@ -53,7 +55,7 @@ const AuthState = props => {
                 payload: res.data
             });
 
-            // loadUser();
+            loadUser();
         } catch (err) {
             dispatch({
                 type: REGISTER_FAIL,
@@ -78,7 +80,7 @@ const AuthState = props => {
                 payload: res.data
             });
 
-            // loadUser();
+            loadUser();
         } catch (err) {
             dispatch({
                 type: LOGIN_FAIL,
@@ -87,11 +89,8 @@ const AuthState = props => {
         }
     };
 
-    /* // Logout
-     const logout = () => dispatch({type: LOGOUT});
+  //  const logout = () => dispatch({type: LOGOUT});
 
-     // Clear Errors
-     const clearErrors = () => dispatch({type: CLEAR_ERRORS});*/
 
     return (
         <AuthContext.Provider
@@ -102,7 +101,8 @@ const AuthState = props => {
                 user: state.user,
                 error: state.error,
                 login,
-                register
+                register,
+                loadUser
             }}
         >
             {props.children}

@@ -1,11 +1,22 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import {Link} from "react-router-dom";
 import {Button} from "@material-ui/core";
+import AuthContext from '../../context/auth/authContext';
+
 
 export default function Header() {
+    const authContext = useContext(AuthContext);
+
+    const {isAuthenticated, logout, user, loadUser} = authContext;
+
+    useEffect(() => {
+        loadUser();
+        // eslint-disable-next-line
+    }, []);
+
     return (
         <AppBar position="static" className='navbar'>
             <Toolbar variant="dense">
