@@ -16,6 +16,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import AuthState from "./context/auth/AuthState";
 import PrivateRoute from './components/routing/PrivateRoute';
+import Dashboard from "./components/layout/Dashboard";
 
 
 function App() {
@@ -31,6 +32,11 @@ function App() {
                                     path="/"
                                     exact
                                     component={Courses}
+                                />
+                                <Route
+                                    path="/dashboard"
+                                    exact
+                                    component={Dashboard}
                                 />
                                 <Route
                                     path="/course/:courseId"
