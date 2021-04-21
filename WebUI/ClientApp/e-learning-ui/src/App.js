@@ -26,7 +26,6 @@ function App() {
                 <LessonsState>
                     <Router>
                       {/*  <Header/>*/}
-                        <Container>
                             <Switch>
                                 <Route
                                     path="/"
@@ -76,7 +75,6 @@ function App() {
                                     path='/login'
                                     component={Login}/>
                             </Switch>
-                        </Container>
                     </Router>
                 </LessonsState>
             </CoursesState>
