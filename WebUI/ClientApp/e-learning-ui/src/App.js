@@ -25,7 +25,7 @@ function App() {
             <CoursesState>
                 <LessonsState>
                     <Router>
-                        <Header/>
+                      {/*  <Header/>*/}
                         <Container>
                             <Switch>
                                 <Route
