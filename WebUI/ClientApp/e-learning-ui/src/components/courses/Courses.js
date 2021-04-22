@@ -29,6 +29,7 @@ export default function Courses() {
 
                 {
                     courses.map((course, i) =>
+                        //TODO use unique id for key
                         <article key={i}>
                             <Link to={`/course/${course.id}`}
                                   style={{textDecoration: 'none'}}
