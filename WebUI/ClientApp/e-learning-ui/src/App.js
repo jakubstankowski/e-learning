@@ -1,9 +1,9 @@
 import './App.css';
 import Header from "./components/layout/Header";
 import React from "react";
+import { Router } from "@reach/router";
 import Container from "@material-ui/core/Container";
 import Courses from "./components/courses/Courses";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Course from "./components/courses/Course";
 import Admin from "./components/admin/Admin";
 import CreateCourse from "./components/courses/CreateCourse";
@@ -17,21 +17,29 @@ import Register from "./components/auth/Register";
 import AuthState from "./context/auth/AuthState";
 import PrivateRoute from './components/routing/PrivateRoute';
 import Dashboard from "./components/layout/Dashboard";
-
+import MainLayout from "./components/layout/MainLayout";
 
 function App() {
+
     return (
         <AuthState>
             <CoursesState>
                 <LessonsState>
                     <Router>
-                      {/*  <Header/>*/}
+                        test
+
+                    </Router>
+                    {/* <Router>
+                        <Header/>
                             <Switch>
                                 <Route
-                                    path="/"
+                                    path="/register"
                                     exact
-                                    component={Courses}
+                                    component={MainLayout}
                                 />
+                                <Route
+                                    path='/register/dupa'
+                                    component={Register}/>
                                 <Route
                                     path="/dashboard"
                                     exact
@@ -75,7 +83,7 @@ function App() {
                                     path='/login'
                                     component={Login}/>
                             </Switch>
-                    </Router>
+                    </Router>*/}
                 </LessonsState>
             </CoursesState>
         </AuthState>
