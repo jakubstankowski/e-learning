@@ -2,9 +2,7 @@ import './Auth.css';
 import React, {useContext, useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import {TextField} from 'mui-rff';
-/*
-import {Link} from "react-router-dom";
-*/
+import {Link, navigate} from "@reach/router";
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {Form} from "react-final-form";
@@ -20,7 +18,7 @@ export default function Register({history}) {
 
     useEffect(() => {
         if (isAuthenticated) {
-            history.push('/');
+            navigate('/dashboard')
         }
 
         if (error) {

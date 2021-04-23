@@ -16,6 +16,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import {mainListItems, secondaryListItems} from './listItems';
+import {protectedComponent} from "../routing/PrivateRoute";
 
 
 const drawerWidth = 240;
@@ -99,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Dashboard({children}) {
+const Dashboard = protectedComponent(({children}) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -159,4 +160,6 @@ export default function Dashboard({children}) {
             </main>
         </div>
     );
-}
+});
+
+export default Dashboard;

@@ -1,6 +1,6 @@
 import './App.css';
 import Header from "./components/layout/Header";
-import React from "react";
+import React, {useContext} from "react";
 import {Router} from "@reach/router";
 import Container from "@material-ui/core/Container";
 import Courses from "./components/courses/Courses";
@@ -19,15 +19,15 @@ import PrivateRoute from './components/routing/PrivateRoute';
 import Dashboard from "./components/layout/Dashboard";
 import MainLayout from "./components/layout/MainLayout";
 import Lessons from "./components/lessons/Lessons";
+import AuthContext from "./context/auth/authContext";
 
 function App() {
-
     return (
         <AuthState>
             <CoursesState>
                 <LessonsState>
                     <Router>
-                        <MainLayout path="/">
+                        <MainLayout  path="/">
                             <Courses path="/"/>
                             <Course path="/course/:courseId"/>
                             <Login path="/login"/>

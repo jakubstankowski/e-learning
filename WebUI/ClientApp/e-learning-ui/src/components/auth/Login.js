@@ -2,15 +2,13 @@ import './Auth.css';
 import React, {useContext, useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import {TextField} from 'mui-rff';
-/*
-import {Link} from "react-router-dom";
-*/
+import {Link} from "@reach/router";
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {Form} from "react-final-form";
 import {validateEmail} from "../../helpers/validateEmail";
 import AuthContext from "../../context/auth/authContext";
-
+import { navigate } from "@reach/router"
 
 export default function Login({history}) {
     const authContext = useContext(AuthContext);
@@ -20,7 +18,7 @@ export default function Login({history}) {
 
     useEffect(() => {
         if (isAuthenticated) {
-            history.push('/');
+           navigate('/dashboard')
         }
 
         if (error) {
@@ -96,9 +94,9 @@ export default function Login({history}) {
                                 Sign In
                             </Button>
 
-                         {/*   <Link to={`/register`}>
+                            <Link to={`/register`}>
                                 {"Don't have an account? Sign Up"}
-                            </Link>*/}
+                            </Link>
 
                         </form>
                     )}/>
