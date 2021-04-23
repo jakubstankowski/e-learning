@@ -1,9 +1,7 @@
 import React, {useContext, useEffect} from "react";
 import Typography from "@material-ui/core/Typography";
 import Lessons from "../lessons/Lessons";
-/*
-import {Link, Route, Switch} from "react-router-dom";
-*/
+import {Link, useParams, Router} from "@reach/router";
 import Lesson from "../lessons/Lesson";
 import Button from "@material-ui/core/Button";
 import CoursesContext from "../../context/courses/coursesContext";
@@ -14,11 +12,11 @@ export default function Course({match}) {
 
     const {getCourse, course, loading} = coursesContext;
 
+    const {courseId} = useParams();
+
     useEffect(() => {
-        getCourse(match.params.courseId);
+        getCourse(courseId);
     }, []);
-
-
 
 
     if (loading) return <Spinner/>
@@ -28,7 +26,7 @@ export default function Course({match}) {
             <Typography variant="h5" component="h2">
                 Course <strong>{course.title}</strong> ID: <strong>{course.id}</strong>
             </Typography>
-         {/*   <Link to={`/admin/course/${course.id}/edit`}
+            <Link to={`/admin/course/${course.id}/edit`}
                   style={{textDecoration: 'none'}}
             >
                 <Button variant="contained"
@@ -37,17 +35,11 @@ export default function Course({match}) {
                 >
                     Edit Course
                 </Button>
-            </Link>*/}
-          {/*  <Switch>
-                <Route
-                    exact
-                    path="/course/:courseId"
-                    component={Lessons}/>
-                <Route
-                    path="/course/:courseId/lesson/:lessonId"
-                    component={Lesson}
-                />
-            </Switch>*/}
+            </Link>
+            <Router>
+                <Lessons path="/course/:courseId"/>
+                <Lesson path="/course/:courseId/lesson/:lessonId"/>
+            </Router>
         </section>
     )
 

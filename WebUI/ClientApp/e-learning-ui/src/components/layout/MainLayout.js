@@ -1,10 +1,14 @@
 import React from "react";
+import Header from "./Header";
+import {Container} from "@material-ui/core";
 
 export default function MainLayout({children}) {
     return (
-        <div>
-            <h1>main layout!</h1>
-            {children}
-        </div>
+        <section>
+            <Header/>
+            <Container>
+                {children}
+            </Container>
+        </section>
     )
 }

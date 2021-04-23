@@ -28,6 +28,7 @@ function App() {
                     <Router>
                         <MainLayout path="/">
                             <Courses path="/"/>
+                            <Course path="/course/:courseId"/>
                         </MainLayout>
                         <Dashboard path="/dashboard">
                             <CreateCourse path="/"/>

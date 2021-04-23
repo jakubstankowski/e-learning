@@ -1,20 +1,19 @@
 import Typography from "@material-ui/core/Typography";
 import React, {useContext, useEffect} from "react";
 import LessonItem from "./LessonItem";
-/*
-import {Link} from "react-router-dom";
-*/
+import {Link, useParams} from "@reach/router";
 import {Button} from "@material-ui/core";
 import LessonsContext from "../../context/lessons/lessonsContext";
-import CoursesContext from "../../context/courses/coursesContext";
 import Spinner from "../layout/Spinner";
 
-export default function Lessons({match}) {
+export default function Lessons() {
     const lessonsContext = useContext(LessonsContext);
     const {getCourseLessons, deleteLesson, lessons, loading} = lessonsContext;
 
+    const {courseId} = useParams();
+
     useEffect(() => {
-       getCourseLessons(match.params.courseId);
+        getCourseLessons(courseId);
         // eslint-disable-next-line
     }, []);
 
@@ -28,10 +27,10 @@ export default function Lessons({match}) {
             </Typography>
             <ul>
                 {
-                    lessons.map((lesson, i) =>
-                        <article key={i}>
-                           {/* <Link to={`/course/${match.params.courseId}/lesson/${lesson.id}`}>
-                                <LessonItem key={i}
+                    lessons.map((lesson) =>
+                        <article key={lesson.id}>
+                            <Link to={`/course/${courseId}/lesson/${lesson.id}`}>
+                                <LessonItem key={lesson.id}
                                             lesson={lesson}/>
                             </Link>
                             <Button
@@ -46,7 +45,7 @@ export default function Lessons({match}) {
                                     color="primary">
                                     Edit
                                 </Button>
-                            </Link>*/}
+                            </Link>
                         </article>
                     )
                 }
