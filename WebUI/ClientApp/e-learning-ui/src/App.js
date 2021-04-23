@@ -18,6 +18,7 @@ import AuthState from "./context/auth/AuthState";
 import PrivateRoute from './components/routing/PrivateRoute';
 import Dashboard from "./components/layout/Dashboard";
 import MainLayout from "./components/layout/MainLayout";
+import Lessons from "./components/lessons/Lessons";
 
 function App() {
 
@@ -29,6 +30,8 @@ function App() {
                         <MainLayout path="/">
                             <Courses path="/"/>
                             <Course path="/course/:courseId"/>
+                            <Login path="/login"/>
+                            <Register path="/register"/>
                         </MainLayout>
                         <Dashboard path="/dashboard">
                             <CreateCourse path="/"/>

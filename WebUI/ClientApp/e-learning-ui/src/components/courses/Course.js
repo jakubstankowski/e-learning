@@ -36,6 +36,7 @@ export default function Course({match}) {
                     Edit Course
                 </Button>
             </Link>
+            <Lessons/>
             <Router>
                 <Lessons path="/course/:courseId"/>
                 <Lesson path="/course/:courseId/lesson/:lessonId"/>
