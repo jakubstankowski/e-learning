@@ -1,7 +1,7 @@
 import './App.css';
 import Header from "./components/layout/Header";
 import React from "react";
-import { Router } from "@reach/router";
+import {Router} from "@reach/router";
 import Container from "@material-ui/core/Container";
 import Courses from "./components/courses/Courses";
 import Course from "./components/courses/Course";
@@ -26,12 +26,12 @@ function App() {
             <CoursesState>
                 <LessonsState>
                     <Router>
-                       <MainLayout path="/">
-                           <Courses path="/"/>
-                       </MainLayout>
-                        <Dashboard path="/dashboard"/>
-                          {/*  <CreateCourse path="course/create"/>
-                        </Dashboard>*/}
+                        <MainLayout path="/">
+                            <Courses path="/"/>
+                        </MainLayout>
+                        <Dashboard path="/dashboard">
+                            <CreateCourse path="/"/>
+                        </Dashboard>
                     </Router>
                     {/* <Router>
                         <Header/>
