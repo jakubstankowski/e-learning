@@ -1,7 +1,9 @@
 import * as React from "react";
 import Grid from "@material-ui/core/Grid";
 import CourseItem from "./CourseItem";
+/*
 import {Link} from "react-router-dom";
+*/
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import {useContext, useEffect} from "react";
@@ -31,7 +33,7 @@ export default function Courses() {
                     courses.map((course, i) =>
                         //TODO use unique id for key
                         <article key={i}>
-                            <Link to={`/course/${course.id}`}
+                           {/* <Link to={`/course/${course.id}`}
                                   style={{textDecoration: 'none'}}
                             >
                                 <CourseItem key={i}
@@ -53,7 +55,7 @@ export default function Courses() {
                                 >
                                     Edit
                                 </Button>
-                            </Link>
+                            </Link>*/}
                         </article>
                     )
                 }

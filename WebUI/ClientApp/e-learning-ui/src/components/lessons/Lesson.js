@@ -1,6 +1,8 @@
 import React, {useContext, useEffect} from "react";
 import Typography from "@material-ui/core/Typography";
+/*
 import {Link} from "react-router-dom";
+*/
 import {Button} from "@material-ui/core";
 import LessonsContext from "../../context/lessons/lessonsContext";
 import Spinner from "../layout/Spinner";
@@ -32,13 +34,13 @@ export default function Lesson({match}) {
                 Description: <strong>{lesson.description}</strong>,
                 videoUrl: <strong>{lesson.videoUrl}</strong>
             </Typography>
-            <Link to={`/admin/lesson/${lesson.id}/edit`}>
+          {/*  <Link to={`/admin/lesson/${lesson.id}/edit`}>
                 <Button
                     variant="contained"
                     color="primary">
                     Edit Lesson
                 </Button>
-            </Link>
+            </Link>*/}
         </section>
     )
 }

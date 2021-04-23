@@ -1,7 +1,6 @@
 import * as React from "react";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import {Link} from "react-router-dom";
 
 
 class Admin extends React.Component {
@@ -12,7 +11,7 @@ class Admin extends React.Component {
                 <Typography variant="h5" component="h2">
                     Admin mode
                 </Typography>
-                <Link to="/admin/course/create" style={{textDecoration: 'none'}}>
+               {/* <Link to="/admin/course/create" style={{textDecoration: 'none'}}>
                     <Button variant="contained" color="primary">
                         Create new course
                     </Button>
@@ -21,7 +20,7 @@ class Admin extends React.Component {
                     <Button variant="contained" color="primary">
                         Create new lesson
                     </Button>
-                </Link>
+                </Link>*/}
             </article>
         )
     }

@@ -4,7 +4,9 @@ import Lessons from "../lessons/Lessons";
 import {Field, Form} from "react-final-form";
 import {Button, Grid, Paper} from "@material-ui/core";
 import {TextField} from "final-form-material-ui";
+/*
 import {Route} from "react-router-dom";
+*/
 import CoursesContext from "../../context/courses/coursesContext";
 import Spinner from "../layout/Spinner";
 
@@ -104,7 +106,7 @@ export default function EditCourse({match, history}) {
                     </form>
                 )}
             />
-            <Route component={Lessons}/>
+           {/* <Route component={Lessons}/>*/}
         </section>
     )
 

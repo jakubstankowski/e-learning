@@ -1,7 +1,9 @@
 import Typography from "@material-ui/core/Typography";
 import React, {useContext, useEffect} from "react";
 import LessonItem from "./LessonItem";
+/*
 import {Link} from "react-router-dom";
+*/
 import {Button} from "@material-ui/core";
 import LessonsContext from "../../context/lessons/lessonsContext";
 import CoursesContext from "../../context/courses/coursesContext";
@@ -28,7 +30,7 @@ export default function Lessons({match}) {
                 {
                     lessons.map((lesson, i) =>
                         <article key={i}>
-                            <Link to={`/course/${match.params.courseId}/lesson/${lesson.id}`}>
+                           {/* <Link to={`/course/${match.params.courseId}/lesson/${lesson.id}`}>
                                 <LessonItem key={i}
                                             lesson={lesson}/>
                             </Link>
@@ -44,7 +46,7 @@ export default function Lessons({match}) {
                                     color="primary">
                                     Edit
                                 </Button>
-                            </Link>
+                            </Link>*/}
                         </article>
                     )
                 }

@@ -26,20 +26,17 @@ function App() {
             <CoursesState>
                 <LessonsState>
                     <Router>
-                        test
-
+                       <MainLayout path="/">
+                           <Courses path="/"/>
+                       </MainLayout>
+                        <Dashboard path="/dashboard"/>
+                          {/*  <CreateCourse path="course/create"/>
+                        </Dashboard>*/}
                     </Router>
                     {/* <Router>
                         <Header/>
                             <Switch>
-                                <Route
-                                    path="/register"
-                                    exact
-                                    component={MainLayout}
-                                />
-                                <Route
-                                    path='/register/dupa'
-                                    component={Register}/>
+
                                 <Route
                                     path="/dashboard"
                                     exact
