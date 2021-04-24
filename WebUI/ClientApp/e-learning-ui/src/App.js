@@ -23,10 +23,10 @@ function App() {
                 <LessonsState>
                     <Router>
                         <MainLayout  path="/">
-                            <Courses path="/"/>
+                           {/* <Courses path="/"/>
                             <Course path="/course/:courseId"/>
                             <Login path="/login"/>
-                            <Register path="/register"/>
+                            <Register path="/register"/>*/}
                         </MainLayout>
                         <Dashboard path="/dashboard">
                             <CreateCourse path="/"/>
