@@ -1,6 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
+import {Link} from '@reach/router';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
@@ -136,7 +137,9 @@ const Dashboard = protectedComponent(({children}) => {
                         <MenuIcon/>
                     </IconButton>
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                        Dashboard
+                       <Link to="/">
+                           E Learning
+                       </Link>
                     </Typography>
                     <IconButton color="inherit">
                         <Badge badgeContent={4} color="secondary">

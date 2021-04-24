@@ -2,7 +2,7 @@ import React, {Fragment, useContext, useEffect} from 'react';
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
-import {Link} from "@reach/router";
+import {Link, Redirect} from "@reach/router";
 
 import {Button} from "@material-ui/core";
 import AuthContext from '../../context/auth/authContext';
@@ -15,8 +15,11 @@ export default function Header() {
 
     useEffect(() => {
         loadUser();
+
+
+
         // eslint-disable-next-line
-    }, []);
+    }, [isAuthenticated]);
 
     const onLogout = () => {
         logout();
@@ -29,9 +32,14 @@ export default function Header() {
                     Create new course
                 </Button>
             </Link>
-            <Link to="/admin/lesson/create">
+            <Link to="/dashboard/lesson/create">
                 <Button>
                     Create new lesson
+                </Button>
+            </Link>
+            <Link to="/dashboard">
+                <Button>
+                   Dashboard
                 </Button>
             </Link>
             <Button onClick={onLogout}>
