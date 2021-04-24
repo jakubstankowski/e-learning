@@ -24,7 +24,7 @@ export default function Header() {
 
     const authLinks = (
         <Fragment>
-            <Link to="/admin/course/create">
+            <Link to="/dashboard/course/create">
                 <Button>
                     Create new course
                 </Button>

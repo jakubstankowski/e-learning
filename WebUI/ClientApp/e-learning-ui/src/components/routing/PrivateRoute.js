@@ -4,7 +4,7 @@ import AuthContext from '../../context/auth/authContext';
 
 export const protectedComponent = Component => props => {
     const authContext = useContext(AuthContext);
-    const {isAuthenticated} = authContext;
+    const {isAuthenticated, loading} = authContext;
 
     if (!isAuthenticated) return <Redirect noThrow to='/login'/>;
     return <Component {...props} />

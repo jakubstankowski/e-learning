@@ -1,11 +1,8 @@
 import './App.css';
-import Header from "./components/layout/Header";
 import React, {useContext} from "react";
 import {Router} from "@reach/router";
-import Container from "@material-ui/core/Container";
 import Courses from "./components/courses/Courses";
 import Course from "./components/courses/Course";
-import Admin from "./components/admin/Admin";
 import CreateCourse from "./components/courses/CreateCourse";
 import CreateLesson from "./components/lessons/CreateLesson";
 import EditCourse from "./components/courses/EditCourse";
@@ -15,11 +12,9 @@ import LessonsState from "./context/lessons/LessonsState";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import AuthState from "./context/auth/AuthState";
-import PrivateRoute from './components/routing/PrivateRoute';
 import Dashboard from "./components/layout/Dashboard";
 import MainLayout from "./components/layout/MainLayout";
 import Lessons from "./components/lessons/Lessons";
-import AuthContext from "./context/auth/authContext";
 
 function App() {
     return (

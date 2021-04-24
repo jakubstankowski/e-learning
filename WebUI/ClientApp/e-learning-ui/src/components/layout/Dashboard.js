@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,6 +17,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import {mainListItems, secondaryListItems} from './listItems';
 import {protectedComponent} from "../routing/PrivateRoute";
+import AuthContext from "../../context/auth/authContext";
 
 
 const drawerWidth = 240;
@@ -102,6 +103,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = protectedComponent(({children}) => {
     const classes = useStyles();
+    const authContext = useContext(AuthContext);
+
+    const {loadUser} = authContext;
+
+    useEffect(() => {
+        loadUser();
+        // eslint-disable-next-line
+    }, []);
+
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
         setOpen(true);
