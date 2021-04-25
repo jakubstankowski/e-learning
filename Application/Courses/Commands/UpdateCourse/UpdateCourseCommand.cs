@@ -23,6 +23,8 @@ namespace E_Learning.Application.Courses.Commands.UpdateCourse
         public string Description { get; set; }
 
         public decimal Price { get; set; }
+
+        public string ImageUrl { get; set; }
     }
 
     public class UpdateCourseCommandHandler : IRequestHandler<UpdateCourseCommand, IEnumerable<CourseDto>>
@@ -49,6 +51,7 @@ namespace E_Learning.Application.Courses.Commands.UpdateCourse
             course.Title = request.Title;
             course.Description = request.Description;
             course.Price = request.Price;
+            course.ImageUrl = request.ImageUrl;
 
             await _context.SaveChangesAsync();
 

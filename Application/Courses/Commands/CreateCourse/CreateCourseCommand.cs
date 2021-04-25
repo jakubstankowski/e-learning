@@ -42,7 +42,8 @@ namespace E_Learning.Application.Courses.Commands
             {
                 Title = request.Title,
                 Description = request.Description,
-                Price = request.Price
+                Price = request.Price,
+                ImageUrl = request.ImageUrl
             };
 
 
