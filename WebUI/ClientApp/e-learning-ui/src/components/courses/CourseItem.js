@@ -7,6 +7,8 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Hidden from "@material-ui/core/Hidden";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -17,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
         flex: 1,
     },
     cardMedia: {
-        width: 160,
+        height: 160,
+        padding: theme.spacing(3),
     },
     courseItem: {
         padding: theme.spacing(3),
@@ -26,31 +29,27 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CourseItem(props) {
     const classes = useStyles();
-    const {id, title, description, price} = props.course;
+    const {id, title, price, imageUrl} = props.course;
 
     return (
-        <Grid item xs={12} md={4} className={classes.courseItem}>
+        <Grid item xs={12} md={3} className={classes.courseItem}>
             <CardActionArea component="a" href="#">
+                <CardMedia
+                    className={classes.cardMedia}
+                    image={imageUrl}
+                    title="net core"
+                />
                 <Card className={classes.card}>
                     <article className={classes.cardDetails}>
                         <CardContent>
                             <Typography component="h2" variant="h5">
-                                {title} id: {id}
-                            </Typography>
-                            <Typography variant="subtitle1" paragraph>
-                                {description}
+                                {title}
                             </Typography>
                             <Typography variant="subtitle1" paragraph>
                                 {price} $
                             </Typography>
-                            <Typography variant="subtitle1" color="primary">
-                                Continue reading...
-                            </Typography>
                         </CardContent>
                     </article>
-                    <Hidden xsDown>
-                        <CardMedia className={classes.cardMedia} image='https://jakzostacprogramista.net/wp-content/uploads/2019/12/netcorelogo-1360x765.png' title="net core" />
-                    </Hidden>
                 </Card>
             </CardActionArea>
         </Grid>
