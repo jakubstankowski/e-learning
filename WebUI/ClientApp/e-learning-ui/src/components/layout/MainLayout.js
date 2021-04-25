@@ -22,7 +22,7 @@ export default function MainLayout({children}) {
     return (
         <>
             <Header title="Blog" sections={sections}/>
-            <Container maxWidth="lg">
+            <Container>
                 {children}
             </Container>
             <Footer title="Footer" description="Something here to give the footer a purpose!"/>

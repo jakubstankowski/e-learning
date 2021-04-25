@@ -5,7 +5,6 @@ import MainFeaturedPost from "../layout/MainFeaturedPost";
 import Grid from "@material-ui/core/Grid";
 import Main from "../layout/Main";
 import Sidebar from "../layout/Sidebar";
-import FeaturedPost from "../layout/FeaturedPost";
 import Courses from "../courses/Courses";
 
 const useStyles = makeStyles((theme) => ({
@@ -19,29 +18,10 @@ const mainFeaturedPost = {
     title: 'Title of a longer featured blog post',
     description:
         "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-    image: 'https://source.unsplash.com/random',
+    image: 'https://cdn.pixabay.com/photo/2018/05/19/00/53/online-3412473_1280.jpg',
     imgText: 'main image description',
     linkText: 'Continue reading…',
 };
-
-const featuredPosts = [
-    {
-        title: 'Featured post',
-        date: 'Nov 12',
-        description:
-            'This is a wider card with supporting text below as a natural lead-in to additional content.',
-        image: 'https://source.unsplash.com/random',
-        imageText: 'Image Text',
-    },
-    {
-        title: 'Post title',
-        date: 'Nov 11',
-        description:
-            'This is a wider card with supporting text below as a natural lead-in to additional content.',
-        image: 'https://source.unsplash.com/random',
-        imageText: 'Image Text',
-    },
-];
 
 const posts = ['post1, post2, post3'];
 
@@ -77,9 +57,6 @@ export default function Home({children}) {
             <main>
                 <MainFeaturedPost post={mainFeaturedPost}/>
                 <Grid container spacing={4}>
-                    {/*{featuredPosts.map((post) => (
-                        <FeaturedPost key={post.title} post={post}/>
-                    ))}*/}
                     <Courses/>
                 </Grid>
                 <Grid container spacing={5} className={classes.mainGrid}>

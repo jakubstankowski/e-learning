@@ -8,9 +8,10 @@ import Hidden from "@material-ui/core/Hidden";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardActionArea from "@material-ui/core/CardActionArea";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     card: {
         display: 'flex',
+        overflow: 'auto',
     },
     cardDetails: {
         flex: 1,
@@ -18,27 +19,17 @@ const useStyles = makeStyles({
     cardMedia: {
         width: 160,
     },
-});
+    courseItem: {
+        padding: theme.spacing(3),
+    }
+}));
 
 export default function CourseItem(props) {
     const classes = useStyles();
     const {id, title, description, price} = props.course;
 
     return (
-        <Grid item xs={12} md={4}>
-            {/* <Card className={classes.root}>
-                    <CardContent>
-                        <Typography variant="h5" component="h2">
-                            title: {title} ID: {id}
-                        </Typography>
-                        <Typography className={classes.pos} color="textSecondary">
-                            {price} $
-                        </Typography>
-                        <Typography variant="body2" component="p">
-                            {description}
-                        </Typography>
-                    </CardContent>
-                </Card>*/}
+        <Grid item xs={12} md={4} className={classes.courseItem}>
             <CardActionArea component="a" href="#">
                 <Card className={classes.card}>
                     <article className={classes.cardDetails}>

@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.grey[800],
         color: theme.palette.common.white,
         marginBottom: theme.spacing(4),
-        backgroundImage: 'url(https://source.unsplash.com/random)',
+        backgroundImage: 'url(https://cdn.pixabay.com/photo/2018/05/19/00/53/online-3412473_1280.jpg)',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
