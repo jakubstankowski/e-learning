@@ -15,6 +15,7 @@ import AuthState from "./context/auth/AuthState";
 import Dashboard from "./components/layout/Dashboard";
 import MainLayout from "./components/layout/MainLayout";
 import Lessons from "./components/lessons/Lessons";
+import Home from "./components/pages/Home";
 
 function App() {
     return (
@@ -22,11 +23,11 @@ function App() {
             <CoursesState>
                 <LessonsState>
                     <Router>
-                        <MainLayout  path="/">
-                           {/* <Courses path="/"/>
+                        <MainLayout path="/">
+                            <Home path="/"/>
                             <Course path="/course/:courseId"/>
                             <Login path="/login"/>
-                            <Register path="/register"/>*/}
+                            <Register path="/register"/>
                         </MainLayout>
                         <Dashboard path="/dashboard">
                             <CreateCourse path="/"/>
