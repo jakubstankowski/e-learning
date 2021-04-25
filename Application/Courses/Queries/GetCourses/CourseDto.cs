@@ -14,5 +14,7 @@ namespace E_Learning.Application.Common.Dto
 
         public string Description { get; set; }
 
+        public string ImageUrl { get; set; }
+
     }
 }

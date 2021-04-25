@@ -12,6 +12,8 @@ namespace E_Learning.Domain.Entities
 
         public decimal Price { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public ICollection<Lesson> Lessons { get; set; }
 
         public ICollection<ApplicationUser> ApplicationUser { get; set; }

@@ -58,6 +58,10 @@ export default function Login({history}) {
                     Sign in
                 </Typography>
                 <Form
+                    initialValues={{
+                        email: 'kuba34@hotmail.com',
+                        password: 'Breakingbad_2014'
+                    }}
                     onSubmit={onSubmit}
                     validate={validate}
                     render={({handleSubmit, submitting}) => (

@@ -19,6 +19,8 @@ namespace E_Learning.Application.Courses.Commands
 
         public decimal Price { get; set; }
 
+        public string ImageUrl { get; set; }
+
     }
 
 
