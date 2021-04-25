@@ -1,9 +1,6 @@
 import * as React from "react";
 import Grid from "@material-ui/core/Grid";
 import CourseItem from "./CourseItem";
-import {Link} from "@reach/router";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import {useContext, useEffect} from "react";
 import CoursesContext from '../../context/courses/coursesContext';
 import Spinner from "../layout/Spinner";

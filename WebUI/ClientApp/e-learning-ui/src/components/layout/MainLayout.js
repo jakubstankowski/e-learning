@@ -21,7 +21,7 @@ const sections = [
 export default function MainLayout({children}) {
     return (
         <>
-            <Header title="Blog" sections={sections}/>
+            <Header title="stanlearn" sections={sections}/>
             <Container>
                 {children}
             </Container>

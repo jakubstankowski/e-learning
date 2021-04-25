@@ -48,9 +48,9 @@ export default function CourseItem(props) {
                             </Typography>
                         </CardContent>
                     </article>
-                    {/* <Hidden xsDown>
-                        <CardMedia className={classes.cardMedia} image={post.image} title={post.imageTitle} />
-                    </Hidden>*/}
+                    <Hidden xsDown>
+                        <CardMedia className={classes.cardMedia} image='https://jakzostacprogramista.net/wp-content/uploads/2019/12/netcorelogo-1360x765.png' title="net core" />
+                    </Hidden>
                 </Card>
             </CardActionArea>
         </Grid>
