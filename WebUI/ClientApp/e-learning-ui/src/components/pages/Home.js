@@ -1,13 +1,12 @@
 import React from "react";
-import Header from "../layout/Header";
-import {Container} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import MainFeaturedPost from "../layout/MainFeaturedPost";
 import Grid from "@material-ui/core/Grid";
 import Main from "../layout/Main";
 import Sidebar from "../layout/Sidebar";
-import Footer from "../layout/Footer";
+import FeaturedPost from "../layout/FeaturedPost";
+import Courses from "../courses/Courses";
 
 const useStyles = makeStyles((theme) => ({
     mainGrid: {
@@ -77,11 +76,12 @@ export default function Home({children}) {
             <CssBaseline/>
             <main>
                 <MainFeaturedPost post={mainFeaturedPost}/>
-                {/* <Grid container spacing={4}>
-                        {featuredPosts.map((post) => (
-                            <FeaturedPost key={post.title} post={post} />
-                        ))}
-                    </Grid>*/}
+                <Grid container spacing={4}>
+                    {/*{featuredPosts.map((post) => (
+                        <FeaturedPost key={post.title} post={post}/>
+                    ))}*/}
+                    <Courses/>
+                </Grid>
                 <Grid container spacing={5} className={classes.mainGrid}>
                     <Main title="From the firehose" posts={posts}/>
                     <Sidebar

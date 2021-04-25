@@ -21,43 +21,38 @@ export default function Courses() {
     if (loading) return <Spinner/>
 
     return (
-        <section>
-            <Typography variant="h5" component="h2">
-                Courses:
-            </Typography>
-            <Grid container spacing={2}>
-
-                {
-                    courses.map((course, i) =>
-                        <article key={course.id}>
-                            <Link to={`/course/${course.id}`}
-                                  style={{textDecoration: 'none'}}
-                            >
-                                <CourseItem key={i}
-                                            course={course}/>
-                            </Link>
+        <Grid container spacing={4}>
+            {
+                courses.map((course) =>
+                        <CourseItem course={course} key={course.id}/>
+                    /*<article key={course.id}>
+                        <Link to={`/course/${course.id}`}
+                              style={{textDecoration: 'none'}}
+                        >
+                            <CourseItem key={i}
+                                        course={course}/>
+                        </Link>
+                        <Button variant="contained"
+                                style={{marginTop: '1rem', width: '100%'}}
+                                color="primary"
+                                onClick={() => deleteCourse(course.id)}
+                        >
+                            Delete
+                        </Button>
+                        <Link to={`/admin/course/${course.id}/edit`}
+                              style={{textDecoration: 'none'}}
+                        >
                             <Button variant="contained"
                                     style={{marginTop: '1rem', width: '100%'}}
                                     color="primary"
-                                    onClick={() => deleteCourse(course.id)}
                             >
-                                Delete
+                                Edit
                             </Button>
-                            <Link to={`/admin/course/${course.id}/edit`}
-                                  style={{textDecoration: 'none'}}
-                            >
-                                <Button variant="contained"
-                                        style={{marginTop: '1rem', width: '100%'}}
-                                        color="primary"
-                                >
-                                    Edit
-                                </Button>
-                            </Link>
-                        </article>
-                    )
-                }
-            </Grid>
-        </section>
+                        </Link>
+                    </article>*/
+                )
+            }
+        </Grid>
     )
 }
 
