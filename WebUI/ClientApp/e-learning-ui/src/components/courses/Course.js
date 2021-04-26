@@ -9,7 +9,8 @@ import Spinner from "../layout/Spinner";
 import {Container} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
+import CourseVideo from "./CourseVideo";
 
 export default function Course({match}) {
     const coursesContext = useContext(CoursesContext);
@@ -28,7 +29,7 @@ export default function Course({match}) {
             textAlign: 'center',
             color: theme.palette.text.secondary,
         },
-        course:{
+        course: {
             marginTop: '1rem'
         }
     }));
@@ -41,7 +42,9 @@ export default function Course({match}) {
         <Container className={classes.course}>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={8}>
-                    <Paper className={classes.paper}>xs=12</Paper>
+                    <Paper className={classes.paper}>
+                        <CourseVideo/>
+                    </Paper>
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Paper className={classes.paper}>

@@ -21,35 +21,30 @@ export default function Lessons() {
     if (loading) return <Spinner/>
 
     return (
-        <section>
-            <Typography variant="h5" component="h2">
-                Lessons:
-            </Typography>
-            <ul>
-                {
-                    lessons.map((lesson) =>
-                        <article key={lesson.id}>
-                            <Link to={`/course/${courseId}/lesson/${lesson.id}`}>
-                                <LessonItem key={lesson.id}
-                                            lesson={lesson}/>
-                            </Link>
+        <ul>
+            {
+                lessons.map((lesson) =>
+                    <article key={lesson.id}>
+                        <Link to={`/course/${courseId}/lesson/${lesson.id}`}>
+                            <LessonItem key={lesson.id}
+                                        lesson={lesson}/>
+                        </Link>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => deleteLesson(lesson.id)}>
+                            Delete
+                        </Button>
+                        <Link to={`/admin/lesson/${lesson.id}/edit`}>
                             <Button
                                 variant="contained"
-                                color="primary"
-                                onClick={() => deleteLesson(lesson.id)}>
-                                Delete
+                                color="primary">
+                                Edit
                             </Button>
-                            <Link to={`/admin/lesson/${lesson.id}/edit`}>
-                                <Button
-                                    variant="contained"
-                                    color="primary">
-                                    Edit
-                                </Button>
-                            </Link>
-                        </article>
-                    )
-                }
-            </ul>
-        </section>
+                        </Link>
+                    </article>
+                )
+            }
+        </ul>
     )
 }
