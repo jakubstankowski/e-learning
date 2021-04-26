@@ -18,7 +18,7 @@ const mainFeaturedPost = {
     title: 'Title of a longer featured blog post',
     description:
         "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-    image: 'https://cdn.pixabay.com/photo/2018/05/19/00/53/online-3412473_1280.jpg',
+    image: 'https://i.imgur.com/0NPaOc6.png',
     imgText: 'main image description',
     linkText: 'Continue reading…',
 };

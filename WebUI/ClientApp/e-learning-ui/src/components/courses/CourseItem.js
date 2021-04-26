@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
         flex: 1,
     },
     cardMedia: {
-        height: 160,
+        height: 260,
         padding: theme.spacing(3),
     },
     courseItem: {
@@ -32,7 +32,7 @@ export default function CourseItem(props) {
     const {id, title, price, imageUrl} = props.course;
 
     return (
-        <Grid item xs={12} md={3} className={classes.courseItem}>
+        <Grid item xs={12} md={4} className={classes.courseItem}>
             <CardActionArea component="a" href="#">
                 <CardMedia
                     className={classes.cardMedia}
