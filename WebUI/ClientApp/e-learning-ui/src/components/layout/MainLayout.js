@@ -20,12 +20,12 @@ const sections = [
 
 export default function MainLayout({children}) {
     return (
-        <>
+        <main>
             <Header title="stanlearn" sections={sections}/>
             <Container>
                 {children}
             </Container>
             <Footer title="Footer" description="Something here to give the footer a purpose!"/>
-        </>
+        </main>
     )
 }

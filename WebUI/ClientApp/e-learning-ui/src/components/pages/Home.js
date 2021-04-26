@@ -42,33 +42,25 @@ const sidebar = {
         {title: 'May 1999', url: '#'},
         {title: 'April 1999', url: '#'},
     ],
-    social: [
-        {name: 'GitHub', icon: 'test'},
-        {name: 'Twitter', icon: 'test'},
-        {name: 'Facebook', icon: 'test'},
-    ],
 };
 
 export default function Home({children}) {
     const classes = useStyles();
     return (
-        <>
+        <section>
             <CssBaseline/>
-            <main>
-                <MainFeaturedPost post={mainFeaturedPost}/>
-                <Grid container spacing={4} className={classes.mainGrid}>
-                    <Courses />
-                </Grid>
-                <Grid container spacing={5} className={classes.mainGrid}>
-                    <Main title="From the firehose" posts={posts}/>
-                    <Sidebar
-                        title={sidebar.title}
-                        description={sidebar.description}
-                        archives={sidebar.archives}
-                        social={sidebar.social}
-                    />
-                </Grid>
-            </main>
-        </>
+            <MainFeaturedPost post={mainFeaturedPost}/>
+            <Grid container spacing={4} className={classes.mainGrid}>
+                <Courses/>
+            </Grid>
+            <Grid container spacing={5} className={classes.mainGrid}>
+                <Main title="From the firehose" posts={posts}/>
+                <Sidebar
+                    title={sidebar.title}
+                    description={sidebar.description}
+                    archives={sidebar.archives}
+                />
+            </Grid>
+        </section>
     )
 }

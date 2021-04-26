@@ -32,29 +32,30 @@ export default function CourseItem(props) {
 
     return (
         <Grid item xs={12} md={4} className={classes.courseItem}>
-            <Link to={`/course/${id}`}
-                  style={{textDecoration: 'none'}}
-            >
-                <CardActionArea component="a" href="#">
-                <CardMedia
-                    className={classes.cardMedia}
-                    image={imageUrl}
-                    title="net core"
-                />
-                <Card className={classes.card}>
-                    <article className={classes.cardDetails}>
-                        <CardContent>
-                            <Typography component="h2" variant="h5">
-                                {title}
-                            </Typography>
-                            <Typography variant="subtitle1" paragraph>
-                                {price} $
-                            </Typography>
-                        </CardContent>
-                    </article>
-                </Card>
+
+            <CardActionArea>
+                <Link to={`/course/${id}`}
+                      style={{textDecoration: 'none'}}
+                >
+                    <CardMedia
+                        className={classes.cardMedia}
+                        image={imageUrl}
+                        title="net core"
+                    />
+                    <Card className={classes.card}>
+                        <article className={classes.cardDetails}>
+                            <CardContent>
+                                <Typography component="h2" variant="h5">
+                                    {title}
+                                </Typography>
+                                <Typography variant="subtitle1" paragraph>
+                                    {price} $
+                                </Typography>
+                            </CardContent>
+                        </article>
+                    </Card>
+                </Link>
             </CardActionArea>
-            </Link>
         </Grid>
     )
 }

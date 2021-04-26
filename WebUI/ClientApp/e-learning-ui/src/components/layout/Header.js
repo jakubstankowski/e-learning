@@ -9,8 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import {Link} from '@reach/router';
 
 const useStyles = makeStyles((theme) => ({
-    link:{
-      textDecoration: 'none'
+    link: {
+        textDecoration: 'none'
     },
     toolbar: {
         borderBottom: `1px solid ${theme.palette.divider}`,
@@ -42,29 +42,32 @@ export default function Header(props) {
                     component="h2"
                     variant="h5"
                     color="inherit"
-                    noWrap
                     className={classes.toolbarTitle}
                 >
                     <Link to={'/'}>
                         {title}
                     </Link>
                 </Typography>
-                <Button variant="outlined" size="small" className={classes.loginButton}>
-                    <Link to={'/login'}>
+                <Link to={'/dashboard'}>
+                    <Button variant="outlined" size="small" className={classes.loginButton}>
+                        Dashboard
+                    </Button>
+                </Link>
+                <Link to={'/login'}>
+                    <Button variant="outlined" size="small" className={classes.loginButton}>
                         Login
-                    </Link>
-                </Button>
-                <Button variant="outlined" size="small">
-                    <Link to={'/register'}>
+                    </Button>
+                </Link>
+                <Link to={'/register'}>
+                    <Button variant="outlined" size="small">
                         Register
-                    </Link>
-                </Button>
+                    </Button>
+                </Link>
             </Toolbar>
             <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
                 {sections.map((section) => (
                     <Link
                         color="inherit"
-                        noWrap
                         key={section.title}
                         variant="body2"
                         to={section.url}
