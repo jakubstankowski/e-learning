@@ -6,6 +6,10 @@ import Lesson from "../lessons/Lesson";
 import Button from "@material-ui/core/Button";
 import CoursesContext from "../../context/courses/coursesContext";
 import Spinner from "../layout/Spinner";
+import {Container} from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import { makeStyles } from '@material-ui/core/styles';
 
 export default function Course({match}) {
     const coursesContext = useContext(CoursesContext);
@@ -18,30 +22,34 @@ export default function Course({match}) {
         getCourse(courseId);
     }, []);
 
+    const useStyles = makeStyles((theme) => ({
+        paper: {
+            padding: theme.spacing(2),
+            textAlign: 'center',
+            color: theme.palette.text.secondary,
+        },
+        course:{
+            marginTop: '1rem'
+        }
+    }));
+
+    const classes = useStyles();
 
     if (loading) return <Spinner/>
 
     return (
-        <section>
-            <Typography variant="h5" component="h2">
-                Course <strong>{course.title}</strong> ID: <strong>{course.id}</strong>
-            </Typography>
-            <Link to={`/admin/course/${course.id}/edit`}
-                  style={{textDecoration: 'none'}}
-            >
-                <Button variant="contained"
-                        style={{marginTop: '1rem', width: '100%'}}
-                        color="primary"
-                >
-                    Edit Course
-                </Button>
-            </Link>
-            <Lessons/>
-            <Router>
-                <Lessons path="/course/:courseId"/>
-                <Lesson path="/course/:courseId/lesson/:lessonId"/>
-            </Router>
-        </section>
+        <Container className={classes.course}>
+            <Grid container spacing={3}>
+                <Grid item xs={12} md={8}>
+                    <Paper className={classes.paper}>xs=12</Paper>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <Paper className={classes.paper}>
+                        <Lessons/>
+                    </Paper>
+                </Grid>
+            </Grid>
+        </Container>
     )
 
 }
