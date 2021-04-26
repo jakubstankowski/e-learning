@@ -56,8 +56,8 @@ export default function Home({children}) {
             <CssBaseline/>
             <main>
                 <MainFeaturedPost post={mainFeaturedPost}/>
-                <Grid container spacing={4}>
-                    <Courses/>
+                <Grid container spacing={4} className={classes.mainGrid}>
+                    <Courses />
                 </Grid>
                 <Grid container spacing={5} className={classes.mainGrid}>
                     <Main title="From the firehose" posts={posts}/>
