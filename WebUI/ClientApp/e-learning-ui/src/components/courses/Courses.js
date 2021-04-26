@@ -4,6 +4,7 @@ import CourseItem from "./CourseItem";
 import {useContext, useEffect} from "react";
 import CoursesContext from '../../context/courses/coursesContext';
 import Spinner from "../layout/Spinner";
+import {Link} from "@reach/router";
 
 export default function Courses() {
     const coursesContext = useContext(CoursesContext);

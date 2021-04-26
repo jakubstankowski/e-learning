@@ -4,11 +4,10 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import Hidden from "@material-ui/core/Hidden";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
+import {Link} from "@reach/router";
+
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -33,7 +32,10 @@ export default function CourseItem(props) {
 
     return (
         <Grid item xs={12} md={4} className={classes.courseItem}>
-            <CardActionArea component="a" href="#">
+            <Link to={`/course/${id}`}
+                  style={{textDecoration: 'none'}}
+            >
+                <CardActionArea component="a" href="#">
                 <CardMedia
                     className={classes.cardMedia}
                     image={imageUrl}
@@ -52,6 +54,7 @@ export default function CourseItem(props) {
                     </article>
                 </Card>
             </CardActionArea>
+            </Link>
         </Grid>
     )
 }
