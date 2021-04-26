@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import {makeStyles} from '@material-ui/core/styles';
 import CourseVideo from "./CourseVideo";
+import CourseDescription from "./CourseDescription";
 
 export default function Course({match}) {
     const coursesContext = useContext(CoursesContext);
@@ -52,6 +53,7 @@ export default function Course({match}) {
                     </Paper>
                 </Grid>
             </Grid>
+            <CourseDescription/>
         </Container>
     )
 
