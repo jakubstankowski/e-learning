@@ -1,4 +1,3 @@
-import Typography from "@material-ui/core/Typography";
 import React, {useContext, useEffect} from "react";
 import LessonItem from "./LessonItem";
 import {Link, useParams} from "@reach/router";
