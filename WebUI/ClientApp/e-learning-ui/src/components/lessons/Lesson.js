@@ -1,9 +1,15 @@
 import React, {useContext, useEffect} from "react";
-import Typography from "@material-ui/core/Typography";
-import {Button} from "@material-ui/core";
 import LessonsContext from "../../context/lessons/lessonsContext";
 import Spinner from "../layout/Spinner";
 import {Link, useParams} from "@reach/router";
+import {makeStyles} from '@material-ui/core/styles';
+import Paper from "@material-ui/core/Paper";
+import LessonVideo from "./LessonVideo";
+import Grid from "@material-ui/core/Grid";
+import Lessons from "./Lessons";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+
 
 export default function Lesson({match}) {
     const lessonsContext = useContext(LessonsContext);
@@ -13,31 +19,60 @@ export default function Lesson({match}) {
 
     useEffect(() => {
         getLesson(lessonId);
-
-        if (loading) {
-            alert('loading!');
-        }
-
         // eslint-disable-next-line
-    }, [loading])
+    }, [])
+
+    const useStyles = makeStyles((theme) => ({
+        paper: {
+            padding: theme.spacing(2),
+            marginTop: '1rem',
+            textAlign: 'center',
+            color: theme.palette.text.secondary,
+        },
+        lesson: {
+            marginTop: '1rem'
+        }
+    }));
+
+    const classes = useStyles();
 
     if (loading) return <Spinner/>
 
+    const {title, id, description, videoUrl, courseId} = lesson;
+
     return (
-        <section>
-            <Typography variant="h5" component="h2">
-                Lesson <strong>{lesson.title}</strong>
-                ID: <strong>{lesson.id}</strong>,
-                Description: <strong>{lesson.description}</strong>,
-                videoUrl: <strong>{lesson.videoUrl}</strong>
+        <Container className={classes.lesson}>
+            <Typography component="h4" variant="h3">
+                {title}
             </Typography>
-            <Link to={`/admin/lesson/${lesson.id}/edit`}>
-                <Button
-                    variant="contained"
-                    color="primary">
-                    Edit Lesson
-                </Button>
-            </Link>
-        </section>
+            <Grid container spacing={3}>
+                <Grid item xs={12} md={8}>
+                    <Paper className={classes.paper}>
+                        <LessonVideo videoUrl={videoUrl}/>
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                    <Grid container>
+                        <Grid item lg={12}>
+                            <Paper className={classes.paper}>
+                                {description}
+                            </Paper>
+                        </Grid>
+                        <Grid item lg={12}>
+                            <Link to={`/course/${courseId}`}>
+                                <Paper className={classes.paper}>
+                                    <strong>
+                                        Back to Lessons list
+                                    </strong>
+                                </Paper>
+                            </Link>
+                        </Grid>
+                    </Grid>
+
+                </Grid>
+            </Grid>
+
+
+        </Container>
     )
 }

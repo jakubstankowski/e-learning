@@ -4,11 +4,7 @@ import {useParams} from "@reach/router";
 import CoursesContext from "../../context/courses/coursesContext";
 import Spinner from "../layout/Spinner";
 import {Container} from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import {makeStyles} from '@material-ui/core/styles';
-import CourseDescription from "./CourseDescription";
-import LessonVideo from "../lessons/LessonVideo";
 import Typography from "@material-ui/core/Typography";
 
 export default function Course({match}) {
@@ -33,10 +29,12 @@ export default function Course({match}) {
 
     if (loading) return <Spinner/>
 
+    const {title} = course;
+
     return (
         <Container className={classes.course}>
-            <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-                {course.title}
+            <Typography component="h4" variant="h3">
+                {title}
             </Typography>
             <Lessons/>
         </Container>
