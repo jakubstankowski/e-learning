@@ -39,12 +39,25 @@ namespace E_Learning.Application.Lessons.Queries.GetLessons
         {
             var lesson = await _context.Lessons.FirstOrDefaultAsync(l => l.Id == request.Id);
 
+
             if (lesson == null)
             {
                 throw new NotFoundException(nameof(Course), request.Id);
             }
 
-            return _mapper.Map<Lesson, LessonDto>(lesson);
+            var lessonDto = _mapper.Map<Lesson, LessonDto>(lesson);
+
+            var lessons = await _context.Lessons
+               .Where(l => l.CourseId == lesson.CourseId)
+               .ToListAsync();
+
+
+            int indexOfActiveLesson = lessons.IndexOf(lesson);
+
+            lessonDto.NextLessonId = lessons.Count  > indexOfActiveLesson + 1 ? lessons[indexOfActiveLesson + 1].Id : null;
+          //  lessonDto.PreviousLessonId = lessons.Count < indexOfActiveLesson + 1 ? lessons[indexOfActiveLesson + 1].Id : null;
+
+            return lessonDto;
         }
     }
 

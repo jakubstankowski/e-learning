@@ -16,5 +16,9 @@ namespace E_Learning.Application.Lessons.Queries.GetLessons
         public string VideoUrl { get; set; }
 
         public int CourseId { get; set; }
+
+        public int? NextLessonId { get; set; }
+
+        public int? PreviousLessonId { get; set; }
     }
 }
