@@ -9,6 +9,7 @@ import Paper from "@material-ui/core/Paper";
 import {makeStyles} from '@material-ui/core/styles';
 import CourseDescription from "./CourseDescription";
 import LessonVideo from "../lessons/LessonVideo";
+import Typography from "@material-ui/core/Typography";
 
 export default function Course({match}) {
     const coursesContext = useContext(CoursesContext);
@@ -22,13 +23,9 @@ export default function Course({match}) {
     }, []);
 
     const useStyles = makeStyles((theme) => ({
-        paper: {
-            padding: theme.spacing(2),
-            textAlign: 'center',
-            color: theme.palette.text.secondary,
-        },
         course: {
-            marginTop: '1rem'
+            marginTop: '1rem',
+            textFloat: 'center'
         }
     }));
 
@@ -38,19 +35,10 @@ export default function Course({match}) {
 
     return (
         <Container className={classes.course}>
-            <Grid container spacing={3}>
-                <Grid item xs={12} md={8}>
-                    <Paper className={classes.paper}>
-                        <LessonVideo/>
-                    </Paper>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                    <Paper className={classes.paper}>
-                        <Lessons/>
-                    </Paper>
-                </Grid>
-            </Grid>
-            <CourseDescription/>
+            <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+                {course.title}
+            </Typography>
+            <Lessons/>
         </Container>
     )
 
