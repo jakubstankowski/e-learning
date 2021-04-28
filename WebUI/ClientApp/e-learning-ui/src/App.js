@@ -16,6 +16,7 @@ import Dashboard from "./components/layout/Dashboard";
 import MainLayout from "./components/layout/MainLayout";
 import Lessons from "./components/lessons/Lessons";
 import Home from "./components/pages/Home";
+import Lesson from "./components/lessons/Lesson";
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                         <MainLayout path="/">
                             <Home path="/"/>
                             <Course path="/course/:courseId"/>
+                            <Lesson path="/course/:courseId/lesson/:lessonId"/>
                             <Login path="/login"/>
                             <Register path="/register"/>
                         </MainLayout>

@@ -31,7 +31,7 @@ export default function LessonItem(props) {
     return (
         <Grid item xs={12} md={4} className={classes.courseItem}>
             <CardActionArea>
-                <Link to={`/course/${courseId}/${id}`}
+                <Link to={`/course/${courseId}/lesson/${id}`}
                       style={{textDecoration: 'none'}}
                 >
                     <Card className={classes.card}>
