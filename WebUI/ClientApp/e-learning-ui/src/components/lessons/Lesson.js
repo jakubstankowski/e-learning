@@ -38,7 +38,7 @@ export default function Lesson({match}) {
 
     if (loading) return <Spinner/>
 
-    const {title, id, description, videoUrl, courseId, nextLessonId, previousLessonId} = lesson;
+    const {title, description, videoUrl, courseId, nextLessonId, previousLessonId} = lesson;
 
     return (
         <Container className={classes.lesson}>
@@ -48,7 +48,7 @@ export default function Lesson({match}) {
             <Grid container spacing={3}>
                 <Grid item xs={12} md={8}>
                     <Paper className={classes.paper}>
-                        {/* <LessonVideo videoUrl={videoUrl}/>*/}
+                        <LessonVideo videoUrl={videoUrl}/>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4}>
