@@ -35,7 +35,8 @@ function App() {
                         </MainLayout>
                         <DashboardLayout path="/dashboard">
                             <Dashboard path="/"/>
-                            <CreateCourse path="/create/course"/>
+                            <CreateCourse path="/course/create"/>
+                            <CreateLesson path="/lesson/create"/>
                         </DashboardLayout>
                     </Router>
                 </LessonsState>
