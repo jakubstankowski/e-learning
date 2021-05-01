@@ -42,7 +42,7 @@ namespace E_Learning.Application.Lessons.Queries.GetLessons
 
             if (lesson == null)
             {
-                throw new NotFoundException(nameof(Course), request.Id);
+                throw new NotFoundException(nameof(Lesson), request.Id);
             }
 
             var lessonDto = _mapper.Map<Lesson, LessonDto>(lesson);
@@ -53,9 +53,20 @@ namespace E_Learning.Application.Lessons.Queries.GetLessons
 
 
             int indexOfActiveLesson = lessons.IndexOf(lesson);
+            int indexOfNextLesson = indexOfActiveLesson + 1;
+            int indexOfPreviousLesson = indexOfActiveLesson - 1;
+          
 
-            lessonDto.NextLessonId = lessons.Count  > indexOfActiveLesson + 1 ? lessons[indexOfActiveLesson + 1].Id : null;
-          //  lessonDto.PreviousLessonId = lessons.Count < indexOfActiveLesson + 1 ? lessons[indexOfActiveLesson + 1].Id : null;
+            if (indexOfNextLesson < lessons.Count)
+            {
+                lessonDto.NextLessonId = lessons[indexOfNextLesson].Id;
+            }
+
+
+            if (indexOfPreviousLesson >= 0)
+            {
+                lessonDto.PreviousLessonId = lessons[indexOfPreviousLesson].Id;
+            }
 
             return lessonDto;
         }
