@@ -20,7 +20,7 @@ export default function Lesson({match}) {
     useEffect(() => {
         getLesson(lessonId);
         // eslint-disable-next-line
-    }, [])
+    }, [lessonId])
 
     const useStyles = makeStyles((theme) => ({
         paper: {
@@ -38,7 +38,7 @@ export default function Lesson({match}) {
 
     if (loading) return <Spinner/>
 
-    const {title, id, description, videoUrl, courseId} = lesson;
+    const {title, id, description, videoUrl, courseId, nextLessonId, previousLessonId} = lesson;
 
     return (
         <Container className={classes.lesson}>
@@ -48,7 +48,7 @@ export default function Lesson({match}) {
             <Grid container spacing={3}>
                 <Grid item xs={12} md={8}>
                     <Paper className={classes.paper}>
-                        <LessonVideo videoUrl={videoUrl}/>
+                        {/* <LessonVideo videoUrl={videoUrl}/>*/}
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4}>
@@ -67,6 +67,31 @@ export default function Lesson({match}) {
                                 </Paper>
                             </Link>
                         </Grid>
+                        {
+                            nextLessonId &&
+                            <Grid item lg={12}>
+                                <Link to={`/course/${courseId}/lesson/${nextLessonId}`}>
+                                    <Paper className={classes.paper}>
+                                        <strong>
+                                            Next Lesson
+                                        </strong>
+                                    </Paper>
+                                </Link>
+                            </Grid>
+                        }
+
+                        {
+                            previousLessonId &&
+                            <Grid item lg={12}>
+                                <Link to={`/course/${courseId}/lesson/${previousLessonId}`}>
+                                    <Paper className={classes.paper}>
+                                        <strong>
+                                            Previous Lesson
+                                        </strong>
+                                    </Paper>
+                                </Link>
+                            </Grid>
+                        }
                     </Grid>
 
                 </Grid>
