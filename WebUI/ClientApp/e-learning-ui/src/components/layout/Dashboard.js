@@ -4,7 +4,6 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Link} from '@reach/router';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -16,7 +15,7 @@ import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import {mainListItems, secondaryListItems} from './listItems';
+import {mainListItems} from '../dashboard/listItems';
 import {protectedComponent} from "../routing/PrivateRoute";
 import AuthContext from "../../context/auth/authContext";
 
@@ -102,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Dashboard = protectedComponent(({children}) => {
+const DashboardLayout = protectedComponent(({children}) => {
     const classes = useStyles();
     const authContext = useContext(AuthContext);
 
@@ -162,8 +161,6 @@ const Dashboard = protectedComponent(({children}) => {
                 </div>
                 <Divider/>
                 <List>{mainListItems}</List>
-                <Divider/>
-                <List>{secondaryListItems}</List>
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer}/>
@@ -175,4 +172,4 @@ const Dashboard = protectedComponent(({children}) => {
     );
 });
 
-export default Dashboard;
+export default DashboardLayout;
