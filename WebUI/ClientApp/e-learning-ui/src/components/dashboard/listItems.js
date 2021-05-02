@@ -4,9 +4,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PostAddIcon from '@material-ui/icons/PostAdd';
-import VideoCallIcon from '@material-ui/icons/VideoCall';
+import VideoCallOutlinedIcon from '@material-ui/icons/VideoCallOutlined';
 import {Link} from "@reach/router";
-
+import ListAltOutlinedIcon from '@material-ui/icons/ListAltOutlined';
+import VideocamOutlinedIcon from '@material-ui/icons/VideocamOutlined';
 
 export const mainListItems = (
     <div>
@@ -26,12 +27,28 @@ export const mainListItems = (
                 <ListItemText primary="Create Course"/>
             </ListItem>
         </Link>
+        <Link to={'/dashboard/courses'}>
+            <ListItem button>
+                <ListItemIcon>
+                    <ListAltOutlinedIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Courses"/>
+            </ListItem>
+        </Link>
         <Link to={'/dashboard/lesson/create'}>
             <ListItem button>
                 <ListItemIcon>
-                    <VideoCallIcon/>
+                    <VideoCallOutlinedIcon/>
                 </ListItemIcon>
                 <ListItemText primary="Create Lesson"/>
+            </ListItem>
+        </Link>
+        <Link to={'/dashboard/lesson/create'}>
+            <ListItem button>
+                <ListItemIcon>
+                    <VideocamOutlinedIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Lessons"/>
             </ListItem>
         </Link>
     </div>
