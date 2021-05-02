@@ -1,5 +1,12 @@
 /*main app colors: #3a739d (blue)  #3f4446 (black) #f16564 (pink)*/
 
+:root {
+    --primary-color: #3a739d;
+    --secondary-color: #f16564;
+    --dark-color: #3f4446;
+    --light-color: #f4f4f4;
+}
+
 .App {
     text-align: center;
 }
