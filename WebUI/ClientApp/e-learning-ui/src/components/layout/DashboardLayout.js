@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         flexGrow: 1,
+        color: theme.palette.primary.light
     },
     drawerPaper: {
         position: 'relative',
@@ -136,7 +137,7 @@ const DashboardLayout = protectedComponent(({children}) => {
                     >
                         <MenuIcon/>
                     </IconButton>
-                    <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                    <Typography component="h1" variant="h6"  noWrap className={classes.title}>
                        <Link to="/">
                            E Learning
                        </Link>

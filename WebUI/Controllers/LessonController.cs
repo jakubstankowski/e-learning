@@ -8,6 +8,7 @@ using E_Learning.Application.Lessons.Commands.DeleteLesson;
 using E_Learning.Application.Lessons.Commands.UpdateLesson;
 using E_Learning.Application.Lessons.Queries.GetLessons;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Learning.Controllers
@@ -23,6 +24,7 @@ namespace E_Learning.Controllers
             _mediator = mediator;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<LessonDto>> Create(CreateLessonCommand command)
         {
@@ -32,7 +34,7 @@ namespace E_Learning.Controllers
         }
 
 
-
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<LessonDto>> GetLesson(int id)
         {
@@ -42,7 +44,7 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
-
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<int>> Delete(int id)
         {
@@ -51,7 +53,7 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
-
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult<LessonDto>> Update(int id, UpdateLessonCommand command)
         {

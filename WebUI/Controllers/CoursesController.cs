@@ -10,6 +10,7 @@ using E_Learning.Application.Courses.Queries;
 using E_Learning.Application.Courses.Queries.GetCourses;
 using E_Learning.Application.Courses1.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Learning.Controllers
@@ -27,7 +28,7 @@ namespace E_Learning.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CourseDto>>> Get()
         {
@@ -38,7 +39,7 @@ namespace E_Learning.Controllers
 
         }
 
-
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<CourseDto>> GetCourse(int id)
         {
@@ -48,7 +49,7 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
-
+        [Authorize]
         [HttpGet("{id}/Lessons")]
         public async Task<ActionResult<CourseDto>> GetCourseLessons(int id)
         {
@@ -58,7 +59,7 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
-
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<CourseDto>> Create(CreateCourseCommand command)
         {
@@ -67,6 +68,7 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<int>> Delete(int id)
         {
@@ -75,6 +77,7 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult<CourseDto>> Update(int id, UpdateCourseCommand command)
         {
