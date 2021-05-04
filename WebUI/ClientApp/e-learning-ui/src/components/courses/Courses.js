@@ -31,7 +31,7 @@ export default function Courses() {
         <Grid container spacing={4}>
             {
                 courses.map((course) =>
-                        <CourseItem course={course} key={course.id}/>
+                        <CourseItem course={course} key={course.id} />
                     /*<article key={course.id}>
                         <Link to={`/course/${course.id}`}
                               style={{textDecoration: 'none'}}

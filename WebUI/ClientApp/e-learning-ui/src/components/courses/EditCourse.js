@@ -1,14 +1,13 @@
 import React, {useContext, useEffect} from "react";
 import Typography from "@material-ui/core/Typography";
-import Lessons from "../lessons/Lessons";
 import {Field, Form} from "react-final-form";
 import {Button, Grid, Paper} from "@material-ui/core";
 import {TextField} from "final-form-material-ui";
-/*
-import {Route} from "react-router-dom";
-*/
 import CoursesContext from "../../context/courses/coursesContext";
 import Spinner from "../layout/Spinner";
+import Lessons from "../lessons/Lessons";
+import AuthContext from "../../context/auth/authContext";
+import {useParams} from "@reach/router";
 
 
 export default function EditCourse({match, history}) {
@@ -16,15 +15,22 @@ export default function EditCourse({match, history}) {
 
     const {getCourse, course, updateCourse, loading} = coursesContext;
 
+    const authContext = useContext(AuthContext);
+    const {isAuthenticated} = authContext;
+
+    const {courseId} = useParams();
+
     useEffect(() => {
-        getCourse(match.params.courseId);
+        if (isAuthenticated) {
+            getCourse(courseId);
+        }
         // eslint-disable-next-line
-    }, []);
+    }, [isAuthenticated]);
 
     const onSubmit = (course) => {
-        updateCourse(match.params.courseId, course)
+        updateCourse(courseId, course)
             .then(() => {
-                history.push('/');
+                history.push('/dashboard/courses');
             })
     };
 
@@ -44,17 +50,18 @@ export default function EditCourse({match, history}) {
 
     if (loading) return <Spinner/>;
 
+    const {title, id, description, price} = course;
     return (
         <section className='form-container'>
             <Typography variant="h5" component="h2">
-                Edit Course <strong>{course.title}</strong> ID: <strong>{course.id}</strong>
+                Edit Course <strong>{title}</strong> ID: <strong>{id}</strong>
             </Typography>
             <Form
                 initialValues={{
-                    id: course.id,
-                    title: course.title,
-                    description: course.description,
-                    price: course.price
+                    id: id,
+                    title: title,
+                    description: description,
+                    price: price
                 }}
                 onSubmit={onSubmit}
                 validate={validate}
@@ -106,7 +113,7 @@ export default function EditCourse({match, history}) {
                     </form>
                 )}
             />
-           {/* <Route component={Lessons}/>*/}
+            <Lessons/>
         </section>
     )
 

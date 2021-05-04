@@ -10,6 +10,7 @@ import {Link} from "@reach/router";
 import AuthContext from "../../context/auth/authContext";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
+import CoursesContext from "../../context/courses/coursesContext";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,6 +37,9 @@ export default function CourseItem(props) {
     const authContext = useContext(AuthContext);
     const {isAuthenticated} = authContext;
 
+    const coursesContext = useContext(CoursesContext);
+
+    const { deleteCourse} = coursesContext;
 
     useEffect(() => {
         // eslint-disable-next-line
@@ -43,7 +47,6 @@ export default function CourseItem(props) {
 
     return (
         <Grid item xs={12} md={4} className={classes.courseItem}>
-
             <Card className={classes.card}>
                 <CardActionArea>
                     <Link to={`/course/${id}`}
@@ -68,10 +71,16 @@ export default function CourseItem(props) {
                         {
                             isAuthenticated &&
                             <CardActions>
-                                <Button  color="primary"  variant="contained">
-                                    Edit
-                                </Button>
-                                <Button  color="secondary"  variant="contained">
+                                <Link to={`/dashboard/course/${id}/edit`}
+                                      style={{textDecoration: 'none'}}
+                                >
+                                    <Button  color="primary"  variant="contained">
+                                        Edit
+                                    </Button>
+                                </Link>
+                                <Button  color="secondary"
+                                         onClick={() => deleteCourse(id)}
+                                         variant="contained">
                                     Delete
                                 </Button>
                             </CardActions>
