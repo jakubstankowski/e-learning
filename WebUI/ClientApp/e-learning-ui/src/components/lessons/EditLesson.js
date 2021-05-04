@@ -6,23 +6,26 @@ import {TextField} from "final-form-material-ui";
 import {useContext, useEffect} from "react";
 import LessonsContext from "../../context/lessons/lessonsContext";
 import Spinner from "../layout/Spinner";
+import {navigate, useParams} from "@reach/router";
 
-export default function EditLesson({match, history}) {
+export default function EditLesson() {
     const lessonsContext = useContext(LessonsContext);
 
     const {getLesson, updateLesson, lesson, loading} = lessonsContext;
 
+    const {lessonId} = useParams();
+
     useEffect(() => {
-        getLesson(match.params.lessonId);
+        getLesson(lessonId);
         // eslint-disable-next-line
     }, []);
 
     if (loading) return <Spinner/>
 
     const onSubmit = (lesson) => {
-        updateLesson(match.params.lessonId, lesson)
+        updateLesson(lessonId, lesson)
             .then(() => {
-                history.push(`/course/${lesson.courseId}/lesson/${match.params.lessonId}`);
+                navigate(`/course/${lesson.courseId}/lesson/${lessonId}`);
             })
     };
 

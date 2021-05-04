@@ -71,7 +71,7 @@ export default function CourseItem(props) {
                         {
                             isAuthenticated &&
                             <CardActions>
-                                <Link to={`/dashboard/course/${id}/edit`}
+                                <Link to={`/dashboard/courses/${id}/edit`}
                                       style={{textDecoration: 'none'}}
                                 >
                                     <Button  color="primary"  variant="contained">

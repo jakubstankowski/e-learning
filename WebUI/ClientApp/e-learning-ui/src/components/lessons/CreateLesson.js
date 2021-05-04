@@ -6,9 +6,10 @@ import Typography from "@material-ui/core/Typography";
 import {useContext} from "react";
 import LessonsContext from "../../context/lessons/lessonsContext";
 import Container from "@material-ui/core/Container";
+import {navigate} from "@reach/router";
 
 
-export default function CreateLesson({history}) {
+export default function CreateLesson() {
     const lessonsContext = useContext(LessonsContext);
 
     const {postLesson} = lessonsContext;
@@ -16,7 +17,7 @@ export default function CreateLesson({history}) {
     const onSubmit = (values) => {
         postLesson(values)
             .then(() => {
-                history.push(`/course/${values.courseId}`);
+                navigate(`/course/${values.courseId}`);
             })
     };
 

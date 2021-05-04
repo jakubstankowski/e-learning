@@ -6,6 +6,7 @@ import {useContext} from "react";
 import CoursesContext from "../../context/courses/coursesContext";
 import {TextField} from 'mui-rff';
 import Container from "@material-ui/core/Container";
+import {navigate} from "@reach/router";
 
 
 export default function CreateCourse({history}) {
@@ -16,7 +17,7 @@ export default function CreateCourse({history}) {
     const onSubmit = (values) => {
         postCourse(values)
             .then(() => {
-                history.push('/');
+                navigate('/dashboard/courses');
             })
     };
 

@@ -7,7 +7,7 @@ import CoursesContext from "../../context/courses/coursesContext";
 import Spinner from "../layout/Spinner";
 import Lessons from "../lessons/Lessons";
 import AuthContext from "../../context/auth/authContext";
-import {useParams} from "@reach/router";
+import {navigate, useParams} from "@reach/router";
 import {makeStyles} from "@material-ui/core/styles";
 
 
@@ -31,7 +31,7 @@ export default function EditCourse({history}) {
     const onSubmit = (course) => {
         updateCourse(courseId, course)
             .then(() => {
-                history.push('/dashboard/courses');
+                navigate('/dashboard/courses');
             })
     };
 

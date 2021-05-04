@@ -32,31 +32,6 @@ export default function Courses() {
             {
                 courses.map((course) =>
                         <CourseItem course={course} key={course.id} />
-                    /*<article key={course.id}>
-                        <Link to={`/course/${course.id}`}
-                              style={{textDecoration: 'none'}}
-                        >
-                            <CourseItem key={i}
-                                        course={course}/>
-                        </Link>
-                        <Button variant="contained"
-                                style={{marginTop: '1rem', width: '100%'}}
-                                color="primary"
-                                onClick={() => deleteCourse(course.id)}
-                        >
-                            Delete
-                        </Button>
-                        <Link to={`/admin/course/${course.id}/edit`}
-                              style={{textDecoration: 'none'}}
-                        >
-                            <Button variant="contained"
-                                    style={{marginTop: '1rem', width: '100%'}}
-                                    color="primary"
-                            >
-                                Edit
-                            </Button>
-                        </Link>
-                    </article>*/
                 )
             }
         </Grid>
