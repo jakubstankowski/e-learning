@@ -68,11 +68,11 @@ export default function CourseItem(props) {
                         {
                             isAuthenticated &&
                             <CardActions>
-                                <Button size="small" color="primary"  variant="contained">
-                                    Delete
-                                </Button>
-                                <Button size="small" color="primary"  variant="contained">
+                                <Button  color="primary"  variant="contained">
                                     Edit
+                                </Button>
+                                <Button  color="secondary"  variant="contained">
+                                    Delete
                                 </Button>
                             </CardActions>
                         }

@@ -43,13 +43,5 @@ export const mainListItems = (
                 <ListItemText primary="Create Lesson"/>
             </ListItem>
         </NavLink>
-        <NavLink to={'/dashboard/lesson/create'}>
-            <ListItem button>
-                <ListItemIcon>
-                    <VideocamOutlinedIcon/>
-                </ListItemIcon>
-                <ListItemText primary="Lessons"/>
-            </ListItem>
-        </NavLink>
     </div>
 );
