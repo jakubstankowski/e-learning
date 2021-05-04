@@ -1,16 +1,17 @@
 import React, {useContext, useEffect} from "react";
 import Typography from "@material-ui/core/Typography";
 import {Field, Form} from "react-final-form";
-import {Button, Grid, Paper} from "@material-ui/core";
+import {Button, Container, Grid, Paper} from "@material-ui/core";
 import {TextField} from "final-form-material-ui";
 import CoursesContext from "../../context/courses/coursesContext";
 import Spinner from "../layout/Spinner";
 import Lessons from "../lessons/Lessons";
 import AuthContext from "../../context/auth/authContext";
 import {useParams} from "@reach/router";
+import {makeStyles} from "@material-ui/core/styles";
 
 
-export default function EditCourse({match, history}) {
+export default function EditCourse({history}) {
     const coursesContext = useContext(CoursesContext);
 
     const {getCourse, course, updateCourse, loading} = coursesContext;
@@ -48,11 +49,23 @@ export default function EditCourse({match, history}) {
         return errors;
     };
 
+    const useStyles = makeStyles((theme) => ({
+        editCourse: {
+            textFloat: 'center'
+        },
+        lessons: {
+            marginTop: '2rem'
+        }
+    }));
+
+    const classes = useStyles();
+
     if (loading) return <Spinner/>;
 
     const {title, id, description, price} = course;
+
     return (
-        <section className='form-container'>
+        <section className={classes.editCourse}>
             <Typography variant="h5" component="h2">
                 Edit Course <strong>{title}</strong> ID: <strong>{id}</strong>
             </Typography>
@@ -99,7 +112,7 @@ export default function EditCourse({match, history}) {
                                         label="Price"
                                     />
                                 </Grid>
-                                <Grid item xs={12}>
+                                <Grid item xs={4}>
                                     <Button type="submit"
                                             className="form-button"
                                             color="primary"
@@ -113,7 +126,9 @@ export default function EditCourse({match, history}) {
                     </form>
                 )}
             />
-            <Lessons/>
+            <Container className={classes.lessons}>
+                <Lessons/>
+            </Container>
         </section>
     )
 
