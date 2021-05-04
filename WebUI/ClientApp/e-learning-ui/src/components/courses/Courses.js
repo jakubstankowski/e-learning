@@ -4,6 +4,7 @@ import CourseItem from "./CourseItem";
 import {useContext, useEffect} from "react";
 import CoursesContext from '../../context/courses/coursesContext';
 import Spinner from "../layout/Spinner";
+import AuthContext from "../../context/auth/authContext";
 
 
 export default function Courses() {
@@ -11,10 +12,18 @@ export default function Courses() {
 
     const {getCourses, deleteCourse, courses, loading} = coursesContext;
 
+    const authContext = useContext(AuthContext);
+
+    const {loadUser, isAuthenticated} = authContext;
+
     useEffect(() => {
-        getCourses();
+
         // eslint-disable-next-line
-    }, [])
+        if (isAuthenticated) {
+            getCourses();
+        }
+
+    }, [isAuthenticated]);
 
     if (loading) return <Spinner/>
 
