@@ -30,8 +30,9 @@ export default function Lessons() {
     return (
         <Grid container spacing={4}>
             {
-                lessons.map((lesson) =>
+                lessons.map((lesson, i) =>
                     <LessonItem key={lesson.id}
+                                deleteLesson={deleteLesson}
                                 lesson={lesson}/>
                 )
             }
