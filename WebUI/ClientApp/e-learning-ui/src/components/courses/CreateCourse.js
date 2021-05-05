@@ -9,7 +9,7 @@ import Container from "@material-ui/core/Container";
 import {navigate} from "@reach/router";
 
 
-export default function CreateCourse({history}) {
+export default function CreateCourse() {
     const coursesContext = useContext(CoursesContext);
 
     const {postCourse} = coursesContext;

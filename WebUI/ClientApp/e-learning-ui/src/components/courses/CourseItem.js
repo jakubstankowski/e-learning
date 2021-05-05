@@ -49,7 +49,7 @@ export default function CourseItem(props) {
         <Grid item xs={12} md={4} className={classes.courseItem}>
             <Card className={classes.card}>
                 <CardActionArea>
-                    <Link to={`/course/${id}`}
+                    <Link to={`/dashboard/course/${id}`}
                           style={{textDecoration: 'none'}}
                     >
                         <CardMedia
