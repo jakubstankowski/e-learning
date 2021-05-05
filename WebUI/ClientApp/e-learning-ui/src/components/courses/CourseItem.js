@@ -61,7 +61,7 @@ export default function CourseItem(props) {
                         <article className={classes.cardDetails}>
                             <CardContent>
                                 <Typography component="h2" variant="h5">
-                                    {title}
+                                    {title} id: {id}
                                 </Typography>
                                 <Typography variant="subtitle1" paragraph>
                                     {price} $
@@ -83,6 +83,13 @@ export default function CourseItem(props) {
                                          variant="contained">
                                     Delete
                                 </Button>
+                                <Link to={`/dashboard/lesson/create`}
+                                      style={{textDecoration: 'none'}}
+                                >
+                                    <Button  color="primary"  variant="contained">
+                                        Create New Lesson
+                                    </Button>
+                                </Link>
                             </CardActions>
                         }
                     </Link>
