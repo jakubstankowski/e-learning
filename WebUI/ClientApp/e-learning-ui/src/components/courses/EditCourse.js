@@ -11,7 +11,7 @@ import {navigate, useParams} from "@reach/router";
 import {makeStyles} from "@material-ui/core/styles";
 
 
-export default function EditCourse({history}) {
+export default function EditCourse() {
     const coursesContext = useContext(CoursesContext);
 
     const {getCourse, course, updateCourse, loading} = coursesContext;

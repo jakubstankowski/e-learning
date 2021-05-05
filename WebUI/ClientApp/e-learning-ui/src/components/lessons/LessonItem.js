@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import {Link} from "@reach/router";
+import {Link, useParams} from "@reach/router";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
@@ -29,10 +29,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LessonItem(props) {
     const classes = useStyles();
-    const {title, id, courseId, deleteLesson, index} = props.lesson;
+    const {title, id, deleteLesson} = props.lesson;
 
     const authContext = useContext(AuthContext);
     const {isAuthenticated} = authContext;
+
+    const {courseId} = useParams();
 
     useEffect(() => {
         // eslint-disable-next-line
@@ -55,7 +57,7 @@ export default function LessonItem(props) {
                         {
                             isAuthenticated &&
                             <CardActions>
-                                <Link to={`/dashboard/lessons/${id}/edit`}
+                                <Link to={`/dashboard/course/${courseId}/lesson/${id}/edit`}
                                       style={{textDecoration: 'none'}}
                                 >
                                     <Button color="primary" variant="contained">
