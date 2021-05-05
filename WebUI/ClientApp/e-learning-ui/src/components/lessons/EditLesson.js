@@ -7,25 +7,33 @@ import {useContext, useEffect} from "react";
 import LessonsContext from "../../context/lessons/lessonsContext";
 import Spinner from "../layout/Spinner";
 import {navigate, useParams} from "@reach/router";
+import AuthContext from "../../context/auth/authContext";
 
 export default function EditLesson() {
     const lessonsContext = useContext(LessonsContext);
 
     const {getLesson, updateLesson, lesson, loading} = lessonsContext;
 
-    const {lessonId} = useParams();
+    const authContext = useContext(AuthContext);
+    const {isAuthenticated} = authContext;
+
+    const {lessonId, courseId} = useParams();
 
     useEffect(() => {
-        getLesson(lessonId);
+        if (isAuthenticated) {
+            getLesson(lessonId);
+        }
         // eslint-disable-next-line
-    }, []);
+    }, [isAuthenticated]);
 
     if (loading) return <Spinner/>
+
+    const {id, title, description, videoUrl} = lesson;
 
     const onSubmit = (lesson) => {
         updateLesson(lessonId, lesson)
             .then(() => {
-                navigate(`/course/${lesson.courseId}/lesson/${lessonId}`);
+                navigate(`/course/${courseId}/lesson/${lessonId}`);
             })
     };
 
@@ -55,11 +63,11 @@ export default function EditLesson() {
             </Typography>
             <Form
                 initialValues={{
-                    id: lesson.id,
-                    title: lesson.title,
-                    description: lesson.description,
-                    videoUrl: lesson.videoUrl,
-                    courseId: lesson.courseId
+                    id: id,
+                    title: title,
+                    description: description,
+                    videoUrl: videoUrl,
+                    courseId: courseId
                 }}
                 onSubmit={onSubmit}
                 validate={validate}

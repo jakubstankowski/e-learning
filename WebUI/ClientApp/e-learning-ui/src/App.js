@@ -39,6 +39,7 @@ function App() {
                             <EditCourse path="/courses/:courseId/edit"/>
                             <Courses path="/courses"/>
                             <Course path="/course/:courseId"/>
+                            <Lesson path="/course/:courseId/lesson/:lessonId"/>
                             <CreateLesson path="/lesson/create"/>
                             <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>
                         </DashboardLayout>
