@@ -6,21 +6,27 @@ import {makeStyles} from '@material-ui/core/styles';
 import Paper from "@material-ui/core/Paper";
 import LessonVideo from "./LessonVideo";
 import Grid from "@material-ui/core/Grid";
-import Lessons from "./Lessons";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
+import AuthContext from "../../context/auth/authContext";
+import Button from "@material-ui/core/Button";
 
 
-export default function Lesson({match}) {
+export default function Lesson() {
     const lessonsContext = useContext(LessonsContext);
-    const {getLesson, lesson, loading} = lessonsContext;
+    const {getLesson, lesson, loading, deleteLesson} = lessonsContext;
 
-    const {lessonId} = useParams();
+    const authContext = useContext(AuthContext);
+    const {isAuthenticated} = authContext;
+
+    const {lessonId, courseId} = useParams();
 
     useEffect(() => {
-        getLesson(lessonId);
+        if (isAuthenticated) {
+            getLesson(lessonId);
+        }
         // eslint-disable-next-line
-    }, [lessonId])
+    }, [lessonId, isAuthenticated])
 
     const useStyles = makeStyles((theme) => ({
         paper: {
@@ -38,7 +44,7 @@ export default function Lesson({match}) {
 
     if (loading) return <Spinner/>
 
-    const {title, description, videoUrl, courseId, nextLessonId, previousLessonId} = lesson;
+    const {id, title, description, videoUrl, nextLessonId, previousLessonId} = lesson;
 
     return (
         <Container className={classes.lesson}>
@@ -91,6 +97,23 @@ export default function Lesson({match}) {
                                     </Paper>
                                 </Link>
                             </Grid>
+                        }
+                        {
+                            isAuthenticated &&
+                            <article>
+                                <Link to={`/dashboard/course/${courseId}/lesson/${id}/edit`}
+                                      style={{textDecoration: 'none'}}
+                                >
+                                    <Button color="primary" variant="contained">
+                                        Edit
+                                    </Button>
+                                </Link>
+                                <Button color="secondary"
+                                        onClick={() => deleteLesson(id)}
+                                        variant="contained">
+                                    Delete
+                                </Button>
+                            </article>
                         }
                     </Grid>
 

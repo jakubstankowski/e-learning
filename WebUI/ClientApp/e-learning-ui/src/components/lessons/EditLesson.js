@@ -59,7 +59,7 @@ export default function EditLesson() {
     return (
         <section className='form-container'>
             <Typography variant="h5" component="h2">
-                Edit Lesson <strong>{lesson.title}</strong> ID: <strong>{lesson.id}</strong>
+                Edit Lesson <strong>{title}</strong> ID: <strong>{id}</strong>
             </Typography>
             <Form
                 initialValues={{
