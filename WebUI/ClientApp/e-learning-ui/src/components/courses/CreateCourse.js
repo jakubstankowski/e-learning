@@ -32,6 +32,11 @@ export default function CreateCourse() {
         if (!values.price) {
             errors.price = 'Required';
         }
+
+        if(!values.imageUrl){
+            errors.imageUrl = 'Required';
+        }
+
         return errors;
     };
 
@@ -70,6 +75,15 @@ export default function CreateCourse() {
                                 name="price"
                                 fullWidth
                                 label="Price"
+                            />
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                type="text"
+                                name="imageUrl"
+                                fullWidth
+                                label="Image Url"
                             />
                             <Button type="submit"
                                     className="form-button"

@@ -46,6 +46,11 @@ export default function EditCourse() {
         if (!values.price) {
             errors.price = 'Required';
         }
+
+        if(!values.imageUrl){
+            errors.imageUrl = 'Required';
+        }
+
         return errors;
     };
 
@@ -62,7 +67,7 @@ export default function EditCourse() {
 
     if (loading) return <Spinner/>;
 
-    const {title, id, description, price} = course;
+    const {title, id, description, price, imageUrl} = course;
 
     return (
         <section className={classes.editCourse}>
@@ -74,7 +79,8 @@ export default function EditCourse() {
                     id: id,
                     title: title,
                     description: description,
-                    price: price
+                    price: price,
+                    imageUrl: imageUrl,
                 }}
                 onSubmit={onSubmit}
                 validate={validate}
@@ -110,6 +116,16 @@ export default function EditCourse() {
                                         component={TextField}
                                         type="number"
                                         label="Price"
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Field
+                                        fullWidth
+                                        required
+                                        name="imageUrl"
+                                        component={TextField}
+                                        type="text"
+                                        label="Image Url"
                                     />
                                 </Grid>
                                 <Grid item xs={4}>
