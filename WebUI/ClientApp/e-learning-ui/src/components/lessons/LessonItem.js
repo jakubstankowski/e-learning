@@ -54,24 +54,24 @@ export default function LessonItem(props) {
                                 </Typography>
                             </CardContent>
                         </article>
-                        {
-                            isAuthenticated &&
-                            <CardActions>
-                                <Link to={`/dashboard/course/${courseId}/lesson/${id}/edit`}
-                                      style={{textDecoration: 'none'}}
-                                >
-                                    <Button color="primary" variant="contained">
-                                        Edit
-                                    </Button>
-                                </Link>
-                                <Button color="secondary"
-                                        onClick={() => deleteLesson(id)}
-                                        variant="contained">
-                                    Delete
-                                </Button>
-                            </CardActions>
-                        }
                     </Link>
+                    {
+                        isAuthenticated &&
+                        <CardActions>
+                            <Link to={`/dashboard/course/${courseId}/lesson/${id}/edit`}
+                                  style={{textDecoration: 'none'}}
+                            >
+                                <Button color="primary" variant="contained">
+                                    Edit
+                                </Button>
+                            </Link>
+                            <Button color="secondary"
+                                    onClick={() => deleteLesson(id)}
+                                    variant="contained">
+                                Delete
+                            </Button>
+                        </CardActions>
+                    }
                 </CardActionArea>
             </Card>
         </Grid>

@@ -10,15 +10,13 @@ import AuthContext from "../../context/auth/authContext";
 export default function Courses() {
     const coursesContext = useContext(CoursesContext);
 
-    const {getCourses, deleteCourse, courses, loading} = coursesContext;
+    const {getCourses, courses, loading} = coursesContext;
 
     const authContext = useContext(AuthContext);
 
-    const {loadUser, isAuthenticated} = authContext;
+    const {isAuthenticated} = authContext;
 
     useEffect(() => {
-
-        // eslint-disable-next-line
         if (isAuthenticated) {
             getCourses();
         }
@@ -31,7 +29,7 @@ export default function Courses() {
         <Grid container spacing={4}>
             {
                 courses.map((course) =>
-                        <CourseItem course={course} key={course.id} />
+                    <CourseItem course={course} key={course.id}/>
                 )
             }
         </Grid>
