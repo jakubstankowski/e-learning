@@ -39,7 +39,7 @@ export default function CourseItem(props) {
 
     const coursesContext = useContext(CoursesContext);
 
-    const { deleteCourse} = coursesContext;
+    const {deleteCourse} = coursesContext;
 
     useEffect(() => {
         // eslint-disable-next-line
@@ -74,19 +74,19 @@ export default function CourseItem(props) {
                                 <Link to={`/dashboard/courses/${id}/edit`}
                                       style={{textDecoration: 'none'}}
                                 >
-                                    <Button  color="primary"  variant="contained">
+                                    <Button color="primary" variant="contained">
                                         Edit
                                     </Button>
                                 </Link>
-                                <Button  color="secondary"
-                                         onClick={() => deleteCourse(id)}
-                                         variant="contained">
+                                <Button color="secondary"
+                                        onClick={() => deleteCourse(id)}
+                                        variant="contained">
                                     Delete
                                 </Button>
-                                <Link to={`/dashboard/lesson/create`}
+                                <Link to={`/dashboard/course/${id}/lesson/create`}
                                       style={{textDecoration: 'none'}}
                                 >
-                                    <Button  color="primary"  variant="contained">
+                                    <Button color="primary" variant="contained">
                                         Create New Lesson
                                     </Button>
                                 </Link>

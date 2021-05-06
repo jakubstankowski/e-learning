@@ -40,7 +40,7 @@ function App() {
                             <Courses path="/courses"/>
                             <Course path="/course/:courseId"/>
                             <Lesson path="/course/:courseId/lesson/:lessonId"/>
-                            <CreateLesson path="/lesson/create"/>
+                            <CreateLesson path="/course/:courseId/lesson/create"/>
                             <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>
                         </DashboardLayout>
                     </Router>

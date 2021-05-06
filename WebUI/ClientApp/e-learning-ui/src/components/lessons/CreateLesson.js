@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import {useContext} from "react";
 import LessonsContext from "../../context/lessons/lessonsContext";
 import Container from "@material-ui/core/Container";
-import {navigate} from "@reach/router";
+import {navigate, useParams} from "@reach/router";
 
 
 export default function CreateLesson() {
@@ -14,10 +14,12 @@ export default function CreateLesson() {
 
     const {postLesson} = lessonsContext;
 
+    const {courseId} = useParams();
+
     const onSubmit = (values) => {
         postLesson(values)
             .then(() => {
-                navigate(`/course/${values.courseId}`);
+                navigate(`/course/${courseId}`);
             })
     };
 
@@ -50,6 +52,9 @@ export default function CreateLesson() {
                     Create Lesson
                 </Typography>
                 <Form
+                    initialValues={{
+                        courseId: courseId
+                    }}
                     onSubmit={onSubmit}
                     validate={validate}
                     render={({handleSubmit, submitting}) => (
@@ -82,6 +87,7 @@ export default function CreateLesson() {
                                 variant="outlined"
                                 margin="normal"
                                 required
+                                disabled={true}
                                 type="number"
                                 name="courseId"
                                 fullWidth
