@@ -38,7 +38,6 @@ export default function CourseItem(props) {
     const {isAuthenticated} = authContext;
 
     const coursesContext = useContext(CoursesContext);
-
     const {deleteCourse} = coursesContext;
 
     useEffect(() => {

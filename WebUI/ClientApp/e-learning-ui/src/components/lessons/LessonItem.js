@@ -9,6 +9,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import AuthContext from "../../context/auth/authContext";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
+import LessonsContext from "../../context/lessons/lessonsContext";
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -29,10 +30,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LessonItem(props) {
     const classes = useStyles();
-    const {title, id, deleteLesson} = props.lesson;
+
+    const {title, id} = props.lesson;
 
     const authContext = useContext(AuthContext);
     const {isAuthenticated} = authContext;
+
+    const lessonsContext = useContext(LessonsContext);
+    const {deleteLesson} = lessonsContext;
 
     const {courseId} = useParams();
 
