@@ -22,12 +22,14 @@ namespace E_Learning.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IIdentityService _identityService;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IIdentityService identityService)
+        public AccountController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager, IIdentityService identityService)
         {
             _userManager = userManager;
             _identityService = identityService;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
         [HttpPost("register")]
@@ -48,10 +50,15 @@ namespace E_Learning.Controllers
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
+
+
             if (!result.Succeeded)
             {
                 return BadRequest();
             }
+
+
+            await _userManager.AddToRoleAsync(user, "Member");
 
             return new UserDto
             {
@@ -62,6 +69,8 @@ namespace E_Learning.Controllers
 
 
         }
+
+
 
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
@@ -110,6 +119,26 @@ namespace E_Learning.Controllers
             };
         }
 
+        [HttpPost("roles")]
+        public async Task<ActionResult> CreateNewRoles(RoleDto role)
+        {
+            var alreadyExists = await _roleManager.RoleExistsAsync(role.ToString());
+
+            if (alreadyExists)
+            {
+                throw new Exception("Role is already exist!");
+            }
+
+            var newRole = new IdentityRole
+            {
+                Name = role.ToString()
+            };
+
+            await _roleManager.CreateAsync(newRole);
+
+
+            return Ok(200);
+        }
 
     }
 

@@ -21,6 +21,7 @@ using E_Learning.Application.Courses.Queries;
 using E_Learning.Application.Courses.Commands;
 using E_Learning.Domain.Entities;
 using StackExchange.Redis;
+using Microsoft.AspNetCore.Identity;
 
 namespace E_Learning
 {
@@ -49,6 +50,7 @@ namespace E_Learning
             services.AddAutoMapper(typeof(MappingProfiles));
 
             services.AddDefaultIdentity<ApplicationUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<Context>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
