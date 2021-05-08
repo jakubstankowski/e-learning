@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using E_Learning.Application.Common.Interfaces;
+﻿using System.Threading.Tasks;
 using E_Learning.Application.Lessons.Commands;
 using E_Learning.Application.Lessons.Commands.DeleteLesson;
 using E_Learning.Application.Lessons.Commands.UpdateLesson;
@@ -14,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace E_Learning.Controllers
 {
     [ApiController]
+    [Authorize(Roles = "User")]
     [Route("api/[controller]")]
     public class LessonController : ControllerBase
     {
@@ -24,7 +21,7 @@ namespace E_Learning.Controllers
             _mediator = mediator;
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<LessonDto>> Create(CreateLessonCommand command)
         {
@@ -34,7 +31,7 @@ namespace E_Learning.Controllers
         }
 
 
-        [Authorize]
+       
         [HttpGet("{id}")]
         public async Task<ActionResult<LessonDto>> GetLesson(int id)
         {
@@ -44,7 +41,7 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<int>> Delete(int id)
         {
@@ -53,7 +50,7 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<ActionResult<LessonDto>> Update(int id, UpdateLessonCommand command)
         {
