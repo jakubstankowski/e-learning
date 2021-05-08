@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace E_Learning.Controllers
 {
     [ApiController]
+    [Authorize(Roles = "User")]
     [Route("api/[controller]")]
     public class CoursesController : ControllerBase
     {
@@ -28,7 +29,7 @@ namespace E_Learning.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [Authorize(Roles = "User")]
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CourseDto>>> Get()
         {
@@ -39,7 +40,6 @@ namespace E_Learning.Controllers
 
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<ActionResult<CourseDto>> GetCourse(int id)
         {
@@ -59,7 +59,7 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "Admin, User")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<CourseDto>> Create(CreateCourseCommand command)
         {
@@ -68,7 +68,7 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<int>> Delete(int id)
         {
@@ -77,7 +77,7 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<ActionResult<CourseDto>> Update(int id, UpdateCourseCommand command)
         {
@@ -85,8 +85,6 @@ namespace E_Learning.Controllers
             {
                 return BadRequest();
             }
-
-
 
             var result = await _mediator.Send(command);
 
