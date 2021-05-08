@@ -17,7 +17,7 @@ export default function Lesson() {
     const {getLesson, lesson, loading, deleteLesson} = lessonsContext;
 
     const authContext = useContext(AuthContext);
-    const {isAuthenticated} = authContext;
+    const {isAuthenticated, isAdmin} = authContext;
 
     const {lessonId, courseId} = useParams();
 
@@ -99,7 +99,7 @@ export default function Lesson() {
                             </Grid>
                         }
                         {
-                            isAuthenticated &&
+                            isAdmin &&
                             <article>
                                 <Link to={`/dashboard/course/${courseId}/lesson/${id}/edit`}
                                       style={{textDecoration: 'none'}}

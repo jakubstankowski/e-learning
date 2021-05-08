@@ -15,7 +15,7 @@ export default function Course() {
     const {getCourse, course, loading, deleteCourse} = coursesContext;
 
     const authContext = useContext(AuthContext);
-    const {isAuthenticated} = authContext;
+    const {isAuthenticated, isAdmin} = authContext;
 
     const {courseId} = useParams();
 
@@ -47,7 +47,7 @@ export default function Course() {
                 {title}
             </Typography>
             {
-                isAuthenticated &&
+                isAdmin &&
                 <article>
                     <Link to={`/dashboard/courses/${courseId}/edit`}
                           style={{textDecoration: 'none'}}

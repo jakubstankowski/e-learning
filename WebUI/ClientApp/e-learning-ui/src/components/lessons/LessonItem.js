@@ -34,7 +34,7 @@ export default function LessonItem(props) {
     const {title, id} = props.lesson;
 
     const authContext = useContext(AuthContext);
-    const {isAuthenticated} = authContext;
+    const {isAuthenticated, isAdmin} = authContext;
 
     const lessonsContext = useContext(LessonsContext);
     const {deleteLesson} = lessonsContext;
@@ -61,7 +61,7 @@ export default function LessonItem(props) {
                         </article>
                     </Link>
                     {
-                        isAuthenticated &&
+                        isAdmin &&
                         <CardActions>
                             <Link to={`/dashboard/course/${courseId}/lesson/${id}/edit`}
                                   style={{textDecoration: 'none'}}
