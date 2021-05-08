@@ -59,7 +59,6 @@ namespace E_Learning.Controllers
                 return BadRequest();
             }
 
-
             var result = await _mediator.Send(command);
 
             return Ok(result);
