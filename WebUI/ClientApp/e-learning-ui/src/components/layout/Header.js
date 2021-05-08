@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {Fragment, useContext, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import {Link} from '@reach/router';
+import AuthContext from '../../context/auth/authContext';
+
 
 const useStyles = makeStyles((theme) => ({
     link: {
@@ -15,8 +15,8 @@ const useStyles = makeStyles((theme) => ({
     toolbar: {
         borderBottom: `1px solid ${theme.palette.divider}`,
     },
-    loginButton: {
-        marginRight: '1rem'
+    headerButton: {
+        margin: '1rem'
     },
     toolbarTitle: {
         flex: 1,
@@ -31,9 +31,46 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 export default function Header(props) {
     const classes = useStyles();
     const {sections, title} = props;
+
+    const authContext = useContext(AuthContext);
+    const {logout, loadUser, isAuthenticated} = authContext;
+
+    useEffect(() => {
+        loadUser();
+        // eslint-disable-next-line
+    }, [isAuthenticated]);
+
+    const authLinks = (
+        <Fragment>
+            <Link to="/dashboard">
+                <Button variant="outlined" size="small" className={classes.headerButton} color="primary">
+                    Dashboard
+                </Button>
+            </Link>
+            <Button variant="outlined" size="small" className={classes.headerButton} onClick={logout} color="primary">
+                Logout
+            </Button>
+        </Fragment>
+    );
+
+    const guestLinks = (
+        <Fragment>
+            <Link to="/register">
+                <Button variant="outlined" size="small" className={classes.headerButton} color="primary">
+                    Register
+                </Button>
+            </Link>
+            <Link to="/login">
+                <Button variant="outlined" size="small" className={classes.headerButton} color="primary">
+                    Login
+                </Button>
+            </Link>
+        </Fragment>
+    );
 
     return (
         <React.Fragment>
@@ -48,21 +85,9 @@ export default function Header(props) {
                         {title}
                     </Link>
                 </Typography>
-                <Link to={'/dashboard'}>
-                    <Button variant="outlined" size="small" className={classes.loginButton}>
-                        Dashboard
-                    </Button>
-                </Link>
-                <Link to={'/login'}>
-                    <Button variant="outlined" size="small" className={classes.loginButton}>
-                        Login
-                    </Button>
-                </Link>
-                <Link to={'/register'}>
-                    <Button variant="outlined" size="small">
-                        Register
-                    </Button>
-                </Link>
+                {
+                    isAuthenticated ? authLinks : guestLinks
+                }
             </Toolbar>
             <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
                 {sections.map((section) => (
@@ -85,87 +110,3 @@ Header.propTypes = {
     sections: PropTypes.array,
     title: PropTypes.string,
 };
-
-
-/*
-import React, {Fragment, useContext, useEffect} from 'react';
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import AppBar from "@material-ui/core/AppBar";
-import {Link, Redirect} from "@reach/router";
-
-import {Button} from "@material-ui/core";
-import AuthContext from '../../context/auth/authContext';
-
-
-export default function Header() {
-    const authContext = useContext(AuthContext);
-
-    const {isAuthenticated, logout, user, loadUser} = authContext;
-
-    useEffect(() => {
-        loadUser();
-
-
-
-        // eslint-disable-next-line
-    }, [isAuthenticated]);
-
-    const onLogout = () => {
-        logout();
-    };
-
-    const authLinks = (
-        <Fragment>
-            <Link to="/dashboard/course/create">
-                <Button>
-                    Create new course
-                </Button>
-            </Link>
-            <Link to="/dashboard/lesson/create">
-                <Button>
-                    Create new lesson
-                </Button>
-            </Link>
-            <Link to="/dashboard">
-                <Button>
-                   Dashboard
-                </Button>
-            </Link>
-            <Button onClick={onLogout}>
-                Logout
-            </Button>
-        </Fragment>
-    );
-
-    const guestLinks = (
-        <Fragment>
-            <Link to="/register">
-                <Button>
-                    Register
-                </Button>
-            </Link>
-            <Link to="/login">
-                <Button>
-                    Login
-                </Button>
-            </Link>
-        </Fragment>
-    );
-
-    return (
-        <AppBar position="static" className='navbar'>
-            <Toolbar variant="dense">
-                <Link to="/">
-                    <Typography variant="h6" color="inherit">
-                        E-Learning
-                    </Typography>
-                </Link>
-                {isAuthenticated ? authLinks : guestLinks}
-            </Toolbar>
-        </AppBar>
-    )
-
-}
-
-*/

@@ -59,7 +59,7 @@ export default function Login({history}) {
                 </Typography>
                 <Form
                     initialValues={{
-                        email: 'kuba34@hotmail.com',
+                        email: 'admin@stanlearn.pl',
                         password: 'Breakingbad_2014'
                     }}
                     onSubmit={onSubmit}
