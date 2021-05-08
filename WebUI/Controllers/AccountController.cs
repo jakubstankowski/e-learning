@@ -122,7 +122,7 @@ namespace E_Learning.Controllers
         [HttpPost("roles")]
         public async Task<ActionResult> CreateNewRoles(RoleDto role)
         {
-            var alreadyExists = await _roleManager.RoleExistsAsync(role.ToString());
+            var alreadyExists = await _roleManager.RoleExistsAsync(role.Name);
 
             if (alreadyExists)
             {
@@ -131,13 +131,13 @@ namespace E_Learning.Controllers
 
             var newRole = new IdentityRole
             {
-                Name = role.ToString()
+                Name = role.Name
             };
 
             await _roleManager.CreateAsync(newRole);
 
 
-            return Ok(200);
+            return Ok("Roles success create");
         }
 
     }
