@@ -63,7 +63,7 @@ namespace E_Learning.Controllers
 
             return new UserDto
             {
-                Token = _identityService.GenerateToken(user),
+                Token = await _identityService.GenerateToken(user),
                 Email = user.Email,
                 Roles = await _userManager.GetRolesAsync(user)
             };
@@ -93,7 +93,7 @@ namespace E_Learning.Controllers
 
             return new UserDto
             {
-                Token = _identityService.GenerateToken(user),
+                Token = await _identityService.GenerateToken(user),
                 Email = user.Email,
                 Roles = await _userManager.GetRolesAsync(user)
             };
@@ -117,7 +117,7 @@ namespace E_Learning.Controllers
 
             return new UserDto
             {
-                Token = _identityService.GenerateToken(user),
+                Token = await _identityService.GenerateToken(user),
                 Email = user.Email,
                 Roles = await _userManager.GetRolesAsync(user)
             };

@@ -29,19 +29,25 @@ namespace Infrastructure.Identity
             _userManager = userManager;
         }
 
-        public string GenerateToken(ApplicationUser user)
+        public async Task<string> GenerateToken(ApplicationUser user)
         {
-
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var roles = await _userManager.GetRolesAsync(user);          
+
+            var claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
+            claims.Add(new Claim(ClaimTypes.Email, user.Email));
+
+            foreach(var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
+            }
+
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Expires = DateTime.UtcNow.AddHours(3),
-                Subject = new ClaimsIdentity(new[]
-           {
-                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                 new Claim(ClaimTypes.Email, user.Email)
-             }),
+                Subject = new ClaimsIdentity(claims),
                 SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature),
                 Audience = _config["Jwt:Issuer"],
                 Issuer = _config["Jwt:Issuer"],

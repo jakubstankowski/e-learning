@@ -106,12 +106,16 @@ const DashboardLayout = protectedComponent(({children}) => {
     const classes = useStyles();
     const authContext = useContext(AuthContext);
 
-    const {loadUser} = authContext;
+    const {loadUser, isAuthenticated} = authContext;
 
     useEffect(() => {
         loadUser();
         // eslint-disable-next-line
-    }, []);
+    }, [isAuthenticated]);
+
+    if (!isAuthenticated) {
+        return <h1>Not authenticated!</h1>
+    }
 
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
@@ -137,10 +141,10 @@ const DashboardLayout = protectedComponent(({children}) => {
                     >
                         <MenuIcon/>
                     </IconButton>
-                    <Typography component="h1" variant="h6"  noWrap className={classes.title}>
-                       <Link to="/">
-                           E Learning
-                       </Link>
+                    <Typography component="h1" variant="h6" noWrap className={classes.title}>
+                        <Link to="/">
+                            E Learning
+                        </Link>
                     </Typography>
                     <IconButton color="inherit">
                         <Badge badgeContent={4} color="secondary">

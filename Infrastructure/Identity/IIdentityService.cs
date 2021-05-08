@@ -8,7 +8,7 @@ namespace E_Learning.Application.Common.Interfaces
 {
     public interface IIdentityService
     {
-        public string GenerateToken(ApplicationUser user);
+        public Task<string> GenerateToken(ApplicationUser user);
 
         public string GetUserId();
 

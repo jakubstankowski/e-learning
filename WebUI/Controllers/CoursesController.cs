@@ -28,7 +28,7 @@ namespace E_Learning.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [Authorize]
+        [Authorize(Roles = "User")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CourseDto>>> Get()
         {
@@ -39,7 +39,7 @@ namespace E_Learning.Controllers
 
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<ActionResult<CourseDto>> GetCourse(int id)
         {
@@ -59,7 +59,7 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin, User")]
         [HttpPost]
         public async Task<ActionResult<CourseDto>> Create(CreateCourseCommand command)
         {
