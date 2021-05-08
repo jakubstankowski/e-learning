@@ -35,7 +35,7 @@ export default function CourseItem(props) {
     const {id, title, price, imageUrl} = props.course;
 
     const authContext = useContext(AuthContext);
-    const {isAuthenticated} = authContext;
+    const {isAuthenticated, isAdmin} = authContext;
 
     const coursesContext = useContext(CoursesContext);
     const {deleteCourse} = coursesContext;
@@ -69,7 +69,7 @@ export default function CourseItem(props) {
                         </article>
                     </Link>
                     {
-                        isAuthenticated &&
+                        isAuthenticated && isAdmin &&
                         <CardActions>
                             <Link to={`/dashboard/courses/${id}/edit`}
                                   style={{textDecoration: 'none'}}

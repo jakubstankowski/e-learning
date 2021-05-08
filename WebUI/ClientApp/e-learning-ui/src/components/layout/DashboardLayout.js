@@ -106,16 +106,12 @@ const DashboardLayout = protectedComponent(({children}) => {
     const classes = useStyles();
     const authContext = useContext(AuthContext);
 
-    const {loadUser, isAuthenticated} = authContext;
+    const {loadUser} = authContext;
 
     useEffect(() => {
         loadUser();
         // eslint-disable-next-line
-    }, [isAuthenticated]);
-
-    if (!isAuthenticated) {
-        return <h1>Not authenticated!</h1>
-    }
+    }, []);
 
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {
