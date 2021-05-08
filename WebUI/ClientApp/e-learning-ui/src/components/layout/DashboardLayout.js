@@ -18,6 +18,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import {protectedComponent} from "../routing/PrivateRoute";
 import AuthContext from "../../context/auth/authContext";
 import {DashboardListItems} from "../dashboard/DashboardListItems";
+import {Button} from "@material-ui/core";
 
 
 const drawerWidth = 240;
@@ -106,7 +107,7 @@ const DashboardLayout = protectedComponent(({children}) => {
     const classes = useStyles();
     const authContext = useContext(AuthContext);
 
-    const {loadUser} = authContext;
+    const {loadUser, logout} = authContext;
 
     useEffect(() => {
         loadUser();
@@ -142,11 +143,9 @@ const DashboardLayout = protectedComponent(({children}) => {
                             E Learning
                         </Link>
                     </Typography>
-                    <IconButton color="inherit">
-                        <Badge badgeContent={4} color="secondary">
-                            <NotificationsIcon/>
-                        </Badge>
-                    </IconButton>
+                    <Button variant="contained" size="small" onClick={logout} color="secondary">
+                        Logout
+                    </Button>
                 </Toolbar>
             </AppBar>
             <Drawer
