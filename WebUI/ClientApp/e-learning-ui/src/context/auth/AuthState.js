@@ -3,12 +3,15 @@ import axios from 'axios';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
 import setAuthToken from '../../utils/setAuthToken';
+import {ROLES} from "../../constants/roles";
+
 import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     USER_LOADED,
+    USER_IS_ADMIN,
     AUTH_ERROR,
     LOGOUT
 } from '../types';
@@ -17,6 +20,7 @@ const AuthState = props => {
     const initialState = {
         token: localStorage.getItem('token'),
         isAuthenticated: null,
+        isAdmin: null,
         loading: true,
         user: null,
         error: null
@@ -30,12 +34,21 @@ const AuthState = props => {
         try {
             const res = await axios.get('/api/auth');
 
-            console.log('res: ', res);
-
             dispatch({
                 type: USER_LOADED,
                 payload: res.data
             });
+
+
+            res.data.roles.includes(ROLES.ADMIN) ?
+                dispatch({
+                    type: USER_IS_ADMIN,
+                    payload: true
+                }) : dispatch({
+                    type: USER_IS_ADMIN,
+                    payload: false
+                });
+
         } catch (err) {
             dispatch({type: AUTH_ERROR});
         }
@@ -98,6 +111,7 @@ const AuthState = props => {
                 token: state.token,
                 isAuthenticated: state.isAuthenticated,
                 loading: state.loading,
+                isAdmin: state.isAdmin,
                 user: state.user,
                 error: state.error,
                 login,
