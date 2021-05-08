@@ -58,12 +58,14 @@ namespace E_Learning.Controllers
             }
 
 
-            await _userManager.AddToRoleAsync(user, "Member");
+            await _userManager.AddToRoleAsync(user, "User");
+
 
             return new UserDto
             {
                 Token = _identityService.GenerateToken(user),
-                Email = user.Email
+                Email = user.Email,
+                Roles = await _userManager.GetRolesAsync(user)
             };
 
 
@@ -92,7 +94,8 @@ namespace E_Learning.Controllers
             return new UserDto
             {
                 Token = _identityService.GenerateToken(user),
-                Email = user.Email
+                Email = user.Email,
+                Roles = await _userManager.GetRolesAsync(user)
             };
 
         }
@@ -115,9 +118,11 @@ namespace E_Learning.Controllers
             return new UserDto
             {
                 Token = _identityService.GenerateToken(user),
-                Email = user.Email
+                Email = user.Email,
+                Roles = await _userManager.GetRolesAsync(user)
             };
         }
+
 
         [HttpPost("roles")]
         public async Task<ActionResult> CreateNewRoles(RoleDto role)
