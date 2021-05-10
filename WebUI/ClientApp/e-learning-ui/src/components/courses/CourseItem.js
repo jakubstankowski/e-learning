@@ -53,8 +53,10 @@ export default function CourseItem(props) {
                     >
                         <CardMedia
                             className={classes.cardMedia}
-                            image={imageUrl}
-                            title="net core"
+                            component="img"
+                            alt={`${title}-image`}
+                            title={title}
+                            src={imageUrl}
                         />
 
                         <article className={classes.cardDetails}>
@@ -68,7 +70,7 @@ export default function CourseItem(props) {
                             </CardContent>
                         </article>
                     </Link>
-                    {
+                   {/* {
                          isAdmin &&
                         <CardActions>
                             <Link to={`/dashboard/courses/${id}/edit`}
@@ -91,7 +93,7 @@ export default function CourseItem(props) {
                                 </Button>
                             </Link>
                         </CardActions>
-                    }
+                    }*/}
                 </CardActionArea>
             </Card>
         </Grid>
