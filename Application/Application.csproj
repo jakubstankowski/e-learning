@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="ApplicationUser\Command\" />
-    <Folder Include="ApplicationUser\Queries\" />
   </ItemGroup>
 
 </Project>
