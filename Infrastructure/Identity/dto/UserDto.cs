@@ -12,6 +12,8 @@ namespace Infrastructure.Identity.dto
 
         public string Token { get; set; }
 
+        public string UserId { get; set; }
+
         public IEnumerable<string> Roles { get; set; }
     }
 }

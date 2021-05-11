@@ -70,7 +70,7 @@ export default function CourseItem(props) {
                             </CardContent>
                         </article>
                     </Link>
-                   {/* {
+                   {
                          isAdmin &&
                         <CardActions>
                             <Link to={`/dashboard/courses/${id}/edit`}
@@ -93,7 +93,7 @@ export default function CourseItem(props) {
                                 </Button>
                             </Link>
                         </CardActions>
-                    }*/}
+                    }
                 </CardActionArea>
             </Card>
         </Grid>
