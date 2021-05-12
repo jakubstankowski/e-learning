@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ApplicationUser\Command\" />
+    <Folder Include="User\Command\" />
   </ItemGroup>
 
 </Project>
