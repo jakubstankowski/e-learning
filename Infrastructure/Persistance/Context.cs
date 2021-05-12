@@ -18,6 +18,8 @@ namespace Infrastructure.Persistance
 
         public DbSet<Course> Courses { get; set; }
 
+        public DbSet<UserCourses> UserCourses { get; set; }
+
         public DbSet<Lesson> Lessons { get; set; }
 
         public DbSet<Order> Orders { get; set; }

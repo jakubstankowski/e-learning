@@ -15,7 +15,5 @@ namespace E_Learning.Domain.Entities
         public string ImageUrl { get; set; }
 
         public ICollection<Lesson> Lessons { get; set; }
-
-       
     }
 }
