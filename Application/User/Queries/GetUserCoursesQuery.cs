@@ -8,10 +8,11 @@ using AutoMapper;
 using E_Learning.Application.Common.Dto;
 using E_Learning.Application.Common.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.ApplicationUser.Queries
 {
-    public class GetUserCoursesQuery : IRequest<CourseDto>
+    public class GetUserCoursesQuery : IRequest<UserCoursesDto>
     {
         public int UserId { get; set; }
 
@@ -20,7 +21,7 @@ namespace E_Learning.Application.ApplicationUser.Queries
             this.UserId = userId;
         }
 
-        public class GetUserCoursesHandler : IRequestHandler<GetUserCoursesQuery, CourseDto>
+        public class GetUserCoursesHandler : IRequestHandler<GetUserCoursesQuery, UserCoursesDto>
         {
             private readonly IContext _context;
             private readonly IMapper _mapper;
@@ -31,8 +32,12 @@ namespace E_Learning.Application.ApplicationUser.Queries
                 _mapper = mapper;
             }
 
-            public Task<CourseDto> Handle(GetUserCoursesQuery request, CancellationToken cancellationToken)
+            public Task<UserCoursesDto> Handle(GetUserCoursesQuery request, CancellationToken cancellationToken)
             {
+                _context.UserCourses
+                    .Where(u => u.ApplicationUser.Id.Equals(request.UserId))
+                    .ToListAsync();
+
                 throw new NotImplementedException();
             }
         }
