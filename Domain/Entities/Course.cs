@@ -16,6 +16,6 @@ namespace E_Learning.Domain.Entities
 
         public ICollection<Lesson> Lessons { get; set; }
 
-        public ICollection<ApplicationUser> ApplicationUser { get; set; }
+       
     }
 }
