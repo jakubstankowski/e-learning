@@ -16,7 +16,8 @@ export default (state, action) => {
                 ...state,
                 isAuthenticated: true,
                 loading: false,
-                user: action.payload
+                user: action.payload,
+                userId: action.payload.userId,
             };
         case USER_IS_ADMIN:
             return {
@@ -43,6 +44,7 @@ export default (state, action) => {
                 isAuthenticated: false,
                 loading: false,
                 user: null,
+                userId: null,
                 error: action.payload
             };
         default:
