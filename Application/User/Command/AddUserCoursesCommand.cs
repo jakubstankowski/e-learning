@@ -6,8 +6,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using E_Learning.Application.Common.Dto;
+using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
+using E_Learning.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+
+
 
 namespace E_Learning.Application.User.Command
 {
@@ -15,8 +20,8 @@ namespace E_Learning.Application.User.Command
     {
         public string UserId { get; set; }
 
-        public string CourseId { get; set; }
-    
+        public int CourseId { get; set; }
+
     }
 
     public class AddUserCoursesHandler : IRequestHandler<AddUserCoursesCommand, IEnumerable<CourseDto>>
@@ -31,8 +36,18 @@ namespace E_Learning.Application.User.Command
         }
 
 
-        public Task<IEnumerable<CourseDto>> Handle(AddUserCoursesCommand request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<CourseDto>> Handle(AddUserCoursesCommand request, CancellationToken cancellationToken)
         {
+            var course = await _context
+                         .Courses.FirstOrDefaultAsync(c => c.Id == request.CourseId);
+
+            if (course == null)
+            {
+                throw new NotFoundException(nameof(Course), request.CourseId);
+            }
+
+
+
             throw new NotImplementedException();
         }
     }

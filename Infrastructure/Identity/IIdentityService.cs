@@ -15,5 +15,6 @@ namespace Infrastructure.Identity
 
         public Task<bool> UserExist(string email);
 
+
     }
 }
