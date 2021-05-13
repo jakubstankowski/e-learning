@@ -18,6 +18,9 @@ import Lessons from "./components/lessons/Lessons";
 import Home from "./components/pages/Home";
 import Lesson from "./components/lessons/Lesson";
 import Dashboard from "./components/dashboard/Dashboard";
+import UserLayout from "./components/layout/UserLayout";
+import UserCourses from "./components/user/UserCourses";
+import UserProfile from "./components/user/UserProfile";
 
 
 function App() {
@@ -43,6 +46,10 @@ function App() {
                             <CreateLesson path="/course/:courseId/lesson/create"/>
                             <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>
                         </DashboardLayout>
+                        <UserLayout path="/user">
+                            <UserCourses path="/my-courses"/>
+                            <UserProfile path="/profile"/>
+                        </UserLayout>
                     </Router>
                 </LessonsState>
             </CoursesState>
