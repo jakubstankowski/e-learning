@@ -66,6 +66,7 @@ namespace E_Learning.Controllers
                 Token = await _identityService.GenerateToken(user),
                 Email = user.Email,
                 UserId = user.Id,
+                IsAdmin = await _userManager.IsInRoleAsync(user, "Admin"),
                 Roles = await _userManager.GetRolesAsync(user)
             };
 
@@ -92,12 +93,12 @@ namespace E_Learning.Controllers
                 return Unauthorized();
             }
 
-
             return new UserDto
             {
                 Token = await _identityService.GenerateToken(user),
                 Email = user.Email,
                 UserId = user.Id,
+                IsAdmin = await _userManager.IsInRoleAsync(user, "Admin"),
                 Roles = await _userManager.GetRolesAsync(user)
             };
 
@@ -123,6 +124,7 @@ namespace E_Learning.Controllers
                 Token = await _identityService.GenerateToken(user),
                 Email = user.Email,
                 UserId = user.Id,
+                IsAdmin = await _userManager.IsInRoleAsync(user, "Admin"),
                 Roles = await _userManager.GetRolesAsync(user)
             };
         }

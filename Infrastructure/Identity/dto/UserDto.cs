@@ -14,6 +14,13 @@ namespace Infrastructure.Identity.dto
 
         public string UserId { get; set; }
 
+        public bool IsAdmin { get; set; }
+
         public IEnumerable<string> Roles { get; set; }
+
+        public UserDto()
+        {
+            this.IsAdmin = false;
+        }
     }
 }

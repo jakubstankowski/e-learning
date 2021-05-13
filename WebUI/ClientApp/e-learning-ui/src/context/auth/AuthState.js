@@ -95,6 +95,8 @@ const AuthState = props => {
             });
 
             loadUser();
+
+            return res.data;
         } catch (err) {
             dispatch({
                 type: LOGIN_FAIL,

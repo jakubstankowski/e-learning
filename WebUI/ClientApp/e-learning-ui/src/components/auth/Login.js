@@ -19,11 +19,6 @@ export default function Login({history}) {
     useEffect(() => {
         if (isAuthenticated) {
             console.log('isAdmin? ', isAdmin);
-            if (isAdmin) {
-                navigate('/dashboard')
-            } else {
-                navigate('/user/my-courses')
-            }
         }
 
         if (error) {
@@ -31,11 +26,14 @@ export default function Login({history}) {
             console.log('error!');
         }
         // eslint-disable-next-line
-    }, [error, isAuthenticated, history, isAdmin]);
+    }, [isAdmin, error, isAuthenticated, history, ]);
 
 
     const onSubmit = (values) => {
         login(values)
+            .then((res)=>{
+                console.log('res', res);
+            })
     };
 
     const validate = (values) => {
