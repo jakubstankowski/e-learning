@@ -6,7 +6,7 @@ export default function Dashboard(){
 
     return(
         <Container>
-            dashboard
+            admin dashboard
         </Container>
     )
 }

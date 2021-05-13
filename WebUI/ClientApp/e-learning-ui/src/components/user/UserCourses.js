@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export default function UserCourses() {
+export default function UserCourses(){
     return (
         <div>
             user courses
