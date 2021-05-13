@@ -7,21 +7,22 @@ using System.Threading.Tasks;
 using AutoMapper;
 using E_Learning.Application.Common.Dto;
 using E_Learning.Application.Common.Interfaces;
+using E_Learning.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.ApplicationUser.Queries
 {
-    public class GetUserCoursesQuery : IRequest<UserCoursesDto>
+    public class GetUserCoursesQuery : IRequest<IEnumerable<CourseDto>>
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
-        public GetUserCoursesQuery(int userId)
+        public GetUserCoursesQuery(string userId)
         {
             this.UserId = userId;
         }
 
-        public class GetUserCoursesHandler : IRequestHandler<GetUserCoursesQuery, UserCoursesDto>
+        public class GetUserCoursesHandler : IRequestHandler<GetUserCoursesQuery, IEnumerable<CourseDto>>
         {
             private readonly IContext _context;
             private readonly IMapper _mapper;
@@ -32,13 +33,25 @@ namespace E_Learning.Application.ApplicationUser.Queries
                 _mapper = mapper;
             }
 
-            public Task<UserCoursesDto> Handle(GetUserCoursesQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<CourseDto>> Handle(GetUserCoursesQuery request, CancellationToken cancellationToken)
             {
-                _context.UserCourses
-                    .Where(u => u.ApplicationUser.Id.Equals(request.UserId))
-                    .ToListAsync();
+                var userCourses = await _context.UserCourses
+                        .Include(u => u.ApplicationUser)
+                        .Include(u => u.Course)
+                       .Where(u => u.ApplicationUser.Id == request.UserId)
+                       .Include(u => u.Course)
+                       .ToListAsync();
 
-                throw new NotImplementedException();
+
+                List<Course> courses = new();
+
+                foreach (var userCourse in userCourses)
+                {
+                    courses.Add(userCourse.Course);
+                }
+
+
+                return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
             }
         }
 

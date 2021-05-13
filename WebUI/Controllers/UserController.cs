@@ -11,24 +11,20 @@ using Microsoft.AspNetCore.Mvc;
 namespace E_Learning.Controllers
 {
     [ApiController]
-    [Authorize(Roles = "User")]
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IMapper _mapper;
-
         public IMediator _mediator { get; }
 
-        public UserController(IMapper mapper, IMediator mediator)
+        public UserController(IMediator mediator)
         {
-            _mapper = mapper;
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
         [HttpGet("{id}/Courses")]
-        public async Task<ActionResult<UserCoursesDto>> GetUserCourses(int userId)
+        public async Task<ActionResult<UserCoursesDto>> GetUserCourses(string id)
         {
-            var query = new GetUserCoursesQuery(userId);
+            var query = new GetUserCoursesQuery(id);
             var result = await _mediator.Send(query);
 
             return Ok(result);
