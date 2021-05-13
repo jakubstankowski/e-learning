@@ -34,21 +34,11 @@ const AuthState = props => {
 
         try {
             const res = await axios.get('/api/auth');
-
             dispatch({
                 type: USER_LOADED,
                 payload: res.data
             });
 
-
-            res.data.roles.includes(ROLES.ADMIN) ?
-                dispatch({
-                    type: USER_IS_ADMIN,
-                    payload: true
-                }) : dispatch({
-                    type: USER_IS_ADMIN,
-                    payload: false
-                });
 
         } catch (err) {
             dispatch({type: AUTH_ERROR});

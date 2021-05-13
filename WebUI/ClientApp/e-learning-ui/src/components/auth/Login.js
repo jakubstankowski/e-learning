@@ -18,7 +18,10 @@ export default function Login({history}) {
 
     useEffect(() => {
         if (isAuthenticated) {
-            console.log('isAdmin? ', isAdmin);
+            if (isAdmin) {
+                return navigate('/dashboard')
+            }
+            return navigate('/user/my-courses')
         }
 
         if (error) {
