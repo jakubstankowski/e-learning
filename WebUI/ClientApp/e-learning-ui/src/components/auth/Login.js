@@ -8,17 +8,22 @@ import Container from '@material-ui/core/Container';
 import {Form} from "react-final-form";
 import {validateEmail} from "../../helpers/validateEmail";
 import AuthContext from "../../context/auth/authContext";
-import { navigate } from "@reach/router"
+import {navigate} from "@reach/router"
 
 export default function Login({history}) {
     const authContext = useContext(AuthContext);
 
-    const {login, error, isAuthenticated} = authContext;
+    const {login, error, isAuthenticated, isAdmin} = authContext;
 
 
     useEffect(() => {
         if (isAuthenticated) {
-           navigate('/dashboard')
+            console.log('isAdmin? ', isAdmin);
+            if (isAdmin) {
+                navigate('/dashboard')
+            } else {
+                navigate('/user/my-courses')
+            }
         }
 
         if (error) {
@@ -26,7 +31,7 @@ export default function Login({history}) {
             console.log('error!');
         }
         // eslint-disable-next-line
-    }, [error, isAuthenticated, history]);
+    }, [error, isAuthenticated, history, isAdmin]);
 
 
     const onSubmit = (values) => {

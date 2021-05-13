@@ -122,6 +122,7 @@ namespace E_Learning.Controllers
             {
                 Token = await _identityService.GenerateToken(user),
                 Email = user.Email,
+                UserId = user.Id,
                 Roles = await _userManager.GetRolesAsync(user)
             };
         }
