@@ -4,7 +4,8 @@ import UserContext from './userContext';
 import UserReducer from './userReducer';
 
 import {
-    GET_USER_COURSES
+    GET_USER_COURSES,
+    SET_LOADING
 } from '../types'
 
 
@@ -20,6 +21,8 @@ function UserState(props) {
         setLoading();
 
         const res = await axios.get(`https://localhost:44367/api/user/${userId}/courses`);
+
+        console.log('res', res);
 
         dispatch({
             type: GET_USER_COURSES,

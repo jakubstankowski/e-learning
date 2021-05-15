@@ -1,5 +1,6 @@
 import {
     GET_USER_COURSES,
+    SET_LOADING,
 } from '../types';
 
 const reducer = (state, action) => {
@@ -9,6 +10,11 @@ const reducer = (state, action) => {
                 ...state,
                 courses: action.payload,
                 loading: false
+            };
+        case SET_LOADING:
+            return {
+                ...state,
+                loading: true
             };
         default:
             return state;

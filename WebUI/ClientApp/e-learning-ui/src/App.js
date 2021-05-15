@@ -21,6 +21,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import UserLayout from "./components/layout/UserLayout";
 import UserCourses from "./components/user/UserCourses";
 import UserProfile from "./components/user/UserProfile";
+import UserState from "./context/user/UserState";
 
 
 function App() {
@@ -28,29 +29,31 @@ function App() {
         <AuthState>
             <CoursesState>
                 <LessonsState>
-                    <Router>
-                        <MainLayout path="/">
-                            <Home path="/"/>
-                            <Course path="/course/:courseId"/>
-                            <Lesson path="/course/:courseId/lesson/:lessonId"/>
-                            <Login path="/login"/>
-                            <Register path="/register"/>
-                        </MainLayout>
-                        <DashboardLayout path="/dashboard">
-                            <Dashboard path="/"/>
-                            <CreateCourse path="/course/create"/>
-                            <EditCourse path="/courses/:courseId/edit"/>
-                            <Courses path="/courses"/>
-                            <Course path="/course/:courseId"/>
-                            <Lesson path="/course/:courseId/lesson/:lessonId"/>
-                            <CreateLesson path="/course/:courseId/lesson/create"/>
-                            <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>
-                        </DashboardLayout>
-                        <UserLayout path="/user">
-                            <UserCourses path="/my-courses"/>
-                            <UserProfile path="/profile"/>
-                        </UserLayout>
-                    </Router>
+                    <UserState>
+                        <Router>
+                            <MainLayout path="/">
+                                <Home path="/"/>
+                                <Course path="/course/:courseId"/>
+                                <Lesson path="/course/:courseId/lesson/:lessonId"/>
+                                <Login path="/login"/>
+                                <Register path="/register"/>
+                            </MainLayout>
+                            <DashboardLayout path="/dashboard">
+                                <Dashboard path="/"/>
+                                <CreateCourse path="/course/create"/>
+                                <EditCourse path="/courses/:courseId/edit"/>
+                                <Courses path="/courses"/>
+                                <Course path="/course/:courseId"/>
+                                <Lesson path="/course/:courseId/lesson/:lessonId"/>
+                                <CreateLesson path="/course/:courseId/lesson/create"/>
+                                <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>
+                            </DashboardLayout>
+                            <UserLayout path="/user">
+                                <UserCourses path="/my-courses"/>
+                                <UserProfile path="/profile"/>
+                            </UserLayout>
+                        </Router>
+                    </UserState>
                 </LessonsState>
             </CoursesState>
         </AuthState>
