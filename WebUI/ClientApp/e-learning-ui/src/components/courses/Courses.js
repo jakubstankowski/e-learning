@@ -30,7 +30,6 @@ export default function Courses() {
             {
                 courses.map((course) =>
                     <CourseItem
-                        link="/dashboard/course"
                         course={course}
                         key={course.id}/>
                 )

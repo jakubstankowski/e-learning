@@ -32,7 +32,6 @@ export default function UserCourses() {
                 {
                     courses.map((course) =>
                         <CourseItem
-                            link="/user/course"
                             course={course}
                             key={course.id}/>
                     )

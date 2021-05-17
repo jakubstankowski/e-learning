@@ -34,6 +34,7 @@ function App() {
                             <MainLayout path="/">
                                 <Home path="/"/>
                                 <Course path="/course/:courseId"/>
+                                <Lesson path="/course/:courseId/lesson/:lessonId"/>
                                 <Login path="/login"/>
                                 <Register path="/register"/>
                             </MainLayout>
@@ -49,8 +50,6 @@ function App() {
                             </DashboardLayout>
                             <UserLayout path="/user">
                                 <UserCourses path="/my-courses"/>
-                                <Course path="/course/:courseId"/>
-                                <Lesson path="/course/:courseId/lesson/:lessonId"/>
                                 <UserProfile path="/profile"/>
                             </UserLayout>
                         </Router>
