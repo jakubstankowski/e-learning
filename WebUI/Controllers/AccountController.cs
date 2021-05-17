@@ -19,12 +19,12 @@ namespace E_Learning.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IIdentityService _identityService;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager, IIdentityService identityService)
+        public AccountController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager, IIdentityService identityService)
         {
             _userManager = userManager;
             _identityService = identityService;
@@ -42,7 +42,7 @@ namespace E_Learning.Controllers
             }
 
 
-            var user = new ApplicationUser
+            var user = new IdentityUser
             {
                 Email = registerDto.Email,
                 UserName = registerDto.Email
@@ -65,7 +65,6 @@ namespace E_Learning.Controllers
             {
                 Token = await _identityService.GenerateToken(user),
                 Email = user.Email,
-                UserId = user.Id,
                 IsAdmin = await _userManager.IsInRoleAsync(user, "Admin"),
                 Roles = await _userManager.GetRolesAsync(user)
             };
@@ -97,7 +96,6 @@ namespace E_Learning.Controllers
             {
                 Token = await _identityService.GenerateToken(user),
                 Email = user.Email,
-                UserId = user.Id,
                 IsAdmin = await _userManager.IsInRoleAsync(user, "Admin"),
                 Roles = await _userManager.GetRolesAsync(user)
             };
@@ -123,7 +121,6 @@ namespace E_Learning.Controllers
             {
                 Token = await _identityService.GenerateToken(user),
                 Email = user.Email,
-                UserId = user.Id,
                 IsAdmin = await _userManager.IsInRoleAsync(user, "Admin"),
                 Roles = await _userManager.GetRolesAsync(user)
             };

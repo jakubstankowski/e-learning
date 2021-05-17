@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using E_Learning.Application.Common.Interfaces;
-using E_Learning.Domain.Entities;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -19,17 +15,17 @@ namespace Infrastructure.Identity
     {
         private readonly IConfiguration _config;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
        
 
-        public IdentityService(IConfiguration config, IHttpContextAccessor httpContextAccessor, UserManager<ApplicationUser> userManager)
+        public IdentityService(IConfiguration config, IHttpContextAccessor httpContextAccessor, UserManager<IdentityUser> userManager)
         {
             _config = config;
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
         }
 
-        public async Task<string> GenerateToken(ApplicationUser user)
+        public async Task<string> GenerateToken(IdentityUser user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var roles = await _userManager.GetRolesAsync(user);          

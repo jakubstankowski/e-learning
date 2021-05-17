@@ -36,10 +36,9 @@ namespace E_Learning.Application.ApplicationUser.Queries
             public async Task<IEnumerable<CourseDto>> Handle(GetUserCoursesQuery request, CancellationToken cancellationToken)
             {
                 var userCourses = await _context.UserCourses
-                        .Include(u => u.ApplicationUser)
+                        .Include(u => u.IdentityUser)
                         .Include(u => u.Course)
-                       .Where(u => u.ApplicationUser.Id == request.UserId)
-                       .Include(u => u.Course)
+                       .Where(u => u.IdentityUser.Id == request.UserId)
                        .ToListAsync();
 
 

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistance
 {
-    public class Context : IdentityDbContext<ApplicationUser>, IContext
+    public class Context : IdentityDbContext, IContext
     {
 
 

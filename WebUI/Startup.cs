@@ -1,27 +1,24 @@
+using System;
 using System.Text;
-using E_Learning.Application.Common.Interfaces;
+using AutoMapper;
 using E_Learning.Application.Common.Mapping;
+using E_Learning.Application.Courses.Commands;
+using E_Learning.Application.Courses.Queries;
+using E_Learning.Application.Courses1.Queries;
 using Infrastructure;
-using Infrastructure.Identity;
 using Infrastructure.Persistance;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using AutoMapper;
-using System;
-using E_Learning.Application.Courses1.Queries;
-using E_Learning.Application.Courses.Queries;
-using E_Learning.Application.Courses.Commands;
-using E_Learning.Domain.Entities;
 using StackExchange.Redis;
-using Microsoft.AspNetCore.Identity;
 
 namespace E_Learning
 {
@@ -49,7 +46,7 @@ namespace E_Learning
 
             services.AddAutoMapper(typeof(MappingProfiles));
 
-            services.AddDefaultIdentity<ApplicationUser>()
+            services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<Context>();
 
