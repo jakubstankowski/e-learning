@@ -3,7 +3,7 @@ import axios from 'axios';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
 import setAuthToken from '../../utils/setAuthToken';
-import {ROLES} from "../../constants/roles";
+import {navigate} from "@reach/router"
 
 import {
     LOGIN_SUCCESS,
@@ -11,7 +11,6 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     USER_LOADED,
-    USER_IS_ADMIN,
     AUTH_ERROR,
     LOGOUT
 } from '../types';
@@ -95,7 +94,13 @@ const AuthState = props => {
         }
     };
 
-    const logout = () => dispatch({type: LOGOUT});
+    const logout = () => {
+        dispatch({
+            type: LOGOUT
+        });
+
+        return navigate('/')
+    }
 
 
     return (
