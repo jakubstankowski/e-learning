@@ -107,12 +107,17 @@ const DashboardLayout = protectedComponent(({children}) => {
     const classes = useStyles();
     const authContext = useContext(AuthContext);
 
-    const {loadUser, logout} = authContext;
+    const {loadUser, logout, isAdmin} = authContext;
 
     useEffect(() => {
         loadUser();
         // eslint-disable-next-line
-    }, []);
+    }, [isAdmin]);
+
+    if (!isAdmin) {
+        return 'You have no permissions for that!';
+    }
+
 
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {

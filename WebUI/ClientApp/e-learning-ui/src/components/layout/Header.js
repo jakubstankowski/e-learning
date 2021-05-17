@@ -38,14 +38,28 @@ export default function Header(props) {
     const {sections, title} = props;
 
     const authContext = useContext(AuthContext);
-    const {logout, loadUser, isAuthenticated} = authContext;
+    const {logout, loadUser, isAuthenticated, isAdmin} = authContext;
 
     useEffect(() => {
         loadUser();
         // eslint-disable-next-line
     }, [isAuthenticated]);
 
+
     const authLinks = (
+        <Fragment>
+            <Link to="/user/my-courses">
+                <Button variant="outlined" size="small" className={classes.headerButton} color="primary">
+                    My Courses
+                </Button>
+            </Link>
+            <Button variant="outlined" size="small" className={classes.headerButton} onClick={logout} color="primary">
+                Logout
+            </Button>
+        </Fragment>
+    );
+
+    const adminAuthLinks = (
         <Fragment>
             <Link to="/dashboard">
                 <Button variant="outlined" size="small" className={classes.headerButton} color="primary">
@@ -58,7 +72,7 @@ export default function Header(props) {
         </Fragment>
     );
 
-    const guestLinks = (
+    let basicLinks = (
         <Fragment>
             <Link to="/register">
                 <Button variant="outlined" size="small" className={classes.headerButton} color="primary">
@@ -72,6 +86,12 @@ export default function Header(props) {
             </Link>
         </Fragment>
     );
+
+    if (isAuthenticated && isAdmin) {
+        basicLinks = adminAuthLinks;
+    } else if (isAuthenticated && !isAdmin) {
+        basicLinks = authLinks;
+    }
 
     return (
         <React.Fragment>
@@ -87,7 +107,7 @@ export default function Header(props) {
                     </Link>
                 </Typography>
                 {
-                    isAuthenticated ? authLinks : guestLinks
+                    basicLinks
                 }
             </Toolbar>
             {
