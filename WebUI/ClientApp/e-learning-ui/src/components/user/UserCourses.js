@@ -31,7 +31,10 @@ export default function UserCourses() {
             <Grid container spacing={4}>
                 {
                     courses.map((course) =>
-                        <CourseItem course={course} key={course.id}/>
+                        <CourseItem
+                            link="/user/course"
+                            course={course}
+                            key={course.id}/>
                     )
                 }
             </Grid>

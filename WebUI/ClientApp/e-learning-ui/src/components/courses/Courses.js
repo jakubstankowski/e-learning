@@ -29,7 +29,10 @@ export default function Courses() {
         <Grid container spacing={4}>
             {
                 courses.map((course) =>
-                    <CourseItem course={course} key={course.id}/>
+                    <CourseItem
+                        link="/dashboard/course"
+                        course={course}
+                        key={course.id}/>
                 )
             }
         </Grid>
