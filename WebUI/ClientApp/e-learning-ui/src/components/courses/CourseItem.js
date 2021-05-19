@@ -48,7 +48,7 @@ export default function CourseItem(props) {
         <Grid item xs={12} md={4} className={classes.courseItem}>
             <Card className={classes.card}>
                 <CardActionArea>
-                    <Link to={ isAdmin ? `/dashboard/course/${id}` : `/course/${id}`}
+                    <Link to={isAdmin ? `/dashboard/course/${id}` : `/course/${id}`}
                           style={{textDecoration: 'none'}}
                     >
                         <CardMedia
@@ -70,8 +70,16 @@ export default function CourseItem(props) {
                             </CardContent>
                         </article>
                     </Link>
-                   {
-                         isAdmin &&
+                    {
+                        props.showAddToCartButton &&
+                        <CardActions>
+                            <Button color="primary" variant="contained">
+                                Edit
+                            </Button>
+                        </CardActions>
+                    }
+                    {
+                        isAdmin &&
                         <CardActions>
                             <Link to={`/dashboard/courses/${id}/edit`}
                                   style={{textDecoration: 'none'}}
