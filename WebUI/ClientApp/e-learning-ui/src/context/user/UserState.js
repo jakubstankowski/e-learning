@@ -22,8 +22,6 @@ function UserState(props) {
 
         const res = await axios.get(`https://localhost:44367/api/user/courses`);
 
-        console.log('res', res);
-
         dispatch({
             type: GET_USER_COURSES,
             payload: res.data

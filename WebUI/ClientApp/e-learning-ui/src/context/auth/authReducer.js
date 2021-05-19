@@ -17,7 +17,6 @@ export default (state, action) => {
                 loading: false,
                 user: action.payload,
                 isAdmin: action.payload.isAdmin,
-                userId: action.payload.userId,
             };
         case REGISTER_SUCCESS:
         case LOGIN_SUCCESS:
@@ -39,7 +38,6 @@ export default (state, action) => {
                 isAuthenticated: false,
                 loading: false,
                 user: null,
-                userId: null,
                 error: action.payload
             };
         default:
