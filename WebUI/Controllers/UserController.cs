@@ -15,21 +15,17 @@ namespace E_Learning.Controllers
     {
         public IMediator _mediator { get; }
 
-        private readonly IIdentityService _identityService;
-
-        public UserController(IMediator mediator, IIdentityService identityService)
+        public UserController(IMediator mediator)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-            _identityService = identityService;
         }
 
-            //TODO remove user id
+        
         [HttpGet("Courses")]
         public async Task<ActionResult<UserCoursesDto>> GetUserCourses()
         {
-            string userId = _identityService.GetUserId();
 
-            var query = new GetUserCoursesQuery(userId);
+            var query = new GetUserCoursesQuery();
             var result = await _mediator.Send(query);
 
             return Ok(result);
@@ -38,9 +34,7 @@ namespace E_Learning.Controllers
         [HttpPost("Courses")]
         public async Task<ActionResult<UserCoursesDto>> PostUserCourses()
         {
-            string userId = _identityService.GetUserId();
-
-            var query = new GetUserCoursesQuery(userId);
+            var query = new GetUserCoursesQuery();
             var result = await _mediator.Send(query);
 
             return Ok(result);

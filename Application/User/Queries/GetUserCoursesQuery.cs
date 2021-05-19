@@ -15,30 +15,28 @@ namespace E_Learning.Application.ApplicationUser.Queries
 {
     public class GetUserCoursesQuery : IRequest<IEnumerable<CourseDto>>
     {
-        public string UserId { get; set; }
-
-        public GetUserCoursesQuery(string userId)
-        {
-            this.UserId = userId;
-        }
 
         public class GetUserCoursesHandler : IRequestHandler<GetUserCoursesQuery, IEnumerable<CourseDto>>
         {
             private readonly IContext _context;
             private readonly IMapper _mapper;
+            private readonly IIdentityService _identityService;
 
-            public GetUserCoursesHandler(IContext context, IMapper mapper)
+            public GetUserCoursesHandler(IContext context, IMapper mapper, IIdentityService identityService)
             {
                 _context = context;
                 _mapper = mapper;
+                _identityService = identityService;
             }
 
             public async Task<IEnumerable<CourseDto>> Handle(GetUserCoursesQuery request, CancellationToken cancellationToken)
             {
+                string userId = _identityService.GetUserId();
+
                 var userCourses = await _context.UserCourses
                         .Include(u => u.IdentityUser)
                         .Include(u => u.Course)
-                       .Where(u => u.IdentityUser.Id == request.UserId)
+                       .Where(u => u.IdentityUser.Id == userId)
                        .ToListAsync();
 
 

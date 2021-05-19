@@ -17,10 +17,10 @@ function UserState(props) {
 
     const [state, dispatch] = useReducer(UserReducer, initialState);
 
-    const getUserCourses = async (userId) => {
+    const getUserCourses = async () => {
         setLoading();
 
-        const res = await axios.get(`https://localhost:44367/api/user/${userId}/courses`);
+        const res = await axios.get(`https://localhost:44367/api/user/courses`);
 
         console.log('res', res);
 

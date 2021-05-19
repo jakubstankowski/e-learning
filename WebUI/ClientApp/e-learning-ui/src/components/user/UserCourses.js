@@ -12,11 +12,11 @@ export default function UserCourses() {
     const {getUserCourses, courses, loading} = userContext;
 
     const authContext = useContext(AuthContext);
-    const {isAuthenticated, userId} = authContext;
+    const {isAuthenticated} = authContext;
 
     useEffect(() => {
         if (isAuthenticated) {
-            getUserCourses(userId);
+            getUserCourses();
         }
 
     }, [isAuthenticated]);
