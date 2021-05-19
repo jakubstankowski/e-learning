@@ -4,6 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import HomeBillboard from "../home/HomeBillboard";
 import Grid from "@material-ui/core/Grid";
 import Courses from "../courses/Courses";
+import HomeCourses from "../home/HomeCourses";
 
 const useStyles = makeStyles((theme) => ({
     mainGrid: {
@@ -22,14 +23,14 @@ const mainFeaturedPost = {
 };
 
 
-export default function Home({children}) {
+export default function Home() {
     const classes = useStyles();
     return (
         <section>
             <CssBaseline/>
             <HomeBillboard post={mainFeaturedPost}/>
             <Grid container spacing={4} className={classes.mainGrid}>
-                <Courses/>
+                <HomeCourses/>
             </Grid>
         </section>
     )
