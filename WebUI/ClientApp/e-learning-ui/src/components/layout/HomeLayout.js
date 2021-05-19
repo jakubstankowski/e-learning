@@ -18,7 +18,7 @@ const sections = [
 ];
 
 
-export default function MainLayout({children}) {
+export default function HomeLayout({children}) {
     return (
         <main>
             <Header title="stanlearn" sections={sections}/>

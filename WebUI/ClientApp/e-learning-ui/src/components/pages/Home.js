@@ -1,10 +1,10 @@
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import MainFeaturedPost from "../layout/MainFeaturedPost";
+import MainFeaturedPost from "../home/MainFeaturedPost";
 import Grid from "@material-ui/core/Grid";
-import Main from "../layout/Main";
-import Sidebar from "../layout/Sidebar";
+import Main from "../home/Main";
+import Sidebar from "../home/Sidebar";
 import Courses from "../courses/Courses";
 
 const useStyles = makeStyles((theme) => ({

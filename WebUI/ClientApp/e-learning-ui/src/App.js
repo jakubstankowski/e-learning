@@ -13,15 +13,16 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import AuthState from "./context/auth/AuthState";
 import DashboardLayout from "./components/layout/DashboardLayout";
-import MainLayout from "./components/layout/MainLayout";
+import HomeLayout from "./components/layout/HomeLayout";
 import Lessons from "./components/lessons/Lessons";
 import Home from "./components/pages/Home";
 import Lesson from "./components/lessons/Lesson";
 import Dashboard from "./components/dashboard/Dashboard";
 import UserLayout from "./components/layout/UserLayout";
-import UserCourses from "./components/user/UserCourses";
+import UserCourses from "./components/pages/UserCourses";
 import UserProfile from "./components/user/UserProfile";
 import UserState from "./context/user/UserState";
+import DashboardCourses from "./components/dashboard/DashboardCourses";
 
 
 function App() {
@@ -31,18 +32,18 @@ function App() {
                 <LessonsState>
                     <UserState>
                         <Router>
-                            <MainLayout path="/">
+                            <HomeLayout path="/">
                                 <Home path="/"/>
                                 <Course path="/course/:courseId"/>
                                 <Lesson path="/course/:courseId/lesson/:lessonId"/>
                                 <Login path="/login"/>
                                 <Register path="/register"/>
-                            </MainLayout>
+                            </HomeLayout>
                             <DashboardLayout path="/dashboard">
                                 <Dashboard path="/"/>
                                 <CreateCourse path="/course/create"/>
                                 <EditCourse path="/courses/:courseId/edit"/>
-                                <Courses path="/courses"/>
+                                <DashboardCourses path="/courses"/>
                                 <Course path="/course/:courseId"/>
                                 <Lesson path="/course/:courseId/lesson/:lessonId"/>
                                 <CreateLesson path="/course/:courseId/lesson/create"/>

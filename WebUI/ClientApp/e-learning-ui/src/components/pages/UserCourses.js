@@ -32,7 +32,7 @@ export default function UserCourses() {
                 {
                     courses.map((course) =>
                         <CourseItem
-                            showAddToCartButton={false}
+                            showAddToCartButton={true}
                             course={course}
                             key={course.id}/>
                     )

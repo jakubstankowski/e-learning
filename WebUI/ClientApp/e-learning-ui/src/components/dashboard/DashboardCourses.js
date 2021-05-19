@@ -32,6 +32,7 @@ export default function DashboardCourses() {
                 {
                     courses.map((course) =>
                         <CourseItem
+                            showAddToCartButton={false}
                             course={course}
                             key={course.id}/>
                     )

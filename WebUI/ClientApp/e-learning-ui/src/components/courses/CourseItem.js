@@ -73,8 +73,8 @@ export default function CourseItem(props) {
                     {
                         props.showAddToCartButton &&
                         <CardActions>
-                            <Button color="primary" variant="contained">
-                                Edit
+                            <Button color="secondary" variant="contained">
+                                Add To Cart
                             </Button>
                         </CardActions>
                     }
