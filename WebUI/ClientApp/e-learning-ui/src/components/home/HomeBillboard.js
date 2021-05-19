@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function MainFeaturedPost(props) {
+export default function HomeBillboard(props) {
     const classes = useStyles();
     const { post } = props;
 
@@ -63,6 +63,6 @@ export default function MainFeaturedPost(props) {
     );
 }
 
-MainFeaturedPost.propTypes = {
+HomeBillboard.propTypes = {
     post: PropTypes.object,
 };
