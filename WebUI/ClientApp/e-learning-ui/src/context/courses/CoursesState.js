@@ -9,7 +9,7 @@ import {
     DELETE_COURSE,
     POST_COURSE,
     UPDATE_COURSE,
-    SET_LOADING, GET_USER_COURSES
+    SET_LOADING
 } from '../types'
 
 
@@ -48,7 +48,7 @@ function CoursesState(props) {
         const res = await axios.get(`https://localhost:44367/api/user/courses`);
 
         dispatch({
-            type: GET_USER_COURSES,
+            type: GET_COURSES,
             payload: res.data
         })
     }

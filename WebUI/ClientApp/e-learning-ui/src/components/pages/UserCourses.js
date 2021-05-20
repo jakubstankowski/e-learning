@@ -1,15 +1,15 @@
 import React, {useContext, useEffect} from "react";
-import UserContext from '../../context/user/userContext';
 import AuthContext from "../../context/auth/authContext";
 import Spinner from "../layout/Spinner";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import CourseItem from "../courses/CourseItem";
 import Grid from "@material-ui/core/Grid";
+import CoursesContext from "../../context/courses/coursesContext";
 
 export default function UserCourses() {
-    const userContext = useContext(UserContext);
-    const {getUserCourses, courses, loading} = userContext;
+    const coursesContext = useContext(CoursesContext);
+    const {getUserCourses, courses, loading} = coursesContext;
 
     const authContext = useContext(AuthContext);
     const {isAuthenticated} = authContext;
