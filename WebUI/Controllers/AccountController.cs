@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
-using E_Learning.Domain.Entities;
-using Infrastructure.Identity;
 using Infrastructure.Identity.dto;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
