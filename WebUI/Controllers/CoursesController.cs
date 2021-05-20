@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
 using E_Learning.Application.Common.Dto;
 using E_Learning.Application.Courses.Commands;
 using E_Learning.Application.Courses.Commands.DeleteCourse;

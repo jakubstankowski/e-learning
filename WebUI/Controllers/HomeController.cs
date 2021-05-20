@@ -19,7 +19,7 @@ namespace E_Learning.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [HttpGet]
+        [HttpGet("Courses")]
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetHomeCourses()
         {
             var query = new GetHomeCoursesQuery();
