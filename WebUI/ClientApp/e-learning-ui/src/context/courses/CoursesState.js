@@ -9,7 +9,7 @@ import {
     DELETE_COURSE,
     POST_COURSE,
     UPDATE_COURSE,
-    SET_LOADING
+    SET_LOADING, GET_USER_COURSES
 } from '../types'
 
 
@@ -27,11 +27,31 @@ function CoursesState(props) {
 
         const res = await axios.get('https://localhost:44367/api/courses');
         dispatch({
-                type: GET_COURSES,
-                payload: res.data
-            })
+            type: GET_COURSES,
+            payload: res.data
+        })
     }
 
+    const getHomeCourses = async () => {
+        setLoading();
+
+        const res = await axios.get('https://localhost:44367/api/home/courses');
+        dispatch({
+            type: GET_COURSES,
+            payload: res.data
+        })
+    }
+
+    const getUserCourses = async () => {
+        setLoading();
+
+        const res = await axios.get(`https://localhost:44367/api/user/courses`);
+
+        dispatch({
+            type: GET_USER_COURSES,
+            payload: res.data
+        })
+    }
 
     const getCourse = async (id) => {
         setLoading();
@@ -39,9 +59,9 @@ function CoursesState(props) {
         const res = await axios.get(`https://localhost:44367/api/courses/${id}`);
 
         dispatch({
-                type: GET_COURSE,
-                payload: res.data
-            })
+            type: GET_COURSE,
+            payload: res.data
+        })
     }
 
     const postCourse = async (course) => {
@@ -86,6 +106,8 @@ function CoursesState(props) {
                 course: state.course,
                 loading: state.loading,
                 getCourses,
+                getHomeCourses,
+                getUserCourses,
                 getCourse,
                 postCourse,
                 deleteCourse,
