@@ -20,12 +20,10 @@ namespace E_Learning.Controllers
     [Route("api/[controller]")]
     public class CoursesController : ControllerBase
     {
-        private readonly IMapper _mapper;
         private readonly IMediator _mediator;
 
-        public CoursesController(IMapper mapper, IMediator mediator)
+        public CoursesController(IMediator mediator)
         {
-            _mapper = mapper;
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
@@ -40,15 +38,6 @@ namespace E_Learning.Controllers
 
         }
 
-        [Authorize]
-        [HttpGet("Home")]
-        public async Task<ActionResult<IEnumerable<CourseDto>>> GetHomeCourses()
-        {
-            var query = new GetHomeCoursesQuery();
-            var result = await _mediator.Send(query);
-
-            return Ok(result);
-        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<CourseDto>> GetCourse(int id)

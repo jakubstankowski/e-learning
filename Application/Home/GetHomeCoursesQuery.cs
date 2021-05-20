@@ -8,7 +8,7 @@ using E_Learning.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace E_Learning.Application.Courses.Queries.GetCourses
+namespace E_Learning.Application.Home
 {
     public class GetHomeCoursesQuery : IRequest<IEnumerable<CourseDto>>
     {
@@ -32,5 +32,4 @@ namespace E_Learning.Application.Courses.Queries.GetCourses
             return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
         }
     }
-
 }
