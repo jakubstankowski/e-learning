@@ -40,6 +40,16 @@ namespace E_Learning.Controllers
 
         }
 
+        [Authorize]
+        [HttpGet("Home")]
+        public async Task<ActionResult<IEnumerable<CourseDto>>> GetHomeCourses()
+        {
+            var query = new GetHomeCoursesQuery();
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<CourseDto>> GetCourse(int id)
         {
