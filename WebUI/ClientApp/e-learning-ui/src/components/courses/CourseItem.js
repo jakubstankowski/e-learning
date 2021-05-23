@@ -68,11 +68,39 @@ export default function CourseItem(props) {
 
                         </article>
                     </Link>
-                    <CardActions>
-                        <Button color="secondary" variant="contained">
-                            Add To Cart
-                        </Button>
-                    </CardActions>
+                    {
+                        props.showAddToCartButton &&
+                        <CardActions>
+                            <Button color="secondary" variant="contained">
+                                Add To Cart
+                            </Button>
+                        </CardActions>
+                    }
+
+                    {
+                        isAdmin &&
+                        <CardActions>
+                            <Link to={`/dashboard/courses/${id}/edit`}
+                                  style={{textDecoration: 'none'}}
+                            >
+                                <Button color="primary" variant="contained">
+                                    Edit
+                                </Button>
+                            </Link>
+                            <Button color="secondary"
+                                    onClick={() => deleteCourse(id)}
+                                    variant="contained">
+                                Delete
+                            </Button>
+                            <Link to={`/dashboard/course/${id}/lesson/create`}
+                                  style={{textDecoration: 'none'}}
+                            >
+                                <Button color="primary" variant="contained">
+                                    Create New Lesson
+                                </Button>
+                            </Link>
+                        </CardActions>
+                    }
                 </CardContent>
             </Card>
         </Grid>

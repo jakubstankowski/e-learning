@@ -48,37 +48,34 @@ export default function LessonItem(props) {
     return (
         <Grid item xs={12} md={4} className={classes.courseItem}>
             <Card className={classes.card}>
-                <CardActionArea>
+                <CardContent>
                     <Link
                         to={isAdmin ? `/dashboard/course/${courseId}/lesson/${id}` : `/course/${courseId}/lesson/${id}`}
                         style={{textDecoration: 'none'}}
                     >
-                        <article className={classes.cardDetails}>
-                            <CardContent>
-                                <Typography component="h2" variant="h5">
-                                    {title}
-                                </Typography>
-                            </CardContent>
-                        </article>
+                        <Typography component="h2" variant="h5">
+                            {title}
+                        </Typography>
                     </Link>
-                    {
-                        isAdmin &&
-                        <CardActions>
-                            <Link to={`/dashboard/course/${courseId}/lesson/${id}/edit`}
-                                  style={{textDecoration: 'none'}}
-                            >
-                                <Button color="primary" variant="contained">
-                                    Edit
-                                </Button>
-                            </Link>
-                            <Button color="secondary"
-                                    onClick={() => deleteLesson(id)}
-                                    variant="contained">
-                                Delete
+                </CardContent>
+                {
+                    isAdmin &&
+                    <CardActions>
+                        <Link to={`/dashboard/course/${courseId}/lesson/${id}/edit`}
+                              style={{textDecoration: 'none'}}
+                        >
+                            <Button color="primary" variant="contained">
+                                Edit
                             </Button>
-                        </CardActions>
-                    }
-                </CardActionArea>
+                        </Link>
+                        <Button color="secondary"
+                                onClick={() => deleteLesson(id)}
+                                variant="contained">
+                            Delete
+                        </Button>
+                    </CardActions>
+                }
+
             </Card>
         </Grid>
     )
