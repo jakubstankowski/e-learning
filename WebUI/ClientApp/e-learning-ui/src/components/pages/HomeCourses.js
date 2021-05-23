@@ -28,7 +28,6 @@ export default function HomeCourses() {
                             showAddToCartButton={true}
                             course={course}
                             key={course.id}/>
-
                     )
                 }
 

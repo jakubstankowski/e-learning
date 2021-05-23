@@ -15,11 +15,8 @@ export default function UserCourses() {
     const {isAuthenticated} = authContext;
 
     useEffect(() => {
-        if (isAuthenticated) {
-            getUserCourses();
-        }
-
-    }, [isAuthenticated]);
+        getUserCourses();
+    }, []);
 
     if (loading) return <Spinner/>
 

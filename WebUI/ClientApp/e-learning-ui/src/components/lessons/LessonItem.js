@@ -1,5 +1,4 @@
 import React, {useContext, useEffect} from "react";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import {Link, useParams} from "@reach/router";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";

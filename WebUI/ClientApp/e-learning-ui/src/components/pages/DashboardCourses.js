@@ -17,11 +17,8 @@ export default function DashboardCourses() {
     const {isAuthenticated} = authContext;
 
     useEffect(() => {
-        if (isAuthenticated) {
-            getCourses();
-        }
-
-    }, [isAuthenticated]);
+        getCourses();
+    }, []);
 
     if (loading) return <Spinner/>
 

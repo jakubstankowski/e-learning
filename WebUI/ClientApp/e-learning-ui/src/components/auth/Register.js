@@ -2,7 +2,7 @@ import './Auth.css';
 import React, {useContext, useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import {TextField} from 'mui-rff';
-import {Link, navigate} from "@reach/router";
+import {navigate} from "@reach/router";
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {Form} from "react-final-form";

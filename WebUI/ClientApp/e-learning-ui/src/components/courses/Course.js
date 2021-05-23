@@ -20,10 +20,8 @@ export default function Course() {
     const {courseId} = useParams();
 
     useEffect(() => {
-        if (isAuthenticated) {
-            getCourse(courseId);
-        }
-    }, [isAuthenticated]);
+        getCourse(courseId);
+    }, []);
 
     const useStyles = makeStyles((theme) => ({
         course: {
@@ -64,7 +62,7 @@ export default function Course() {
                     <Link to={`/dashboard/course/${courseId}/lesson/create`}
                           style={{textDecoration: 'none'}}
                     >
-                        <Button  color="primary"  variant="contained">
+                        <Button color="primary" variant="contained">
                             Create New Lesson
                         </Button>
                     </Link>
