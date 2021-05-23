@@ -19,7 +19,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import UserLayout from "./components/layout/UserLayout";
 import UserCourses from "./components/pages/UserCourses";
 import UserProfile from "./components/user/UserProfile";
-import DashboardCourses from "./components/dashboard/DashboardCourses";
+import DashboardCourses from "./components/pages/DashboardCourses";
 
 
 function App() {

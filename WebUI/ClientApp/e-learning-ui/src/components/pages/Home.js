@@ -4,7 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import HomeBillboard from "../home/HomeBillboard";
 import Grid from "@material-ui/core/Grid";
 import Courses from "../courses/Courses";
-import HomeCourses from "../home/HomeCourses";
+import HomeCourses from "./HomeCourses";
 
 const useStyles = makeStyles((theme) => ({
     mainGrid: {
