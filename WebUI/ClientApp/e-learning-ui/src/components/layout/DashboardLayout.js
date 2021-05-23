@@ -112,12 +112,7 @@ const DashboardLayout = protectedComponent(({children}) => {
     useEffect(() => {
         loadUser();
         // eslint-disable-next-line
-    }, [isAdmin]);
-
-    if (!isAdmin) {
-        return 'You have no permissions for that!';
-    }
-
+    }, []);
 
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => {

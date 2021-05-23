@@ -41,7 +41,7 @@ export default function CourseItem(props) {
 
     useEffect(() => {
         // eslint-disable-next-line
-    }, [isAuthenticated]);
+    }, [isAuthenticated, isAdmin]);
 
     return (
         <Grid item xs={12} md={4} className={classes.courseItem}>
