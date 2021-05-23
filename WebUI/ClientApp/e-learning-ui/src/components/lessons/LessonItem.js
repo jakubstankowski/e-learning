@@ -47,8 +47,8 @@ export default function LessonItem(props) {
 
     return (
         <Grid item xs={12} md={4} className={classes.courseItem}>
-            <Card className={classes.card}>
-                <CardContent>
+            <Card>
+                <CardContent className={classes.card}>
                     <Link
                         to={isAdmin ? `/dashboard/course/${courseId}/lesson/${id}` : `/course/${courseId}/lesson/${id}`}
                         style={{textDecoration: 'none'}}

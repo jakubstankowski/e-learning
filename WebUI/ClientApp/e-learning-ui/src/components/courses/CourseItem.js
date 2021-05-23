@@ -46,8 +46,8 @@ export default function CourseItem(props) {
 
     return (
         <Grid item xs={12} md={4} className={classes.courseItem}>
-            <Card className={classes.card}>
-                <CardContent>
+            <Card>
+                <CardActionArea className={classes.card}>
                     <Link to={isAdmin ? `/dashboard/course/${id}` : `/course/${id}`}
                           style={{textDecoration: 'none'}}
                     >
@@ -68,40 +68,40 @@ export default function CourseItem(props) {
 
                         </article>
                     </Link>
-                    {
-                        props.showAddToCartButton &&
-                        <CardActions>
-                            <Button color="secondary" variant="contained">
-                                Add To Cart
-                            </Button>
-                        </CardActions>
-                    }
+                </CardActionArea>
+                {
+                    props.showAddToCartButton &&
+                    <CardActions>
+                        <Button color="secondary" variant="contained">
+                            Add To Cart
+                        </Button>
+                    </CardActions>
+                }
 
-                    {
-                        isAdmin &&
-                        <CardActions>
-                            <Link to={`/dashboard/courses/${id}/edit`}
-                                  style={{textDecoration: 'none'}}
-                            >
-                                <Button color="primary" variant="contained">
-                                    Edit
-                                </Button>
-                            </Link>
-                            <Button color="secondary"
-                                    onClick={() => deleteCourse(id)}
-                                    variant="contained">
-                                Delete
+                {
+                    isAdmin &&
+                    <CardActions>
+                        <Link to={`/dashboard/courses/${id}/edit`}
+                              style={{textDecoration: 'none'}}
+                        >
+                            <Button color="primary" variant="contained">
+                                Edit
                             </Button>
-                            <Link to={`/dashboard/course/${id}/lesson/create`}
-                                  style={{textDecoration: 'none'}}
-                            >
-                                <Button color="primary" variant="contained">
-                                    Create New Lesson
-                                </Button>
-                            </Link>
-                        </CardActions>
-                    }
-                </CardContent>
+                        </Link>
+                        <Button color="secondary"
+                                onClick={() => deleteCourse(id)}
+                                variant="contained">
+                            Delete
+                        </Button>
+                        <Link to={`/dashboard/course/${id}/lesson/create`}
+                              style={{textDecoration: 'none'}}
+                        >
+                            <Button color="primary" variant="contained">
+                                Create New Lesson
+                            </Button>
+                        </Link>
+                    </CardActions>
+                }
             </Card>
         </Grid>
     )
