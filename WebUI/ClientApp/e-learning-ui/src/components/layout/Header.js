@@ -109,6 +109,11 @@ export default function Header(props) {
                 {
                     basicLinks
                 }
+                <Link to="/cart">
+                    <Button variant="outlined" size="small" className={classes.headerButton} color="primary">
+                        Cart
+                    </Button>
+                </Link>
             </Toolbar>
             {
                 sections.length >= 0 &&
