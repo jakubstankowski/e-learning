@@ -34,7 +34,7 @@ export default function HomeLayout({children}) {
             <Container className={classes.homeContainer}>
                 {children}
             </Container>
-            <Footer title="Footer" description="Something here to give the footer a purpose!"/>
+            <Footer title="Footer" description="Create by standev (2021)"/>
         </main>
     )
 }
