@@ -20,7 +20,7 @@ const sections = [
 
 const useStyles = makeStyles((theme) => ({
     homeContainer: {
-        minHeight: '90vh'
+        minHeight: '80vh'
     },
 }));
 
