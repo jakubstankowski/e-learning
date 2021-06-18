@@ -1,7 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import LessonItem from "./LessonItem";
-import {Link, useParams} from "@reach/router";
-import {Button} from "@material-ui/core";
+import {useParams} from "@reach/router";
 import LessonsContext from "../../context/lessons/lessonsContext";
 import Spinner from "../layout/Spinner";
 import Grid from "@material-ui/core/Grid";
@@ -9,7 +8,7 @@ import AuthContext from "../../context/auth/authContext";
 
 export default function Lessons() {
     const lessonsContext = useContext(LessonsContext);
-    const {getCourseLessons, deleteLesson, lessons, loading} = lessonsContext;
+    const {getCourseLessons, lessons, loading} = lessonsContext;
 
     const authContext = useContext(AuthContext);
     const {isAuthenticated} = authContext;
