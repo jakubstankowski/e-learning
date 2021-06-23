@@ -20,11 +20,6 @@ export default function Register({history}) {
         if (isAuthenticated) {
             navigate('/dashboard')
         }
-
-        if (error) {
-            //TODO : implement error alert #EL-32
-            console.log('error!');
-        }
         // eslint-disable-next-line
     }, [error, isAuthenticated, history]);
 
