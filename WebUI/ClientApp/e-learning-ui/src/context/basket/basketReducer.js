@@ -9,19 +9,22 @@ const reducer = (state, action) => {
         case GET_BASKET:
             return {
                 ...state,
-                basket: action.payload,
+                id: action.payload,
+                items: action.payload,
                 loading: false
             };
         case POST_BASKET:
             return {
                 ...state,
-                basket: action.payload,
+                id: action.payload,
+                items: action.payload,
                 loading: false
             };
         case DELETE_BASKET:
             return {
                 ...state,
-                basket: action.payload,
+                id: action.payload,
+                items: action.payload,
                 loading: false
             };
         default:
