@@ -17,9 +17,9 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
-export const POST_CART = 'POST_CART';
-export const DELETE_CART = 'DELETE_CART';
-export const GET_CART = 'GET_CART';
+export const POST_BASKET= 'POST_BASKET';
+export const DELETE_BASKET = 'DELETE_BASKET';
+export const GET_BASKET = 'GET_BASKET'
 
 
 

@@ -20,7 +20,7 @@ import UserLayout from "./components/layout/UserLayout";
 import UserCourses from "./components/pages/UserCourses";
 import UserProfile from "./components/user/UserProfile";
 import DashboardCourses from "./components/pages/DashboardCourses";
-import Cart from "./components/pages/Cart";
+import Basket from "./components/pages/Basket";
 
 
 function App() {
@@ -35,7 +35,7 @@ function App() {
                             <Lesson path="/course/:courseId/lesson/:lessonId"/>
                             <Login path="/login"/>
                             <Register path="/register"/>
-                            <Cart path="/cart"/>
+                            <Basket path="/basket"/>
                         </HomeLayout>
                         <DashboardLayout path="/dashboard">
                             <Dashboard path="/"/>

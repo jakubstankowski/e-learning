@@ -1,27 +1,27 @@
 import {
-    POST_CART,
-    GET_CART,
-    DELETE_CART
+    POST_BASKET,
+    GET_BASKET,
+    DELETE_BASKET
 } from '../types';
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case GET_CART:
+        case GET_BASKET:
             return {
                 ...state,
-                cart: action.payload,
+                basket: action.payload,
                 loading: false
             };
-        case POST_CART:
+        case POST_BASKET:
             return {
                 ...state,
-                cart: action.payload,
+                basket: action.payload,
                 loading: false
             };
-        case DELETE_CART:
+        case DELETE_BASKET:
             return {
                 ...state,
-                cart: action.payload,
+                basket: action.payload,
                 loading: false
             };
         default:
