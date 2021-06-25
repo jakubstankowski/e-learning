@@ -7,7 +7,9 @@ import {
     DELETE_BASKET,
     POST_BASKET,
     SET_LOADING
-} from '../types'
+} from '../types';
+import uuid from 'uuid/v4';
+
 
 function BasketState(props) {
     const initialState = {
