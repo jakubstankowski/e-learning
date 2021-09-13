@@ -10,7 +10,7 @@ import AuthContext from "../../context/auth/authContext";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import CoursesContext from "../../context/courses/coursesContext";
-
+import BasketContext from "../../context/basket/basketContext";
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -38,6 +38,9 @@ export default function CourseItem(props) {
 
     const coursesContext = useContext(CoursesContext);
     const {deleteCourse} = coursesContext;
+
+    const basketContext = useContext(BasketContext);
+    const {postBasket} = basketContext;
 
     useEffect(() => {
         // eslint-disable-next-line
@@ -71,7 +74,9 @@ export default function CourseItem(props) {
                 {
                     props.showAddToCartButton &&
                     <CardActions>
-                        <Button color="secondary" variant="contained">
+                        <Button onClick={() => postBasket(id)}
+                                color="secondary"
+                                variant="contained">
                             Add To Cart
                         </Button>
                     </CardActions>

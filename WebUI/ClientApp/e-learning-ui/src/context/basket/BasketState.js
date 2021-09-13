@@ -8,7 +8,8 @@ import {
     POST_BASKET,
     SET_LOADING
 } from '../types';
-import uuid from 'uuidv4';
+
+import { uuid } from 'uuidv4';
 
 
 function BasketState(props) {
