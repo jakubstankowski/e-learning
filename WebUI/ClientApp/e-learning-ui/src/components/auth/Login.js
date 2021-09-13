@@ -26,7 +26,6 @@ export default function Login({history}) {
 
         if (error) {
             //TODO : implement error alert #EL-32
-            console.log('error!');
         }
         // eslint-disable-next-line
     }, [isAdmin, error, isAuthenticated, history, ]);
@@ -34,9 +33,6 @@ export default function Login({history}) {
 
     const onSubmit = (values) => {
         login(values)
-            .then((res)=>{
-                console.log('res', res);
-            })
     };
 
     const validate = (values) => {
