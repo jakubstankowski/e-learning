@@ -8,7 +8,7 @@ import {
     POST_BASKET,
     SET_LOADING
 } from '../types';
-import uuid from 'uuid/v4';
+import uuid from 'uuidv4';
 
 
 function BasketState(props) {
@@ -32,13 +32,14 @@ function BasketState(props) {
     }
 
     const postBasket = async (basket) => {
-        setLoading();
-        const res = await axios.post('https://localhost:44367/api/basket', basket)
+        console.log('basket: ', basket);
+        /* setLoading();
+         const res = await axios.post('https://localhost:44367/api/basket', basket)
 
-        dispatch({
-            type: POST_BASKET,
-            payload: res.data
-        })
+         dispatch({
+             type: POST_BASKET,
+             payload: res.data
+         })*/
     }
 
     const deleteBasket = async (id) => {
