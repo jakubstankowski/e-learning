@@ -78,7 +78,7 @@ export default function CourseItem(props) {
                 }
 
                 {
-                    isAdmin &&
+                    isAdmin && isAuthenticated &&
                     <CardActions>
                         <Link to={`/dashboard/courses/${id}/edit`}
                               style={{textDecoration: 'none'}}
