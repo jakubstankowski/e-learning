@@ -9,6 +9,6 @@
 `npm install`
 `npm start`
 
-### Run redis on windows:
-``
+### Run redis-commander on windows (before that run redis server):
+
 `redis-commander`
