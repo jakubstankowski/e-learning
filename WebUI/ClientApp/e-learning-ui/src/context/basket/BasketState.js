@@ -44,6 +44,7 @@ function BasketState(props) {
         }
 
         state.basket.items = addItem(state.basket.items, itemToAdd);
+        postBasket(state.basket);
     };
 
     const createBasket = () => {
@@ -53,7 +54,7 @@ function BasketState(props) {
 
 
     const addItem = (items, item) => {
-        const index = items.findIndex(item => item.id === item);
+        const index = items.findIndex(value => value.id === item.id);
 
         if (index === -1) {
             items.push(item);
@@ -69,9 +70,9 @@ function BasketState(props) {
         }
     }
 
-    const postBasket = async () => {
+    const postBasket = async (basket) => {
         setLoading();
-        const res = await axios.post('https://localhost:44367/api/basket')
+        const res = await axios.post('https://localhost:44367/api/basket', basket)
 
         dispatch({
             type: POST_BASKET,

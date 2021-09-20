@@ -105,7 +105,7 @@ const DashboardLayout = protectedComponent(({children}) => {
     const classes = useStyles();
     const authContext = useContext(AuthContext);
 
-    const {loadUser, logout, isAdmin} = authContext;
+    const {loadUser, logout} = authContext;
 
     useEffect(() => {
         loadUser();
