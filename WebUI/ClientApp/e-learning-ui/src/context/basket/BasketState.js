@@ -35,16 +35,20 @@ function BasketState(props) {
     }
 
     const addItemToBasket = (item) => {
-        console.log('item: ', item);
-        createBasket();
+        const itemToAdd = mapCourseItemToBasketItem(item);
     };
 
     const createBasket = () => {
-        console.log('basket: ', state.basket)
         localStorage.setItem('basket_id', state.basket.id);
         return state.basket;
     };
 
+    const mapCourseItemToBasketItem = (item) => {
+        return {
+            id: item.id,
+            title: item.title
+        }
+    }
 
     const postBasket = async () => {
         setLoading();
