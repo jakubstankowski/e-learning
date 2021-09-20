@@ -36,12 +36,31 @@ function BasketState(props) {
 
     const addItemToBasket = (item) => {
         const itemToAdd = mapCourseItemToBasketItem(item);
+
+        const basketId = localStorage.getItem('basket_id');
+
+        if (basketId === null) {
+            createBasket();
+        }
+
+        state.basket.items = addItem(state.basket.items, itemToAdd);
     };
 
     const createBasket = () => {
         localStorage.setItem('basket_id', state.basket.id);
         return state.basket;
     };
+
+
+    const addItem = (items, item) => {
+        const index = items.findIndex(item => item.id === item);
+
+        if (index === -1) {
+            items.push(item);
+        }
+
+        return items;
+    }
 
     const mapCourseItemToBasketItem = (item) => {
         return {

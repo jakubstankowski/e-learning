@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useEffect, useContext} from "react";
 import Header from "./Header";
 import {Container} from "@material-ui/core";
 import Footer from "./Footer";
 import {makeStyles} from "@material-ui/core/styles";
-
+import BasketContext from "../../context/basket/basketContext";
 
 const sections = [
     {title: 'Technology', url: '#'},
@@ -27,6 +27,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function HomeLayout({children}) {
     const classes = useStyles();
+
+    const basketContext = useContext(BasketContext);
+    const {getBasket} = basketContext;
+
+    useEffect(() => {
+        const basketId = localStorage.getItem('basket_id');
+
+       /* if (basketId) {
+            getBasket(basketId)
+                .then((res) => {
+                    console.log('get basket res: ', res);
+                })
+        }*/
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <main>

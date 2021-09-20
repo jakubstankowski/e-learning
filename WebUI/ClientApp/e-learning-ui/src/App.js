@@ -1,5 +1,5 @@
 import './App.css';
-import React from "react";
+import React, {useEffect} from "react";
 import {Router} from "@reach/router";
 import Course from "./components/courses/Course";
 import CreateCourse from "./components/courses/CreateCourse";
@@ -22,7 +22,6 @@ import UserCourses from "./components/pages/UserCourses";
 import UserProfile from "./components/user/UserProfile";
 import DashboardCourses from "./components/pages/DashboardCourses";
 import Basket from "./components/pages/Basket";
-
 
 function App() {
     return (
@@ -59,7 +58,6 @@ function App() {
             </CoursesState>
         </AuthState>
     );
-
 }
 
 export default App;
