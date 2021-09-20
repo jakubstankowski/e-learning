@@ -40,7 +40,7 @@ export default function CourseItem(props) {
     const {deleteCourse} = coursesContext;
 
     const basketContext = useContext(BasketContext);
-    const {postBasket} = basketContext;
+    const {addItemToBasket} = basketContext;
 
     useEffect(() => {
         // eslint-disable-next-line
@@ -67,14 +67,13 @@ export default function CourseItem(props) {
                             <Typography variant="subtitle1" paragraph>
                                 {price} $
                             </Typography>
-
                         </article>
                     </Link>
                 </CardActionArea>
                 {
                     props.showAddToCartButton &&
                     <CardActions>
-                        <Button onClick={() => postBasket(id)}
+                        <Button onClick={() => addItemToBasket(props.course)}
                                 color="secondary"
                                 variant="contained">
                             Add To Cart

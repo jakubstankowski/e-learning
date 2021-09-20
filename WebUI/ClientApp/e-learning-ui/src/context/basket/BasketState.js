@@ -9,13 +9,15 @@ import {
     SET_LOADING
 } from '../types';
 
-import { uuid } from 'uuidv4';
+import {uuid} from 'uuidv4';
 
 
 function BasketState(props) {
     const initialState = {
-        id: uuid(),
-        items: [],
+        basket: {
+            id: uuid(),
+            items: []
+        },
         loading: false
     }
 
@@ -32,15 +34,26 @@ function BasketState(props) {
         })
     }
 
-    const postBasket = async (basket) => {
-        console.log('basket: ', basket);
-        /* setLoading();
-         const res = await axios.post('https://localhost:44367/api/basket', basket)
+    const addItemToBasket = (item) => {
+        console.log('item: ', item);
+        createBasket();
+    };
 
-         dispatch({
-             type: POST_BASKET,
-             payload: res.data
-         })*/
+    const createBasket = () => {
+        console.log('basket: ', state.basket)
+        localStorage.setItem('basket_id', state.basket.id);
+        return state.basket;
+    };
+
+
+    const postBasket = async () => {
+        setLoading();
+        const res = await axios.post('https://localhost:44367/api/basket')
+
+        dispatch({
+            type: POST_BASKET,
+            payload: res.data
+        })
     }
 
     const deleteBasket = async (id) => {
@@ -59,11 +72,11 @@ function BasketState(props) {
     return (
         <BasketContext.Provider
             value={{
-                id: state.id,
-                items: state.items,
+                basket: state.basket,
                 getBasket,
                 postBasket,
-                deleteBasket
+                deleteBasket,
+                addItemToBasket
             }}
         >
             {props.children}
