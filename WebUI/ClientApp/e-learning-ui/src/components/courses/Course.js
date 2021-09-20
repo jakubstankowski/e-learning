@@ -15,7 +15,7 @@ export default function Course() {
     const {getCourse, course, loading, deleteCourse} = coursesContext;
 
     const authContext = useContext(AuthContext);
-    const {isAuthenticated, isAdmin} = authContext;
+    const {isAdmin} = authContext;
 
     const {courseId} = useParams();
 

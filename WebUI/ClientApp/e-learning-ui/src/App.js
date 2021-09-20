@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useEffect} from "react";
+import React from "react";
 import {Router} from "@reach/router";
 import Course from "./components/courses/Course";
 import CreateCourse from "./components/courses/CreateCourse";
