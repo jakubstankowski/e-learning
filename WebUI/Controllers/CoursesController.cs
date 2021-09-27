@@ -47,7 +47,6 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
-        [Authorize]
         [HttpGet("{id}/Lessons")]
         public async Task<ActionResult<CourseDto>> GetCourseLessons(int id)
         {
