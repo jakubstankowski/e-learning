@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace E_Learning.Controllers
 {
     [ApiController]
-    [Authorize(Roles = "User")]
+    /*[Authorize(Roles = "User")]*/
     [Route("api/[controller]")]
     public class CoursesController : ControllerBase
     {
