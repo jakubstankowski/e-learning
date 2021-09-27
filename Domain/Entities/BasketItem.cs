@@ -12,7 +12,7 @@ namespace E_Learning.Domain.Entities
 
         public string Title { get; set; }
 
-        public string Price { get; set; }
+        public double Price { get; set; }
 
 
     }
