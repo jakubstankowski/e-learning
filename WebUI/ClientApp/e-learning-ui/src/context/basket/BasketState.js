@@ -43,8 +43,6 @@ function BasketState(props) {
             createBasket();
         }
 
-        console.log('item to add', itemToAdd);
-
         state.basket.items = addItem(state.basket.items, itemToAdd);
         postBasket(state.basket);
     };
@@ -68,13 +66,12 @@ function BasketState(props) {
     const mapCourseItemToBasketItem = (item) => {
         return {
             id: item.id,
-            title: item.title
+            title: item.title,
+            price: item.price
         }
     }
 
     const postBasket = async (basket) => {
-        console.log('basket: ', basket);
-
         const res = await axios.post('https://localhost:44367/api/basket', basket)
 
         dispatch({
