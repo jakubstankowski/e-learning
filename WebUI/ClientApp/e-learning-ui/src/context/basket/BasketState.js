@@ -5,7 +5,7 @@ import BasketReducer from './basketReducer';
 import {
     GET_BASKET,
     DELETE_BASKET,
-    POST_BASKET,
+    SET_BASKET,
     SET_LOADING
 } from '../types';
 
@@ -44,7 +44,7 @@ function BasketState(props) {
         }
 
         state.basket.items = addItem(state.basket.items, itemToAdd);
-        postBasket(state.basket);
+        setBasket(state.basket);
     };
 
     const createBasket = () => {
@@ -71,11 +71,11 @@ function BasketState(props) {
         }
     }
 
-    const postBasket = async (basket) => {
+    const setBasket = async (basket) => {
         const res = await axios.post('https://localhost:44367/api/basket', basket)
 
         dispatch({
-            type: POST_BASKET,
+            type: SET_BASKET,
             payload: res.data
         })
     }
@@ -98,7 +98,7 @@ function BasketState(props) {
             value={{
                 basket: state.basket,
                 getBasket,
-                postBasket,
+                setBasket,
                 deleteBasket,
                 addItemToBasket
             }}

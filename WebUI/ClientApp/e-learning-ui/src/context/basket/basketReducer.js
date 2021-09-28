@@ -1,5 +1,5 @@
 import {
-    POST_BASKET,
+    SET_BASKET,
     GET_BASKET,
     DELETE_BASKET
 } from '../types';
@@ -12,7 +12,7 @@ const reducer = (state, action) => {
                 basket: action.payload,
                 loading: false
             };
-        case POST_BASKET:
+        case SET_BASKET:
             return {
                 ...state,
                 basket: action.payload,
