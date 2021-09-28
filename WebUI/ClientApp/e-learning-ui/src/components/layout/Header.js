@@ -109,9 +109,9 @@ export default function Header(props) {
                 {
                     basicLinks
                 }
-                <Link to="/cart">
+                <Link to="/basket">
                     <Button variant="outlined" size="small" className={classes.headerButton} color="primary">
-                        Cart
+                        Basket
                     </Button>
                 </Link>
             </Toolbar>
