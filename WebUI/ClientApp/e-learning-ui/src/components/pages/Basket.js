@@ -1,6 +1,7 @@
 import React from "react";
 import {useContext, useEffect} from "react";
 import BasketContext from '../../context/basket/basketContext';
+import BasketItem from "../basket/BasketItem";
 
 export default function Cart() {
     const basketContext = useContext(BasketContext);
@@ -11,17 +12,21 @@ export default function Cart() {
         const basketId = localStorage.getItem('basket_id');
 
         if (basketId) {
-            getBasket(basketId)
-                .then((res) => {
-                    console.log('get basket res: ', res);
-                })
+            getBasket(basketId);
         }
         // eslint-disable-next-line
     }, []);
 
     return (
         <div>
-            cart
+            {
+                basket.items.map((basket) =>
+                    <BasketItem
+                        basket={basket}
+                        key={basket.id}
+                    />
+                )
+            }
         </div>
     )
 }
