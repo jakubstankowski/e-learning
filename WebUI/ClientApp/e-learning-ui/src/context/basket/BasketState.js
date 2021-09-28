@@ -52,9 +52,12 @@ function BasketState(props) {
         return state.basket;
     };
 
+    const removeItemFromBasket = (item) => {
+        state.basket.items = state.basket.items.filter(i => i.id === item.id);
+    }
 
     const addItem = (items, item) => {
-        const index = items.findIndex(value => value.id === item.id);
+        const index = items.findIndex(i => i.id === item.id);
 
         if (index === -1) {
             items.push(item);
@@ -100,6 +103,7 @@ function BasketState(props) {
                 getBasket,
                 setBasket,
                 deleteBasket,
+                removeItemFromBasket,
                 addItemToBasket
             }}
         >
