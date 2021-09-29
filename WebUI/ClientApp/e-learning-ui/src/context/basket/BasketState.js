@@ -49,11 +49,10 @@ function BasketState(props) {
 
     const createBasket = () => {
         localStorage.setItem('basket_id', state.basket.id);
-        return state.basket;
     };
 
     const removeItemFromBasket = (item) => {
-        state.basket.items = state.basket.items.filter(i => i.id === item.id);
+        state.basket.items = state.basket.items.filter(i => i.id !== item.id);
     }
 
     const addItem = (items, item) => {
