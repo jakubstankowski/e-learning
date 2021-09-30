@@ -1,7 +1,7 @@
 import {
     UPDATE_BASKET,
     GET_BASKET,
-    DELETE_BASKET, REMOVE_ITEM_FROM_BASKET
+    DELETE_BASKET, REMOVE_ITEM_FROM_BASKET, ADD_ITEM_TO_BASKET
 } from '../types';
 
 const reducer = (state, action) => {
@@ -9,19 +9,24 @@ const reducer = (state, action) => {
         case GET_BASKET:
             return {
                 ...state,
-                basket: action.payload,
+                items: action.payload,
                 loading: false
             };
+        case ADD_ITEM_TO_BASKET:
+            return {
+                ...state,
+                items: [action.payload, ...state.items]
+            }
         case UPDATE_BASKET:
             return {
                 ...state,
-                basket: action.payload,
+                items: action.payload,
                 loading: false
             };
         case REMOVE_ITEM_FROM_BASKET: {
             return {
                 ...state,
-                basket: state.basket.filter(
+                items: state.items.filter(
                     basket => basket.id !== action.payload
                 ),
                 loading: false

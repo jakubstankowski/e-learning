@@ -16,10 +16,8 @@ import {uuid} from 'uuidv4';
 
 function BasketState(props) {
     const initialState = {
-        basket: {
-            id: uuid(),
-            items: []
-        },
+        id: uuid(),
+        items: [],
         loading: false
     }
 
@@ -45,12 +43,16 @@ function BasketState(props) {
             createBasket();
         }
 
-        state.basket.items = addItem(state.basket.items, itemToAdd);
-        updateBasket(state.basket);
+        dispatch({
+            type: ADD_ITEM_TO_BASKET,
+            payload: [itemToAdd]
+        })
+
+        updateBasket();
     };
 
     const createBasket = () => {
-        localStorage.setItem('basket_id', state.basket.id);
+        localStorage.setItem('basket_id', state.id);
     };
 
     const removeItemFromBasket = (id) => {
@@ -79,7 +81,10 @@ function BasketState(props) {
     }
 
     const updateBasket = async (basket) => {
-        const res = await axios.post('https://localhost:44367/api/basket', basket)
+        const res = await axios.post('https://localhost:44367/api/basket', {
+            id: state.id,
+            items: state.items
+        })
 
         dispatch({
             type: UPDATE_BASKET,
@@ -103,9 +108,10 @@ function BasketState(props) {
     return (
         <BasketContext.Provider
             value={{
-                basket: state.basket,
+                items: state.items,
+                id: state.id,
                 getBasket,
-                setBasket,
+                updateBasket,
                 deleteBasket,
                 removeItemFromBasket,
                 addItemToBasket

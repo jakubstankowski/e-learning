@@ -6,7 +6,7 @@ import BasketItem from "../basket/BasketItem";
 export default function Cart() {
     const basketContext = useContext(BasketContext);
 
-    const {getBasket, basket} = basketContext;
+    const {getBasket, items} = basketContext;
 
     useEffect(() => {
         const basketId = localStorage.getItem('basket_id');
@@ -20,7 +20,9 @@ export default function Cart() {
     return (
         <div>
             {
-                basket.items.map((basket) =>
+                items.length <= 0 ? 'Theres no item in the basket' :
+
+                items.map((basket) =>
                     <BasketItem
                         basket={basket}
                         key={basket.id}
