@@ -1,7 +1,7 @@
 import {
     UPDATE_BASKET,
     GET_BASKET,
-    DELETE_BASKET
+    DELETE_BASKET, REMOVE_ITEM_FROM_BASKET
 } from '../types';
 
 const reducer = (state, action) => {
@@ -18,6 +18,15 @@ const reducer = (state, action) => {
                 basket: action.payload,
                 loading: false
             };
+        case REMOVE_ITEM_FROM_BASKET: {
+            return {
+                ...state,
+                basket: state.basket.filter(
+                    basket => basket.id !== action.payload
+                ),
+                loading: false
+            }
+        }
         case DELETE_BASKET:
             return {
                 ...state,

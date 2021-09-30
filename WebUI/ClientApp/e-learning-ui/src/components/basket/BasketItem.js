@@ -19,7 +19,7 @@ export default function BasketItem(props) {
             <li>
                 price: {price} $
             </li>
-            <button onClick={() => removeItemFromBasket(props.basket)}>
+            <button onClick={() => removeItemFromBasket(id)}>
                 remove item
             </button>
         </ul>

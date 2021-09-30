@@ -5,8 +5,10 @@ import BasketReducer from './basketReducer';
 import {
     GET_BASKET,
     DELETE_BASKET,
-    SET_BASKET,
-    SET_LOADING
+    UPDATE_BASKET,
+    REMOVE_ITEM_FROM_BASKET,
+    ADD_ITEM_TO_BASKET,
+    SET_LOADING,
 } from '../types';
 
 import {uuid} from 'uuidv4';
@@ -44,15 +46,18 @@ function BasketState(props) {
         }
 
         state.basket.items = addItem(state.basket.items, itemToAdd);
-        setBasket(state.basket);
+        updateBasket(state.basket);
     };
 
     const createBasket = () => {
         localStorage.setItem('basket_id', state.basket.id);
     };
 
-    const removeItemFromBasket = (item) => {
-        state.basket.items = state.basket.items.filter(i => i.id !== item.id);
+    const removeItemFromBasket = (id) => {
+        dispatch({
+            type: REMOVE_ITEM_FROM_BASKET,
+            payload: id
+        })
     }
 
     const addItem = (items, item) => {
@@ -73,11 +78,11 @@ function BasketState(props) {
         }
     }
 
-    const setBasket = async (basket) => {
+    const updateBasket = async (basket) => {
         const res = await axios.post('https://localhost:44367/api/basket', basket)
 
         dispatch({
-            type: SET_BASKET,
+            type: UPDATE_BASKET,
             payload: res.data
         })
     }
