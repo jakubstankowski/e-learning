@@ -30,13 +30,14 @@ function BasketState(props) {
 
         dispatch({
             type: GET_BASKET,
-            payload: res.data
+            payload: {
+                items: res.data.items,
+                id: res.data.id
+            }
         })
     }
 
     const addItemToBasket = (item) => {
-        const itemToAdd = mapCourseItemToBasketItem(item);
-
         const basketId = localStorage.getItem('basket_id');
 
         if (basketId === null) {
@@ -45,10 +46,10 @@ function BasketState(props) {
 
         dispatch({
             type: ADD_ITEM_TO_BASKET,
-            payload: [itemToAdd]
+            payload: item
         })
 
-        updateBasket();
+        //updateBasket();
     };
 
     const createBasket = () => {
@@ -72,15 +73,7 @@ function BasketState(props) {
         return items;
     }
 
-    const mapCourseItemToBasketItem = (item) => {
-        return {
-            id: item.id,
-            title: item.title,
-            price: item.price
-        }
-    }
-
-    const updateBasket = async (basket) => {
+    const updateBasket = async () => {
         const res = await axios.post('https://localhost:44367/api/basket', {
             id: state.id,
             items: state.items
@@ -88,7 +81,10 @@ function BasketState(props) {
 
         dispatch({
             type: UPDATE_BASKET,
-            payload: res.data
+            payload: {
+                items: res.data.items,
+                id: res.data.id
+            }
         })
     }
 
