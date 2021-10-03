@@ -33,16 +33,14 @@ function BasketState(props) {
         dispatch({
             type: GET_BASKET,
             payload: res.data
-        })
-
-
+        });
     }
 
     const addItemToBasket = async (item) => {
         dispatch({
             type: ADD_ITEM_TO_BASKET,
             payload: item
-        })
+        });
 
         updateBasket(state.basket);
     };
@@ -51,7 +49,9 @@ function BasketState(props) {
         dispatch({
             type: REMOVE_ITEM_FROM_BASKET,
             payload: id
-        })
+        });
+
+        updateBasket(state.basket);
     }
 
 
@@ -61,7 +61,7 @@ function BasketState(props) {
         dispatch({
             type: UPDATE_BASKET,
             payload: res.data
-        })
+        });
     }
 
     const deleteBasket = async (id) => {
@@ -72,7 +72,7 @@ function BasketState(props) {
         dispatch({
             type: DELETE_BASKET,
             payload: res.data
-        })
+        });
     }
 
     const setLoading = () => dispatch({type: SET_LOADING});

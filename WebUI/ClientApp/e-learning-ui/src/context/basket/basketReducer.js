@@ -35,7 +35,7 @@ const reducer = (state, action) => {
                 loading: false
             };
         case REMOVE_ITEM_FROM_BASKET: {
-            state.basket.items = state.items.filter(
+            state.basket.items = state.basket.items.filter(
                 basket => basket.id !== action.payload
             );
 
