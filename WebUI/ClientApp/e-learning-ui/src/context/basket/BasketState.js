@@ -39,22 +39,12 @@ function BasketState(props) {
     }
 
     const addItemToBasket = async (item) => {
-        const basketId = localStorage.getItem('basket_id');
-
-        if (basketId === null) {
-            createBasket();
-        }
-
         dispatch({
             type: ADD_ITEM_TO_BASKET,
             payload: item
         })
 
         updateBasket(state.basket);
-    };
-
-    const createBasket = () => {
-        localStorage.setItem('basket_id', state.id);
     };
 
     const removeItemFromBasket = (id) => {
@@ -64,15 +54,6 @@ function BasketState(props) {
         })
     }
 
-    const addItem = (items, item) => {
-        const index = items.findIndex(i => i.id === item.id);
-
-        if (index === -1) {
-            items.push(item);
-        }
-
-        return items;
-    }
 
     const updateBasket = async (basket) => {
         const res = await axios.post('https://localhost:44367/api/basket', basket)

@@ -13,7 +13,18 @@ const reducer = (state, action) => {
                 loading: false
             };
         case ADD_ITEM_TO_BASKET:
-            state.basket.items.push(action.payload);
+            const basketId = localStorage.getItem('basket_id');
+
+            if (!basketId) {
+                localStorage.setItem('basket_id', state.basket.id);
+            }
+
+            const index = state.basket.items.findIndex(i => i.id === action.payload.id);
+
+            if (index === -1) {
+                state.basket.items.push(action.payload);
+            }
+
             return {
                 ...state,
             }
@@ -24,11 +35,12 @@ const reducer = (state, action) => {
                 loading: false
             };
         case REMOVE_ITEM_FROM_BASKET: {
+            state.basket.items = state.items.filter(
+                basket => basket.id !== action.payload
+            );
+
             return {
                 ...state,
-                items: state.items.filter(
-                    basket => basket.id !== action.payload
-                ),
                 loading: false
             }
         }
