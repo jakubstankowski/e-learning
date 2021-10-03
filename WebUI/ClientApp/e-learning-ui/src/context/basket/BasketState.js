@@ -80,8 +80,7 @@ function BasketState(props) {
     return (
         <BasketContext.Provider
             value={{
-                items: state.items,
-                id: state.id,
+                basket: state.basket,
                 getBasket,
                 updateBasket,
                 deleteBasket,

@@ -19,9 +19,9 @@ const reducer = (state, action) => {
                 localStorage.setItem('basket_id', state.basket.id);
             }
 
-            const index = state.basket.items.findIndex(i => i.id === action.payload.id);
+            const isItemIsUnique = state.basket.items.findIndex(i => i.id === action.payload.id) === -1 ?? true;
 
-            if (index === -1) {
+            if (isItemIsUnique) {
                 state.basket.items.push(action.payload);
             }
 
