@@ -34,6 +34,8 @@ function BasketState(props) {
             type: GET_BASKET,
             payload: res.data
         })
+
+
     }
 
     const addItemToBasket = async (item) => {
@@ -48,6 +50,7 @@ function BasketState(props) {
             payload: item
         })
 
+        updateBasket(state.basket);
     };
 
     const createBasket = () => {
@@ -71,8 +74,8 @@ function BasketState(props) {
         return items;
     }
 
-    const updateBasket = async () => {
-        const res = await axios.post('https://localhost:44367/api/basket', state.basket)
+    const updateBasket = async (basket) => {
+        const res = await axios.post('https://localhost:44367/api/basket', basket)
 
         dispatch({
             type: UPDATE_BASKET,

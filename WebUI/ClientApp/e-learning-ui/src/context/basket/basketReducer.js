@@ -13,10 +13,9 @@ const reducer = (state, action) => {
                 loading: false
             };
         case ADD_ITEM_TO_BASKET:
-            alert('add item!');
+            state.basket.items.push(action.payload);
             return {
                 ...state,
-                items: [...state.items, action.payload.items],
             }
         case UPDATE_BASKET:
             return {
