@@ -16,8 +16,10 @@ import {uuid} from 'uuidv4';
 
 function BasketState(props) {
     const initialState = {
-        id: uuid(),
-        items: [],
+        basket: {
+            id: uuid(),
+            items: [],
+        },
         loading: false
     }
 
@@ -30,14 +32,11 @@ function BasketState(props) {
 
         dispatch({
             type: GET_BASKET,
-            payload: {
-                items: res.data.items,
-                id: res.data.id
-            }
+            payload: res.data
         })
     }
 
-    const addItemToBasket = (item) => {
+    const addItemToBasket = async (item) => {
         const basketId = localStorage.getItem('basket_id');
 
         if (basketId === null) {
@@ -49,7 +48,6 @@ function BasketState(props) {
             payload: item
         })
 
-        //updateBasket();
     };
 
     const createBasket = () => {
@@ -74,17 +72,11 @@ function BasketState(props) {
     }
 
     const updateBasket = async () => {
-        const res = await axios.post('https://localhost:44367/api/basket', {
-            id: state.id,
-            items: state.items
-        })
+        const res = await axios.post('https://localhost:44367/api/basket', state.basket)
 
         dispatch({
             type: UPDATE_BASKET,
-            payload: {
-                items: res.data.items,
-                id: res.data.id
-            }
+            payload: res.data
         })
     }
 

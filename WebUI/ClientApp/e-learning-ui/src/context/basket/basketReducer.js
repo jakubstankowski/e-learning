@@ -9,18 +9,19 @@ const reducer = (state, action) => {
         case GET_BASKET:
             return {
                 ...state,
-                items: action.payload,
+                basket: action.payload,
                 loading: false
             };
         case ADD_ITEM_TO_BASKET:
+            alert('add item!');
             return {
                 ...state,
-                items: [action.payload, ...state.items]
+                items: [...state.items, action.payload.items],
             }
         case UPDATE_BASKET:
             return {
                 ...state,
-                items: action.payload,
+                basket: action.payload,
                 loading: false
             };
         case REMOVE_ITEM_FROM_BASKET: {
