@@ -27,6 +27,7 @@ const reducer = (state, action) => {
 
             return {
                 ...state,
+                loading: false
             }
         case UPDATE_BASKET:
             return {
@@ -45,6 +46,8 @@ const reducer = (state, action) => {
             }
         }
         case DELETE_BASKET:
+            localStorage.removeItem('basket_id');
+
             return {
                 ...state,
                 basket: action.payload,
