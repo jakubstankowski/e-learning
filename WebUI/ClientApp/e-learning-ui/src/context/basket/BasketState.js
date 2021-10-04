@@ -51,7 +51,12 @@ function BasketState(props) {
             payload: id
         });
 
-        updateBasket(state.basket);
+        if (state.basket.items.length > 0) {
+            updateBasket(state.basket);
+        } else {
+            deleteBasket(state.basket.id);
+        }
+
     }
 
 
