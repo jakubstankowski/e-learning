@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {Link} from '@reach/router';
 import AuthContext from '../../context/auth/authContext';
+import BasketContext from "../../context/basket/basketContext";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,6 +40,10 @@ export default function Header(props) {
 
     const authContext = useContext(AuthContext);
     const {logout, loadUser, isAuthenticated, isAdmin} = authContext;
+
+    const basketContext = useContext(BasketContext);
+
+    const {basket} = basketContext;
 
     useEffect(() => {
         loadUser();
@@ -112,6 +117,9 @@ export default function Header(props) {
                 <Link to="/basket">
                     <Button variant="outlined" size="small" className={classes.headerButton} color="primary">
                         Basket
+                        {
+                            basket.items && basket.items.length > 0 ? ` (${basket.items.length})` : ''
+                        }
                     </Button>
                 </Link>
             </Toolbar>
