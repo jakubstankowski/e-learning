@@ -41,7 +41,7 @@ namespace E_Learning.Controllers
             return Ok(result);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> Delete(string id)
         {
             var query = new DeleteBasketCommand(id);
