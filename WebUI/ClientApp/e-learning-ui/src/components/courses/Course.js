@@ -21,6 +21,7 @@ export default function Course() {
 
     useEffect(() => {
         getCourse(courseId);
+        // eslint-disable-next-line
     }, []);
 
     const useStyles = makeStyles((theme) => ({

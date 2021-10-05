@@ -12,6 +12,7 @@ export default function UserCourses() {
 
     useEffect(() => {
         getUserCourses();
+        // eslint-disable-next-line
     }, []);
 
     if (loading) return <Spinner/>

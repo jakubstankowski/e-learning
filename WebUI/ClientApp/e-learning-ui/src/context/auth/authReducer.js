@@ -7,7 +7,7 @@ import {
     LOGIN_FAIL,
     LOGOUT
 } from '../types';
-
+// eslint-disable-next-line
 export default (state, action) => {
     switch (action.type) {
         case USER_LOADED:

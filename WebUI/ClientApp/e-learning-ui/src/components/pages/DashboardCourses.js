@@ -20,7 +20,7 @@ export default function DashboardCourses() {
         if (isAuthenticated) {
             getCourses();
         }
-
+        // eslint-disable-next-line
     }, [isAuthenticated]);
 
     if (loading) return <Spinner/>
