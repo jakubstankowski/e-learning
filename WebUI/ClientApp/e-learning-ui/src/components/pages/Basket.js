@@ -29,6 +29,11 @@ export default function Cart() {
                         />
                     )
             }
+            <h4>
+                {
+                    basket.totalCount > 0 && `Total Count: ${basket.totalCount} $`
+                }
+            </h4>
         </div>
     )
 }
