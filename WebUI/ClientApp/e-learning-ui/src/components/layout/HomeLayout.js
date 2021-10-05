@@ -35,10 +35,7 @@ export default function HomeLayout({children}) {
         const basketId = localStorage.getItem('basket_id');
 
         if (basketId) {
-            getBasket(basketId)
-                .then((res) => {
-                    console.log('get basket res: ', res);
-                })
+            getBasket(basketId);
         }
         // eslint-disable-next-line
     }, []);
