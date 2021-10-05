@@ -18,6 +18,7 @@ function BasketState(props) {
         basket: {
             id: uuid(),
             items: [],
+            totalCount: null
         },
         loading: false
     }
@@ -39,7 +40,6 @@ function BasketState(props) {
         const basketId = localStorage.getItem('basket_id');
 
         if (!basketId) {
-            console.log('state', state)
             localStorage.setItem('basket_id', state.basket.id);
         }
 
@@ -83,6 +83,10 @@ function BasketState(props) {
         await axios.delete(`https://localhost:44367/api/basket/${id}`)
 
         localStorage.removeItem('basket_id');
+
+        dispatch({
+            type: DELETE_BASKET,
+        });
     }
 
     const setLoading = () => dispatch({type: SET_LOADING});

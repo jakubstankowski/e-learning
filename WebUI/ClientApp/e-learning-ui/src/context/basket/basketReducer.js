@@ -3,6 +3,7 @@ import {
     GET_BASKET,
     DELETE_BASKET, REMOVE_ITEM_FROM_BASKET, ADD_ITEM_TO_BASKET
 } from '../types';
+import {uuid} from "uuidv4";
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -39,6 +40,16 @@ const reducer = (state, action) => {
                 loading: false
             }
         }
+        case DELETE_BASKET:
+
+            return {
+                ...state,
+                basket: {
+                    id: uuid(),
+                    items: [],
+                    totalCount: null
+                }
+            };
         default:
             return state;
     }
