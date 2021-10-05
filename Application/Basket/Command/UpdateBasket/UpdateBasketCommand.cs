@@ -20,6 +20,7 @@ namespace E_Learning.Application.Basket.Command.UpdateBasket
     {
         public string Id { get; set; }
         public List<BasketItem> Items { get; set; } = new List<BasketItem>();
+
     }
 
     public class UpdateBasketHandler : IRequestHandler<UpdateBasketCommand, CustomerBasket>
@@ -40,7 +41,8 @@ namespace E_Learning.Application.Basket.Command.UpdateBasket
             var basket = new CustomerBasket
             {
                 Id = request.Id,
-                Items = request.Items
+                Items = request.Items,
+                TotalCount = 0
             };
 
             foreach (var item in basket.Items)
@@ -52,6 +54,9 @@ namespace E_Learning.Application.Basket.Command.UpdateBasket
                 {
                     throw new NotFoundException(nameof(Course), item.Id);
                 }
+
+                basket.TotalCount += course.Price;
+
             }
 
             var created = await _database.StringSetAsync(request.Id,
