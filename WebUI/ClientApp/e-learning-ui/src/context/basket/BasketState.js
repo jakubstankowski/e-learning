@@ -39,6 +39,7 @@ function BasketState(props) {
         const basketId = localStorage.getItem('basket_id');
 
         if (!basketId) {
+            console.log('state', state)
             localStorage.setItem('basket_id', state.basket.id);
         }
 
@@ -57,7 +58,7 @@ function BasketState(props) {
         });
 
         //TODO find better way, its a hack!
-        setTimeout(()=>{
+        setTimeout(() => {
             if (state.basket.items.length >= 1) {
                 updateBasket(state.basket);
             } else {
@@ -68,10 +69,8 @@ function BasketState(props) {
 
 
     const updateBasket = async (basket) => {
-        console.log('update basket basket', basket);
         const res = await axios.post('https://localhost:44367/api/basket', basket)
 
-        console.log('res data: ', res.data);
         dispatch({
             type: UPDATE_BASKET,
             payload: res.data
@@ -81,14 +80,9 @@ function BasketState(props) {
     const deleteBasket = async (id) => {
         setLoading();
 
-        const res = await axios.delete(`https://localhost:44367/api/basket/${id}`)
+        await axios.delete(`https://localhost:44367/api/basket/${id}`)
 
         localStorage.removeItem('basket_id');
-
-        dispatch({
-            type: DELETE_BASKET,
-            payload: res.data
-        });
     }
 
     const setLoading = () => dispatch({type: SET_LOADING});

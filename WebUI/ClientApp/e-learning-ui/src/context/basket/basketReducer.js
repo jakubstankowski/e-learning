@@ -39,12 +39,6 @@ const reducer = (state, action) => {
                 loading: false
             }
         }
-        case DELETE_BASKET:
-            return {
-                ...state,
-                basket: action.payload,
-                loading: false
-            };
         default:
             return state;
     }

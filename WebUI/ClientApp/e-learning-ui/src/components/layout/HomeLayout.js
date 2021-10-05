@@ -34,9 +34,12 @@ export default function HomeLayout({children}) {
     useEffect(() => {
         const basketId = localStorage.getItem('basket_id');
 
-        if (basketId) {
-            getBasket(basketId);
+        if (!basketId) {
+            return;
         }
+
+        getBasket(basketId);
+
         // eslint-disable-next-line
     }, []);
 
