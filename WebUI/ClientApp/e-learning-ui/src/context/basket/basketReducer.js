@@ -13,12 +13,6 @@ const reducer = (state, action) => {
                 loading: false
             };
         case ADD_ITEM_TO_BASKET:
-            const basketId = localStorage.getItem('basket_id');
-
-            if (!basketId) {
-                localStorage.setItem('basket_id', state.basket.id);
-            }
-
             const isItemIsUnique = state.basket.items.findIndex(i => i.id === action.payload.id) === -1 ?? true;
 
             if (isItemIsUnique) {
@@ -46,8 +40,6 @@ const reducer = (state, action) => {
             }
         }
         case DELETE_BASKET:
-            localStorage.removeItem('basket_id');
-
             return {
                 ...state,
                 basket: action.payload,

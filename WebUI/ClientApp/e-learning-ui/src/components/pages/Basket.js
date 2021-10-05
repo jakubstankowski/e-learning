@@ -20,7 +20,7 @@ export default function Cart() {
     return (
         <div>
             {
-                basket.items && basket.items.length <= 0 ? 'Theres no item in the basket' :
+                !basket.items || basket.items.length <= 0 ? 'Theres no item in the basket' :
 
                     basket.items.map((basket) =>
                         <BasketItem

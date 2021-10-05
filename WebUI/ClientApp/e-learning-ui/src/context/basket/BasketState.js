@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {useContext, useReducer} from 'react';
 import axios from 'axios';
 import BasketContext from './basketContext';
 import BasketReducer from './basketReducer';
@@ -12,7 +12,6 @@ import {
 } from '../types';
 
 import {uuid} from 'uuidv4';
-
 
 function BasketState(props) {
     const initialState = {
@@ -37,6 +36,12 @@ function BasketState(props) {
     }
 
     const addItemToBasket = async (item) => {
+        const basketId = localStorage.getItem('basket_id');
+
+        if (!basketId) {
+            localStorage.setItem('basket_id', state.basket.id);
+        }
+
         dispatch({
             type: ADD_ITEM_TO_BASKET,
             payload: item
@@ -51,20 +56,22 @@ function BasketState(props) {
             payload: id
         });
 
-        console.log('state.basket.items.length', state.basket.items.length)
-        if (state.basket.items.length >= 1) {
-            updateBasket(state.basket);
-        }
-        if (state.basket.items.length <= 0) {
-            deleteBasket(state.basket.id);
-        }
-
+        //TODO find better way, its a hack!
+        setTimeout(()=>{
+            if (state.basket.items.length >= 1) {
+                updateBasket(state.basket);
+            } else {
+                deleteBasket(state.basket.id);
+            }
+        }, 500);
     }
 
 
     const updateBasket = async (basket) => {
+        console.log('update basket basket', basket);
         const res = await axios.post('https://localhost:44367/api/basket', basket)
 
+        console.log('res data: ', res.data);
         dispatch({
             type: UPDATE_BASKET,
             payload: res.data
@@ -75,6 +82,8 @@ function BasketState(props) {
         setLoading();
 
         const res = await axios.delete(`https://localhost:44367/api/basket/${id}`)
+
+        localStorage.removeItem('basket_id');
 
         dispatch({
             type: DELETE_BASKET,
