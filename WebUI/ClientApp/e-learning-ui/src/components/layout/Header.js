@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header(props) {
     const classes = useStyles();
-    const {sections, title} = props;
+    const {title} = props;
 
     const authContext = useContext(AuthContext);
     const {logout, loadUser, isAuthenticated, isAdmin} = authContext;
@@ -123,23 +123,6 @@ export default function Header(props) {
                     </Button>
                 </Link>
             </Toolbar>
-            {
-                sections.length >= 0 &&
-                <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-                    {sections.map((section) => (
-                        <Link
-                            color="inherit"
-                            key={section.title}
-                            variant="body2"
-                            to={section.url}
-                            className={classes.toolbarLink}
-                        >
-                            {section.title}
-                        </Link>
-                    ))}
-                </Toolbar>
-            }
-
         </React.Fragment>
     );
 }

@@ -45,11 +45,9 @@ export default function HomeLayout({children}) {
 
     return (
         <main>
-            <Header title="stanlearn" sections={sections}/>
             <Container className={classes.homeContainer}>
                 {children}
             </Container>
-            <Footer title="Footer" description="Create by standev (2021)"/>
         </main>
     )
 }

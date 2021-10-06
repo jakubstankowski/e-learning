@@ -1,5 +1,5 @@
 import './App.css';
-import React from "react";
+import React, {Fragment} from 'react';
 import {Router} from "@reach/router";
 import Course from "./pages/courses/Course";
 import CreateCourse from "./pages/courses/CreateCourse";
@@ -22,6 +22,9 @@ import UserCourses from "./pages/UserCourses";
 import UserProfile from "./components/user/UserProfile";
 import DashboardCourses from "./pages/DashboardCourses";
 import Basket from "./pages/basket/Basket";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
+import {Container} from "@material-ui/core";
 
 function App() {
     return (
@@ -29,8 +32,22 @@ function App() {
             <CoursesState>
                 <BasketState>
                     <LessonsState>
-                        <Router>
-                            <HomeLayout path="/">
+                        <Header title="E-Learning"/>
+                        <Container maxWidth="lg">
+                            <Router>
+                                <HomeLayout path="/">
+                                    <Home path="/"/>
+                                    <Course path="/course/:courseId"/>
+                                    <Lesson path="/course/:courseId/lesson/:lessonId"/>
+                                    <Login path="/login"/>
+                                    <Register path="/register"/>
+                                    <Basket path="/basket"/>
+                                </HomeLayout>
+                            </Router>
+                        </Container>
+                        <Footer title="Stantech"/>
+                        {/*  <Router>*/}
+                        {/*<HomeLayout path="/">
                                 <Home path="/"/>
                                 <Course path="/course/:courseId"/>
                                 <Lesson path="/course/:courseId/lesson/:lessonId"/>
@@ -47,8 +64,7 @@ function App() {
                                 <Lesson path="/course/:courseId/lesson/:lessonId"/>
                                 <CreateLesson path="/course/:courseId/lesson/create"/>
                                 <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>
-                            </DashboardLayout>
-                        </Router>
+                            </DashboardLayout>*/}
                     </LessonsState>
                 </BasketState>
             </CoursesState>
