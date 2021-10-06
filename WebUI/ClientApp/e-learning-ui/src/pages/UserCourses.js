@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from "react";
 import Spinner from "../components/layout/Spinner";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import CourseItem from "../components/courses/CourseItem";
+import CourseItem from "./courses/CourseItem";
 import Grid from "@material-ui/core/Grid";
 import CoursesContext from "../context/courses/coursesContext";
 

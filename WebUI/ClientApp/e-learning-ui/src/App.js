@@ -1,10 +1,10 @@
 import './App.css';
 import React from "react";
 import {Router} from "@reach/router";
-import Course from "./components/courses/Course";
-import CreateCourse from "./components/courses/CreateCourse";
+import Course from "./pages/courses/Course";
+import CreateCourse from "./pages/courses/CreateCourse";
 import CreateLesson from "./components/lessons/CreateLesson";
-import EditCourse from "./components/courses/EditCourse";
+import EditCourse from "./pages/courses/EditCourse";
 import EditLesson from "./components/lessons/EditLesson";
 import CoursesState from "./context/courses/CoursesState";
 import LessonsState from "./context/lessons/LessonsState";
@@ -21,7 +21,7 @@ import UserLayout from "./components/layout/UserLayout";
 import UserCourses from "./pages/UserCourses";
 import UserProfile from "./components/user/UserProfile";
 import DashboardCourses from "./pages/DashboardCourses";
-import Basket from "./pages/Basket";
+import Basket from "./pages/basket/Basket";
 
 function App() {
     return (

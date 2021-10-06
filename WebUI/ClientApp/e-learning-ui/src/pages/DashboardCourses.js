@@ -3,7 +3,7 @@ import React, {useContext, useEffect} from "react";
 import CoursesContext from "../context/courses/coursesContext";
 import AuthContext from "../context/auth/authContext";
 import Spinner from "../components/layout/Spinner";
-import CourseItem from "../components/courses/CourseItem";
+import CourseItem from "./courses/CourseItem";
 import Grid from "@material-ui/core/Grid";
 
 export default function DashboardCourses() {

@@ -4,7 +4,7 @@ import CoursesContext from "../context/courses/coursesContext";
 import Spinner from "../components/layout/Spinner";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import CourseItem from "../components/courses/CourseItem";
+import CourseItem from "./courses/CourseItem";
 
 export default function HomeCourses() {
     const coursesContext = useContext(CoursesContext);

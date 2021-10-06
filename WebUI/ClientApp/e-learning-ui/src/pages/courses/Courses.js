@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import CourseItem from "./CourseItem";
 import {useContext, useEffect} from "react";
 import CoursesContext from '../../context/courses/coursesContext';
-import Spinner from "../layout/Spinner";
+import Spinner from "../../components/layout/Spinner";
 import AuthContext from "../../context/auth/authContext";
 
 
