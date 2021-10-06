@@ -51,6 +51,10 @@ a {
     text-decoration: none;
 }
 
+.container {
+    min-height: 90vh;
+}
+
 .form-container {
     max-width: 500px;
     margin: 2rem auto;

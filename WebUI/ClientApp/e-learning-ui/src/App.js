@@ -33,7 +33,8 @@ function App() {
                 <BasketState>
                     <LessonsState>
                         <Header title="E-Learning"/>
-                        <Container maxWidth="lg">
+                        <Container maxWidth="lg"
+                                   className="container">
                             <Router>
                                 <Home path="/"/>
                                 <Course path="/course/:courseId"/>
