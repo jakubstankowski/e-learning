@@ -12,15 +12,9 @@ import BasketState from './context/basket/BasketState';
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import AuthState from "./context/auth/AuthState";
-import DashboardLayout from "./components/layout/DashboardLayout";
-import HomeLayout from "./components/layout/HomeLayout";
 import Home from "./pages/Home";
 import Lesson from "./components/lessons/Lesson";
 import Dashboard from "./components/dashboard/Dashboard";
-import UserLayout from "./components/layout/UserLayout";
-import UserCourses from "./pages/UserCourses";
-import UserProfile from "./components/user/UserProfile";
-import DashboardCourses from "./pages/DashboardCourses";
 import Basket from "./pages/basket/Basket";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
@@ -39,33 +33,17 @@ function App() {
                                 <Home path="/"/>
                                 <Course path="/course/:courseId"/>
                                 <Lesson path="/course/:courseId/lesson/:lessonId"/>
+                                <CreateCourse path="/course/create"/>
+                                <EditCourse path="/course/:courseId/edit"/>
+                                <CreateLesson path="/course/:courseId/lesson/create"/>
+                                <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>
                                 <Login path="/login"/>
                                 <Register path="/register"/>
                                 <Basket path="/basket"/>
                                 <Dashboard path="/dashboard"/>
-                                <CreateCourse path="/course/create"/>
                             </Router>
                         </Container>
                         <Footer title="Stantech"/>
-                        {/*  <Router>*/}
-                        {/*<HomeLayout path="/">
-                                <Home path="/"/>
-                                <Course path="/course/:courseId"/>
-                                <Lesson path="/course/:courseId/lesson/:lessonId"/>
-                                <Login path="/login"/>
-                                <Register path="/register"/>
-                                <Basket path="/basket"/>
-                            </HomeLayout>
-                            <DashboardLayout path="/dashboard">
-                                <Dashboard path="/"/>
-                                <CreateCourse path="/course/create"/>
-                                <EditCourse path="/courses/:courseId/edit"/>
-                                <DashboardCourses path="/courses"/>
-                                <Course path="/course/:courseId"/>
-                                <Lesson path="/course/:courseId/lesson/:lessonId"/>
-                                <CreateLesson path="/course/:courseId/lesson/create"/>
-                                <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>
-                            </DashboardLayout>*/}
                     </LessonsState>
                 </BasketState>
             </CoursesState>
