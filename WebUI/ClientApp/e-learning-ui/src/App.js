@@ -35,14 +35,12 @@ function App() {
                         <Header title="E-Learning"/>
                         <Container maxWidth="lg">
                             <Router>
-                                <HomeLayout path="/">
-                                    <Home path="/"/>
-                                    <Course path="/course/:courseId"/>
-                                    <Lesson path="/course/:courseId/lesson/:lessonId"/>
-                                    <Login path="/login"/>
-                                    <Register path="/register"/>
-                                    <Basket path="/basket"/>
-                                </HomeLayout>
+                                <Home path="/"/>
+                                <Course path="/course/:courseId"/>
+                                <Lesson path="/course/:courseId/lesson/:lessonId"/>
+                                <Login path="/login"/>
+                                <Register path="/register"/>
+                                <Basket path="/basket"/>
                             </Router>
                         </Container>
                         <Footer title="Stantech"/>

@@ -19,9 +19,6 @@ export default function HomeCourses() {
 
     return (
         <Container>
-            <Typography>
-                Welcome to home courses!
-            </Typography>
             <Grid container spacing={4}>
                 {
                     courses.map((course) =>
