@@ -2,42 +2,34 @@ import './Auth.css';
 import React, {useContext, useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import {TextField} from 'mui-rff';
-import {Link} from "@reach/router";
+import {navigate} from "@reach/router";
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {Form} from "react-final-form";
-import {validateEmail} from "../../helpers/validateEmail";
+import {validateEmail} from "../../utils/helpers/validateEmail";
 import AuthContext from "../../context/auth/authContext";
-import {navigate} from "@reach/router"
 
-export default function Login({history}) {
+
+export default function Register({history}) {
     const authContext = useContext(AuthContext);
 
-    const {login, error, isAuthenticated, isAdmin} = authContext;
+    const {register, error, isAuthenticated} = authContext;
 
 
     useEffect(() => {
         if (isAuthenticated) {
-            if (isAdmin) {
-                return navigate('/dashboard')
-            }
-            return navigate('/user/my-courses')
-        }
-
-        if (error) {
-            //TODO : implement error alert #EL-32
+            navigate('/dashboard')
         }
         // eslint-disable-next-line
-    }, [isAdmin, error, isAuthenticated, history, ]);
+    }, [error, isAuthenticated, history]);
 
 
     const onSubmit = (values) => {
-        login(values)
+        register(values);
     };
 
     const validate = (values) => {
         const errors = {};
-
         if (!values.email) {
             errors.email = 'Required';
         }
@@ -57,13 +49,9 @@ export default function Login({history}) {
         <Container component="main" maxWidth="xs">
             <article className="paper">
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    Sign up
                 </Typography>
                 <Form
-                    initialValues={{
-                        email: 'admin@stanlearn.pl',
-                        password: 'Breakingbad_2014'
-                    }}
                     onSubmit={onSubmit}
                     validate={validate}
                     render={({handleSubmit, submitting}) => (
@@ -97,13 +85,11 @@ export default function Login({history}) {
                                 color="primary"
                                 className="submit"
                             >
-                                Sign In
+                                Sign Up
                             </Button>
-
-                            <Link to={`/register`}>
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-
+                            {/*<Link to={`/login`}>
+                                Already have an account? Sign in
+                            </Link>*/}
                         </form>
                     )}/>
             </article>

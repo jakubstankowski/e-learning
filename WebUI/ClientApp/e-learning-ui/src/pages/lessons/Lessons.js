@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from "react";
 import LessonItem from "./LessonItem";
 import {useParams} from "@reach/router";
 import LessonsContext from "../../context/lessons/lessonsContext";
-import Spinner from "../layout/Spinner";
+import Spinner from "../../components/Spinner";
 import Grid from "@material-ui/core/Grid";
 import AuthContext from "../../context/auth/authContext";
 

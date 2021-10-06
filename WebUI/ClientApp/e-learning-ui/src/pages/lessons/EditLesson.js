@@ -5,7 +5,7 @@ import {Button, Grid, Paper} from "@material-ui/core";
 import {TextField} from "final-form-material-ui";
 import {useContext, useEffect} from "react";
 import LessonsContext from "../../context/lessons/lessonsContext";
-import Spinner from "../layout/Spinner";
+import Spinner from "../../components/Spinner";
 import {navigate, useParams} from "@reach/router";
 import AuthContext from "../../context/auth/authContext";
 
