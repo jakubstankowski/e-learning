@@ -17,9 +17,11 @@ export default function Courses() {
     const {isAuthenticated} = authContext;
 
     useEffect(() => {
-        if (isAuthenticated) {
+       /* if (isAuthenticated) {
             getCourses();
-        }
+        }*/
+
+        getCourses();
 
     }, [isAuthenticated]);
 

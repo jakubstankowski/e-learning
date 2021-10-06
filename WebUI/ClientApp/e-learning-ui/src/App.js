@@ -42,6 +42,8 @@ function App() {
                                 <Login path="/login"/>
                                 <Register path="/register"/>
                                 <Basket path="/basket"/>
+                                <Dashboard path="/dashboard"/>
+                                <CreateCourse path="/course/create"/>
                             </Router>
                         </Container>
                         <Footer title="Stantech"/>

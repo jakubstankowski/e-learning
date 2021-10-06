@@ -16,10 +16,11 @@ export default function Lessons() {
     const {courseId} = useParams();
 
     useEffect(() => {
-
-        if (isAuthenticated) {
+       /* if (isAuthenticated) {
             getCourseLessons(courseId);
-        }
+        }*/
+        getCourseLessons(courseId);
+
         // eslint-disable-next-line
     }, [isAuthenticated]);
 
