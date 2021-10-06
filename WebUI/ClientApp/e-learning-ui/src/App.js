@@ -14,14 +14,14 @@ import Register from "./components/auth/Register";
 import AuthState from "./context/auth/AuthState";
 import DashboardLayout from "./components/layout/DashboardLayout";
 import HomeLayout from "./components/layout/HomeLayout";
-import Home from "./components/pages/Home";
+import Home from "./pages/Home";
 import Lesson from "./components/lessons/Lesson";
 import Dashboard from "./components/dashboard/Dashboard";
 import UserLayout from "./components/layout/UserLayout";
-import UserCourses from "./components/pages/UserCourses";
+import UserCourses from "./pages/UserCourses";
 import UserProfile from "./components/user/UserProfile";
-import DashboardCourses from "./components/pages/DashboardCourses";
-import Basket from "./components/pages/Basket";
+import DashboardCourses from "./pages/DashboardCourses";
+import Basket from "./pages/Basket";
 
 function App() {
     return (
@@ -48,10 +48,6 @@ function App() {
                                 <CreateLesson path="/course/:courseId/lesson/create"/>
                                 <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>
                             </DashboardLayout>
-                            <UserLayout path="/user">
-                                <UserCourses path="/my-courses"/>
-                                <UserProfile path="/profile"/>
-                            </UserLayout>
                         </Router>
                     </LessonsState>
                 </BasketState>

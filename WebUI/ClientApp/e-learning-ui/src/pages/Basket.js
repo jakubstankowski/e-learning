@@ -1,7 +1,7 @@
 import React from "react";
 import {useContext, useEffect} from "react";
-import BasketContext from '../../context/basket/basketContext';
-import BasketItem from "../basket/BasketItem";
+import BasketContext from '../context/basket/basketContext';
+import BasketItem from "../components/basket/BasketItem";
 
 export default function Cart() {
     const basketContext = useContext(BasketContext);

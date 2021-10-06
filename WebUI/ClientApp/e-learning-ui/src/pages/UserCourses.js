@@ -1,33 +1,27 @@
-import Container from "@material-ui/core/Container";
 import React, {useContext, useEffect} from "react";
-import CoursesContext from "../../context/courses/coursesContext";
-import AuthContext from "../../context/auth/authContext";
-import Spinner from "../layout/Spinner";
-import CourseItem from "../courses/CourseItem";
+import Spinner from "../components/layout/Spinner";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import CourseItem from "../components/courses/CourseItem";
 import Grid from "@material-ui/core/Grid";
+import CoursesContext from "../context/courses/coursesContext";
 
-export default function DashboardCourses() {
-
+export default function UserCourses() {
     const coursesContext = useContext(CoursesContext);
-
-    const {getCourses, courses, loading} = coursesContext;
-
-    const authContext = useContext(AuthContext);
-
-    const {isAuthenticated} = authContext;
+    const {getUserCourses, courses, loading} = coursesContext;
 
     useEffect(() => {
-        if (isAuthenticated) {
-            getCourses();
-        }
+        getUserCourses();
         // eslint-disable-next-line
-    }, [isAuthenticated]);
+    }, []);
 
     if (loading) return <Spinner/>
 
     return (
         <Container>
-            Dashboard Courses
+            <Typography>
+                Welcome to user courses!
+            </Typography>
             <Grid container spacing={4}>
                 {
                     courses.map((course) =>

@@ -1,10 +1,10 @@
 import {Container} from "@material-ui/core";
 import React, {useContext, useEffect} from "react";
-import CoursesContext from "../../context/courses/coursesContext";
-import Spinner from "../layout/Spinner";
+import CoursesContext from "../context/courses/coursesContext";
+import Spinner from "../components/layout/Spinner";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import CourseItem from "../courses/CourseItem";
+import CourseItem from "../components/courses/CourseItem";
 
 export default function HomeCourses() {
     const coursesContext = useContext(CoursesContext);
