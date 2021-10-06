@@ -19,7 +19,7 @@ export default function CreateLesson() {
     const onSubmit = (values) => {
         postLesson(values)
             .then(() => {
-                navigate(`/dashboard/course/${courseId}`);
+                navigate(`/course/${courseId}`);
             })
     };
 

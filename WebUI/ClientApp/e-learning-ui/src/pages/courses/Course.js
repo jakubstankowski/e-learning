@@ -48,7 +48,7 @@ export default function Course() {
             {
                 isAdmin &&
                 <article>
-                    <Link to={`/dashboard/courses/${courseId}/edit`}
+                    <Link to={`/course/${courseId}/edit`}
                           style={{textDecoration: 'none'}}
                     >
                         <Button color="primary" variant="contained">
@@ -60,7 +60,7 @@ export default function Course() {
                             variant="contained">
                         Delete
                     </Button>
-                    <Link to={`/dashboard/course/${courseId}/lesson/create`}
+                    <Link to={`/course/${courseId}/lesson/create`}
                           style={{textDecoration: 'none'}}
                     >
                         <Button color="primary" variant="contained">

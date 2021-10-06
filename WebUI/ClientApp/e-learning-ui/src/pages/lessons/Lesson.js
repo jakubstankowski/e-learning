@@ -101,7 +101,7 @@ export default function Lesson() {
                         {
                             isAdmin &&
                             <article>
-                                <Link to={`/dashboard/course/${courseId}/lesson/${id}/edit`}
+                                <Link to={`/course/${courseId}/lesson/${id}/edit`}
                                       style={{textDecoration: 'none'}}
                                 >
                                     <Button color="primary" variant="contained">

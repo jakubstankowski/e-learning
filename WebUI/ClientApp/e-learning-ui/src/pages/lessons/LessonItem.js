@@ -49,7 +49,7 @@ export default function LessonItem(props) {
             <Card>
                 <CardContent className={classes.card}>
                     <Link
-                        to={isAdmin ? `/dashboard/course/${courseId}/lesson/${id}` : `/course/${courseId}/lesson/${id}`}
+                        to={ `/course/${courseId}/lesson/${id}`}
                         style={{textDecoration: 'none'}}
                     >
                         <Typography component="h2" variant="h5">
@@ -60,7 +60,7 @@ export default function LessonItem(props) {
                 {
                     isAdmin &&
                     <CardActions>
-                        <Link to={`/dashboard/course/${courseId}/lesson/${id}/edit`}
+                        <Link to={`/course/${courseId}/lesson/${id}/edit`}
                               style={{textDecoration: 'none'}}
                         >
                             <Button color="primary" variant="contained">
