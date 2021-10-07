@@ -19,6 +19,7 @@ import Basket from "./pages/basket/Basket";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import {Container} from "@material-ui/core";
+import NotFound from "./pages/NotFound";
 
 function App() {
     return (
@@ -41,6 +42,7 @@ function App() {
                                 <Register path="/register"/>
                                 <Basket path="/basket"/>
                                 <Dashboard path="/dashboard"/>
+                                <NotFound path="*"/>
                             </Router>
                         </Container>
                         <Footer title="Stantech"/>
