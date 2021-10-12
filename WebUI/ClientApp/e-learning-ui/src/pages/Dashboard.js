@@ -30,7 +30,9 @@ export default function Dashboard() {
                 </Button>
             </Link>
             <Grid container spacing={4} className={classes.mainGrid}>
-                <Courses/>
+                <Courses
+                    type="admin"
+                />
             </Grid>
         </Container>
     )

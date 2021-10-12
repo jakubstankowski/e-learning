@@ -25,7 +25,9 @@ export default function Home() {
         <section>
             <HomeBillboard post={mainFeaturedPost}/>
             <Grid container spacing={4} className={classes.mainGrid}>
-                <Courses/>
+                <Courses
+                    type="home"
+                />
             </Grid>
         </section>
     )

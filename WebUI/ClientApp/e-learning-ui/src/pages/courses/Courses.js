@@ -7,18 +7,32 @@ import Spinner from "../../components/Spinner";
 import AuthContext from "../../context/auth/authContext";
 
 
-export default function Courses() {
+export default function Courses(props) {
     const coursesContext = useContext(CoursesContext);
 
-    const {getCourses, courses, loading} = coursesContext;
+    const {type} = props;
+
+    const {getAdminCourses, getHomeCourses, getUserCourses, courses, loading} = coursesContext;
 
     const authContext = useContext(AuthContext);
 
     const {isAuthenticated} = authContext;
 
     useEffect(() => {
-        if (isAuthenticated) {
-            getCourses();
+        switch(type) {
+            case 'home':
+               getHomeCourses();
+                break;
+            case 'user':
+                getUserCourses();
+                break;
+            case 'admin':
+                if (isAuthenticated) {
+                    getAdminCourses();
+                }
+                break;
+            default:
+            // code block
         }
 
     }, [isAuthenticated]);
