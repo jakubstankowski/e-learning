@@ -10,7 +10,7 @@ import AuthContext from "../../context/auth/authContext";
 export default function Courses(props) {
     const coursesContext = useContext(CoursesContext);
 
-    const {type} = props;
+    const {type, showAddToCartButton} = props;
 
     const {getAdminCourses, getHomeCourses, getUserCourses, courses, loading} = coursesContext;
 
@@ -19,9 +19,9 @@ export default function Courses(props) {
     const {isAuthenticated} = authContext;
 
     useEffect(() => {
-        switch(type) {
+        switch (type) {
             case 'home':
-               getHomeCourses();
+                getHomeCourses();
                 break;
             case 'user':
                 getUserCourses();
@@ -44,6 +44,7 @@ export default function Courses(props) {
             {
                 courses.map((course) =>
                     <CourseItem
+                        showAddToCartButton={showAddToCartButton}
                         course={course}
                         key={course.id}/>
                 )

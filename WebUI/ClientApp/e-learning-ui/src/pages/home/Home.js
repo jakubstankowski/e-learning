@@ -27,6 +27,7 @@ export default function Home() {
             <Grid container spacing={4} className={classes.mainGrid}>
                 <Courses
                     type="home"
+                    showAddToCartButton="true"
                 />
             </Grid>
         </section>

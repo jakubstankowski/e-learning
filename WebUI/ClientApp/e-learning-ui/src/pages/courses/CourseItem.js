@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CourseItem(props) {
     const classes = useStyles();
     const {id, title, price, imageUrl} = props.course;
+    const {showAddToCartButton} = props;
 
     const authContext = useContext(AuthContext);
     const {isAuthenticated, isAdmin} = authContext;
@@ -71,7 +72,7 @@ export default function CourseItem(props) {
                     </Link>
                 </CardActionArea>
                 {
-                    props.showAddToCartButton &&
+                    showAddToCartButton &&
                     <CardActions>
                         <Button onClick={() => addItemToBasket(props.course)}
                                 color="secondary"
@@ -108,5 +109,9 @@ export default function CourseItem(props) {
             </Card>
         </Grid>
     )
+}
+
+CourseItem.defaultProps = {
+    showAddToCartButton: false
 }
 
