@@ -19,9 +19,9 @@ export default function Login({history}) {
     useEffect(() => {
         if (isAuthenticated) {
             if (isAdmin) {
-                return navigate('/dashboard')
+                navigate('/dashboard');
             }
-            return navigate('/user')
+            navigate('/user');
         }
 
         // eslint-disable-next-line

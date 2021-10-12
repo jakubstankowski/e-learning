@@ -23,6 +23,8 @@ namespace E_Learning.Domain.Entities.OrderAggregate
 
         public string BuyerEmail { get; set; }
 
+        public decimal SubTotal { get; set; }
+
         public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.Now;
 
         public IReadOnlyList<OrderItem> OrderItems { get; set; }

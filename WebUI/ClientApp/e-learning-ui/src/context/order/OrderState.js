@@ -6,6 +6,7 @@ import React, {useReducer} from "react";
 import OrderReducer from "../order/orderReducer";
 import axios from "axios";
 import OrderContext from "../order/orderContext";
+import {navigate} from "@reach/router";
 
 
 export default function OrderState(props) {
@@ -26,6 +27,8 @@ export default function OrderState(props) {
             type: POST_ORDER,
             payload: res.data
         })
+
+        navigate('/order');
     }
 
     const setLoading = () => dispatch({type: SET_LOADING});
