@@ -21,34 +21,37 @@ import Footer from "./components/layout/Footer";
 import {Container} from "@material-ui/core";
 import NotFound from "./pages/NotFound";
 import User from "./pages/user/User";
+import OrderState from "./context/order/OrderState";
 
 function App() {
     return (
         <AuthState>
             <CoursesState>
                 <BasketState>
-                    <LessonsState>
-                        <Header title="E-Learning"/>
-                        <Container maxWidth="lg"
-                                   className="container">
-                            <Router>
-                                <Home path="/"/>
-                                <Course path="/course/:courseId"/>
-                                <Lesson path="/course/:courseId/lesson/:lessonId"/>
-                                <CreateCourse path="/course/create"/>
-                                <EditCourse path="/course/:courseId/edit"/>
-                                <CreateLesson path="/course/:courseId/lesson/create"/>
-                                <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>
-                                <Login path="/login"/>
-                                <Register path="/register"/>
-                                <Basket path="/basket"/>
-                                <User path="/user"/>
-                                <Dashboard path="/dashboard"/>
-                                <NotFound path="*"/>
-                            </Router>
-                        </Container>
-                        <Footer title="Stantech"/>
-                    </LessonsState>
+                    <OrderState>
+                        <LessonsState>
+                            <Header title="E-Learning"/>
+                            <Container maxWidth="lg"
+                                       className="container">
+                                <Router>
+                                    <Home path="/"/>
+                                    <Course path="/course/:courseId"/>
+                                    <Lesson path="/course/:courseId/lesson/:lessonId"/>
+                                    <CreateCourse path="/course/create"/>
+                                    <EditCourse path="/course/:courseId/edit"/>
+                                    <CreateLesson path="/course/:courseId/lesson/create"/>
+                                    <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>
+                                    <Login path="/login"/>
+                                    <Register path="/register"/>
+                                    <Basket path="/basket"/>
+                                    <User path="/user"/>
+                                    <Dashboard path="/dashboard"/>
+                                    <NotFound path="*"/>
+                                </Router>
+                            </Container>
+                            <Footer title="Stantech"/>
+                        </LessonsState>
+                    </OrderState>
                 </BasketState>
             </CoursesState>
         </AuthState>
