@@ -42,6 +42,16 @@ function CoursesState(props) {
         })
     }
 
+    const getAdminCourses = async () => {
+        setLoading();
+
+        const res = await axios.get('https://localhost:44367/api/admin/courses');
+        dispatch({
+            type: GET_COURSES,
+            payload: res.data
+        })
+    }
+
     const getUserCourses = async () => {
         setLoading();
 
@@ -107,6 +117,7 @@ function CoursesState(props) {
                 loading: state.loading,
                 getCourses,
                 getHomeCourses,
+                getAdminCourses,
                 getUserCourses,
                 getCourse,
                 postCourse,
