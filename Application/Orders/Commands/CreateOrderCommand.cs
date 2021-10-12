@@ -44,6 +44,7 @@ namespace E_Learning.Application.Orders.Commands
             var basket = await _mediator.Send(query);
 
             var items = new List<OrderItem>();
+
             foreach (var item in basket.Items)
             {
                 var courseItem = await _context.Courses.FirstOrDefaultAsync(c => c.Id == item.Id);
