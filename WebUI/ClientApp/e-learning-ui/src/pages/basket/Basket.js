@@ -1,14 +1,18 @@
 import React from "react";
 import {useContext, useEffect} from "react";
 import BasketContext from '../../context/basket/basketContext';
+import OrderContext from '../../context/order/orderContext';
 import BasketItem from "./BasketItem";
 import AuthContext from "../../context/auth/authContext";
 import Button from "@material-ui/core/Button";
 
 export default function Cart() {
     const basketContext = useContext(BasketContext);
-
     const {getBasket, basket} = basketContext;
+
+    const orderContext = useContext(OrderContext);
+    const {postOrder} = orderContext;
+
 
     const authContext = useContext(AuthContext);
     const {isAuthenticated} = authContext;
@@ -42,6 +46,7 @@ export default function Cart() {
             {
                 isAuthenticated && basket.items.length > 0 &&
                 <Button color="secondary"
+                        onClick={() => postOrder(basket.id)}
                         variant="contained">
                     Finish Order
                 </Button>
