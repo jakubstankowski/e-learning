@@ -2,11 +2,16 @@ import React from "react";
 import {useContext, useEffect} from "react";
 import BasketContext from '../../context/basket/basketContext';
 import BasketItem from "./BasketItem";
+import AuthContext from "../../context/auth/authContext";
+import Button from "@material-ui/core/Button";
 
 export default function Cart() {
     const basketContext = useContext(BasketContext);
 
     const {getBasket, basket} = basketContext;
+
+    const authContext = useContext(AuthContext);
+    const {isAuthenticated} = authContext;
 
     useEffect(() => {
         const basketId = localStorage.getItem('basket_id');
@@ -34,6 +39,13 @@ export default function Cart() {
                     basket.totalCount > 0 && `Total Count: ${basket.totalCount} $`
                 }
             </h4>
+            {
+                isAuthenticated && basket.items.length > 0 &&
+                <Button color="secondary"
+                        variant="contained">
+                    Finish Order
+                </Button>
+            }
         </div>
     )
 }
