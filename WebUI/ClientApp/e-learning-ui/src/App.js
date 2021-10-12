@@ -20,6 +20,7 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import {Container} from "@material-ui/core";
 import NotFound from "./pages/NotFound";
+import User from "./pages/user/User";
 
 function App() {
     return (
@@ -41,6 +42,7 @@ function App() {
                                 <Login path="/login"/>
                                 <Register path="/register"/>
                                 <Basket path="/basket"/>
+                                <User path="/user"/>
                                 <Dashboard path="/dashboard"/>
                                 <NotFound path="*"/>
                             </Router>
