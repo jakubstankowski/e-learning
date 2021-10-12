@@ -42,7 +42,6 @@ namespace E_Learning.Application.Basket.Command.UpdateBasket
             {
                 Id = request.Id,
                 Items = request.Items,
-                TotalCount = 0
             };
 
             foreach (var item in basket.Items)
@@ -55,7 +54,7 @@ namespace E_Learning.Application.Basket.Command.UpdateBasket
                     throw new NotFoundException(nameof(Course), item.Id);
                 }
 
-                basket.TotalCount += course.Price;
+                basket.SubTotal += course.Price;
 
             }
 

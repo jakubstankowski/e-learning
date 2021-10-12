@@ -20,7 +20,7 @@ namespace E_Learning.Domain.Entities
         public string Id { get; set; }
         public List<BasketItem> Items { get; set; } = new List<BasketItem>();
 
-        public decimal TotalCount { get; set; }
+        public decimal SubTotal { get; set; }
 
 
     }
