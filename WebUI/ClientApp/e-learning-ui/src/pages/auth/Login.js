@@ -21,12 +21,9 @@ export default function Login({history}) {
             if (isAdmin) {
                 return navigate('/dashboard')
             }
-            return navigate('/user/my-courses')
+            return navigate('/user')
         }
 
-        if (error) {
-            //TODO : implement error alert #EL-32
-        }
         // eslint-disable-next-line
     }, [isAdmin, error, isAuthenticated, history, ]);
 
