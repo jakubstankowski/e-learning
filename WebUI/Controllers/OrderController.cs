@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using E_Learning.Application.Orders.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Learning.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class OrderController : ControllerBase
     {
         private readonly IMediator _mediator;
