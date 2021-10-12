@@ -17,7 +17,7 @@ namespace Infrastructure.Identity
         private readonly IConfiguration _config;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<IdentityUser> _userManager;
-       
+
 
         public IdentityService(IConfiguration config, IHttpContextAccessor httpContextAccessor, UserManager<IdentityUser> userManager)
         {
@@ -29,13 +29,13 @@ namespace Infrastructure.Identity
         public async Task<string> GenerateToken(IdentityUser user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var roles = await _userManager.GetRolesAsync(user);          
+            var roles = await _userManager.GetRolesAsync(user);
 
             var claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
             claims.Add(new Claim(ClaimTypes.Email, user.Email));
 
-            foreach(var role in roles)
+            foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
             }
@@ -55,6 +55,11 @@ namespace Infrastructure.Identity
 
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public string GetUserEmail()
+        {
+            return _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Email);
         }
 
         public string GetUserId()

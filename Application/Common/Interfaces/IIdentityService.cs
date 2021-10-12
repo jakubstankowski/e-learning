@@ -13,6 +13,8 @@ namespace E_Learning.Application.Common.Interfaces
 
         public string GetUserId();
 
+        public string GetUserEmail();
+
         public Task<bool> UserExist(string email);
     }
 }

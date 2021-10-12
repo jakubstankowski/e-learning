@@ -21,8 +21,6 @@ namespace E_Learning.Application.Orders.Commands
     {
         public string BasketId { get; set; }
 
-        public string Email { get; set; }
-
     }
 
     public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Order>
@@ -30,17 +28,18 @@ namespace E_Learning.Application.Orders.Commands
         private readonly IMediator _mediator;
         private readonly IContext _context;
         private readonly IMapper _mapper;
+        private readonly IIdentityService _identityService;
 
-        public CreateOrderHandler(IMediator mediator, IContext context, IMapper mapper)
+        public CreateOrderHandler(IMediator mediator, IContext context, IMapper mapper, IIdentityService identityService)
         {
             _mediator = mediator;
             _context = context;
             _mapper = mapper;
+            _identityService = identityService;
         }
 
         public async Task<Order> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            // TODO: is that ok to use CQRS in CQRS?
             var query = new GetBasketByIdQuery(request.BasketId);
             var basket = await _mediator.Send(query);
 
@@ -62,7 +61,10 @@ namespace E_Learning.Application.Orders.Commands
 
             }
 
-            var order = new Order(items, request.Email);
+
+            string userEmail = _identityService.GetUserEmail();
+
+            var order = new Order(items, userEmail);
 
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
