@@ -22,6 +22,7 @@ import {Container} from "@material-ui/core";
 import NotFound from "./pages/NotFound";
 import User from "./pages/user/User";
 import OrderState from "./context/order/OrderState";
+import Order from "./pages/order/Order";
 
 function App() {
     return (
@@ -46,6 +47,7 @@ function App() {
                                     <Basket path="/basket"/>
                                     <User path="/user"/>
                                     <Dashboard path="/dashboard"/>
+                                    <Order path="/order"/>
                                     <NotFound path="*"/>
                                 </Router>
                             </Container>
