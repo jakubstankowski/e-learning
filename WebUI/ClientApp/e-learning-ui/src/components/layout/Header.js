@@ -56,7 +56,7 @@ export default function Header(props) {
 
     const authLinks = (
         <Fragment>
-            <Link to="/user/my-courses">
+            <Link to="/user">
                 <Button variant="outlined" size="small" className={classes.headerButton} color="primary">
                     My Courses
                 </Button>
