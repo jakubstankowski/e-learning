@@ -65,7 +65,10 @@ namespace E_Learning.Application.Orders.Commands
 
             string userEmail = _identityService.GetUserEmail();
 
-            var order = new Order(items, userEmail);
+            var order = new Order(items, userEmail)
+            {
+                SubTotal = basket.TotalCount
+            };
 
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
