@@ -7,6 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import {Link} from '@reach/router';
 import AuthContext from '../../context/auth/authContext';
 import BasketContext from "../../context/basket/basketContext";
+import Badge from '@material-ui/core/Badge';
+import IconButton from '@material-ui/core/IconButton';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -115,12 +118,13 @@ export default function Header(props) {
                     basicLinks
                 }
                 <Link to="/basket">
-                    <Button variant="outlined" size="small" className={classes.headerButton} color="primary">
-                        Basket
-                        {
-                            basket.items && basket.items.length > 0 ? ` (${basket.items.length})` : ''
-                        }
-                    </Button>
+                    <IconButton aria-label="cart">
+                        <Badge
+                            badgeContent={basket.items && basket.items.length > 0 ? basket.items.length : null}
+                            color="secondary">
+                            <ShoppingCartIcon/>
+                        </Badge>
+                    </IconButton>
                 </Link>
             </Toolbar>
         </React.Fragment>
