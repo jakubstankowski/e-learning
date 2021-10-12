@@ -40,7 +40,7 @@ export default function Cart() {
             }
             <h4>
                 {
-                    basket.totalCount > 0 && `Total Count: ${basket.totalCount} $`
+                    basket.subTotal > 0 && `Total Count: ${basket.subTotal} $`
                 }
             </h4>
             {

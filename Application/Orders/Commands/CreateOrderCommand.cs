@@ -67,7 +67,7 @@ namespace E_Learning.Application.Orders.Commands
 
             var order = new Order(items, userEmail)
             {
-                SubTotal = basket.TotalCount
+                SubTotal = basket.SubTotal
             };
 
             _context.Orders.Add(order);
