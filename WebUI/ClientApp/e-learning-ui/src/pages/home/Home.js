@@ -1,14 +1,8 @@
-import React from "react";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import React, {useContext, useEffect} from "react";
 import Grid from "@material-ui/core/Grid";
-import Courses from "../../components/courses/Courses";
 import HomeBillboard from "./HomeBillboard";
-
-const useStyles = makeStyles((theme) => ({
-    mainGrid: {
-        marginTop: theme.spacing(3),
-    },
-}));
+import CourseItem from "../../components/courses/CourseItem";
+import CoursesContext from "../../context/courses/coursesContext";
 
 const mainFeaturedPost = {
     title: 'Title of a longer featured blog post',
@@ -20,15 +14,26 @@ const mainFeaturedPost = {
 };
 
 export default function Home() {
-    const classes = useStyles();
+    const coursesContext = useContext(CoursesContext);
+    const {getHomeCourses, courses} = coursesContext;
+
+
+    useEffect(() => {
+        getHomeCourses();
+    }, []);
+
     return (
         <section>
             <HomeBillboard post={mainFeaturedPost}/>
-            <Grid container spacing={4} className={classes.mainGrid}>
-                <Courses
-                    type="home"
-                    showAddToCartButton="true"
-                />
+            <Grid container spacing={4}>
+                {
+                    courses.map((course) =>
+                        <CourseItem
+                            showAddToCartButton="true"
+                            course={course}
+                            key={course.id}/>
+                    )
+                }
             </Grid>
         </section>
     )

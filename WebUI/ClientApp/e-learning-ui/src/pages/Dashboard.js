@@ -1,21 +1,26 @@
 import {Container} from "@material-ui/core";
-import React from "react";
-import Courses from "../components/courses/Courses";
+import React, {useContext, useEffect} from "react";
 import Grid from "@material-ui/core/Grid";
-import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Link} from "@reach/router";
 import Button from "@material-ui/core/Button";
-import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
+import CourseItem from "../components/courses/CourseItem";
+import CoursesContext from "../context/courses/coursesContext";
+import AuthContext from "../context/auth/authContext";
 
-const useStyles = makeStyles((theme) => ({
-    mainGrid: {
-        marginTop: theme.spacing(3),
-    },
-}));
 
 export default function Dashboard() {
-    const classes = useStyles();
+    const coursesContext = useContext(CoursesContext);
+    const {getAdminCourses, courses} = coursesContext;
+
+    const authContext = useContext(AuthContext);
+    const {isAuthenticated} = authContext;
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            getAdminCourses();
+        }
+    }, [isAuthenticated]);
 
     return (
         <Container>
@@ -29,10 +34,14 @@ export default function Dashboard() {
                     Create New Course
                 </Button>
             </Link>
-            <Grid container spacing={4} className={classes.mainGrid}>
-                <Courses
-                    type="admin"
-                />
+            <Grid container spacing={4}>
+                {
+                    courses.map((course) =>
+                        <CourseItem
+                            course={course}
+                            key={course.id}/>
+                    )
+                }
             </Grid>
         </Container>
     )
