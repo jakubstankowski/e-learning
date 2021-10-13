@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import HomeBillboard from "./HomeBillboard";
 import CourseItem from "../../components/courses/CourseItem";
 import CoursesContext from "../../context/courses/coursesContext";
+import BasketContext from "../../context/basket/basketContext";
 
 const mainFeaturedPost = {
     title: 'Title of a longer featured blog post',
@@ -17,8 +18,16 @@ export default function Home() {
     const coursesContext = useContext(CoursesContext);
     const {getHomeCourses, courses} = coursesContext;
 
+    const basketContext = useContext(BasketContext);
+    const {getBasket} = basketContext;
 
     useEffect(() => {
+        const basketId = localStorage.getItem('basket_id');
+
+        if (basketId) {
+            getBasket(basketId);
+        }
+
         getHomeCourses();
     }, []);
 

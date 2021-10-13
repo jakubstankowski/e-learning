@@ -1,5 +1,5 @@
 import './App.css';
-import React, {Fragment} from 'react';
+import React from 'react';
 import {Router} from "@reach/router";
 import Course from "./pages/course/Course";
 import CreateCourse from "./pages/course/CreateCourse";
@@ -18,11 +18,12 @@ import Dashboard from "./pages/Dashboard";
 import Basket from "./pages/basket/Basket";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
-import {Container} from "@material-ui/core";
 import NotFound from "./pages/NotFound";
 import User from "./pages/user/User";
 import OrderState from "./context/order/OrderState";
 import Order from "./pages/order/Order";
+import Layout from "./components/layout/Layout";
+
 
 function App() {
     return (
@@ -32,9 +33,8 @@ function App() {
                     <OrderState>
                         <LessonsState>
                             <Header title="E-Learning"/>
-                            <Container maxWidth="lg"
-                                       className="container">
-                                <Router>
+                            <Router>
+                                <Layout path="/">
                                     <Home path="/"/>
                                     <Course path="/course/:courseId"/>
                                     <Lesson path="/course/:courseId/lesson/:lessonId"/>
@@ -49,8 +49,8 @@ function App() {
                                     <Dashboard path="/dashboard"/>
                                     <Order path="/order"/>
                                     <NotFound path="*"/>
-                                </Router>
-                            </Container>
+                                </Layout>
+                            </Router>
                             <Footer title="Stantech"/>
                         </LessonsState>
                     </OrderState>
