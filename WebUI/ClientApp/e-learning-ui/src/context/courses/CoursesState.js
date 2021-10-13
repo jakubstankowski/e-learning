@@ -11,7 +11,7 @@ import {
     SET_LOADING,
     GET_HOME_COURSES,
     GET_ADMIN_COURSES,
-    GET_USER_COURSES
+    GET_USER_COURSES, RESET_COURSES
 } from '../types'
 
 
@@ -25,37 +25,46 @@ function CoursesState(props) {
     const [state, dispatch] = useReducer(CoursesReducer, initialState);
 
     const getHomeCourses = async () => {
-        alert('get home courses');
+        dispatch({
+            type: RESET_COURSES
+        });
+
         setLoading();
 
         const res = await axios.get('https://localhost:44367/api/home/courses');
         dispatch({
             type: GET_HOME_COURSES,
             payload: res.data
-        })
+        });
     }
 
     const getAdminCourses = async () => {
-        alert('get admin courses');
+        dispatch({
+            type: RESET_COURSES
+        });
+
         setLoading();
 
         const res = await axios.get('https://localhost:44367/api/admin/courses');
+
         dispatch({
             type: GET_ADMIN_COURSES,
             payload: res.data
-        })
+        });
     }
 
     const getUserCourses = async () => {
-        alert('get user courses!');
+        dispatch({
+            type: RESET_COURSES
+        });
+
         setLoading();
 
         const res = await axios.get(`https://localhost:44367/api/user/courses`);
-
         dispatch({
             type: GET_USER_COURSES,
             payload: res.data
-        })
+        });
     }
 
     const getCourse = async (id) => {
@@ -66,7 +75,7 @@ function CoursesState(props) {
         dispatch({
             type: GET_COURSE,
             payload: res.data
-        })
+        });
     }
 
     const postCourse = async (course) => {
@@ -76,7 +85,7 @@ function CoursesState(props) {
         dispatch({
             type: POST_COURSE,
             payload: res.data
-        })
+        });
     }
 
     const deleteCourse = async (id) => {
@@ -87,7 +96,7 @@ function CoursesState(props) {
         dispatch({
             type: DELETE_COURSE,
             payload: res.data
-        })
+        });
     }
 
     const updateCourse = async (id, course) => {
@@ -98,7 +107,7 @@ function CoursesState(props) {
         dispatch({
             type: UPDATE_COURSE,
             payload: res.data
-        })
+        });
     }
 
 
