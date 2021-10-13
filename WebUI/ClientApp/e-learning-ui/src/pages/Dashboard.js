@@ -1,6 +1,6 @@
 import {Container} from "@material-ui/core";
 import React from "react";
-import Courses from "./courses/Courses";
+import Courses from "../components/courses/Courses";
 import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Link} from "@reach/router";

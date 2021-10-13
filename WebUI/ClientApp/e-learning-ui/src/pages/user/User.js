@@ -1,4 +1,4 @@
-import Courses from "../courses/Courses";
+import Courses from "../../components/courses/Courses";
 import Grid from "@material-ui/core/Grid";
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";

@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import LessonsContext from "../../context/lessons/lessonsContext";
-import Spinner from "../../components/Spinner";
+import Spinner from "../Spinner";
 import {Link, useParams} from "@reach/router";
 import {makeStyles} from '@material-ui/core/styles';
 import Paper from "@material-ui/core/Paper";

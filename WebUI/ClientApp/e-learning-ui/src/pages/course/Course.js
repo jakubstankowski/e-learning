@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from "react";
-import Lessons from "../lessons/Lessons";
+import Lessons from "../../components/lessons/Lessons";
 import {Link, useParams} from "@reach/router";
 import CoursesContext from "../../context/courses/coursesContext";
 import Spinner from "../../components/Spinner";

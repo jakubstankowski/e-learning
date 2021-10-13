@@ -2,7 +2,7 @@ import React from "react";
 import {useContext, useEffect} from "react";
 import BasketContext from '../../context/basket/basketContext';
 import OrderContext from '../../context/order/orderContext';
-import BasketItem from "./BasketItem";
+import BasketItem from "../../components/basket/BasketItem";
 import AuthContext from "../../context/auth/authContext";
 import Button from "@material-ui/core/Button";
 

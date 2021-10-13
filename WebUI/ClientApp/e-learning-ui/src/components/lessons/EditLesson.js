@@ -1,86 +1,73 @@
-import React, {useContext, useEffect} from "react";
+import * as React from "react";
 import Typography from "@material-ui/core/Typography";
 import {Field, Form} from "react-final-form";
-import {Button, Container, Grid, Paper} from "@material-ui/core";
+import {Button, Grid, Paper} from "@material-ui/core";
 import {TextField} from "final-form-material-ui";
-import CoursesContext from "../../context/courses/coursesContext";
-import Spinner from "../../components/Spinner";
-import Lessons from "../lessons/Lessons";
-import AuthContext from "../../context/auth/authContext";
+import {useContext, useEffect} from "react";
+import LessonsContext from "../../context/lessons/lessonsContext";
+import Spinner from "../Spinner";
 import {navigate, useParams} from "@reach/router";
-import {makeStyles} from "@material-ui/core/styles";
+import AuthContext from "../../context/auth/authContext";
 
+export default function EditLesson() {
+    const lessonsContext = useContext(LessonsContext);
 
-export default function EditCourse() {
-    const coursesContext = useContext(CoursesContext);
-
-    const {getCourse, course, updateCourse, loading} = coursesContext;
+    const {getLesson, updateLesson, lesson, loading} = lessonsContext;
 
     const authContext = useContext(AuthContext);
     const {isAuthenticated} = authContext;
 
-    const {courseId} = useParams();
+    const {lessonId, courseId} = useParams();
 
     useEffect(() => {
         if (isAuthenticated) {
-            getCourse(courseId);
+            getLesson(lessonId);
         }
         // eslint-disable-next-line
     }, [isAuthenticated]);
 
-    const onSubmit = (course) => {
-        updateCourse(courseId, course)
+    if (loading) return <Spinner/>
+
+    const {id, title, description, videoUrl} = lesson;
+
+    const onSubmit = (lesson) => {
+        updateLesson(lessonId, lesson)
             .then(() => {
-                navigate('/courses');
+                navigate(`/course/${courseId}/lesson/${lessonId}`);
             })
     };
 
     const validate = (values) => {
         const errors = {};
+
         if (!values.title) {
             errors.title = 'Required';
         }
         if (!values.description) {
             errors.description = 'Required';
         }
-        if (!values.price) {
-            errors.price = 'Required';
+        if (!values.videoUrl) {
+            errors.videoUrl = 'Required';
         }
-
-        if(!values.imageUrl){
-            errors.imageUrl = 'Required';
+        if (!values.courseId) {
+            errors.courseId = 'Required';
         }
 
         return errors;
     };
 
-    const useStyles = makeStyles((theme) => ({
-        editCourse: {
-            textFloat: 'center'
-        },
-        lessons: {
-            marginTop: '2rem'
-        }
-    }));
-
-    const classes = useStyles();
-
-    if (loading) return <Spinner/>;
-
-    const {title, id, description, price, imageUrl} = course;
-
     return (
-        <section className={classes.editCourse}>
+        <section className='form-container'>
             <Typography variant="h5" component="h2">
-                Edit Course <strong>{title}</strong> ID: <strong>{id}</strong>
+                Edit Lesson <strong>{title}</strong> ID: <strong>{id}</strong>
             </Typography>
             <Form
                 initialValues={{
                     id: id,
                     title: title,
                     description: description,
-                    price: price,
-                    imageUrl: imageUrl,
+                    videoUrl: videoUrl,
+                    courseId: courseId
                 }}
                 onSubmit={onSubmit}
                 validate={validate}
@@ -112,23 +99,23 @@ export default function EditCourse() {
                                     <Field
                                         fullWidth
                                         required
-                                        name="price"
+                                        name="videoUrl"
                                         component={TextField}
-                                        type="number"
-                                        label="Price"
+                                        type="text"
+                                        label="Video URL"
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Field
                                         fullWidth
                                         required
-                                        name="imageUrl"
+                                        name="courseId"
                                         component={TextField}
-                                        type="text"
-                                        label="Image Url"
+                                        type="number"
+                                        label="Course ID"
                                     />
                                 </Grid>
-                                <Grid item xs={4}>
+                                <Grid item xs={12}>
                                     <Button type="submit"
                                             className="form-button"
                                             color="primary"
@@ -142,11 +129,7 @@ export default function EditCourse() {
                     </form>
                 )}
             />
-            <Container className={classes.lessons}>
-                <Lessons/>
-            </Container>
         </section>
     )
 
 }
-
