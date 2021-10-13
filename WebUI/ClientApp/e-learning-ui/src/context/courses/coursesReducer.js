@@ -1,5 +1,7 @@
 import {
-    GET_COURSES,
+    GET_HOME_COURSES,
+    GET_USER_COURSES,
+    GET_ADMIN_COURSES,
     GET_COURSE,
     SET_LOADING,
     POST_COURSE,
@@ -9,7 +11,19 @@ import {
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case GET_COURSES:
+        case GET_HOME_COURSES:
+            return {
+                ...state,
+                courses: action.payload,
+                loading: false
+            };
+        case GET_ADMIN_COURSES:
+            return {
+                ...state,
+                courses: action.payload,
+                loading: false
+            };
+        case GET_USER_COURSES:
             return {
                 ...state,
                 courses: action.payload,

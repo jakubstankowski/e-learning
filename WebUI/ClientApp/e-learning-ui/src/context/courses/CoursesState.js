@@ -5,11 +5,13 @@ import CoursesReducer from './coursesReducer';
 
 import {
     GET_COURSE,
-    GET_COURSES,
     DELETE_COURSE,
     POST_COURSE,
     UPDATE_COURSE,
-    SET_LOADING
+    SET_LOADING,
+    GET_HOME_COURSES,
+    GET_ADMIN_COURSES,
+    GET_USER_COURSES
 } from '../types'
 
 
@@ -22,43 +24,36 @@ function CoursesState(props) {
 
     const [state, dispatch] = useReducer(CoursesReducer, initialState);
 
-    const getCourses = async () => {
-        setLoading();
-
-        const res = await axios.get('https://localhost:44367/api/courses');
-        dispatch({
-            type: GET_COURSES,
-            payload: res.data
-        })
-    }
-
     const getHomeCourses = async () => {
+        alert('get home courses');
         setLoading();
 
         const res = await axios.get('https://localhost:44367/api/home/courses');
         dispatch({
-            type: GET_COURSES,
+            type: GET_HOME_COURSES,
             payload: res.data
         })
     }
 
     const getAdminCourses = async () => {
+        alert('get admin courses');
         setLoading();
 
         const res = await axios.get('https://localhost:44367/api/admin/courses');
         dispatch({
-            type: GET_COURSES,
+            type: GET_ADMIN_COURSES,
             payload: res.data
         })
     }
 
     const getUserCourses = async () => {
+        alert('get user courses!');
         setLoading();
 
         const res = await axios.get(`https://localhost:44367/api/user/courses`);
 
         dispatch({
-            type: GET_COURSES,
+            type: GET_USER_COURSES,
             payload: res.data
         })
     }
@@ -115,7 +110,6 @@ function CoursesState(props) {
                 courses: state.courses,
                 course: state.course,
                 loading: state.loading,
-                getCourses,
                 getHomeCourses,
                 getAdminCourses,
                 getUserCourses,

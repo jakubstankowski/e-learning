@@ -1,4 +1,6 @@
-export const GET_COURSES = 'GET_COURSES';
+export const GET_HOME_COURSES = 'GET_HOME_COURSES';
+export const GET_ADMIN_COURSES = 'GET_ADMIN_COURSES';
+export const GET_USER_COURSES = 'GET_USER_COURSES';
 export const GET_COURSE = 'GET_COURSE';
 export const GET_COURSE_LESSONS = 'GET_COURSE_LESSONS';
 export const GET_LESSON = 'GET_LESSON';
