@@ -19,7 +19,7 @@ export default function Layout({children}) {
     return (
         <Container maxWidth="lg"
                    className="container">
-            {{children}}
+            {children}
         </Container>
     )
 
