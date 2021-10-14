@@ -79,6 +79,9 @@ namespace Infrastructure.Persistance.Migrations
                     b.Property<string>("BuyerEmail")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("BuyerId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTimeOffset>("OrderDate")
                         .HasColumnType("datetimeoffset");
 

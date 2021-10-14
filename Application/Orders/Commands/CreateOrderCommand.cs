@@ -64,8 +64,10 @@ namespace E_Learning.Application.Orders.Commands
 
 
             string userEmail = _identityService.GetUserEmail();
+            string userId = _identityService.GetUserId();
 
-            var order = new Order(items, userEmail)
+
+            var order = new Order(items, userEmail, userId)
             {
                 SubTotal = basket.SubTotal
             };
