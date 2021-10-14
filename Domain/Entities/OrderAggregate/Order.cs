@@ -17,6 +17,7 @@ namespace E_Learning.Domain.Entities.OrderAggregate
         {
             BuyerEmail = buyerEmail;
             OrderItems = orderItems;
+            BuyerId = buyerId;
         }
 
         public int Id { get; set; }
