@@ -1,4 +1,5 @@
 import {
+    GET_ORDER_BY_USER,
     POST_ORDER,
     SET_LOADING
 } from '../types';
@@ -31,13 +32,24 @@ export default function OrderState(props) {
         navigate('/order');
     }
 
+    const getOrderByUser = async () => {
+        setLoading();
+        const res = await axios.post('https://localhost:44367/api/order')
+
+        dispatch({
+            type: GET_ORDER_BY_USER,
+            payload: res.data
+        })
+    }
+
     const setLoading = () => dispatch({type: SET_LOADING});
 
     return (
         <OrderContext.Provider
             value={{
                 order: state.order,
-                postOrder
+                postOrder,
+                getOrderByUser
             }}
         >
             {props.children}
