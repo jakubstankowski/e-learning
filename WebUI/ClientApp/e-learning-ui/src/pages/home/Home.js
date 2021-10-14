@@ -4,6 +4,7 @@ import HomeBillboard from "./HomeBillboard";
 import CourseItem from "../../components/courses/CourseItem";
 import CoursesContext from "../../context/courses/coursesContext";
 import BasketContext from "../../context/basket/basketContext";
+import Courses from "../../components/courses/Courses";
 
 const mainFeaturedPost = {
     title: 'Title of a longer featured blog post',
@@ -16,7 +17,7 @@ const mainFeaturedPost = {
 
 export default function Home() {
     const coursesContext = useContext(CoursesContext);
-    const {getHomeCourses, courses} = coursesContext;
+    const {getHomeCourses} = coursesContext;
 
     const basketContext = useContext(BasketContext);
     const {getBasket} = basketContext;
@@ -34,16 +35,7 @@ export default function Home() {
     return (
         <section>
             <HomeBillboard post={mainFeaturedPost}/>
-            <Grid container spacing={4}>
-                {
-                    courses.map((course) =>
-                        <CourseItem
-                            showAddToCartButton="true"
-                            course={course}
-                            key={course.id}/>
-                    )
-                }
-            </Grid>
+            <Courses/>
         </section>
     )
 }
