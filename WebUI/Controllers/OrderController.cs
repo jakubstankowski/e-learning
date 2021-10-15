@@ -31,10 +31,10 @@ namespace E_Learning.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<OrderDto>> GetOrderByUser()
+        public async Task<ActionResult<OrderDto>> GetOrdersByUser()
         {
 
-            var query = new GetOrderByUserQuery();
+            var query = new GetOrdersByUserQuery();
             var result = await _mediator.Send(query);
 
             return Ok(result);
