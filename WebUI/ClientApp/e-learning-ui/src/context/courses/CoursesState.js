@@ -19,16 +19,12 @@ function CoursesState(props) {
     const initialState = {
         courses: [],
         course: {},
-        loading: false
+        loading: true
     }
 
     const [state, dispatch] = useReducer(CoursesReducer, initialState);
 
     const getHomeCourses = async () => {
-        dispatch({
-            type: RESET_COURSES
-        });
-
         setLoading();
 
         const res = await axios.get('https://localhost:44367/api/home/courses');
@@ -39,10 +35,6 @@ function CoursesState(props) {
     }
 
     const getAdminCourses = async () => {
-        dispatch({
-            type: RESET_COURSES
-        });
-
         setLoading();
 
         const res = await axios.get('https://localhost:44367/api/admin/courses');
@@ -54,10 +46,6 @@ function CoursesState(props) {
     }
 
     const getUserCourses = async () => {
-        dispatch({
-            type: RESET_COURSES
-        });
-
         setLoading();
 
         const res = await axios.get(`https://localhost:44367/api/user/courses`);
@@ -110,6 +98,11 @@ function CoursesState(props) {
         });
     }
 
+    const resetCourses = () => {
+        dispatch({
+            type: RESET_COURSES
+        });
+    }
 
     const setLoading = () => dispatch({type: SET_LOADING});
 
@@ -125,7 +118,8 @@ function CoursesState(props) {
                 getCourse,
                 postCourse,
                 deleteCourse,
-                updateCourse
+                updateCourse,
+                resetCourses
             }}
         >
             {props.children}

@@ -6,12 +6,14 @@ import Courses from "../../components/courses/Courses";
 
 export default function User() {
     const coursesContext = useContext(CoursesContext);
-    const {getUserCourses, courses} = coursesContext;
+    const {getUserCourses, courses, resetCourses} = coursesContext;
 
     const authContext = useContext(AuthContext);
     const {isAuthenticated} = authContext;
 
     useEffect(() => {
+        resetCourses();
+
         if (isAuthenticated) {
             getUserCourses();
         }
