@@ -23,6 +23,7 @@ import User from "./pages/user/User";
 import OrderState from "./context/order/OrderState";
 import Order from "./pages/order/Order";
 import Layout from "./components/layout/Layout";
+import Checkout from "./pages/checkout/Checkout";
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
                                     <Login path="/login"/>
                                     <Register path="/register"/>
                                     <Basket path="/basket"/>
+                                    <Checkout path="/checkout"/>
                                     <User path="/user"/>
                                     <Dashboard path="/dashboard"/>
                                     <Order path="/order"/>

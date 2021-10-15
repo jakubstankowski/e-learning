@@ -19,13 +19,13 @@ export default function Login({history}) {
     useEffect(() => {
         if (isAuthenticated) {
             if (isAdmin) {
-                navigate('/dashboard');
+                return navigate('/dashboard');
             }
-            navigate('/user');
+             navigate('/user');
         }
 
         // eslint-disable-next-line
-    }, [isAdmin, error, isAuthenticated, history, ]);
+    }, [isAdmin, error, isAuthenticated, history,]);
 
 
     const onSubmit = (values) => {
