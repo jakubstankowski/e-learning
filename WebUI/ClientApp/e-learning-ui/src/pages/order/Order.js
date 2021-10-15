@@ -4,10 +4,13 @@ import {navigate} from "@reach/router";
 
 export default function Order() {
     const orderContext = useContext(OrderContext);
-    const {order} = orderContext;
+    const {order, getOrderByUser} = orderContext;
 
     useEffect(() => {
-        console.log('order:', order);
+        getOrderByUser()
+            .then((r) => {
+                console.log('re: ', r);
+            })
         // eslint-disable-next-line
     }, []);
 

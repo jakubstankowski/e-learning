@@ -1,5 +1,5 @@
 import {
-    GET_ORDER_BY_USER,
+    GET_ORDERS_BY_USER,
     POST_ORDER,
     SET_LOADING
 } from '../types';
@@ -34,10 +34,10 @@ export default function OrderState(props) {
 
     const getOrderByUser = async () => {
         setLoading();
-        const res = await axios.post('https://localhost:44367/api/order')
+        const res = await axios.get('https://localhost:44367/api/order')
 
         dispatch({
-            type: GET_ORDER_BY_USER,
+            type: GET_ORDERS_BY_USER,
             payload: res.data
         })
     }
