@@ -12,12 +12,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.Orders.Queries.GetOrders
 {
-    public class GetOrdersByUserQuery : IRequest<IEnumerable<Order>>
+    public class GetOrdersByUserQuery : IRequest<IEnumerable<OrderDto>>
     {
 
     }
 
-    public class GetOrdersByUserQueryHandler : IRequestHandler<GetOrdersByUserQuery, IEnumerable<Order>>
+    public class GetOrdersByUserQueryHandler : IRequestHandler<GetOrdersByUserQuery, IEnumerable<OrderDto>>
     {
         private readonly IIdentityService _identityService;
         private readonly IContext _context;
@@ -29,17 +29,17 @@ namespace E_Learning.Application.Orders.Queries.GetOrders
             _context = context;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<Order>> Handle(GetOrdersByUserQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<OrderDto>> Handle(GetOrdersByUserQuery request, CancellationToken cancellationToken)
         {
             string userId = _identityService.GetUserId();
 
-            var order = await _context.Orders
+            var orders = await _context.Orders
                 .Where(o => o.BuyerId == userId)
                 .Include(o => o.OrderItems)
-                .Include(o => o.Status)
                 .ToListAsync();
 
-            return order;
+
+           return _mapper.Map<IEnumerable<Order>, IEnumerable <OrderDto>> (orders);
         }
     }
 

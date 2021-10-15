@@ -31,7 +31,7 @@ namespace E_Learning.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<OrderDto>> GetOrdersByUser()
+        public async Task<ActionResult<OrderDto>> GetOrderByUser()
         {
 
             var query = new GetOrdersByUserQuery();
