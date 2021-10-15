@@ -14,7 +14,7 @@ const reducer = (state, action) => {
         case GET_ORDERS_BY_USER:
             return {
                 ...state,
-                order: action.payload,
+                orders: action.payload,
                 loading: false
             };
         default:

@@ -13,6 +13,7 @@ import {navigate} from "@reach/router";
 export default function OrderState(props) {
     const initialState = {
         order: {},
+        orders: [],
         loading: false
     };
 
