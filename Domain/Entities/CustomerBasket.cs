@@ -22,6 +22,6 @@ namespace E_Learning.Domain.Entities
 
         public decimal SubTotal { get; set; }
 
-
+        public string PaymentIntentId { get; set; }
     }
 }
