@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using E_Learning.Application.Basket.Queries.GetBasket;
 using E_Learning.Application.Common.Interfaces;
 using Infrastructure.Identity;
+using Infrastructure.Interfaces;
 using Infrastructure.Persistance;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,7 +18,7 @@ namespace Infrastructure
         {
             services.AddScoped<IContext>(provider => provider.GetService<Context>());
             services.AddScoped<IIdentityService, IdentityService>();
-
+          
             return services;
         }
     }
