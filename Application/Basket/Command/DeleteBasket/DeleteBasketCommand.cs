@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using E_Learning.Application.Common.Interfaces;
 using MediatR;
 using StackExchange.Redis;
 
@@ -22,16 +23,16 @@ namespace E_Learning.Application.Basket.Command.DeleteBasket
 
     public class DeleteBasketHandler : IRequestHandler<DeleteBasketCommand, bool>
     {
-        private readonly IDatabase _database;
+        private readonly IBasketRepository _basketRepository;
 
-        public DeleteBasketHandler(IConnectionMultiplexer redis)
+        public DeleteBasketHandler(IBasketRepository basketRepository)
         {
-            _database = redis.GetDatabase();
+            _basketRepository = basketRepository;
         }
 
         public async Task<bool> Handle(DeleteBasketCommand request, CancellationToken cancellationToken)
         {
-            return await _database.KeyDeleteAsync(request.Id);
+            return await _basketRepository.DeleteBasketAsync(request.Id);
         }
     }
 
