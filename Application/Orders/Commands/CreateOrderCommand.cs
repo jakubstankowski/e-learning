@@ -43,6 +43,8 @@ namespace E_Learning.Application.Orders.Commands
             var query = new GetBasketByIdQuery(request.BasketId);
             var basket = await _mediator.Send(query);
 
+            if (basket == null) return null;
+
             var items = new List<OrderItem>();
 
             foreach (var item in basket.Items)

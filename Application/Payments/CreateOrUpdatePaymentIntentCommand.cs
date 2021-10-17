@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using E_Learning.Application.Basket.Command.UpdateBasket;
+using E_Learning.Application.Basket.Queries.GetBasket;
 using E_Learning.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -20,16 +22,53 @@ namespace E_Learning.Application.Payments
     {
         public IConfiguration Configuration { get; }
 
-        public CreateOrUpdatePaymentIntentCommandHandler(IConfiguration configuration)
+        private readonly IMediator _mediator;
+
+        public CreateOrUpdatePaymentIntentCommandHandler(IConfiguration configuration, IMediator mediator)
         {
             Configuration = configuration;
+            _mediator = mediator;
         }
 
-        public Task<CustomerBasket> Handle(CreateOrUpdatePaymentIntentCommand request, CancellationToken cancellationToken)
+        public async Task<CustomerBasket> Handle(CreateOrUpdatePaymentIntentCommand request, CancellationToken cancellationToken)
         {
             StripeConfiguration.ApiKey = Configuration.GetConnectionString("StripeSettings:SecretKey");
 
-            throw new NotImplementedException();
+            var query = new GetBasketByIdQuery(request.BasketId);
+            var basket = await _mediator.Send(query);
+
+            if (basket == null) return null;
+
+            var service = new PaymentIntentService();
+
+            PaymentIntent intent;
+
+            if (string.IsNullOrEmpty(basket.PaymentIntentId))
+            {
+                var options = new PaymentIntentCreateOptions
+                {
+                    Amount = (long?)basket.SubTotal,
+                    Currency = "usd",
+                    PaymentMethodTypes = new List<string> { "card" }
+                };
+                intent = await service.CreateAsync(options);
+                basket.PaymentIntentId = intent.Id;
+                basket.ClientSecret = intent.ClientSecret;
+            }
+            else
+            {
+                var options = new PaymentIntentUpdateOptions
+                {
+                    Amount = (long?)basket.SubTotal,
+                };
+                await service.UpdateAsync(basket.PaymentIntentId, options);
+            }
+
+
+           //use there a update basket command? 
+
+
+            return basket;
         }
     }
 
