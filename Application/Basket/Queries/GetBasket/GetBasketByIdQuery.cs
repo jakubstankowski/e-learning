@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using E_Learning.Application.Common.Exceptions;
+using E_Learning.Application.Common.Interfaces;
 using E_Learning.Domain.Entities;
 using MediatR;
 using StackExchange.Redis;
@@ -25,25 +26,16 @@ namespace E_Learning.Application.Basket.Queries.GetBasket
 
     public class GetBasketHandler : IRequestHandler<GetBasketByIdQuery, CustomerBasket>
     {
-        private readonly IDatabase _database;
+        private readonly IBasketRepository _basketService;
 
-        public GetBasketHandler(IConnectionMultiplexer redis)
+        public GetBasketHandler(IBasketRepository basketService)
         {
-            _database = redis.GetDatabase();
+            _basketService = basketService;
         }
 
         public async Task<CustomerBasket> Handle(GetBasketByIdQuery request, CancellationToken cancellationToken)
         {
-
-            var data = await _database.StringGetAsync(request.Id);
-
-
-            if (data.IsNullOrEmpty)
-            {
-                throw new NotFoundException(nameof(CustomerBasket), request.Id);
-            }
-
-            return JsonSerializer.Deserialize<CustomerBasket>(data);
+            return await _basketService.GetBasketByIdAsync(request.Id);
         }
     }
 

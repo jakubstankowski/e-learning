@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using E_Learning.Application.Basket.Queries.GetBasket;
 using E_Learning.Application.Common.Interfaces;
 using Infrastructure.Identity;
-using Infrastructure.Interfaces;
 using Infrastructure.Persistance;
+using Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure
@@ -18,6 +18,7 @@ namespace Infrastructure
         {
             services.AddScoped<IContext>(provider => provider.GetService<Context>());
             services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IBasketRepository, BasketService>();
           
             return services;
         }

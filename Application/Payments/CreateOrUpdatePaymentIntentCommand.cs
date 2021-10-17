@@ -65,8 +65,9 @@ namespace E_Learning.Application.Payments
             }
 
 
-           //use there a update basket command? 
+            //use there a update basket command? 
 
+            UpdateBasketCommand command = new CustomerBasket();
 
             return basket;
         }
