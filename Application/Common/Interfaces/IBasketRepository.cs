@@ -11,6 +11,6 @@ namespace E_Learning.Application.Common.Interfaces
     {
         public Task<CustomerBasket> GetBasketByIdAsync(string basketId);
 
-        public Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket);
+        public Task<CustomerBasket> UpdateBasketAsync(string basketId, List<BasketItem> Items);
     }
 }

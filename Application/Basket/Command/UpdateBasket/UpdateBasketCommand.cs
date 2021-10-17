@@ -25,49 +25,16 @@ namespace E_Learning.Application.Basket.Command.UpdateBasket
 
     public class UpdateBasketHandler : IRequestHandler<UpdateBasketCommand, CustomerBasket>
     {
-        private readonly IDatabase _database;
-        private readonly IContext _context;
-        public IMapper _mapper { get; }
+        private readonly IBasketRepository _basketRepository;
 
-        public UpdateBasketHandler(IConnectionMultiplexer redis, IContext context)
+        public UpdateBasketHandler(IBasketRepository basketRepository)
         {
-            _database = redis.GetDatabase();
-            _context = context;
+            _basketRepository = basketRepository;
         }
 
         public async Task<CustomerBasket> Handle(UpdateBasketCommand request, CancellationToken cancellationToken)
         {
-
-            var basket = new CustomerBasket
-            {
-                Id = request.Id,
-                Items = request.Items,
-            };
-
-            foreach (var item in basket.Items)
-            {
-                var course = await _context
-                         .Courses.FirstOrDefaultAsync(c => c.Id == item.Id);
-
-                if (course == null)
-                {
-                    throw new NotFoundException(nameof(Course), item.Id);
-                }
-
-                basket.SubTotal += course.Price;
-
-            }
-
-            var created = await _database.StringSetAsync(request.Id,
-                JsonSerializer.Serialize(basket), TimeSpan.FromDays(30));
-
-            if (!created)
-            {
-                return null;
-            }
-
-            return basket;
-
+            return await _basketRepository.UpdateBasketAsync(request.Id, request.Items);
         }
     }
 
