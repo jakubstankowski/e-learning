@@ -50,7 +50,7 @@ export default function Checkout() {
                                     fullWidth
                                     id="card-expired"
                                     label="Card Expired"
-                                    name="cardExpired"
+                                    name="cardExpiry"
                                     autoFocus
                                 />
                                 <TextField
