@@ -9,17 +9,16 @@ using E_Learning.Application.Common.Interfaces;
 using E_Learning.Domain.Entities;
 using StackExchange.Redis;
 
-namespace Infrastructure.Services
+namespace Infrastructure.Persistance
 {
-    public class BasketService : IBasketRepository
+    public class BasketRepository : IBasketRepository
     {
         private readonly IDatabase _database;
 
-        public BasketService(IConnectionMultiplexer redis)
+        public BasketRepository(IConnectionMultiplexer redis)
         {
             _database = redis.GetDatabase();
         }
-
 
         public async Task<CustomerBasket> GetBasketByIdAsync(string basketId)
         {

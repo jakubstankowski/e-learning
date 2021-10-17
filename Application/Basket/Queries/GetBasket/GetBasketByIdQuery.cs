@@ -26,16 +26,16 @@ namespace E_Learning.Application.Basket.Queries.GetBasket
 
     public class GetBasketHandler : IRequestHandler<GetBasketByIdQuery, CustomerBasket>
     {
-        private readonly IBasketRepository _basketService;
+        private readonly IBasketRepository _basketRepository;
 
-        public GetBasketHandler(IBasketRepository basketService)
+        public GetBasketHandler(IBasketRepository basketRepository)
         {
-            _basketService = basketService;
+            _basketRepository = basketRepository;
         }
 
         public async Task<CustomerBasket> Handle(GetBasketByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _basketService.GetBasketByIdAsync(request.Id);
+            return await _basketRepository.GetBasketByIdAsync(request.Id);
         }
     }
 
