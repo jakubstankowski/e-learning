@@ -18,7 +18,6 @@ namespace E_Learning.Application.Payments
 
     public class CreateOrUpdatePaymentIntentCommandHandler : IRequestHandler<CreateOrUpdatePaymentIntentCommand, CustomerBasket>
     {
-        private object _config;
         public IConfiguration Configuration { get; }
 
         public CreateOrUpdatePaymentIntentCommandHandler(IConfiguration configuration)
