@@ -29,19 +29,20 @@ namespace E_Learning.Application.Orders.Commands
         private readonly IContext _context;
         private readonly IMapper _mapper;
         private readonly IIdentityService _identityService;
+        private readonly IBasketRepository _basketRepository;
 
-        public CreateOrderHandler(IMediator mediator, IContext context, IMapper mapper, IIdentityService identityService)
+        public CreateOrderHandler(IMediator mediator, IContext context, IMapper mapper, IIdentityService identityService, IBasketRepository basketRepository)
         {
             _mediator = mediator;
             _context = context;
             _mapper = mapper;
             _identityService = identityService;
+            _basketRepository = basketRepository;
         }
 
         public async Task<Order> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            var query = new GetBasketByIdQuery(request.BasketId);
-            var basket = await _mediator.Send(query);
+            var basket = await _basketRepository.GetBasketByIdAsync(request.BasketId);
 
             if (basket == null) return null;
 
