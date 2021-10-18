@@ -21,12 +21,11 @@ namespace E_Learning.Application.Payments
 
     public class CreateOrUpdatePaymentIntentCommandHandler : IRequestHandler<CreateOrUpdatePaymentIntentCommand, CustomerBasket>
     {
-        public IConfiguration Configuration { get; }
-
+      
         private readonly IBasketRepository _basketRepository;
         private readonly IConfiguration _configuration;
 
-        public CreateOrUpdatePaymentIntentCommandHandler(IConfiguration configuration, IMediator mediator, IBasketRepository basketRepository)
+        public CreateOrUpdatePaymentIntentCommandHandler(IConfiguration configuration, IBasketRepository basketRepository)
         {
             _basketRepository = basketRepository;
             _configuration = configuration;
@@ -34,7 +33,7 @@ namespace E_Learning.Application.Payments
 
         public async Task<CustomerBasket> Handle(CreateOrUpdatePaymentIntentCommand request, CancellationToken cancellationToken)
         {
-            StripeConfiguration.ApiKey = _configuration.GetConnectionString("StripeSettings:SecretKey");
+            StripeConfiguration.ApiKey = _configuration["StripeSettings:SecretKey"];
 
             var basket = await _basketRepository.GetBasketByIdAsync(request.BasketId);
 
@@ -48,7 +47,7 @@ namespace E_Learning.Application.Payments
             {
                 var options = new PaymentIntentCreateOptions
                 {
-                    Amount = (long?)basket.SubTotal,
+                    Amount = (long?)basket.SubTotal * 100,
                     Currency = "usd",
                     PaymentMethodTypes = new List<string> { "card" }
                 };
@@ -60,7 +59,7 @@ namespace E_Learning.Application.Payments
             {
                 var options = new PaymentIntentUpdateOptions
                 {
-                    Amount = (long?)basket.SubTotal,
+                    Amount = (long?)basket.SubTotal * 100,
                 };
                 await service.UpdateAsync(basket.PaymentIntentId, options);
             }
