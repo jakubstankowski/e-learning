@@ -35,7 +35,7 @@ export default function Cart() {
                         />
                     )
             }
-            <OrderTotals total="1"/>
+            <OrderTotals total={basket.subTotal}/>
             {
                 isAuthenticated && basket.items.length > 0 &&
                 <Link to="/checkout">

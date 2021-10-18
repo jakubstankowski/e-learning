@@ -9,6 +9,7 @@ import {
     REMOVE_ITEM_FROM_BASKET,
     ADD_ITEM_TO_BASKET,
     SET_LOADING,
+    SET_BASKET_SUB_TOTAL
 } from '../types';
 
 import {uuid} from 'uuidv4';
@@ -18,7 +19,7 @@ function BasketState(props) {
         basket: {
             id: uuid(),
             items: [],
-            totalCount: null
+            subTotal: null
         },
         loading: false
     }
@@ -34,6 +35,8 @@ function BasketState(props) {
             type: GET_BASKET,
             payload: res.data
         });
+
+        setBasketSubTotal(res.data.items);
     }
 
     const addItemToBasket = async (item) => {
@@ -75,6 +78,15 @@ function BasketState(props) {
             type: UPDATE_BASKET,
             payload: res.data
         });
+
+        setBasketSubTotal(res.data.items);
+    }
+
+    const setBasketSubTotal = (items) => {
+        dispatch({
+            type: SET_BASKET_SUB_TOTAL,
+            payload: items
+        })
     }
 
     const deleteBasket = async (id) => {
