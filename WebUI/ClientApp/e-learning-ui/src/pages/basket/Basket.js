@@ -5,6 +5,7 @@ import BasketItem from "../../components/basket/BasketItem";
 import AuthContext from "../../context/auth/authContext";
 import Button from "@material-ui/core/Button";
 import {Link} from "@reach/router";
+import OrderTotals from "../../components/order/OrderTotals";
 
 export default function Cart() {
     const basketContext = useContext(BasketContext);
@@ -34,11 +35,7 @@ export default function Cart() {
                         />
                     )
             }
-            <h4>
-                {
-                    basket.subTotal > 0 && `Total Count: ${basket.subTotal} $`
-                }
-            </h4>
+            <OrderTotals total="1"/>
             {
                 isAuthenticated && basket.items.length > 0 &&
                 <Link to="/checkout">
