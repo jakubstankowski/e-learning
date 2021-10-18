@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using E_Learning.Application.Basket.Command.UpdateBasket;
 using E_Learning.Application.Basket.Queries.GetBasket;
+using E_Learning.Application.Common.Interfaces;
 using E_Learning.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -23,19 +24,21 @@ namespace E_Learning.Application.Payments
         public IConfiguration Configuration { get; }
 
         private readonly IMediator _mediator;
+        private readonly IBasketRepository _basketRepository;
+        private readonly IConfiguration _configuration;
 
-        public CreateOrUpdatePaymentIntentCommandHandler(IConfiguration configuration, IMediator mediator)
+        public CreateOrUpdatePaymentIntentCommandHandler(IConfiguration configuration, IMediator mediator, IBasketRepository basketRepository)
         {
-            Configuration = configuration;
             _mediator = mediator;
+            _basketRepository = basketRepository;
+            _configuration = configuration;
         }
 
         public async Task<CustomerBasket> Handle(CreateOrUpdatePaymentIntentCommand request, CancellationToken cancellationToken)
         {
-            StripeConfiguration.ApiKey = Configuration.GetConnectionString("StripeSettings:SecretKey");
+            StripeConfiguration.ApiKey = _configuration.GetConnectionString("StripeSettings:SecretKey");
 
-            var query = new GetBasketByIdQuery(request.BasketId);
-            var basket = await _mediator.Send(query);
+            var basket = await _basketRepository.GetBasketByIdAsync(request.BasketId);
 
             if (basket == null) return null;
 
