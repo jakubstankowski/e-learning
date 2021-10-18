@@ -43,11 +43,12 @@ namespace E_Learning.Application.Payments
 
             PaymentIntent intent;
 
+
             if (string.IsNullOrEmpty(basket.PaymentIntentId))
             {
                 var options = new PaymentIntentCreateOptions
                 {
-                    Amount = (long?)basket.SubTotal * 100,
+                    Amount = 1,
                     Currency = "usd",
                     PaymentMethodTypes = new List<string> { "card" }
                 };
@@ -59,7 +60,7 @@ namespace E_Learning.Application.Payments
             {
                 var options = new PaymentIntentUpdateOptions
                 {
-                    Amount = (long?)basket.SubTotal * 100,
+                    Amount = 1,
                 };
                 await service.UpdateAsync(basket.PaymentIntentId, options);
             }

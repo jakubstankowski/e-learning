@@ -20,8 +20,6 @@ namespace E_Learning.Domain.Entities
         public string Id { get; set; }
         public List<BasketItem> Items { get; set; } = new List<BasketItem>();
 
-        public decimal SubTotal { get; set; }
-
         public string PaymentIntentId { get; set; }
 
         public string ClientSecret { get; set; }

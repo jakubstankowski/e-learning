@@ -48,8 +48,6 @@ namespace Infrastructure.Persistance
                     throw new NotFoundException(nameof(Course), item.Id);
                 }
 
-                basket.SubTotal += course.Price;
-
             }
 
             var created = await _database.StringSetAsync(basket.Id,
