@@ -9,7 +9,7 @@ import {
     REMOVE_ITEM_FROM_BASKET,
     ADD_ITEM_TO_BASKET,
     SET_LOADING,
-    SET_BASKET_SUB_TOTAL
+    CALCULATE_BASKET_TOTALS
 } from '../types';
 
 import {uuid} from 'uuidv4';
@@ -36,7 +36,7 @@ function BasketState(props) {
             payload: res.data
         });
 
-        setBasketSubTotal(res.data.items);
+        calculateBasketTotals(res.data.items);
     }
 
     const addItemToBasket = async (item) => {
@@ -79,12 +79,12 @@ function BasketState(props) {
             payload: res.data
         });
 
-        setBasketSubTotal(res.data.items);
+        calculateBasketTotals(res.data.items);
     }
 
-    const setBasketSubTotal = (items) => {
+    const calculateBasketTotals = (items) => {
         dispatch({
-            type: SET_BASKET_SUB_TOTAL,
+            type: CALCULATE_BASKET_TOTALS,
             payload: items
         })
     }

@@ -1,8 +1,9 @@
 import {
     UPDATE_BASKET,
     GET_BASKET,
-    DELETE_BASKET, REMOVE_ITEM_FROM_BASKET, ADD_ITEM_TO_BASKET,
-    SET_BASKET_SUB_TOTAL
+    DELETE_BASKET,
+    REMOVE_ITEM_FROM_BASKET, ADD_ITEM_TO_BASKET,
+    CALCULATE_BASKET_TOTALS
 } from '../types';
 import {uuid} from "uuidv4";
 
@@ -50,11 +51,7 @@ const reducer = (state, action) => {
                     totalCount: null
                 }
             };
-        case SET_BASKET_SUB_TOTAL:
-            action.payload.map((val) => {
-                state.basket.subTotal += val.price;
-            })
-
+        case CALCULATE_BASKET_TOTALS:
             return {
                 ...state,
             };
