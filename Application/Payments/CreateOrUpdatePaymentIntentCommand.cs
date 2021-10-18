@@ -23,13 +23,11 @@ namespace E_Learning.Application.Payments
     {
         public IConfiguration Configuration { get; }
 
-        private readonly IMediator _mediator;
         private readonly IBasketRepository _basketRepository;
         private readonly IConfiguration _configuration;
 
         public CreateOrUpdatePaymentIntentCommandHandler(IConfiguration configuration, IMediator mediator, IBasketRepository basketRepository)
         {
-            _mediator = mediator;
             _basketRepository = basketRepository;
             _configuration = configuration;
         }
@@ -67,9 +65,7 @@ namespace E_Learning.Application.Payments
                 await service.UpdateAsync(basket.PaymentIntentId, options);
             }
 
-
-            //use there a update basket command? 
-            await _basketRepository
+            await _basketRepository.UpdateBasketAsync(basket);
 
             return basket;
         }
