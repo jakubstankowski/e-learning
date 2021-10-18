@@ -36,14 +36,8 @@ namespace Infrastructure.Persistance
             return JsonSerializer.Deserialize<CustomerBasket>(data);
         }
 
-        public async Task<CustomerBasket> UpdateBasketAsync(string basketId, List<BasketItem> Items)
+        public async Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)
         {
-            var basket = new CustomerBasket
-            {
-                Id = basketId,
-                Items = Items,
-            };
-
             foreach (var item in basket.Items)
             {
                 var course = await _context
@@ -58,7 +52,7 @@ namespace Infrastructure.Persistance
 
             }
 
-            var created = await _database.StringSetAsync(basketId,
+            var created = await _database.StringSetAsync(basket.Id,
                 JsonSerializer.Serialize(basket), TimeSpan.FromDays(30));
 
             if (!created)

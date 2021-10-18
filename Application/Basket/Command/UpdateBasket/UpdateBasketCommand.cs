@@ -34,7 +34,13 @@ namespace E_Learning.Application.Basket.Command.UpdateBasket
 
         public async Task<CustomerBasket> Handle(UpdateBasketCommand request, CancellationToken cancellationToken)
         {
-            return await _basketRepository.UpdateBasketAsync(request.Id, request.Items);
+            var basket = new CustomerBasket
+            {
+                Id = request.Id,
+                Items = request.Items,
+            };
+
+            return await _basketRepository.UpdateBasketAsync(basket);
         }
     }
 
