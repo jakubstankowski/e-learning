@@ -52,6 +52,7 @@ const reducer = (state, action) => {
                 }
             };
         case CALCULATE_BASKET_TOTALS:
+            state.basket.subTotal = action.payload.reduce((a, b) => b.price + a, 0);
             return {
                 ...state,
             };
