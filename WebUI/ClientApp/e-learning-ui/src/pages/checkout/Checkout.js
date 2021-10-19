@@ -1,5 +1,6 @@
 import React, {useContext} from "react";
 import BasketContext from "../../context/basket/basketContext";
+import OrderContext from "../../context/order/orderContext";
 import Button from "@material-ui/core/Button";
 import {Form} from "react-final-form";
 import {TextField} from "mui-rff";
@@ -8,6 +9,9 @@ import Grid from "@material-ui/core/Grid";
 export default function Checkout() {
     const basketContext = useContext(BasketContext);
     const {basket} = basketContext;
+
+    const orderContext = useContext(OrderContext);
+    const {postOrder} = orderContext;
 
     const onSubmit = (values) => {
         console.log('values: ', values);
@@ -64,6 +68,7 @@ export default function Checkout() {
                                 />
                                 <Button color="secondary"
                                         type="submit"
+                                        onClick={() => postOrder(basket.id)}
                                         variant="contained">
                                     Submit order
                                 </Button>
