@@ -69,18 +69,16 @@ namespace E_Learning.Application.Orders.Commands
             string userEmail = _identityService.GetUserEmail();
             string userId = _identityService.GetUserId();
 
+            decimal subTotal = items.Sum(item => item.Price);
 
-            var order = new Order(items, userEmail, userId)
-            {
-                SubTotal = 1
-            };
+            var order = new Order(items, userEmail, userId, subTotal);
+
 
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
 
             return order;
-
         }
     }
 
