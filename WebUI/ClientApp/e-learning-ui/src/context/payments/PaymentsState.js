@@ -17,7 +17,9 @@ export default function OrderState(props) {
 
     const createPaymentIntent = async (basketId) => {
         setLoading();
-        const res = await axios.get(`https://localhost:44367/api/payments/${basketId}`)
+        const res = await axios.post(`https://localhost:44367/api/payments/${basketId}`, {
+            basketId: basketId
+        })
 
         console.log('res', res);
     }
