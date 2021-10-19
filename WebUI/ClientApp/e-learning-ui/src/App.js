@@ -25,43 +25,53 @@ import OrderState from "./context/order/OrderState";
 import Order from "./pages/order/Order";
 import Layout from "./components/layout/Layout";
 import Checkout from "./pages/checkout/Checkout";
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 
 function App() {
+    const options = {
+        clientSecret: process.env.REACT_APP_STRIPE_SECRET_KEY,
+    };
+
     return (
-        <AuthState>
-            <CoursesState>
-                <BasketState>
-                    <OrderState>
-                        <PaymentsState>
-                            <LessonsState>
-                                <Header title="E-Learning"/>
-                                <Router>
-                                    <Layout path="/">
-                                        <Home path="/"/>
-                                        <Course path="/course/:courseId"/>
-                                        <Lesson path="/course/:courseId/lesson/:lessonId"/>
-                                        <CreateCourse path="/course/create"/>
-                                        <EditCourse path="/course/:courseId/edit"/>
-                                        <CreateLesson path="/course/:courseId/lesson/create"/>
-                                        <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>
-                                        <Login path="/login"/>
-                                        <Register path="/register"/>
-                                        <Basket path="/basket"/>
-                                        <Checkout path="/checkout"/>
-                                        <User path="/user"/>
-                                        <Dashboard path="/dashboard"/>
-                                        <Order path="/order"/>
-                                        <NotFound path="*"/>
-                                    </Layout>
-                                </Router>
-                                <Footer title="Stantech"/>
-                            </LessonsState>
-                        </PaymentsState>
-                    </OrderState>
-                </BasketState>
-            </CoursesState>
-        </AuthState>
+        <Elements stripe={stripePromise} options={options}>
+            <AuthState>
+                <CoursesState>
+                    <BasketState>
+                        <OrderState>
+                            <PaymentsState>
+                                <LessonsState>
+                                    <Header title="E-Learning"/>
+                                    <Router>
+                                        <Layout path="/">
+                                            <Home path="/"/>
+                                            <Course path="/course/:courseId"/>
+                                            <Lesson path="/course/:courseId/lesson/:lessonId"/>
+                                            <CreateCourse path="/course/create"/>
+                                            <EditCourse path="/course/:courseId/edit"/>
+                                            <CreateLesson path="/course/:courseId/lesson/create"/>
+                                            <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>
+                                            <Login path="/login"/>
+                                            <Register path="/register"/>
+                                            <Basket path="/basket"/>
+                                            <Checkout path="/checkout"/>
+                                            <User path="/user"/>
+                                            <Dashboard path="/dashboard"/>
+                                            <Order path="/order"/>
+                                            <NotFound path="*"/>
+                                        </Layout>
+                                    </Router>
+                                    <Footer title="Stantech"/>
+                                </LessonsState>
+                            </PaymentsState>
+                        </OrderState>
+                    </BasketState>
+                </CoursesState>
+            </AuthState>
+        </Elements>
     );
 }
 
