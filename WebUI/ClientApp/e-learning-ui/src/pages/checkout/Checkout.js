@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import BasketContext from "../../context/basket/basketContext";
 import OrderContext from "../../context/order/orderContext";
+import PaymentsContext from "../../context/payments/paymentsContext";
 import Button from "@material-ui/core/Button";
 import {Form} from "react-final-form";
 import {TextField} from "mui-rff";
@@ -12,6 +13,9 @@ export default function Checkout() {
 
     const orderContext = useContext(OrderContext);
     const {postOrder} = orderContext;
+
+    const paymentContext = useContext(PaymentsContext);
+    const {createPaymentIntent} = paymentContext;
 
     const onSubmit = (values) => {
         console.log('values: ', values);
@@ -68,7 +72,7 @@ export default function Checkout() {
                                 />
                                 <Button color="secondary"
                                         type="submit"
-                                        onClick={() => postOrder(basket.id)}
+                                        onClick={() => createPaymentIntent(basket.id)}
                                         variant="contained">
                                     Submit payment
                                 </Button>
