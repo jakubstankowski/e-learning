@@ -1,4 +1,4 @@
-import React, {useContext, useReducer} from 'react';
+import React, {useReducer} from 'react';
 import axios from 'axios';
 import BasketContext from './basketContext';
 import BasketReducer from './basketReducer';
@@ -29,7 +29,7 @@ function BasketState(props) {
     const getBasket = async (id) => {
         setLoading();
 
-        const res = await axios.get(`https://localhost:44367/api/basket/${id}`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/basket/${id}`);
 
         dispatch({
             type: GET_BASKET,
@@ -72,7 +72,7 @@ function BasketState(props) {
 
 
     const updateBasket = async (basket) => {
-        const res = await axios.post('https://localhost:44367/api/basket', basket)
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/basket`, basket)
 
         dispatch({
             type: UPDATE_BASKET,
@@ -92,7 +92,7 @@ function BasketState(props) {
     const deleteBasket = async (id) => {
         setLoading();
 
-        await axios.delete(`https://localhost:44367/api/basket/${id}`)
+        await axios.delete(`${process.env.REACT_APP_API_URL}/basket/${id}`)
 
         localStorage.removeItem('basket_id');
 

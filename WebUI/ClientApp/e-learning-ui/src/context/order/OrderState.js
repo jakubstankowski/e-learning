@@ -21,7 +21,7 @@ export default function OrderState(props) {
 
     const postOrder = async (basketId) => {
         setLoading();
-        const res = await axios.post('https://localhost:44367/api/order', {
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/order`, {
             basketId: basketId
         })
 
@@ -35,7 +35,7 @@ export default function OrderState(props) {
 
     const getOrderByUser = async () => {
         setLoading();
-        const res = await axios.get('https://localhost:44367/api/order')
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/order`)
 
         dispatch({
             type: GET_ORDERS_BY_USER,

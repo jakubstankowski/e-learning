@@ -27,7 +27,7 @@ function CoursesState(props) {
     const getHomeCourses = async () => {
         setLoading();
 
-        const res = await axios.get('https://localhost:44367/api/home/courses');
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/home/courses`);
         dispatch({
             type: GET_HOME_COURSES,
             payload: res.data
@@ -37,7 +37,7 @@ function CoursesState(props) {
     const getAdminCourses = async () => {
         setLoading();
 
-        const res = await axios.get('https://localhost:44367/api/admin/courses');
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/admin/courses`);
 
         dispatch({
             type: GET_ADMIN_COURSES,
@@ -48,7 +48,7 @@ function CoursesState(props) {
     const getUserCourses = async () => {
         setLoading();
 
-        const res = await axios.get(`https://localhost:44367/api/user/courses`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/user/courses`);
         dispatch({
             type: GET_USER_COURSES,
             payload: res.data
@@ -58,7 +58,7 @@ function CoursesState(props) {
     const getCourse = async (id) => {
         setLoading();
 
-        const res = await axios.get(`https://localhost:44367/api/courses/${id}`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/courses/${id}`);
 
         dispatch({
             type: GET_COURSE,
@@ -68,7 +68,7 @@ function CoursesState(props) {
 
     const postCourse = async (course) => {
         setLoading();
-        const res = await axios.post('https://localhost:44367/api/courses', course)
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/courses`, course)
 
         dispatch({
             type: POST_COURSE,
@@ -79,7 +79,7 @@ function CoursesState(props) {
     const deleteCourse = async (id) => {
         setLoading();
 
-        const res = await axios.delete(`https://localhost:44367/api/courses/${id}`)
+        const res = await axios.delete(`${process.env.REACT_APP_API_URL}/courses/${id}`)
 
         dispatch({
             type: DELETE_COURSE,
@@ -90,7 +90,7 @@ function CoursesState(props) {
     const updateCourse = async (id, course) => {
         setLoading();
 
-        const res = await axios.put(`https://localhost:44367/api/courses/${id}`, course)
+        const res = await axios.put(`${process.env.REACT_APP_API_URL}/courses/${id}`, course)
 
         dispatch({
             type: UPDATE_COURSE,
