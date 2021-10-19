@@ -70,6 +70,12 @@ export default function Checkout() {
                                         type="submit"
                                         onClick={() => postOrder(basket.id)}
                                         variant="contained">
+                                    Submit payment
+                                </Button>
+                                <Button color="secondary"
+                                        type="submit"
+                                        onClick={() => postOrder(basket.id)}
+                                        variant="contained">
                                     Submit order
                                 </Button>
                             </form>
