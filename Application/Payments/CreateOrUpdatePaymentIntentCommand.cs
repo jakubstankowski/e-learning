@@ -21,7 +21,7 @@ namespace E_Learning.Application.Payments
 
     public class CreateOrUpdatePaymentIntentCommandHandler : IRequestHandler<CreateOrUpdatePaymentIntentCommand, CustomerBasket>
     {
-      
+
         private readonly IBasketRepository _basketRepository;
         private readonly IConfiguration _configuration;
 
@@ -43,12 +43,13 @@ namespace E_Learning.Application.Payments
 
             PaymentIntent intent;
 
+            long amount = (long)basket.Items.Sum(i => i.Price * 100);
 
             if (string.IsNullOrEmpty(basket.PaymentIntentId))
             {
                 var options = new PaymentIntentCreateOptions
                 {
-                    Amount = 1,
+                    Amount = (long)basket.Items.Sum(i => i.Price * 100),
                     Currency = "usd",
                     PaymentMethodTypes = new List<string> { "card" }
                 };
@@ -60,7 +61,7 @@ namespace E_Learning.Application.Payments
             {
                 var options = new PaymentIntentUpdateOptions
                 {
-                    Amount = 1,
+                    Amount = (long)basket.Items.Sum(i => i.Price * 100),
                 };
                 await service.UpdateAsync(basket.PaymentIntentId, options);
             }
