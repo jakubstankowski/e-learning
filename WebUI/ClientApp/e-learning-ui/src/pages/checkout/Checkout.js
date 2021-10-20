@@ -6,6 +6,8 @@ import Button from "@material-ui/core/Button";
 import {Form} from "react-final-form";
 import {TextField} from "mui-rff";
 import Grid from "@material-ui/core/Grid";
+import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
+
 
 export default function Checkout() {
     const basketContext = useContext(BasketContext);
@@ -17,15 +19,15 @@ export default function Checkout() {
     const paymentContext = useContext(PaymentsContext);
     const {createPaymentIntent} = paymentContext;
 
-    const onSubmit = (values) => {
-        console.log('values: ', values);
-    };
-
     return (
         <>
             <h4>
                 total payment: {basket.subTotal}
             </h4>
+            <form>
+                <PaymentElement/>
+                <button>Submit</button>
+            </form>
             <Grid container spacing={4}>
                 <Grid item lg={4} xs={12}>
                     <Form
