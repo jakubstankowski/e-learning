@@ -17,11 +17,11 @@ export default function OrderState(props) {
 
     const createPaymentIntent = async (basketId) => {
         setLoading();
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/payments/${basketId}`, {
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/payments/${basketId}`, {
             basketId: basketId
         })
 
-        console.log('res', res);
+        return response.data;
     }
 
     const setLoading = () => dispatch({type: SET_LOADING});

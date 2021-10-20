@@ -7,6 +7,9 @@ import {Form} from "react-final-form";
 import {TextField} from "mui-rff";
 import Grid from "@material-ui/core/Grid";
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 
 export default function Checkout() {
@@ -19,15 +22,28 @@ export default function Checkout() {
     const paymentContext = useContext(PaymentsContext);
     const {createPaymentIntent} = paymentContext;
 
+
+    const onSubmit = async (values) => {
+        console.log('values: ', values);
+        await createPaymentIntent(basket.id);
+        const stripe = await stripePromise;
+        const response = await stripe.confirmCardPayment(basket.clientServer, {
+            payment_method: {
+                card: values.cardNumber,
+                billing_details: {
+                    name: values.nameOnCard
+                }
+            }
+        })
+
+        console.log('response', response);
+    };
+
     return (
         <>
             <h4>
                 total payment: {basket.subTotal}
             </h4>
-            <form>
-                <PaymentElement/>
-                <button>Submit</button>
-            </form>
             <Grid container spacing={4}>
                 <Grid item lg={4} xs={12}>
                     <Form
@@ -52,7 +68,6 @@ export default function Checkout() {
                                     id="card-number"
                                     label="Curd Number"
                                     name="cardNumber"
-                                    autoFocus
                                 />
                                 <TextField
                                     variant="outlined"
@@ -61,7 +76,6 @@ export default function Checkout() {
                                     id="card-expired"
                                     label="Card Expired"
                                     name="cardExpiry"
-                                    autoFocus
                                 />
                                 <TextField
                                     variant="outlined"
@@ -70,19 +84,11 @@ export default function Checkout() {
                                     id="card-cvc"
                                     label="Card CVC"
                                     name="cardCvc"
-                                    autoFocus
                                 />
                                 <Button color="secondary"
                                         type="submit"
-                                        onClick={() => createPaymentIntent(basket.id)}
                                         variant="contained">
                                     Submit payment
-                                </Button>
-                                <Button color="secondary"
-                                        type="submit"
-                                        onClick={() => postOrder(basket.id)}
-                                        variant="contained">
-                                    Submit order
                                 </Button>
                             </form>
                         )}/>
