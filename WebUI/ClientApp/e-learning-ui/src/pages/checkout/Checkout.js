@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import BasketContext from "../../context/basket/basketContext";
 import PaymentsContext from "../../context/payments/paymentsContext";
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
@@ -34,6 +34,13 @@ export default function Checkout() {
             },
         );
 
+        if (error) {
+            alert('error!');
+        }
+
+        if (paymentIntent) {
+            alert('payment intent!');
+        }
 
     };
 
