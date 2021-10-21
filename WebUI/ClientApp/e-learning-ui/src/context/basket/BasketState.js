@@ -72,7 +72,7 @@ function BasketState(props) {
 
 
     const updateBasket = async (basket) => {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/basket`, basket)
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/basket`, basket)
 
         dispatch({
             type: UPDATE_BASKET,
