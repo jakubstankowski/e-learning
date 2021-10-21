@@ -1,6 +1,8 @@
 import React, {useEffect, useContext} from "react";
 import BasketContext from "../../context/basket/basketContext";
 import {Container} from "@material-ui/core";
+import {Elements} from "@stripe/react-stripe-js";
+import {loadStripe} from '@stripe/stripe-js';
 
 export default function Layout({children}) {
     const basketContext = useContext(BasketContext);
@@ -16,11 +18,15 @@ export default function Layout({children}) {
         // eslint-disable-next-line
     }, []);
 
+    const stripeTestPromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+
     return (
-        <Container maxWidth="lg"
-                   className="container">
-            {children}
-        </Container>
+        <Elements stripe={stripeTestPromise}>
+            <Container maxWidth="lg"
+                       className="container">
+                {children}
+            </Container>
+        </Elements>
     )
 
 }
