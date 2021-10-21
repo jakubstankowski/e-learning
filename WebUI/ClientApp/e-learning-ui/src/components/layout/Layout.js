@@ -18,6 +18,8 @@ export default function Layout({children}) {
         // eslint-disable-next-line
     }, []);
 
+
+
     const stripeTestPromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
     return (

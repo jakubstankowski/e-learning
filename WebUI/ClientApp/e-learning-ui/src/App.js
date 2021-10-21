@@ -26,7 +26,6 @@ import Order from "./pages/order/Order";
 import Layout from "./components/layout/Layout";
 import Checkout from "./pages/checkout/Checkout";
 
-
 function App() {
     return (
             <AuthState>
