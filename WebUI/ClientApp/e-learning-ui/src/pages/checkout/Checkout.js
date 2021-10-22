@@ -8,7 +8,7 @@ import {
     CardCvcElement
 } from '@stripe/react-stripe-js';
 import Button from "@material-ui/core/Button";
-
+import './Checkout.css';
 
 const ELEMENT_OPTIONS = {
     style: {

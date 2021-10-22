@@ -1,5 +1,12 @@
 /*main app colors: #3a739d (blue)  #3f4446 (black) #f16564 (pink)*/
 
+body,
+html {
+    background-color: #f6f9fc;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+
 :root {
     --primary-color: #3a739d;
     --secondary-color: #f16564;
