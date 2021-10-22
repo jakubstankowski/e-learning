@@ -52,10 +52,10 @@ export default function Checkout() {
             return;
         }
 
-        await createPaymentIntent(basket.id);
+        const createdPayment = await createPaymentIntent(basket.id);
 
         const {paymentIntent, error} = await stripe.confirmCardPayment(
-            basket.clientSecret,
+            createdPayment.clientSecret,
             {
                 payment_method: {
                     card: card,

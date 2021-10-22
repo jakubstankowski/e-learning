@@ -1,11 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
+import BasketContext from "../../context/basket/basketContext";
 
 
-export default function OrderTotals(props) {
-    const {total} = props;
+export default function OrderTotals() {
+    const basketContext = useContext(BasketContext);
+    const {basket} = basketContext;
+
     return (
         <h4>
-            total order: {total}
+            total order: {basket.subTotal}
         </h4>
     )
 }
