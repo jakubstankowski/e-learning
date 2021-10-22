@@ -1,10 +1,11 @@
 import React, {Fragment} from 'react'
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 
 export default function Spinner() {
     return (
         <Fragment>
-            <h4>Loading...</h4>
+            <CircularProgress color="primary"/>
         </Fragment>
     )
 }

@@ -4,7 +4,7 @@ import {Field, Form} from "react-final-form";
 import {Button, Container, Grid, Paper} from "@material-ui/core";
 import {TextField} from "final-form-material-ui";
 import CoursesContext from "../../context/courses/coursesContext";
-import Spinner from "../../components/Spinner";
+import Spinner from "../../components/spinner/Spinner";
 import Lessons from "../../components/lessons/Lessons";
 import AuthContext from "../../context/auth/authContext";
 import {navigate, useParams} from "@reach/router";

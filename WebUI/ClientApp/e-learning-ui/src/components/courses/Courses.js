@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import CourseItem from "./CourseItem";
 import {useContext, useEffect} from "react";
 import CoursesContext from '../../context/courses/coursesContext';
-import Spinner from "../Spinner";
+import Spinner from "../spinner/Spinner";
 
 
 export default function Courses(props) {
@@ -15,7 +15,7 @@ export default function Courses(props) {
 
     if (loading) return <Spinner/>
 
-    return (
+   return (
         <Grid container spacing={4}>
             {
                 courses.map((course) =>

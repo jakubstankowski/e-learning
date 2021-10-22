@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from "react";
 import Lessons from "../../components/lessons/Lessons";
 import {Link, useParams} from "@reach/router";
 import CoursesContext from "../../context/courses/coursesContext";
-import Spinner from "../../components/Spinner";
+import Spinner from "../../components/spinner/Spinner";
 import {Container} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
