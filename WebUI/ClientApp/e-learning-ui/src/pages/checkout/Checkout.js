@@ -36,40 +36,60 @@ export default function Checkout() {
     const paymentContext = useContext(PaymentsContext);
     const {createPaymentIntent} = paymentContext;
 
+    const [name, setName] = useState('');
+
+    const [errorMessage, setErrorMessage] = useState('');
+
     const onSubmit = async (values) => {
         values.preventDefault();
-        /*
-                 if (!stripe || !elements) {
-                     return;
-                 }
+        if (!stripe || !elements) {
+            return;
+        }
 
-                 await createPaymentIntent(basket.id);
+        const card = elements.getElement(CardNumberElement);
 
-                 const {paymentIntent, error} = await stripe.confirmCardPayment(
-                     basket.clientSecret,
-                     {
-                         payment_method: {
-                             card: elements.getElement(CardElement),
-                             billing_details: {
-                                 name: 'Jenny Rosen',
-                             },
-                         },
-                     },
-                 );
+        if (card == null) {
+            return;
+        }
 
-                 if (error) {
-                     alert('error!');
-                 }
+        await createPaymentIntent(basket.id);
 
-                 if (paymentIntent) {
-                     alert('payment intent!');
-                 }*/
+        const {paymentIntent, error} = await stripe.confirmCardPayment(
+            basket.clientSecret,
+            {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: name
+                    },
+                },
+            },
+        );
+
+        if (error) {
+            console.error('[error]: ', error);
+            setErrorMessage(error.message);
+        }
+
+        if (paymentIntent) {
+            alert('payment intent!');
+        }
 
     };
 
 
     return (
         <form onSubmit={onSubmit}>
+            <label htmlFor="name">Full Name</label>
+            <input
+                id="name"
+                required
+                placeholder="Full Name"
+                value={name}
+                onChange={(event) => {
+                    setName(event.target.value);
+                }}
+            />
             <label htmlFor="cardNumber">Card Number</label>
             <CardNumberElement
                 id="cardNumber"
@@ -85,9 +105,13 @@ export default function Checkout() {
                 id="cvc"
                 options={ELEMENT_OPTIONS}
             />
-            <Button type="submit" disabled={!stripe}>
+            <Button color="secondary"
+                    variant="contained"
+                    type="submit"
+                    disabled={!stripe}>
                 Pay
             </Button>
+            {errorMessage && 'Payment Error!'}
         </form>
     )
 }
