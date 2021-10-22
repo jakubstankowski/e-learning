@@ -1,5 +1,6 @@
 import React, {useContext} from "react";
 import BasketContext from "../../context/basket/basketContext";
+import Typography from "@material-ui/core/Typography";
 
 
 export default function OrderTotals() {
@@ -7,8 +8,8 @@ export default function OrderTotals() {
     const {basket} = basketContext;
 
     return (
-        <h4>
-            total order: {basket.subTotal}
-        </h4>
+        <Typography variant="h4" component="h4">
+            Total order: {basket.subTotal} $
+        </Typography>
     )
 }

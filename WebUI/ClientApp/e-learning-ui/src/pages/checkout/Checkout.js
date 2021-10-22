@@ -9,6 +9,8 @@ import {
 } from '@stripe/react-stripe-js';
 import Button from "@material-ui/core/Button";
 import './Checkout.css';
+import Grid from "@material-ui/core/Grid";
+import OrderTotals from "../../components/order/OrderTotals";
 
 const ELEMENT_OPTIONS = {
     style: {
@@ -40,8 +42,7 @@ export default function Checkout() {
 
     const [errorMessage, setErrorMessage] = useState('');
 
-    const onSubmit = async (values) => {
-        values.preventDefault();
+    const onSubmit = async () => {
         if (!stripe || !elements) {
             return;
         }
@@ -79,39 +80,48 @@ export default function Checkout() {
 
 
     return (
-        <form onSubmit={onSubmit}>
-            <label htmlFor="name">Full Name</label>
-            <input
-                id="name"
-                required
-                placeholder="Full Name"
-                value={name}
-                onChange={(event) => {
-                    setName(event.target.value);
-                }}
-            />
-            <label htmlFor="cardNumber">Card Number</label>
-            <CardNumberElement
-                id="cardNumber"
-                options={ELEMENT_OPTIONS}
-            />
-            <label htmlFor="expiry">Card Expiration</label>
-            <CardExpiryElement
-                id="expiry"
-                options={ELEMENT_OPTIONS}
-            />
-            <label htmlFor="cvc">CVC</label>
-            <CardCvcElement
-                id="cvc"
-                options={ELEMENT_OPTIONS}
-            />
-            <Button color="secondary"
-                    variant="contained"
-                    type="submit"
-                    disabled={!stripe}>
-                Pay
-            </Button>
-            {errorMessage && 'Payment Error!'}
-        </form>
+        <Grid container>
+            <Grid item xs={12} lg={6} className="checkout-element">
+                <form onSubmit={onSubmit}>
+                    <label htmlFor="name">Full Name</label>
+                    <input
+                        id="name"
+                        required
+                        placeholder="Full Name"
+                        value={name}
+                        onChange={(event) => {
+                            setName(event.target.value);
+                        }}
+                    />
+                    <label htmlFor="cardNumber">Card Number</label>
+                    <CardNumberElement
+                        id="cardNumber"
+                        options={ELEMENT_OPTIONS}
+                    />
+                    <label htmlFor="expiry">Card Expiration</label>
+                    <CardExpiryElement
+                        id="expiry"
+                        options={ELEMENT_OPTIONS}
+                    />
+                    <label htmlFor="cvc">CVC</label>
+                    <CardCvcElement
+                        id="cvc"
+                        options={ELEMENT_OPTIONS}
+                    />
+                    {errorMessage && 'Payment Error!'}
+                </form>
+            </Grid>
+            <Grid item xs={12} lg={6} className="checkout-element">
+                <OrderTotals/>
+                <Button color="secondary"
+                        variant="contained"
+                        type="submit"
+                        className="pay-button"
+                        onClick={() => onSubmit()}
+                        disabled={!stripe}>
+                    Finalize Payment
+                </Button>
+            </Grid>
+        </Grid>
     )
 }

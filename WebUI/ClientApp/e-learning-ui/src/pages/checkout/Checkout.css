@@ -5,8 +5,7 @@
 }
 
 form {
-    max-width: 800px;
-    margin: 80px auto;
+    width: 100%;
 }
 
 label {
@@ -17,8 +16,17 @@ label {
     display: block;
 }
 
+.pay-button {
+    margin-top: 5rem;
+    width: 100%;
+}
+
 button[disabled] {
     opacity: 0.6;
+}
+
+.checkout-element {
+    padding: 2rem;
 }
 
 input {
