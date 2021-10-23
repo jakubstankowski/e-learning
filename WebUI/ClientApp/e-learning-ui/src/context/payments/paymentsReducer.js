@@ -1,13 +1,13 @@
 import {
-    CREATE_PAYMENT_INTENT
+    CREATE_PAYMENT_INTENT, SET_PAYMENT_CLIENT_SECRET
 } from '../types';
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case CREATE_PAYMENT_INTENT:
+        case SET_PAYMENT_CLIENT_SECRET:
             return {
                 ...state,
-                loading: false
+                clientSecret: action.payload
             };
         default:
             return state;

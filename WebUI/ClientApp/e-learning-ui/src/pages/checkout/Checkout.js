@@ -42,6 +42,8 @@ export default function Checkout() {
 
     const [errorMessage, setErrorMessage] = useState('');
 
+
+
     const onSubmit = async () => {
         if (!stripe || !elements) {
             return;
