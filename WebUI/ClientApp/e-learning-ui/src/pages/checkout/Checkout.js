@@ -45,7 +45,7 @@ export default function Checkout() {
     const [loading, setLoading] = useState(false);
 
 
-    if (loading) return <Spinner/>
+    if (loading) return <Spinner className="payment-spinner"/>
 
     const onSubmit = async () => {
         if (!stripe || !elements) {
@@ -61,11 +61,11 @@ export default function Checkout() {
 
         setLoading(true);
 
-        try{
+        try {
             const {clientSecret} = await createPaymentIntent(basket.id);
 
             const {paymentIntent} = await stripe.confirmCardPayment(
-                clientSecret+1,
+                clientSecret + 1,
                 {
                     payment_method: {
                         card: card,
@@ -79,11 +79,10 @@ export default function Checkout() {
             if (paymentIntent) {
                 alert('payment intent!');
             }
-        }catch (error) {
+        } catch (error) {
             console.error('[error]: ', error);
             setErrorMessage(error.message);
-        }
-        finally {
+        } finally {
             setLoading(false);
         }
     };
