@@ -9,22 +9,20 @@ import PaymentsContext from "../payments/paymentsContext";
 
 export default function OrderState(props) {
     const initialState = {
-        loading: false
+        clientSecret: ""
     };
 
     const [state, dispatch] = useReducer(PaymentsReducer, initialState);
 
 
     const createPaymentIntent = async (basketId) => {
-        setLoading();
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/payments/${basketId}`, {
             basketId: basketId
         })
 
+
         return response.data;
     }
-
-    const setLoading = () => dispatch({type: SET_LOADING});
 
     return (
         <PaymentsContext.Provider
