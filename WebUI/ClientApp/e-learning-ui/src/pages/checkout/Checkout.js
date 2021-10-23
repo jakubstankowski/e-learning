@@ -12,6 +12,7 @@ import './Checkout.css';
 import Grid from "@material-ui/core/Grid";
 import OrderTotals from "../../components/order/OrderTotals";
 import Spinner from "../../components/spinner/Spinner";
+import PaymentErrorMessage from "../../components/payments/PaymentErrorMessage";
 
 const ELEMENT_OPTIONS = {
     style: {
@@ -46,6 +47,8 @@ export default function Checkout() {
 
 
     if (loading) return <Spinner className="payment-spinner"/>
+
+    if(errorMessage) return <PaymentErrorMessage message={errorMessage}/>
 
     const onSubmit = async () => {
         if (!stripe || !elements) {
