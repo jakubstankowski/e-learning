@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import './Checkout.css';
 import Grid from "@material-ui/core/Grid";
 import OrderTotals from "../../components/order/OrderTotals";
+import Spinner from "../../components/spinner/Spinner";
 
 const ELEMENT_OPTIONS = {
     style: {
@@ -41,13 +42,16 @@ export default function Checkout() {
     const [name, setName] = useState('');
 
     const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
 
 
+    if (loading) return <Spinner/>
 
     const onSubmit = async () => {
         if (!stripe || !elements) {
             return;
         }
+
 
         const card = elements.getElement(CardNumberElement);
 
@@ -55,29 +59,33 @@ export default function Checkout() {
             return;
         }
 
-        const createdPayment = await createPaymentIntent(basket.id);
+        setLoading(true);
 
-        const {paymentIntent, error} = await stripe.confirmCardPayment(
-            createdPayment.clientSecret,
-            {
-                payment_method: {
-                    card: card,
-                    billing_details: {
-                        name: name
+        try{
+            const {clientSecret} = await createPaymentIntent(basket.id);
+
+            const {paymentIntent} = await stripe.confirmCardPayment(
+                clientSecret+1,
+                {
+                    payment_method: {
+                        card: card,
+                        billing_details: {
+                            name: name
+                        },
                     },
                 },
-            },
-        );
+            );
 
-        if (error) {
+            if (paymentIntent) {
+                alert('payment intent!');
+            }
+        }catch (error) {
             console.error('[error]: ', error);
             setErrorMessage(error.message);
         }
-
-        if (paymentIntent) {
-            alert('payment intent!');
+        finally {
+            setLoading(false);
         }
-
     };
 
 
