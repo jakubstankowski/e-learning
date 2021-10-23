@@ -48,7 +48,11 @@ export default function Checkout() {
 
     if (loading) return <Spinner className="payment-spinner"/>
 
-    if(errorMessage) return <PaymentErrorMessage message={errorMessage}/>
+    const resetErrorMessage = () => {
+        setErrorMessage(null);
+    }
+
+    if(errorMessage) return <PaymentErrorMessage resetErrorMessage={resetErrorMessage} message={errorMessage}/>
 
     const onSubmit = async () => {
         if (!stripe || !elements) {
