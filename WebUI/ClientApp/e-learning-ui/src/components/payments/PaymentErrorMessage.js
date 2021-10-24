@@ -3,6 +3,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import {Cancel} from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
+import { pink } from '@material-ui/core/colors';
 
 
 export default function PaymentErrorMessage(props) {
@@ -18,7 +19,7 @@ export default function PaymentErrorMessage(props) {
             <Cancel style={{fontSize: 100}}
                     variant="outlined"
                     color="error"/>
-            <Typography variant="title" gutterBottom component="div">
+            <Typography variant="subtitle1" gutterBottom component="div">
                 {message}
             </Typography>
             <Button color="secondary"

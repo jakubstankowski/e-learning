@@ -15,11 +15,15 @@ export default function PaymentSuccessMessage(props){
             textAlign: 'center'
         }}>
             <CheckCircle style={{fontSize: 100}}
-                    variant="outlined"
-                    color="error"/>
-            <Typography variant="title" gutterBottom component="div">
+                    color="primary"/>
+            <Typography variant="subtitle1" gutterBottom component="div">
                 {message}
             </Typography>
+            <Button color="secondary"
+                    variant="contained"
+                    style={{marginTop: '1rem'}}>
+                Go to first lesson
+            </Button>
         </Box>
     )
 }

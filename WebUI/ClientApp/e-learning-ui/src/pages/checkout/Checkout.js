@@ -13,6 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import OrderTotals from "../../components/order/OrderTotals";
 import Spinner from "../../components/spinner/Spinner";
 import PaymentErrorMessage from "../../components/payments/PaymentErrorMessage";
+import PaymentSuccessMessage from "../../components/payments/PaymentSuccessMessage";
 
 const ELEMENT_OPTIONS = {
     style: {
@@ -41,18 +42,19 @@ export default function Checkout() {
     const {createPaymentIntent} = paymentContext;
 
     const [name, setName] = useState('');
-
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
-
-
-    if (loading) return <Spinner className="payment-spinner"/>
+    const [successMessage, setSuccessMessage] = useState('');
 
     const resetErrorMessage = () => {
         setErrorMessage(null);
     }
 
-    if(errorMessage) return <PaymentErrorMessage resetErrorMessage={resetErrorMessage} message={errorMessage}/>
+    if (loading) return <Spinner className="payment-spinner"/>
+
+    if (errorMessage) return <PaymentErrorMessage resetErrorMessage={resetErrorMessage} message={errorMessage}/>
+
+    if (successMessage) return <PaymentSuccessMessage message={successMessage}/>
 
     const onSubmit = async () => {
         if (!stripe || !elements) {
@@ -72,7 +74,7 @@ export default function Checkout() {
             const {clientSecret} = await createPaymentIntent(basket.id);
 
             const {paymentIntent} = await stripe.confirmCardPayment(
-                clientSecret + 1,
+                clientSecret,
                 {
                     payment_method: {
                         card: card,
@@ -84,8 +86,9 @@ export default function Checkout() {
             );
 
             if (paymentIntent) {
-                alert('payment intent!');
+                setSuccessMessage('Payment Success!');
             }
+
         } catch (error) {
             console.error('[error]: ', error);
             setErrorMessage(error.message);
