@@ -18,7 +18,7 @@ export default function PaymentErrorMessage(props) {
             <Cancel style={{fontSize: 100}}
                     variant="outlined"
                     color="error"/>
-            <Typography variant="subtitle1" gutterBottom component="div">
+            <Typography variant="title" gutterBottom component="div">
                 {message}
             </Typography>
             <Button color="secondary"
