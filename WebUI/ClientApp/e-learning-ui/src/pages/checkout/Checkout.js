@@ -42,7 +42,7 @@ export default function Checkout() {
     const elements = useElements()
 
     const basketContext = useContext(BasketContext);
-    const {basket} = basketContext;
+    const {basket, deleteBasket} = basketContext;
 
     const paymentContext = useContext(PaymentsContext);
     const {createPaymentIntent} = paymentContext;
@@ -73,7 +73,7 @@ export default function Checkout() {
             const {clientSecret} = await createPaymentIntent(basket.id);
 
             const {paymentIntent} = await stripe.confirmCardPayment(
-                clientSecret + 1,
+                clientSecret,
                 {
                     payment_method: {
                         card: card,
@@ -86,6 +86,7 @@ export default function Checkout() {
 
             if (paymentIntent) {
                 setSuccessMessage('Payment Success!');
+                deleteBasket(basket.id);
             }
 
         } catch (error) {
@@ -128,33 +129,23 @@ export default function Checkout() {
                     />
                     {errorMessage && 'Payment Error!'}
                 </form>
-                <pre>
-                    Test the payment: <br/>
-                     - card number: 4242 4242 4242 4242 <br/>
-                    - CVC: 123 <br/>
-                    - expiraded: 01/31
-                </pre>
             </Grid>
             <Grid item xs={12} lg={6} className="checkout-element">
                 <OrderTotals/>
-
                 {
-                    !loading ?
-                        (
-                            <Button color="secondary"
-                                    variant="contained"
-                                    type="submit"
-                                    className="pay-button"
-                                    onClick={() => onSubmit()}
-                                    disabled={!stripe}>
-                                Finalize Payment
-                            </Button>
-                        ) : (
-                            <CircularProgress color="secondary"
-                                              size={50}/>
-                        )
+                    !loading ? (
+                        <Button color="secondary"
+                                variant="contained"
+                                type="submit"
+                                className="pay-button"
+                                onClick={() => onSubmit()}
+                                disabled={!stripe}>
+                            Finalize Payment
+                        </Button>
+                    ) : (
+                        <CircularProgress color="secondary"/>
+                    )
                 }
-
             </Grid>
         </Grid>
     )
