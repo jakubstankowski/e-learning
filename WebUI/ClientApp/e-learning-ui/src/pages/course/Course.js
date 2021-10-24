@@ -36,7 +36,7 @@ export default function Course() {
 
     const classes = useStyles();
 
-    if (loading) return <Spinner/>
+    if (loading) return <Spinner size={120}/>
 
     const {title} = course;
 

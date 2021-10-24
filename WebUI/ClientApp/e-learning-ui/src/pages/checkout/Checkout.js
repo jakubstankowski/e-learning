@@ -35,6 +35,7 @@ const ELEMENT_OPTIONS = {
 export default function Checkout() {
     const [name, setName] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
 
     const stripe = useStripe()
@@ -66,11 +67,13 @@ export default function Checkout() {
             return;
         }
 
+        setLoading(true);
+
         try {
             const {clientSecret} = await createPaymentIntent(basket.id);
 
             const {paymentIntent} = await stripe.confirmCardPayment(
-                clientSecret,
+                clientSecret + 1,
                 {
                     payment_method: {
                         card: card,
@@ -88,6 +91,8 @@ export default function Checkout() {
         } catch (error) {
             console.error('[error]: ', error);
             setErrorMessage(error.message);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -126,14 +131,24 @@ export default function Checkout() {
             </Grid>
             <Grid item xs={12} lg={6} className="checkout-element">
                 <OrderTotals/>
-                <Button color="secondary"
-                        variant="contained"
-                        type="submit"
-                        className="pay-button"
-                        onClick={() => onSubmit()}
-                        disabled={!stripe}>
-                    Finalize Payment
-                </Button>
+
+                {
+                    !loading ?
+                        (
+                            <Button color="secondary"
+                                    variant="contained"
+                                    type="submit"
+                                    className="pay-button"
+                                    onClick={() => onSubmit()}
+                                    disabled={!stripe}>
+                                Finalize Payment
+                            </Button>
+                        ) : (
+                            <CircularProgress color="secondary"
+                                              size={50}/>
+                        )
+                }
+
             </Grid>
         </Grid>
     )
