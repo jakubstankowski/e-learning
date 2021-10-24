@@ -14,6 +14,7 @@ import OrderTotals from "../../components/order/OrderTotals";
 import Spinner from "../../components/spinner/Spinner";
 import PaymentErrorMessage from "../../components/payments/PaymentErrorMessage";
 import PaymentSuccessMessage from "../../components/payments/PaymentSuccessMessage";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const ELEMENT_OPTIONS = {
     style: {
@@ -32,6 +33,10 @@ const ELEMENT_OPTIONS = {
 };
 
 export default function Checkout() {
+    const [name, setName] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+
     const stripe = useStripe()
     const elements = useElements()
 
@@ -41,16 +46,9 @@ export default function Checkout() {
     const paymentContext = useContext(PaymentsContext);
     const {createPaymentIntent} = paymentContext;
 
-    const [name, setName] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [successMessage, setSuccessMessage] = useState('');
-
     const resetErrorMessage = () => {
         setErrorMessage(null);
     }
-
-    if (loading) return <Spinner className="payment-spinner"/>
 
     if (errorMessage) return <PaymentErrorMessage resetErrorMessage={resetErrorMessage} message={errorMessage}/>
 
@@ -67,8 +65,6 @@ export default function Checkout() {
         if (card == null) {
             return;
         }
-
-        setLoading(true);
 
         try {
             const {clientSecret} = await createPaymentIntent(basket.id);
@@ -92,8 +88,6 @@ export default function Checkout() {
         } catch (error) {
             console.error('[error]: ', error);
             setErrorMessage(error.message);
-        } finally {
-            setLoading(false);
         }
     };
 
