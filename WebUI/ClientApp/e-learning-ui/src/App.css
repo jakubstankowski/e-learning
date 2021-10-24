@@ -12,6 +12,8 @@ html {
     --secondary-color: #f16564;
     --dark-color: #3f4446;
     --light-color: #f4f4f4;
+    --danger-color: #dc3545;
+    --success-color: #28a745;
 }
 
 .App {
@@ -204,4 +206,13 @@ a {
 
 .mt-2 {
     margin-top: 2rem;
+}
+
+/*display*/
+.d-inline {
+    display: inline;
+}
+
+.w-100{
+    width: 100%;
 }

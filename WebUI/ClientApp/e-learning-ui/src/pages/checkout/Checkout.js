@@ -137,13 +137,14 @@ export default function Checkout() {
                         <Button color="secondary"
                                 variant="contained"
                                 type="submit"
-                                className="pay-button"
+                                className="w-100 mt-2"
                                 onClick={() => onSubmit()}
                                 disabled={!stripe}>
                             Finalize Payment
                         </Button>
-                    ) : (
-                        <CircularProgress color="secondary"/>
+                    ) : (<span className="mt-2 all-center">
+                          <CircularProgress color="secondary"/>
+                    </span>
                     )
                 }
             </Grid>
