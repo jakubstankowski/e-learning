@@ -128,6 +128,12 @@ export default function Checkout() {
                     />
                     {errorMessage && 'Payment Error!'}
                 </form>
+                <pre>
+                    Test the payment: <br/>
+                     - card number: 4242 4242 4242 4242 <br/>
+                    - CVC: 123 <br/>
+                    - expiraded: 01/31
+                </pre>
             </Grid>
             <Grid item xs={12} lg={6} className="checkout-element">
                 <OrderTotals/>
