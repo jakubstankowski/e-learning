@@ -68,7 +68,7 @@ namespace E_Learning.Application.Payments
                 await service.UpdateAsync(basket.PaymentIntentId, options);
             }
 
-            await _basketService.UpdateBasketAsync(basket.Id, basket.Items);
+            await _basketService.UpdateBasketAsync(basket);
 
             return basket;
         }

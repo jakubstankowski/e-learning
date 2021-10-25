@@ -25,11 +25,17 @@ namespace E_Learning.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<CustomerBasket>> Create(string Id, List<BasketItem> Items)
+        public async Task<ActionResult<CustomerBasket>> Create(CustomerBasket customerBasket)
         {
-            var basket = await _basketService.UpdateBasketAsync(Id, Items);
+            var basket = new CustomerBasket
+            {
+                Id = customerBasket.Id,
+                Items = customerBasket.Items,
+            };
 
-            return basket;
+            var updatedBasket = await _basketService.UpdateBasketAsync(basket);
+
+            return updatedBasket;
         }
 
 
