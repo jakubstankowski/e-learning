@@ -13,7 +13,7 @@ export default function Courses(props) {
 
     const {loading, courses} = coursesContext;
 
-    if (loading) return <Spinner/>
+    if (loading) return <Spinner size={120}/>
 
    return (
         <Grid container spacing={4}>

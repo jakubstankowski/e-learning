@@ -6,12 +6,7 @@ export default function Spinner(props) {
     const {size} = props;
 
     return (
-        <div
-            style={{
-                position: 'absolute', left: '50%', top: '50%',
-                transform: 'translate(-50%, -50%)'
-            }}
-        >
+        <div className="all-center">
             <CircularProgress color="secondary"
                               size={size}/>
         </div>

@@ -100,7 +100,7 @@ export default function Checkout() {
 
     return (
         <Grid container>
-            <Grid item xs={12} lg={6} className="checkout-element">
+            <Grid item xs={12} lg={6} className="p-2">
                 <form onSubmit={onSubmit}>
                     <label htmlFor="name">Full Name</label>
                     <input
@@ -130,7 +130,7 @@ export default function Checkout() {
                     {errorMessage && 'Payment Error!'}
                 </form>
             </Grid>
-            <Grid item xs={12} lg={6} className="checkout-element">
+            <Grid item xs={12} lg={6} className="p-2">
                 <OrderTotals/>
                 {
                     !loading ? (
@@ -142,8 +142,9 @@ export default function Checkout() {
                                 disabled={!stripe}>
                             Finalize Payment
                         </Button>
-                    ) : (<span className="mt-2 all-center">
-                          <CircularProgress color="secondary"/>
+                    ) : (
+                        <span className="mt-2 all-center">
+                            <CircularProgress color="secondary"/>
                     </span>
                     )
                 }

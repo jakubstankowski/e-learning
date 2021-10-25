@@ -24,11 +24,6 @@ label {
 button[disabled] {
     opacity: 0.6;
 }
-
-.checkout-element {
-    padding: 2rem;
-}
-
 input {
     display: block;
     border: none;
