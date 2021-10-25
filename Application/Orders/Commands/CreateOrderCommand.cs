@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using E_Learning.Application.Basket.Queries.GetBasket;
 using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Interfaces;
-using E_Learning.Application.Orders.Queries.GetOrders;
 using E_Learning.Domain.Entities;
 using E_Learning.Domain.Entities.OrderAggregate;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.Orders.Commands
@@ -80,7 +75,7 @@ namespace E_Learning.Application.Orders.Commands
             var order = new Order(items, userEmail, userId, subTotal, basket.PaymentIntentId);
 
 
-            if(existingOrder != null)
+            if (existingOrder != null)
             {
 
             }

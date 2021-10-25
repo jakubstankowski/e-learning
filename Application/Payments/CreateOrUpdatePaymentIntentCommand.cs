@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using E_Learning.Application.Basket.Command.UpdateBasket;
-using E_Learning.Application.Basket.Queries.GetBasket;
-using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
 using MediatR;
@@ -23,7 +18,6 @@ namespace E_Learning.Application.Payments
     public class CreateOrUpdatePaymentIntentCommandHandler : IRequestHandler<CreateOrUpdatePaymentIntentCommand, CustomerBasket>
     {
 
-        private readonly IBasketRepository _basketRepository;
         private readonly IBasketService _basketService;
         private readonly IConfiguration _configuration;
 
