@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import BasketContext from "../../context/basket/basketContext";
-import PaymentsContext from "../../context/payments/paymentsContext";
+import OrderContext from "../../context/order/orderContext";
 import {
     useStripe, useElements,
     CardExpiryElement,
@@ -11,7 +11,6 @@ import Button from "@material-ui/core/Button";
 import './Checkout.css';
 import Grid from "@material-ui/core/Grid";
 import OrderTotals from "../../components/order/OrderTotals";
-import Spinner from "../../components/spinner/Spinner";
 import PaymentErrorMessage from "../../components/payments/PaymentErrorMessage";
 import PaymentSuccessMessage from "../../components/payments/PaymentSuccessMessage";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -44,8 +43,9 @@ export default function Checkout() {
     const basketContext = useContext(BasketContext);
     const {basket, deleteBasket} = basketContext;
 
-    const paymentContext = useContext(PaymentsContext);
-    const {createPaymentIntent} = paymentContext;
+    const orderContext = useContext(OrderContext);
+    const {createOrder} = orderContext;
+
 
     const resetErrorMessage = () => {
         setErrorMessage(null);
@@ -70,10 +70,10 @@ export default function Checkout() {
         setLoading(true);
 
         try {
-            const {clientSecret} = await createPaymentIntent(basket.id);
+            await createOrder(basket);
 
             const {paymentIntent} = await stripe.confirmCardPayment(
-                clientSecret,
+                basket.clientSecret,
                 {
                     payment_method: {
                         card: card,

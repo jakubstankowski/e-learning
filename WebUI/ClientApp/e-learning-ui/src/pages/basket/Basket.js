@@ -6,6 +6,7 @@ import AuthContext from "../../context/auth/authContext";
 import Button from "@material-ui/core/Button";
 import {Link} from "@reach/router";
 import OrderTotals from "../../components/order/OrderTotals";
+import PaymentsContext from "../../context/payments/paymentsContext";
 
 export default function Cart() {
     const basketContext = useContext(BasketContext);
@@ -13,6 +14,10 @@ export default function Cart() {
 
     const authContext = useContext(AuthContext);
     const {isAuthenticated} = authContext;
+
+    const paymentContext = useContext(PaymentsContext);
+    const {createPaymentIntent} = paymentContext;
+
 
     useEffect(() => {
         const basketId = localStorage.getItem('basket_id');
@@ -40,6 +45,7 @@ export default function Cart() {
                 isAuthenticated && basket.items.length > 0 &&
                 <Link to="/checkout">
                     <Button color="secondary"
+                            onClick={() => createPaymentIntent}
                             variant="contained">
                         Proceed to checkout
                     </Button>
