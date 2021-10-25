@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using E_Learning.Application.Basket.Command.DeleteBasket;
-using E_Learning.Application.Basket.Command.UpdateBasket;
-using E_Learning.Application.Basket.Queries.GetBasket;
+﻿using System.Threading.Tasks;
+using E_Learning.Application.Dtos.Basket;
 using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Learning.Controllers
@@ -25,12 +19,12 @@ namespace E_Learning.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<CustomerBasket>> Create(CustomerBasket customerBasket)
+        public async Task<ActionResult<CustomerBasket>> Create(CustomerBasketDto basketDto)
         {
             var basket = new CustomerBasket
             {
-                Id = customerBasket.Id,
-                Items = customerBasket.Items,
+                Id = basketDto.Id,
+                Items = basketDto.Items,
             };
 
             var updatedBasket = await _basketService.UpdateBasketAsync(basket);
