@@ -13,12 +13,13 @@ namespace E_Learning.Domain.Entities.OrderAggregate
 
         }
 
-        public Order(IReadOnlyList<OrderItem> orderItems, string buyerEmail, string buyerId, decimal subTotal)
+        public Order(IReadOnlyList<OrderItem> orderItems, string buyerEmail, string buyerId, decimal subTotal, string paymentIntentId)
         {
             BuyerEmail = buyerEmail;
             OrderItems = orderItems;
             BuyerId = buyerId;
             SubTotal = subTotal;
+            PaymentIntentId = paymentIntentId;
         }
 
         public int Id { get; set; }

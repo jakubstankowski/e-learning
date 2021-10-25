@@ -71,8 +71,18 @@ namespace E_Learning.Application.Orders.Commands
 
             decimal subTotal = items.Sum(item => item.Price);
 
-            var order = new Order(items, userEmail, userId, subTotal);
+            var existingOrder = await _context.Orders
+                .Where(o => o.PaymentIntentId == basket.PaymentIntentId)
+                .FirstOrDefaultAsync();
 
+
+            var order = new Order(items, userEmail, userId, subTotal, basket.PaymentIntentId);
+
+
+            if(existingOrder != null)
+            {
+
+            }
 
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
