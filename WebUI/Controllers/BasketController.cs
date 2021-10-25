@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Dtos.Basket;
 using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
@@ -38,7 +39,10 @@ namespace E_Learning.Controllers
         {
             var basket = await _basketService.GetBasketByIdAsync(id);
 
-            if (basket == null) return NotFound();
+            if (basket == null)
+            {
+                throw new NotFoundException(nameof(CustomerBasket), id);
+            }
 
             return basket;
         }
