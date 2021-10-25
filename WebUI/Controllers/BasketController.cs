@@ -23,30 +23,34 @@ namespace E_Learning.Controllers
             _basketService = basketService;
         }
 
-      
-        [HttpPost]
-        public async Task<ActionResult<CustomerBasket>> Create(UpdateBasketCommand command)
-        {
-            var result = await _mediator.Send(command);
 
-            return Ok(result);
+        [HttpPost]
+        public async Task<ActionResult<CustomerBasket>> Create(string Id, List<BasketItem> Items)
+        {
+            var basket = await _basketService.UpdateBasketAsync(Id, Items);
+
+            return basket;
         }
 
 
         [HttpGet("{id}")]
         public async Task<ActionResult<CustomerBasket>> Get(string id)
         {
-           
+            var basket = await _basketService.GetBasketByIdAsync(id);
 
-            return Ok(result);
+            if (basket == null) return NotFound();
+
+            return basket;
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> Delete(string id)
         {
-           
+            var result = await _basketService.DeleteBasketAsync(id);
 
-            return Ok(result);
+            if (result) return Ok();
+
+            return BadRequest(new ProblemDetails { Title = "Problem removing item from the basket" });
         }
     }
 }

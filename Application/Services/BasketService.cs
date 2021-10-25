@@ -43,9 +43,9 @@ namespace E_Learning.Application.Services
             return JsonSerializer.Deserialize<CustomerBasket>(data);
         }
 
-        public async Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)
+        public async Task<CustomerBasket> UpdateBasketAsync(string Id, List<BasketItem> Items)
         {
-            foreach (var item in basket.Items)
+            foreach (var item in Items)
             {
                 var course = await _context
                          .Courses.FirstOrDefaultAsync(c => c.Id == item.Id);
@@ -57,7 +57,13 @@ namespace E_Learning.Application.Services
 
             }
 
-            var created = await _database.StringSetAsync(basket.Id,
+            var basket = new CustomerBasket
+            {
+                Id = Id,
+                Items = Items,
+            };
+
+            var created = await _database.StringSetAsync(Id,
                 JsonSerializer.Serialize(basket), TimeSpan.FromDays(30));
 
             if (!created)
