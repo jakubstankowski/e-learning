@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using E_Learning.Application.Basket.Command.UpdateBasket;
 using E_Learning.Application.Basket.Queries.GetBasket;
 using E_Learning.Application.Common.Interfaces;
+using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -23,11 +24,12 @@ namespace E_Learning.Application.Payments
     {
 
         private readonly IBasketRepository _basketRepository;
+        private readonly IBasketService _basketService;
         private readonly IConfiguration _configuration;
 
-        public CreateOrUpdatePaymentIntentCommandHandler(IConfiguration configuration, IBasketRepository basketRepository)
+        public CreateOrUpdatePaymentIntentCommandHandler(IConfiguration configuration, IBasketService basketService)
         {
-            _basketRepository = basketRepository;
+            _basketService = basketService;
             _configuration = configuration;
         }
 
@@ -35,7 +37,7 @@ namespace E_Learning.Application.Payments
         {
             StripeConfiguration.ApiKey = _configuration["StripeSettings:SecretKey"];
 
-            var basket = await _basketRepository.GetBasketByIdAsync(request.BasketId);
+            var basket = await _basketService.GetBasketByIdAsync(request.BasketId);
 
             if (basket == null) return null;
 
@@ -66,7 +68,7 @@ namespace E_Learning.Application.Payments
                 await service.UpdateAsync(basket.PaymentIntentId, options);
             }
 
-            await _basketRepository.UpdateBasketAsync(basket);
+            await _basketService.UpdateBasketAsync(basket.Id, basket.Items);
 
             return basket;
         }

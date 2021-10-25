@@ -8,6 +8,7 @@ using AutoMapper;
 using E_Learning.Application.Basket.Queries.GetBasket;
 using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
+using E_Learning.Application.Interfaces;
 using E_Learning.Application.Orders.Queries.GetOrders;
 using E_Learning.Domain.Entities;
 using E_Learning.Domain.Entities.OrderAggregate;
@@ -29,20 +30,20 @@ namespace E_Learning.Application.Orders.Commands
         private readonly IContext _context;
         private readonly IMapper _mapper;
         private readonly IIdentityService _identityService;
-        private readonly IBasketRepository _basketRepository;
+        private readonly IBasketService _basketService;
 
-        public CreateOrderHandler(IMediator mediator, IContext context, IMapper mapper, IIdentityService identityService, IBasketRepository basketRepository)
+        public CreateOrderHandler(IMediator mediator, IContext context, IMapper mapper, IIdentityService identityService, IBasketService basketService)
         {
             _mediator = mediator;
             _context = context;
             _mapper = mapper;
             _identityService = identityService;
-            _basketRepository = basketRepository;
+            _basketService = basketService;
         }
 
         public async Task<Order> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            var basket = await _basketRepository.GetBasketByIdAsync(request.BasketId);
+            var basket = await _basketService.GetBasketByIdAsync(request.BasketId);
 
             if (basket == null) return null;
 
