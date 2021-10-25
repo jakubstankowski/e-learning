@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
+using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
 using MediatR;
 using StackExchange.Redis;
@@ -26,16 +27,16 @@ namespace E_Learning.Application.Basket.Queries.GetBasket
 
     public class GetBasketHandler : IRequestHandler<GetBasketByIdQuery, CustomerBasket>
     {
-        private readonly IBasketRepository _basketRepository;
+        private readonly IBasketService _basketService;
 
-        public GetBasketHandler(IBasketRepository basketRepository)
+        public GetBasketHandler(IBasketService basketService)
         {
-            _basketRepository = basketRepository;
+            _basketService = basketService;
         }
 
         public async Task<CustomerBasket> Handle(GetBasketByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _basketRepository.GetBasketByIdAsync(request.Id);
+            return await _basketService.GetBasketByIdAsync(request.Id);
         }
     }
 

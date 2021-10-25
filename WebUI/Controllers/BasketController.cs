@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using E_Learning.Application.Basket.Command.DeleteBasket;
 using E_Learning.Application.Basket.Command.UpdateBasket;
 using E_Learning.Application.Basket.Queries.GetBasket;
+using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +16,11 @@ namespace E_Learning.Controllers
     [Route("api/[controller]")]
     public class BasketController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private readonly IBasketService _basketService;
 
-        public BasketController(IMediator mediator)
+        public BasketController(IBasketService basketService)
         {
-            _mediator = mediator;
+            _basketService = basketService;
         }
 
       
@@ -35,8 +36,7 @@ namespace E_Learning.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CustomerBasket>> Get(string id)
         {
-            var query = new GetBasketByIdQuery(id);
-            var result = await _mediator.Send(query);
+           
 
             return Ok(result);
         }
@@ -44,8 +44,7 @@ namespace E_Learning.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> Delete(string id)
         {
-            var query = new DeleteBasketCommand(id);
-            var result = await _mediator.Send(query);
+           
 
             return Ok(result);
         }
