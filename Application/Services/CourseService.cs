@@ -75,11 +75,6 @@ namespace E_Learning.Application.Services
             var course = await _context
                          .Courses.FirstOrDefaultAsync(c => c.Id == id);
 
-            if (course == null)
-            {
-                throw new NotFoundException(nameof(Course), id);
-            }
-
             return _mapper.Map<Course, CourseDto>(course);
         }
 
