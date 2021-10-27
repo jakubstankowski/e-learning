@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using E_Learning.Application.Common.Dto;
 using E_Learning.Application.Common.Exceptions;
-using E_Learning.Application.Courses.Commands;
-using E_Learning.Application.Courses.Commands.DeleteCourse;
-using E_Learning.Application.Courses.Commands.UpdateCourse;
-using E_Learning.Application.Courses.Queries;
-using E_Learning.Application.Courses.Queries.GetCourses;
-using E_Learning.Application.Courses1.Queries;
 using E_Learning.Application.Interfaces;
+using E_Learning.Application.Lessons.Queries.GetLessons;
 using E_Learning.Domain.Entities;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,22 +27,16 @@ namespace E_Learning.Controllers
         {
             var course = await _courseService.GetCourseById(id);
 
-            if (course == null)
-            {
-                throw new NotFoundException(nameof(Course), id);
-            }
-
             return Ok(course);
         }
 
-        /* [HttpGet("{id}/Lessons")]
-         public async Task<ActionResult<CourseDto>> GetCourseLessons(int id)
-         {
-             var query = new GetCoursesLessonsQuery(id);
-             var result = await _mediator.Send(query);
+        [HttpGet("{id}/Lessons")]
+        public async Task<ActionResult<IEnumerable<LessonDto>>> GetCourseLessons(int id)
+        {
+            var courseLessons = _courseService.GetCourseLessons(id);
 
-             return Ok(result);
-         }*/
+            return Ok(courseLessons);
+        }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]

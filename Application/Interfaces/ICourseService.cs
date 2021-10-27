@@ -20,7 +20,7 @@ namespace E_Learning.Application.Interfaces
 
         public Task<CourseDto> GetCourseById(int id);
 
-        public Task<LessonDto> GetCourseLessons(int id);
+        public Task<IEnumerable<LessonDto>> GetCourseLessons(int id);
 
     }
 }

@@ -35,8 +35,6 @@ namespace E_Learning.Application.Services
                 ImageUrl = courseDto.ImageUrl
             };
 
-
-
             _context.Courses.Add(course);
             await _context.SaveChangesAsync();
 
@@ -75,12 +73,29 @@ namespace E_Learning.Application.Services
             var course = await _context
                          .Courses.FirstOrDefaultAsync(c => c.Id == id);
 
+            if (course == null)
+            {
+                throw new NotFoundException(nameof(Course), id);
+            }
+
             return _mapper.Map<Course, CourseDto>(course);
         }
 
-        public Task<LessonDto> GetCourseLessons(int id)
+        public async Task<IEnumerable<LessonDto>> GetCourseLessons(int id)
         {
-            throw new NotImplementedException();
+            var course = await _context
+                         .Courses.FirstOrDefaultAsync(c => c.Id == id);
+
+            if (course == null)
+            {
+                throw new NotFoundException(nameof(Course), id);
+            }
+
+            var lessons = await _context.Lessons
+               .Where(l => l.CourseId == id)
+               .ToListAsync();
+
+            return _mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons);
         }
 
         public async Task<IEnumerable<CourseDto>> UpdateCourse(CourseDto courseDto)
