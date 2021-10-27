@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using E_Learning.Application.Interfaces;
 using E_Learning.Application.Lessons.Commands;
 using E_Learning.Application.Lessons.Commands.DeleteLesson;
 using E_Learning.Application.Lessons.Commands.UpdateLesson;
@@ -14,54 +16,51 @@ namespace E_Learning.Controllers
     [Route("api/[controller]")]
     public class LessonController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private readonly ILessonService _lessonService;
 
-        public LessonController(IMediator mediator)
+        public LessonController(ILessonService lessonService)
         {
-            _mediator = mediator;
+            _lessonService = lessonService;
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<ActionResult<LessonDto>> Create(CreateLessonCommand command)
+        public async Task<ActionResult<IEnumerable<LessonDto>>> Create(LessonDto lessonDto)
         {
-            var result = await _mediator.Send(command);
+            var lesson = await _lessonService.CreateLessonAsync(lessonDto);
 
-            return Ok(result);
+            return Ok(lesson);
         }
 
-
-       
         [HttpGet("{id}")]
         public async Task<ActionResult<LessonDto>> GetLesson(int id)
         {
-            var query = new GetLessonByIdQuery(id);
-            var result = await _mediator.Send(query);
+            var lesson = await _lessonService.GetLessonByIdAsync(id);
 
-            return Ok(result);
+            return Ok(lesson);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<int>> Delete(int id)
         {
-            var result = await _mediator.Send(new DeleteLessonCommand { Id = id });
+            var result = await _lessonService.DeleteLessonByIdAsync(id);
 
-            return Ok(result);
+            return Ok();
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
-        public async Task<ActionResult<LessonDto>> Update(int id, UpdateLessonCommand command)
+        public async Task<ActionResult<LessonDto>> Update(int id, LessonDto lessonDto)
         {
-            if (id != command.Id)
+            if (id != lessonDto.Id)
             {
                 return BadRequest();
             }
 
-            var result = await _mediator.Send(command);
+            var lesson = await _lessonService.UpdateLessonAsync(lessonDto);
 
-            return Ok(result);
+            return Ok(lesson);
         }
     }
 }
