@@ -61,7 +61,7 @@ namespace E_Learning.Application.Services
             return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
         }
 
-        public async Task<IEnumerable<CourseDto>> GetAllCourseAsync()
+        public async Task<IEnumerable<CourseDto>> GetCoursesAsync()
         {
             var courses = await _context.Courses.ToListAsync();
 

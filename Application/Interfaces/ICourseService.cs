@@ -16,7 +16,7 @@ namespace E_Learning.Application.Interfaces
 
         public Task<IEnumerable<CourseDto>> DeleteCourseAsync(int id);
 
-        public Task<IEnumerable<CourseDto>> GetAllCourseAsync();
+        public Task<IEnumerable<CourseDto>> GetCoursesAsync();
 
         public Task<CourseDto> GetCourseByIdAsync(int id);
 

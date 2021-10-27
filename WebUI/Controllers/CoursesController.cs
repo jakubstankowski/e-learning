@@ -30,6 +30,25 @@ namespace E_Learning.Controllers
             return Ok(course);
         }
 
+        [HttpGet("{id}/Home")]
+        public async Task<ActionResult<CourseDto>> GetHomeCourses()
+        {
+            var course = await _courseService.GetCoursesAsync();
+
+            return Ok(course);
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("{id}/Admin")]
+        public async Task<ActionResult<CourseDto>> GetAdminCourses()
+        {
+            var course = await _courseService.GetCoursesAsync();
+
+            return Ok(course);
+        }
+
+
         [HttpGet("{id}/Lessons")]
         public async Task<ActionResult<IEnumerable<LessonDto>>> GetCourseLessons(int id)
         {
@@ -40,7 +59,7 @@ namespace E_Learning.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<CourseDto>>> Create(CourseDto courseDto)
+        public async Task<ActionResult<IEnumerable<CourseDto>>> CreateCourse(CourseDto courseDto)
         {
             var course = await _courseService.CreateCourseAsync(courseDto);
 
@@ -49,7 +68,7 @@ namespace E_Learning.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
-        public async Task<ActionResult<int>> Delete(int id)
+        public async Task<ActionResult<int>> DeleteCourse(int id)
         {
             await _courseService.DeleteCourseAsync(id);
 
@@ -58,7 +77,7 @@ namespace E_Learning.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
-        public async Task<ActionResult<CourseDto>> Update(CourseDto courseDto)
+        public async Task<ActionResult<CourseDto>> UpdateCourse(CourseDto courseDto)
         {
             var updatedCourse = await _courseService.UpdateCourseAsync(courseDto);
 
