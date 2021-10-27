@@ -1,11 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using E_Learning.Application.Interfaces;
-using E_Learning.Application.Lessons.Commands;
-using E_Learning.Application.Lessons.Commands.DeleteLesson;
-using E_Learning.Application.Lessons.Commands.UpdateLesson;
 using E_Learning.Application.Lessons.Queries.GetLessons;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
