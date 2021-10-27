@@ -1,13 +1,8 @@
-using System;
 using System.Text;
 using AutoMapper;
 using E_Learning.Application.Common.Mapping;
-using E_Learning.Application.Courses.Commands;
-using E_Learning.Application.Courses.Queries;
-using E_Learning.Application.Courses1.Queries;
 using Infrastructure;
 using Infrastructure.Persistance;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -77,15 +72,6 @@ namespace E_Learning
 
             services.AddControllers();
             services.AddInfrastructure();
-
-
-            services.AddMediatR(new Type[]
-            {
-                typeof(GetAllCoursesQuery),
-                typeof(GetCoursesByIdQuery),
-                typeof(CreateCourseCommand)
-            });
-
 
 
             services.AddSwaggerGen(c =>
