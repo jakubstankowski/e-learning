@@ -25,7 +25,7 @@ namespace E_Learning.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CourseDto>> GetCourse(int id)
         {
-            var course = await _courseService.GetCourseById(id);
+            var course = await _courseService.GetCourseByIdAsync(id);
 
             return Ok(course);
         }
@@ -33,7 +33,7 @@ namespace E_Learning.Controllers
         [HttpGet("{id}/Lessons")]
         public async Task<ActionResult<IEnumerable<LessonDto>>> GetCourseLessons(int id)
         {
-            var courseLessons = await _courseService.GetCourseLessons(id);
+            var courseLessons = await _courseService.GetCourseLessonsAsync(id);
 
             return Ok(courseLessons);
         }
@@ -42,7 +42,7 @@ namespace E_Learning.Controllers
         [HttpPost]
         public async Task<ActionResult<IEnumerable<CourseDto>>> Create(CourseDto courseDto)
         {
-            var course = await _courseService.CreateCourse(courseDto);
+            var course = await _courseService.CreateCourseAsync(courseDto);
 
             return Ok(course);
         }
@@ -51,7 +51,7 @@ namespace E_Learning.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<int>> Delete(int id)
         {
-            await _courseService.DeleteCourse(id);
+            await _courseService.DeleteCourseAsync(id);
 
             return Ok();
         }
@@ -60,7 +60,7 @@ namespace E_Learning.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<CourseDto>> Update(CourseDto courseDto)
         {
-            var updatedCourse = await _courseService.UpdateCourse(courseDto);
+            var updatedCourse = await _courseService.UpdateCourseAsync(courseDto);
 
             return Ok(updatedCourse);
         }

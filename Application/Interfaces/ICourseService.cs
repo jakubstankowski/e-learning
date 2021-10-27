@@ -22,5 +22,7 @@ namespace E_Learning.Application.Interfaces
 
         public Task<IEnumerable<LessonDto>> GetCourseLessonsAsync(int id);
 
+        public Task<bool> SaveChangesAsync();
+
     }
 }

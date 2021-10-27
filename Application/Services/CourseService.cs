@@ -98,6 +98,11 @@ namespace E_Learning.Application.Services
             return _mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons);
         }
 
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync() >= 0);
+        }
+
         public async Task<IEnumerable<CourseDto>> UpdateCourseAsync(CourseDto courseDto)
         {
             var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == courseDto.Id);

@@ -39,11 +39,6 @@ namespace E_Learning.Application.Lessons.Queries.GetLessons
         {
             var lesson = await _context.Lessons.FirstOrDefaultAsync(l => l.Id == request.Id);
 
-            // 1. zobacz czy rzuci wyjątek jeśli nie znajdzie id
-            // 2. czy indexOfNextLesson będzie < lessons.Count, czy lessonDTO zwróci to co chciałem
-            // 3. zmockuj entity framework + mapper
-
-
             if (lesson == null)
             {
                 throw new NotFoundException(nameof(Lesson), request.Id);

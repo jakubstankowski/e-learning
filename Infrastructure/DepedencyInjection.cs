@@ -15,6 +15,7 @@ namespace Infrastructure
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<ICourseService, CourseService>();
+            services.AddScoped<ILessonService, LessonService>();
 
             return services;
         }
