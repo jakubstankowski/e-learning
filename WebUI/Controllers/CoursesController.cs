@@ -33,7 +33,7 @@ namespace E_Learning.Controllers
         [HttpGet("{id}/Lessons")]
         public async Task<ActionResult<IEnumerable<LessonDto>>> GetCourseLessons(int id)
         {
-            var courseLessons = _courseService.GetCourseLessons(id);
+            var courseLessons = await _courseService.GetCourseLessons(id);
 
             return Ok(courseLessons);
         }
