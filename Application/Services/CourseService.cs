@@ -25,7 +25,7 @@ namespace E_Learning.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CourseDto>> CreateCourse(CourseDto courseDto)
+        public async Task<IEnumerable<CourseDto>> CreateCourseAsync(CourseDto courseDto)
         {
             var course = new Course
             {
@@ -43,7 +43,7 @@ namespace E_Learning.Application.Services
             return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
         }
 
-        public async Task<IEnumerable<CourseDto>> DeleteCourse(int id)
+        public async Task<IEnumerable<CourseDto>> DeleteCourseAsync(int id)
         {
             var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == id);
 
@@ -61,14 +61,14 @@ namespace E_Learning.Application.Services
             return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
         }
 
-        public async Task<IEnumerable<CourseDto>> GetAllCourse()
+        public async Task<IEnumerable<CourseDto>> GetAllCourseAsync()
         {
             var courses = await _context.Courses.ToListAsync();
 
             return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
         }
 
-        public async Task<CourseDto> GetCourseById(int id)
+        public async Task<CourseDto> GetCourseByIdAsync(int id)
         {
             var course = await _context
                          .Courses.FirstOrDefaultAsync(c => c.Id == id);
@@ -81,7 +81,7 @@ namespace E_Learning.Application.Services
             return _mapper.Map<Course, CourseDto>(course);
         }
 
-        public async Task<IEnumerable<LessonDto>> GetCourseLessons(int id)
+        public async Task<IEnumerable<LessonDto>> GetCourseLessonsAsync(int id)
         {
             var course = await _context
                          .Courses.FirstOrDefaultAsync(c => c.Id == id);
@@ -98,7 +98,7 @@ namespace E_Learning.Application.Services
             return _mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons);
         }
 
-        public async Task<IEnumerable<CourseDto>> UpdateCourse(CourseDto courseDto)
+        public async Task<IEnumerable<CourseDto>> UpdateCourseAsync(CourseDto courseDto)
         {
             var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == courseDto.Id);
 
