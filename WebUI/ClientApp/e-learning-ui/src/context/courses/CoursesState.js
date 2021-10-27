@@ -27,7 +27,7 @@ function CoursesState(props) {
     const getHomeCourses = async () => {
         setLoading();
 
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/home/courses`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/courses/home`);
         dispatch({
             type: GET_HOME_COURSES,
             payload: res.data
@@ -37,7 +37,7 @@ function CoursesState(props) {
     const getAdminCourses = async () => {
         setLoading();
 
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/admin/courses`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/courses/admin`);
 
         dispatch({
             type: GET_ADMIN_COURSES,
