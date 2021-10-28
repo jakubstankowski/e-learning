@@ -18,6 +18,8 @@ namespace E_Learning.Application.Interfaces
 
         public Task<IEnumerable<CourseDto>> GetCoursesAsync();
 
+        public Task<IEnumerable<CourseDto>> GetUserCoursesAsync();
+
         public Task<CourseDto> GetCourseByIdAsync(int id);
 
         public Task<IEnumerable<LessonDto>> GetCourseLessonsAsync(int id);
