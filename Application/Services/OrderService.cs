@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Interfaces;
+using E_Learning.Application.Orders.Queries.GetOrders;
 using E_Learning.Domain.Entities;
 using E_Learning.Domain.Entities.OrderAggregate;
 using Microsoft.EntityFrameworkCore;
@@ -15,12 +17,14 @@ namespace E_Learning.Application.Services
         private readonly IBasketService _basketService;
         private readonly IContext _context;
         private readonly IIdentityService _identityService;
+        private readonly IMapper _mapper;
 
-        public OrderService(IBasketService basketService, IContext context, IIdentityService identityService)
+        public OrderService(IBasketService basketService, IContext context, IIdentityService identityService, IMapper mapper)
         {
             _basketService = basketService;
             _context = context;
             _identityService = identityService;
+            _mapper = mapper;
         }
 
 
@@ -73,6 +77,19 @@ namespace E_Learning.Application.Services
 
 
             return order;
+        }
+
+        public async Task<IEnumerable<OrderDto>> GetOrdersByUserAsync()
+        {
+            string userId = _identityService.GetUserId();
+
+            var orders = await _context.Orders
+                .Where(o => o.BuyerId == userId)
+                .Include(o => o.OrderItems)
+                .ToListAsync();
+
+
+            return _mapper.Map<IEnumerable<Order>, IEnumerable<OrderDto>>(orders);
         }
     }
 }
