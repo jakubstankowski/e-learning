@@ -49,7 +49,7 @@ namespace E_Learning.Controllers
         }
 
         [Authorize]
-        [HttpGet("/Users")]
+        [HttpGet("User")]
         public async Task<ActionResult<CourseDto>> GetUserCourses()
         {
             var course = await _courseService.GetUserCoursesAsync();

@@ -12,8 +12,6 @@ using E_Learning.Application.Interfaces;
 using E_Learning.Application.Lessons.Queries.GetLessons;
 using E_Learning.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
-/*using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;*/
 using Microsoft.EntityFrameworkCore;
 
 namespace E_Learning.Application.Services

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using E_Learning.Application.Interfaces;
-using E_Learning.Application.Orders.Commands;
 using E_Learning.Application.Orders.Queries.GetOrders;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
