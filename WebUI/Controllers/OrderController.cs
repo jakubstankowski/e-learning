@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using E_Learning.Application.Interfaces;
 using E_Learning.Application.Orders.Commands;
 using E_Learning.Application.Orders.Queries.GetOrders;
 using MediatR;
@@ -15,29 +16,27 @@ namespace E_Learning.Controllers
     [Authorize]
     public class OrderController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private readonly IOrderService _orderService;
 
-        public OrderController(IMediator mediator)
+        public OrderController(IOrderService orderService)
         {
-            _mediator = mediator;
+            _orderService = orderService;
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(CreateOrderCommand command)
+        public async Task<ActionResult> Create(string basketId)
         {
-            var result = await _mediator.Send(command);
+            var order = await _orderService.CreateOrderAsync(basketId);
 
-            return Ok(result);
+            return Ok(order);
         }
 
         [HttpGet]
         public async Task<ActionResult<OrderDto>> GetOrderByUser()
         {
+            var order = await _orderService.GetOrdersByUserAsync();
 
-            var query = new GetOrdersByUserQuery();
-            var result = await _mediator.Send(query);
-
-            return Ok(result);
+            return Ok(order);
         }
     }
 }
