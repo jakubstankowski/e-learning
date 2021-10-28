@@ -18,11 +18,13 @@ namespace E_Learning.Application.Services
     {
         private readonly IContext _context;
         private readonly IMapper _mapper;
+        private readonly IIdentityService _identityService;
 
-        public CourseService(IContext context, IMapper mapper)
+        public CourseService(IContext context, IMapper mapper, IIdentityService identityService)
         {
             _context = context;
             _mapper = mapper;
+            _identityService = identityService;
         }
 
         public async Task<IEnumerable<CourseDto>> CreateCourseAsync(CourseDto courseDto)
@@ -121,6 +123,28 @@ namespace E_Learning.Application.Services
             await _context.SaveChangesAsync();
 
             var courses = await _context.Courses.ToListAsync();
+
+            return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
+        }
+
+        public async Task<IEnumerable<CourseDto>> GetUserCoursesAsync()
+        {
+            string userId = _identityService.GetUserId();
+
+            var userCourses = await _context.UserCourses
+                    .Include(u => u.IdentityUser)
+                    .Include(u => u.Course)
+                   .Where(u => u.IdentityUser.Id == userId)
+                   .ToListAsync();
+
+
+            List<Course> courses = new();
+
+            foreach (var userCourse in userCourses)
+            {
+                courses.Add(userCourse.Course);
+            }
+
 
             return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
         }
