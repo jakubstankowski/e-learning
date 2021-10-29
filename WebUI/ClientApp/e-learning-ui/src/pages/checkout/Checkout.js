@@ -44,7 +44,7 @@ export default function Checkout() {
     const {basket, deleteBasket} = basketContext;
 
     const orderContext = useContext(OrderContext);
-    const {createOrder} = orderContext;
+    const {postOrder} = orderContext;
 
 
     const resetErrorMessage = () => {
@@ -60,7 +60,6 @@ export default function Checkout() {
             return;
         }
 
-
         const card = elements.getElement(CardNumberElement);
 
         if (card == null) {
@@ -70,7 +69,7 @@ export default function Checkout() {
         setLoading(true);
 
         try {
-            await createOrder(basket);
+            await postOrder(basket);
 
             const {paymentIntent} = await stripe.confirmCardPayment(
                 basket.clientSecret,

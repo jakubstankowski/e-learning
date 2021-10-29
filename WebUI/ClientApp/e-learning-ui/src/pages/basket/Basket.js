@@ -43,13 +43,11 @@ export default function Cart() {
             <OrderTotals/>
             {
                 isAuthenticated && basket.items.length > 0 &&
-                <Link to="/checkout">
-                    <Button color="secondary"
-                            onClick={() => createPaymentIntent}
-                            variant="contained">
-                        Proceed to checkout
-                    </Button>
-                </Link>
+                <Button color="secondary"
+                        onClick={() => createPaymentIntent(basket.id)}
+                        variant="contained">
+                    Proceed to checkout
+                </Button>
             }
         </div>
     )
