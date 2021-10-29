@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
 using Microsoft.Extensions.Configuration;
@@ -29,7 +30,7 @@ namespace E_Learning.Application.Services
 
             if (basket == null)
             {
-                return null;
+                throw new NotFoundException(nameof(CustomerBasket), basketId);
             }
 
             var service = new PaymentIntentService();

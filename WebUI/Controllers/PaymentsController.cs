@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using E_Learning.Application.Payments;
+﻿using System.Threading.Tasks;
+using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Learning.Controllers
@@ -15,21 +10,20 @@ namespace E_Learning.Controllers
     [ApiController]
     public class PaymentsController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private readonly IPaymentService _paymentService;
 
-        public PaymentsController(IMediator mediator)
+        public PaymentsController(IPaymentService paymentService)
         {
-            _mediator = mediator;
+            _paymentService = paymentService;
         }
 
         [Authorize]
         [HttpPost("{basketId}")]
-        public async Task<ActionResult<CustomerBasket>> CreateOrUpdatePaymentIntent(CreateOrUpdatePaymentIntentCommand command)
+        public async Task<ActionResult<CustomerBasket>> CreateOrUpdatePaymentIntent(string basketId)
         {
-            var result = await _mediator.Send(command);
-            
-            return Ok(result);
+            var basket = await _paymentService.CreateOrUpdatePaymentIntent(basketId);
 
+            return Ok(basket);
         }
     }
 }
