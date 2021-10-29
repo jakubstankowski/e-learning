@@ -19,23 +19,23 @@ namespace E_Learning
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
         public IConfiguration Configuration { get; }
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Context>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ELearningConnection")));
+            services.AddDbContext<Context>(opt => opt.UseSqlServer(_configuration["ConnectionStrings:ELearningConnection"]));
 
             services.AddSingleton<IConnectionMultiplexer>(c =>
             {
-                var configuration = ConfigurationOptions.Parse(Configuration
-                    .GetConnectionString("Redis"), true);
+                var configuration = ConfigurationOptions.Parse(_configuration["ConnectionStrings:Redis"], true);
                 return ConnectionMultiplexer.Connect(configuration);
             });
 
@@ -48,15 +48,15 @@ namespace E_Learning
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddJwtBearer(options =>
                {
-                   options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                   options.TokenValidationParameters = new TokenValidationParameters
                    {
                        ValidateIssuer = true,
                        ValidateAudience = true,
                        ValidateLifetime = true,
                        ValidateIssuerSigningKey = true,
-                       ValidIssuer = Configuration["Jwt:Issuer"],
-                       ValidAudience = Configuration["Jwt:Issuer"],
-                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                       ValidIssuer = _configuration["Jwt:Issuer"],
+                       ValidAudience = _configuration["Jwt:Issuer"],
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]))
                    };
                }
                );
@@ -116,7 +116,7 @@ namespace E_Learning
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseProxyToSpaDevelopmentServer(Configuration["SpaBaseUrl"] ?? "http://localhost:3000");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
                 }
             });
         }
