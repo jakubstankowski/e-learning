@@ -9,6 +9,6 @@ namespace E_Learning.Application.Interfaces
 {
     public interface IPaymentService
     {
-        public Task<CustomerBasket> CreateOrUpdatePaymentIntent();
+        public Task<CustomerBasket> CreateOrUpdatePaymentIntent(string basketId);
     }
 }
