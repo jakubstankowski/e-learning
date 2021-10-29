@@ -30,7 +30,7 @@ namespace E_Learning.Controllers
             return Ok(course);
         }
 
-        [HttpGet("{id}/Home")]
+        [HttpGet("Home")]
         public async Task<ActionResult<CourseDto>> GetHomeCourses()
         {
             var course = await _courseService.GetCoursesAsync();
@@ -40,7 +40,7 @@ namespace E_Learning.Controllers
 
 
         [Authorize(Roles = "Admin")]
-        [HttpGet("{id}/Admin")]
+        [HttpGet("Admin")]
         public async Task<ActionResult<CourseDto>> GetAdminCourses()
         {
             var course = await _courseService.GetCoursesAsync();
