@@ -69,7 +69,7 @@ export default function Checkout() {
         setLoading(true);
 
         try {
-            await postOrder(basket);
+            await postOrder(basket.id);
 
             const {paymentIntent} = await stripe.confirmCardPayment(
                 basket.clientSecret,
@@ -128,6 +128,9 @@ export default function Checkout() {
                     />
                     {errorMessage && 'Payment Error!'}
                 </form>
+                <pre>
+                    Card number for testing: <strong>4242 4242 4242 4242</strong>
+                </pre>
             </Grid>
             <Grid item xs={12} lg={6} className="p-2">
                 <OrderTotals/>

@@ -32,7 +32,11 @@ namespace E_Learning.Application.Services
         {
             var basket = await _basketService.GetBasketByIdAsync(basketId);
 
-            if (basket == null) return null;
+
+            if (basket == null)
+            {
+                throw new NotFoundException(nameof(CustomerBasket), basketId);
+            }
 
             var items = new List<OrderItem>();
 
