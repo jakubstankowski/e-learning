@@ -17,7 +17,7 @@ namespace E_Learning.Controllers
     {
         private readonly IOrderService _orderService;
 
-        public OrderController(IOrderService orderService, IBasketService basketService)
+        public OrderController(IOrderService orderService)
         {
             _orderService = orderService;
         }

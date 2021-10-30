@@ -18,17 +18,15 @@ namespace E_Learning.Application.Services
         private readonly IContext _context;
         private readonly IIdentityService _identityService;
         private readonly IMapper _mapper;
-        private readonly IOrderService _orderService;
         private readonly IPaymentService _paymentService;
 
-        public OrderService(IBasketService basketService, IContext context, IIdentityService identityService, 
-            IMapper mapper, IOrderService orderService, IPaymentService paymentService)
+        public OrderService(IBasketService basketService, IContext context, IIdentityService identityService,
+            IMapper mapper, IPaymentService paymentService)
         {
             _basketService = basketService;
             _context = context;
             _identityService = identityService;
             _mapper = mapper;
-            _orderService = orderService;
             _paymentService = paymentService;
         }
 
@@ -78,7 +76,7 @@ namespace E_Learning.Application.Services
 
             if (existingOrder != null)
             {
-                await _orderService.DeleteOrderByIdAsync(order.Id);
+                _context.Orders.Remove(order);
                 await _paymentService.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
             }
 
