@@ -14,5 +14,7 @@ namespace E_Learning.Application.Interfaces
         public Task<Order> CreateOrderAsync(string basketId);
 
         public Task<IEnumerable<OrderDto>> GetOrdersByUserAsync();
+
+        public Task DeleteOrderByIdAsync(int id);
     }
 }

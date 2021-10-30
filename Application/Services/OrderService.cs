@@ -18,13 +18,15 @@ namespace E_Learning.Application.Services
         private readonly IContext _context;
         private readonly IIdentityService _identityService;
         private readonly IMapper _mapper;
+        private readonly IOrderService _orderService;
 
-        public OrderService(IBasketService basketService, IContext context, IIdentityService identityService, IMapper mapper)
+        public OrderService(IBasketService basketService, IContext context, IIdentityService identityService, IMapper mapper, IOrderService orderService)
         {
             _basketService = basketService;
             _context = context;
             _identityService = identityService;
             _mapper = mapper;
+            _orderService = orderService;
         }
 
 
@@ -73,7 +75,8 @@ namespace E_Learning.Application.Services
 
             if (existingOrder != null)
             {
-
+                await _orderService.DeleteOrderByIdAsync(order.Id);
+                // await _paymentService.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
             }
 
             _context.Orders.Add(order);
@@ -81,6 +84,15 @@ namespace E_Learning.Application.Services
 
 
             return order;
+        }
+
+        public async Task DeleteOrderByIdAsync(int id)
+        {
+            var order = await _context.Orders.Where(o => o.Id == id).FirstOrDefaultAsync();
+
+            _context.Orders.Remove(order);
+
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<OrderDto>> GetOrdersByUserAsync()

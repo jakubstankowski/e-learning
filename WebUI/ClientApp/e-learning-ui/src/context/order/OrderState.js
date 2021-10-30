@@ -20,7 +20,6 @@ export default function OrderState(props) {
     const [state, dispatch] = useReducer(OrderReducer, initialState);
 
     const postOrder = async (basketId) => {
-        console.log('basket id: ', basketId);
         setLoading();
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/order`, {
             basketId: basketId
