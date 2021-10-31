@@ -9,10 +9,12 @@ import {
     REMOVE_ITEM_FROM_BASKET,
     ADD_ITEM_TO_BASKET,
     SET_LOADING,
-    CALCULATE_BASKET_TOTALS
+    CALCULATE_BASKET_TOTALS,
+    CREATE_BASKET_PAYMENT_INTENT
 } from '../types';
 
 import {uuid} from 'uuidv4';
+import {navigate} from "@reach/router";
 
 function BasketState(props) {
     const initialState = {
@@ -101,6 +103,20 @@ function BasketState(props) {
         });
     }
 
+    const createBasketPaymentIntent = async (basketId) => {
+        await navigate('/checkout');
+
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/payments/${basketId}`, {
+            basketId: basketId
+        })
+
+        dispatch({
+            type: CREATE_BASKET_PAYMENT_INTENT,
+        });
+
+        return response.data;
+    }
+
     const setLoading = () => dispatch({type: SET_LOADING});
 
     return (
@@ -111,7 +127,8 @@ function BasketState(props) {
                 updateBasket,
                 deleteBasket,
                 removeItemFromBasket,
-                addItemToBasket
+                addItemToBasket,
+                createBasketPaymentIntent
             }}
         >
             {props.children}
