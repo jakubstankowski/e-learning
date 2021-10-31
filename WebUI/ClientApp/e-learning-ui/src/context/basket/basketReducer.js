@@ -3,7 +3,7 @@ import {
     GET_BASKET,
     DELETE_BASKET,
     REMOVE_ITEM_FROM_BASKET, ADD_ITEM_TO_BASKET,
-    CALCULATE_BASKET_TOTALS
+    CALCULATE_BASKET_TOTALS, CREATE_BASKET_PAYMENT_INTENT
 } from '../types';
 import {uuid} from "uuidv4";
 
@@ -27,6 +27,12 @@ const reducer = (state, action) => {
                 loading: false
             }
         case UPDATE_BASKET:
+            return {
+                ...state,
+                basket: action.payload,
+                loading: false
+            };
+        case CREATE_BASKET_PAYMENT_INTENT:
             return {
                 ...state,
                 basket: action.payload,

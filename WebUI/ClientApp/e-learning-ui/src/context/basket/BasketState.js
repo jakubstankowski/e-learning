@@ -106,15 +106,14 @@ function BasketState(props) {
     const createBasketPaymentIntent = async (basketId) => {
         await navigate('/checkout');
 
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}/payments/${basketId}`, {
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/payments/${basketId}`, {
             basketId: basketId
         })
 
         dispatch({
             type: CREATE_BASKET_PAYMENT_INTENT,
+            payload: res.data
         });
-
-        return response.data;
     }
 
     const setLoading = () => dispatch({type: SET_LOADING});
