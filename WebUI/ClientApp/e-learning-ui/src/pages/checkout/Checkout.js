@@ -71,6 +71,8 @@ export default function Checkout() {
         try {
             await postOrder(basket.id);
 
+            console.log('basket', basket);
+
             const {paymentIntent} = await stripe.confirmCardPayment(
                 basket.clientSecret,
                 {

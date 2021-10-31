@@ -48,7 +48,7 @@ function CoursesState(props) {
     const getUserCourses = async () => {
         setLoading();
 
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/user/courses`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/courses/user`);
         dispatch({
             type: GET_USER_COURSES,
             payload: res.data

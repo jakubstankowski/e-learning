@@ -74,11 +74,11 @@ namespace E_Learning.Application.Services
             var order = new Order(items, userEmail, userId, subTotal, basket.PaymentIntentId);
 
 
-            if (existingOrder != null)
+          /*  if (existingOrder != null)
             {
                 _context.Orders.Remove(order);
                 await _paymentService.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
-            }
+            }*/
 
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();

@@ -9,7 +9,6 @@ import EditLesson from "./components/lessons/EditLesson";
 import CoursesState from "./context/courses/CoursesState";
 import LessonsState from "./context/lessons/LessonsState";
 import BasketState from './context/basket/BasketState';
-import PaymentsState from "./context/payments/PaymentsState";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import AuthState from "./context/auth/AuthState";
@@ -32,7 +31,6 @@ function App() {
                 <CoursesState>
                     <BasketState>
                         <OrderState>
-                            <PaymentsState>
                                 <LessonsState>
                                     <Header title="E-Learning"/>
                                     <Router>
@@ -56,7 +54,6 @@ function App() {
                                     </Router>
                                     <Footer title="Stantech"/>
                                 </LessonsState>
-                            </PaymentsState>
                         </OrderState>
                     </BasketState>
                 </CoursesState>
