@@ -21,7 +21,9 @@ function BasketState(props) {
         basket: {
             id: uuid(),
             items: [],
-            subTotal: null
+            subTotal: null,
+            clientSecret: '',
+            paymentIntentId: ''
         },
         loading: false
     }
@@ -104,8 +106,6 @@ function BasketState(props) {
     }
 
     const createBasketPaymentIntent = async (basketId) => {
-        await navigate('/checkout');
-
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/payments/${basketId}`, {
             basketId: basketId
         })
@@ -114,6 +114,8 @@ function BasketState(props) {
             type: CREATE_BASKET_PAYMENT_INTENT,
             payload: res.data
         });
+
+        await navigate('/checkout');
     }
 
     const setLoading = () => dispatch({type: SET_LOADING});
