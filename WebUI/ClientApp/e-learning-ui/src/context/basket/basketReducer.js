@@ -33,12 +33,11 @@ const reducer = (state, action) => {
                 loading: false
             };
         case CREATE_BASKET_PAYMENT_INTENT:
+            state.basket.paymentIntentId = action.payload.paymentIntentId;
+            state.basket.clientSecret = action.payload.clientSecret;
+
             return {
                 ...state,
-                basket: {
-                    paymentIntentId: action.payload.paymentIntentId,
-                    clientSecret: action.payload.clientSecret
-                },
                 loading: false
             };
         case REMOVE_ITEM_FROM_BASKET: {
