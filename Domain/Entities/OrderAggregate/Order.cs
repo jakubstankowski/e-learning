@@ -37,5 +37,10 @@ namespace E_Learning.Domain.Entities.OrderAggregate
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
         public string PaymentIntentId { get; set; }
+
+        public static implicit operator global::Stripe.Order(Order v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

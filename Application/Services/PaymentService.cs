@@ -79,7 +79,7 @@ namespace E_Learning.Application.Services
             return order;
         }
 
-        async Task<Domain.Entities.OrderAggregate.Order> IPaymentService.UpdateOrderPaymentSuccess(string paymentIntentId)
+        async Task<Domain.Entities.OrderAggregate.Order> IPaymentService.UpdateOrderPaymentSucceeded(string paymentIntentId)
         {
             var order = await _orderService.GetOrderByPaymentIntentAsync(paymentIntentId);
 

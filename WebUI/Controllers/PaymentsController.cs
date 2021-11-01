@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
+using E_Learning.Domain.Entities.OrderAggregate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,7 +16,7 @@ namespace E_Learning.Controllers
     {
         private readonly IPaymentService _paymentService;
         private readonly ILogger<PaymentsController> _logger;
-        const string ENDPOINT_SECRET = "whsec_jb8roI0tP4UREYhL8DsrzXNOaipeXr5W";
+        const string ENDPOINT_SECRET = "";
 
         public PaymentsController(IPaymentService paymentService, ILogger<PaymentsController> logger)
         {
@@ -42,26 +43,24 @@ namespace E_Learning.Controllers
                     Request.Headers["Stripe-Signature"], ENDPOINT_SECRET);
 
                 PaymentIntent intent;
-                Order order;
+                Domain.Entities.OrderAggregate.Order order;
 
                 // Handle the event
                 if (stripeEvent.Type == Events.PaymentIntentPaymentFailed)
                 {
+                    intent = (PaymentIntent)stripeEvent.Data.Object;
                     _logger.LogInformation("Payment Failed");
+                    order = await _paymentService.UpdateOrderPaymentSucceeded(intent.Id);
+                    _logger.LogInformation("Order updated to payment received: ", order.Id);
                 }
                 else if (stripeEvent.Type == Events.PaymentIntentSucceeded)
                 {
                     intent = (PaymentIntent)stripeEvent.Data.Object;
                     _logger.LogInformation("Payment Succeeded");
-                    //order = await _paymentService.UpdateOrderPaymentSucceeded(intent.Id);
-                   // _logger.LogInformation("Order updated to payment received: ", order.Id);
+                    order = await _paymentService.UpdateOrderPaymentSucceeded(intent.Id);
+                    _logger.LogInformation("Order updated to payment received: ", order.Id);
                 }
-                // ... handle other event types
-                else
-                {
-
-                }
-
+             
                 return Ok();
             }
             catch (StripeException e)
