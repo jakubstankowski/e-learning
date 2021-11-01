@@ -62,5 +62,15 @@ namespace E_Learning.Application.Services
 
             return basket;
         }
+
+        public Task<Order> UpdateOrderPaymentFailed(string paymentIntentId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<Order> UpdateOrderPaymentSuccess(string paymentIntentId)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

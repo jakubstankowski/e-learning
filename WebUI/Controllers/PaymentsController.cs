@@ -41,6 +41,9 @@ namespace E_Learning.Controllers
                 var stripeEvent = EventUtility.ConstructEvent(json,
                     Request.Headers["Stripe-Signature"], ENDPOINT_SECRET);
 
+                PaymentIntent intent;
+                Order order;
+
                 // Handle the event
                 if (stripeEvent.Type == Events.PaymentIntentPaymentFailed)
                 {
@@ -48,7 +51,10 @@ namespace E_Learning.Controllers
                 }
                 else if (stripeEvent.Type == Events.PaymentIntentSucceeded)
                 {
+                    intent = (PaymentIntent)stripeEvent.Data.Object;
                     _logger.LogInformation("Payment Succeeded");
+                    //order = await _paymentService.UpdateOrderPaymentSucceeded(intent.Id);
+                   // _logger.LogInformation("Order updated to payment received: ", order.Id);
                 }
                 // ... handle other event types
                 else
