@@ -56,7 +56,9 @@ const reducer = (state, action) => {
                 basket: {
                     id: uuid(),
                     items: [],
-                    totalCount: null
+                    totalCount: null,
+                    paymentIntentId: '',
+                    clientSecret: ''
                 }
             };
         case CALCULATE_BASKET_TOTALS:
