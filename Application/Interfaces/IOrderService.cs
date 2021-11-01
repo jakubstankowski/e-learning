@@ -18,5 +18,9 @@ namespace E_Learning.Application.Interfaces
         public Task DeleteOrderByIdAsync(int id);
 
         public Task<Order> GetOrderByPaymentIntentAsync(string paymentId);
+
+        public Task<Order> UpdateOrderAsync(Order order);
+
+        public Task<bool> SaveChangesAsync();
     }
 }

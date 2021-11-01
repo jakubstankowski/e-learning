@@ -114,5 +114,15 @@ namespace E_Learning.Application.Services
 
             return _mapper.Map<IEnumerable<Order>, IEnumerable<OrderDto>>(orders);
         }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync() >= 0);
+        }
+
+        public Task<Order> UpdateOrderAsync(Order order)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

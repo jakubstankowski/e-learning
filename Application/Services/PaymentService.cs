@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
+using E_Learning.Domain.Entities.OrderAggregate;
 using Microsoft.Extensions.Configuration;
 using Stripe;
 
@@ -13,11 +14,13 @@ namespace E_Learning.Application.Services
     {
         private readonly IConfiguration _configuration;
         private readonly IBasketService _basketService;
+        private readonly IOrderService _orderService;
 
-        public PaymentService(IConfiguration configuration, IBasketService basketService)
+        public PaymentService(IConfiguration configuration, IBasketService basketService, IOrderService orderService)
         {
             _configuration = configuration;
             _basketService = basketService;
+            _orderService = orderService;
         }
 
         public async Task<CustomerBasket> CreateOrUpdatePaymentIntent(string basketId)
@@ -63,14 +66,30 @@ namespace E_Learning.Application.Services
             return basket;
         }
 
-        public Task<Order> UpdateOrderPaymentFailed(string paymentIntentId)
+       async Task<Domain.Entities.OrderAggregate.Order> IPaymentService.UpdateOrderPaymentFailed(string paymentIntentId)
         {
-            throw new System.NotImplementedException();
+            var order = await _orderService.GetOrderByPaymentIntentAsync(paymentIntentId);
+
+            if (order == null) return null;
+
+            order.Status = OrderStatus.PaymentFailed;
+
+            await _orderService.SaveChangesAsync();
+
+            return order;
         }
 
-        public Task<Order> UpdateOrderPaymentSuccess(string paymentIntentId)
+        async Task<Domain.Entities.OrderAggregate.Order> IPaymentService.UpdateOrderPaymentSuccess(string paymentIntentId)
         {
-            throw new System.NotImplementedException();
+            var order = await _orderService.GetOrderByPaymentIntentAsync(paymentIntentId);
+
+            if (order == null) return null;
+
+            order.Status = OrderStatus.PaymentRecevied;
+
+            await _orderService.SaveChangesAsync();
+
+            return order;
         }
     }
 }
