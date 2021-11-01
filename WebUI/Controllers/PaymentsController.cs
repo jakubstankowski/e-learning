@@ -5,6 +5,7 @@ using E_Learning.Domain.Entities;
 using E_Learning.Domain.Entities.OrderAggregate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Stripe;
 
@@ -16,12 +17,15 @@ namespace E_Learning.Controllers
     {
         private readonly IPaymentService _paymentService;
         private readonly ILogger<PaymentsController> _logger;
-        const string ENDPOINT_SECRET = "";
+        private readonly IConfiguration _configuration;
+        private readonly string _whSecret;
 
-        public PaymentsController(IPaymentService paymentService, ILogger<PaymentsController> logger)
+        public PaymentsController(IPaymentService paymentService, ILogger<PaymentsController> logger, IConfiguration configuration)
         {
             _paymentService = paymentService;
             _logger = logger;
+            _configuration = configuration;
+            _whSecret = _configuration["StripeSettings:EndpointSecret"];
         }
 
         [Authorize]
@@ -40,7 +44,7 @@ namespace E_Learning.Controllers
             try
             {
                 var stripeEvent = EventUtility.ConstructEvent(json,
-                    Request.Headers["Stripe-Signature"], ENDPOINT_SECRET);
+                    Request.Headers["Stripe-Signature"], _whSecret);
 
                 PaymentIntent intent;
                 Domain.Entities.OrderAggregate.Order order;
