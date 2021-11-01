@@ -4,6 +4,7 @@ using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Stripe;
 
 namespace E_Learning.Controllers
@@ -13,11 +14,13 @@ namespace E_Learning.Controllers
     public class PaymentsController : ControllerBase
     {
         private readonly IPaymentService _paymentService;
+        private readonly ILogger<PaymentsController> _logger;
         const string ENDPOINT_SECRET = "whsec_jb8roI0tP4UREYhL8DsrzXNOaipeXr5W";
 
-        public PaymentsController(IPaymentService paymentService)
+        public PaymentsController(IPaymentService paymentService, ILogger<PaymentsController> logger)
         {
             _paymentService = paymentService;
+            _logger = logger;
         }
 
         [Authorize]
@@ -41,9 +44,11 @@ namespace E_Learning.Controllers
                 // Handle the event
                 if (stripeEvent.Type == Events.PaymentIntentPaymentFailed)
                 {
+                    _logger.LogInformation("Payment Failed");
                 }
                 else if (stripeEvent.Type == Events.PaymentIntentSucceeded)
                 {
+                    _logger.LogInformation("Payment Succeeded");
                 }
                 // ... handle other event types
                 else
