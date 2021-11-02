@@ -74,11 +74,11 @@ namespace E_Learning.Application.Services
             var order = new Order(items, userEmail, userId, subTotal, basket.PaymentIntentId);
 
 
-            /*  if (existingOrder != null)
-              {
-                  _context.Orders.Remove(order);
-                  await _paymentService.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
-              }*/
+            if (existingOrder != null)
+            {
+                _context.Orders.Remove(order);
+                await _paymentService.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
+            }
 
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
@@ -98,8 +98,8 @@ namespace E_Learning.Application.Services
 
         public Task<Order> GetOrderByPaymentIntentAsync(string paymentId)
         {
-           return  _context.Orders.Where(o => o.PaymentIntentId == paymentId)
-                .FirstOrDefaultAsync();
+            return _context.Orders.Where(o => o.PaymentIntentId == paymentId)
+                 .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<OrderDto>> GetOrdersByUserAsync()
@@ -120,9 +120,5 @@ namespace E_Learning.Application.Services
             return (await _context.SaveChangesAsync() >= 0);
         }
 
-        public Task<Order> UpdateOrderAsync(Order order)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
