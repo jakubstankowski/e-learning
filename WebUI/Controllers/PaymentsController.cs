@@ -41,36 +41,31 @@ namespace E_Learning.Controllers
         public async Task<ActionResult> StripeWebhook()
         {
             var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
-            try
-            {
-                var stripeEvent = EventUtility.ConstructEvent(json,
-                    Request.Headers["Stripe-Signature"], _whSecret);
 
-                PaymentIntent intent;
-                Domain.Entities.OrderAggregate.Order order;
+            var stripeEvent = EventUtility.ConstructEvent(json,
+                Request.Headers["Stripe-Signature"], _whSecret);
 
-                // Handle the event
-                if (stripeEvent.Type == Events.PaymentIntentPaymentFailed)
-                {
-                    intent = (PaymentIntent)stripeEvent.Data.Object;
-                    _logger.LogInformation("Payment Failed");
-                    order = await _paymentService.UpdateOrderPaymentSucceeded(intent.Id);
-                    _logger.LogInformation("Order updated to payment received: ", order.Id);
-                }
-                else if (stripeEvent.Type == Events.PaymentIntentSucceeded)
-                {
-                    intent = (PaymentIntent)stripeEvent.Data.Object;
-                    _logger.LogInformation("Payment Succeeded");
-                    order = await _paymentService.UpdateOrderPaymentSucceeded(intent.Id);
-                    _logger.LogInformation("Order updated to payment received: ", order.Id);
-                }
-             
-                return Ok();
-            }
-            catch (StripeException e)
+            PaymentIntent intent;
+            Domain.Entities.OrderAggregate.Order order;
+
+            // Handle the event
+            if (stripeEvent.Type == Events.PaymentIntentPaymentFailed)
             {
-                return BadRequest();
+                intent = (PaymentIntent)stripeEvent.Data.Object;
+                _logger.LogInformation("Payment Failed");
+                order = await _paymentService.UpdateOrderPaymentSucceeded(intent.Id);
+                _logger.LogInformation("Order updated to payment received: ", order.Id);
             }
+            else if (stripeEvent.Type == Events.PaymentIntentSucceeded)
+            {
+                intent = (PaymentIntent)stripeEvent.Data.Object;
+                _logger.LogInformation("Payment Succeeded");
+                order = await _paymentService.UpdateOrderPaymentSucceeded(intent.Id);
+                _logger.LogInformation("Order updated to payment received: ", order.Id);
+            }
+
+            return Ok();
+
         }
     }
 }

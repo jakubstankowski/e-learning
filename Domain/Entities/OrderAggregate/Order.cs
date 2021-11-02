@@ -38,9 +38,5 @@ namespace E_Learning.Domain.Entities.OrderAggregate
 
         public string PaymentIntentId { get; set; }
 
-        public static implicit operator global::Stripe.Order(Order v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
