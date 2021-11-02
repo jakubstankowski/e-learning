@@ -19,7 +19,9 @@ namespace E_Learning.Application.Interfaces
 
         public Task<Order> GetOrderByPaymentIntentAsync(string paymentId);
 
+        public Task<Order> UpdateOrderPaymentFailed(string paymentIntentId);
 
-        public Task<bool> SaveChangesAsync();
+        public Task<Order> UpdateOrderPaymentSucceeded(string paymentIntentId);
+     
     }
 }

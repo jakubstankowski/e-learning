@@ -8,8 +8,5 @@ namespace E_Learning.Application.Interfaces
     {
         public Task<CustomerBasket> CreateOrUpdatePaymentIntent(string basketId);
 
-        public Task<Order> UpdateOrderPaymentFailed(string paymentIntentId);
-
-        public Task<Order> UpdateOrderPaymentSucceeded(string paymentIntentId);
     }
 }

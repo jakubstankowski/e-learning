@@ -14,13 +14,11 @@ namespace E_Learning.Application.Services
     {
         private readonly IConfiguration _configuration;
         private readonly IBasketService _basketService;
-        private readonly IOrderService _orderService;
 
-        public PaymentService(IConfiguration configuration, IBasketService basketService, IOrderService orderService)
+        public PaymentService(IConfiguration configuration, IBasketService basketService)
         {
             _configuration = configuration;
             _basketService = basketService;
-            _orderService = orderService;
         }
 
         public async Task<CustomerBasket> CreateOrUpdatePaymentIntent(string basketId)
@@ -66,30 +64,5 @@ namespace E_Learning.Application.Services
             return basket;
         }
 
-       async Task<Domain.Entities.OrderAggregate.Order> IPaymentService.UpdateOrderPaymentFailed(string paymentIntentId)
-        {
-            var order = await _orderService.GetOrderByPaymentIntentAsync(paymentIntentId);
-
-            if (order == null) return null;
-
-            order.Status = OrderStatus.PaymentFailed;
-
-            await _orderService.SaveChangesAsync();
-
-            return order;
-        }
-
-        async Task<Domain.Entities.OrderAggregate.Order> IPaymentService.UpdateOrderPaymentSucceeded(string paymentIntentId)
-        {
-            var order = await _orderService.GetOrderByPaymentIntentAsync(paymentIntentId);
-
-            if (order == null) return null;
-
-            order.Status = OrderStatus.PaymentRecevied;
-
-            await _orderService.SaveChangesAsync();
-
-            return order;
-        }
     }
 }

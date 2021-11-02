@@ -16,13 +16,15 @@ namespace E_Learning.Controllers
     public class PaymentsController : ControllerBase
     {
         private readonly IPaymentService _paymentService;
+        private readonly IOrderService _orderService;
         private readonly ILogger<PaymentsController> _logger;
         private readonly IConfiguration _configuration;
         private readonly string _whSecret;
 
-        public PaymentsController(IPaymentService paymentService, ILogger<PaymentsController> logger, IConfiguration configuration)
+        public PaymentsController(IPaymentService paymentService, IOrderService orderService, ILogger<PaymentsController> logger, IConfiguration configuration)
         {
             _paymentService = paymentService;
+            _orderService = orderService;
             _logger = logger;
             _configuration = configuration;
             _whSecret = _configuration["StripeSettings:EndpointSecret"];
@@ -46,22 +48,19 @@ namespace E_Learning.Controllers
                 Request.Headers["Stripe-Signature"], _whSecret);
 
             PaymentIntent intent;
-            Domain.Entities.OrderAggregate.Order order;
 
             // Handle the event
             if (stripeEvent.Type == Events.PaymentIntentPaymentFailed)
             {
                 intent = (PaymentIntent)stripeEvent.Data.Object;
                 _logger.LogInformation("Payment Failed");
-                order = await _paymentService.UpdateOrderPaymentSucceeded(intent.Id);
-                _logger.LogInformation("Order updated to payment received: ", order.Id);
+                await _orderService.UpdateOrderPaymentSucceeded(intent.Id);
             }
             else if (stripeEvent.Type == Events.PaymentIntentSucceeded)
             {
                 intent = (PaymentIntent)stripeEvent.Data.Object;
                 _logger.LogInformation("Payment Succeeded");
-                order = await _paymentService.UpdateOrderPaymentSucceeded(intent.Id);
-                _logger.LogInformation("Order updated to payment received: ", order.Id);
+                await _orderService.UpdateOrderPaymentFailed(intent.Id);
             }
 
             return Ok();
