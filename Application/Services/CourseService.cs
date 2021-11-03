@@ -166,6 +166,8 @@ namespace E_Learning.Application.Services
             string userId = _identityService.GetUserId();
             var user = await _userManager.FindByIdAsync(userId);
 
+
+
             var userCourses = new UserCourses
             {
                 Course = course,

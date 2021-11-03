@@ -22,6 +22,8 @@ namespace E_Learning.Application.Interfaces
         public Task<Order> UpdateOrderPaymentFailed(string paymentIntentId);
 
         public Task<Order> UpdateOrderPaymentSucceeded(string paymentIntentId);
-     
+
+        public Task<Order> GetOrderByCourseIdAndUserId(int courseId, string userId);
+
     }
 }

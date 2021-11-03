@@ -74,11 +74,11 @@ namespace E_Learning.Application.Services
             var order = new Order(items, userEmail, userId, subTotal, basket.PaymentIntentId);
 
 
-              if (existingOrder != null)
-              {
-                  _context.Orders.Remove(order);
-                  await _paymentService.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
-              }
+            if (existingOrder != null)
+            {
+                _context.Orders.Remove(order);
+                await _paymentService.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
+            }
 
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
@@ -96,10 +96,26 @@ namespace E_Learning.Application.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task<Order> GetOrderByCourseIdAndUserId(int courseId, string userId)
+        {
+            var userOrders = await _context.Orders.Where(o => o.BuyerId == userId)
+                .Include(o => o.OrderItems)
+                .ToListAsync();
+
+            Order order = new();
+            
+            foreach (var userOrder in userOrders)
+            {
+
+            }
+
+            return order;
+        }
+
         public Task<Order> GetOrderByPaymentIntentAsync(string paymentId)
         {
-           return  _context.Orders.Where(o => o.PaymentIntentId == paymentId)
-                .FirstOrDefaultAsync();
+            return _context.Orders.Where(o => o.PaymentIntentId == paymentId)
+                 .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<OrderDto>> GetOrdersByUserAsync()
