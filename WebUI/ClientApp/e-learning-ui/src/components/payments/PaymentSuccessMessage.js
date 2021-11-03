@@ -3,6 +3,7 @@ import {Cancel, CheckCircle} from "@material-ui/icons";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import React from "react";
+import {Link} from "@reach/router";
 
 
 export default function PaymentSuccessMessage(props){
@@ -19,11 +20,13 @@ export default function PaymentSuccessMessage(props){
             <Typography variant="subtitle1" gutterBottom component="div">
                 {message}
             </Typography>
-            <Button color="secondary"
-                    variant="contained"
-                    style={{marginTop: '1rem'}}>
-                Go to first lesson
-            </Button>
+            <Link to="/user/my-courses">
+                <Button color="secondary"
+                        variant="contained"
+                        style={{marginTop: '1rem'}}>
+                    Go to my courses
+                </Button>
+            </Link>
         </Box>
     )
 }
