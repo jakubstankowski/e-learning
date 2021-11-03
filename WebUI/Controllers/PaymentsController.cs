@@ -44,27 +44,34 @@ namespace E_Learning.Controllers
         {
             var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
 
-            var stripeEvent = EventUtility.ConstructEvent(json,
-                Request.Headers["Stripe-Signature"], _whSecret);
 
-            PaymentIntent intent;
-
-            // Handle the event
-            if (stripeEvent.Type == Events.PaymentIntentPaymentFailed)
+            try
             {
-                intent = (PaymentIntent)stripeEvent.Data.Object;
-                _logger.LogInformation("Payment Failed");
-                await _orderService.UpdateOrderPaymentSucceeded(intent.Id);
+                var stripeEvent = EventUtility.ConstructEvent(json,
+                               Request.Headers["Stripe-Signature"], _whSecret);
+
+                PaymentIntent intent;
+
+                // Handle the event
+                if (stripeEvent.Type == Events.PaymentIntentPaymentFailed)
+                {
+                    intent = (PaymentIntent)stripeEvent.Data.Object;
+                    _logger.LogInformation("Payment Failed");
+                    await _orderService.UpdateOrderPaymentSucceeded(intent.Id);
+                }
+                else if (stripeEvent.Type == Events.PaymentIntentSucceeded)
+                {
+                    intent = (PaymentIntent)stripeEvent.Data.Object;
+                    _logger.LogInformation("Payment Succeeded");
+                    await _orderService.UpdateOrderPaymentFailed(intent.Id);
+                }
+
+                return Ok();
             }
-            else if (stripeEvent.Type == Events.PaymentIntentSucceeded)
+            catch (StripeException e)
             {
-                intent = (PaymentIntent)stripeEvent.Data.Object;
-                _logger.LogInformation("Payment Succeeded");
-                await _orderService.UpdateOrderPaymentFailed(intent.Id);
+                return BadRequest(e);
             }
-
-            return Ok();
-
         }
     }
 }
