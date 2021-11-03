@@ -19,7 +19,7 @@ import Basket from "./pages/basket/Basket";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import NotFound from "./pages/NotFound";
-import User from "./pages/user/User";
+import UserCourses from "./pages/user/UserCourses";
 import OrderState from "./context/order/OrderState";
 import Order from "./pages/order/Order";
 import Layout from "./components/layout/Layout";
@@ -46,7 +46,7 @@ function App() {
                                             <Register path="/register"/>
                                             <Basket path="/basket"/>
                                             <Checkout path="/checkout"/>
-                                            <User path="/user"/>
+                                            <UserCourses path="/user/my-courses"/>
                                             <Dashboard path="/dashboard"/>
                                             <Order path="/order"/>
                                             <NotFound path="*"/>

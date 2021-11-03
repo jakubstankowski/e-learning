@@ -4,7 +4,7 @@ import CoursesContext from "../../context/courses/coursesContext";
 import AuthContext from "../../context/auth/authContext";
 import Courses from "../../components/courses/Courses";
 
-export default function User() {
+export default function UserCourses() {
     const coursesContext = useContext(CoursesContext);
     const {getUserCourses, courses, resetCourses} = coursesContext;
 
