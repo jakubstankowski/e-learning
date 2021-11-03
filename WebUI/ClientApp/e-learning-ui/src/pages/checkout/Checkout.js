@@ -71,8 +71,6 @@ export default function Checkout() {
         try {
             await postOrder(basket.id);
 
-            console.log('basket', basket);
-
             const {paymentIntent} = await stripe.confirmCardPayment(
                 basket.clientSecret,
                 {
@@ -87,7 +85,7 @@ export default function Checkout() {
 
             if (paymentIntent) {
                 setSuccessMessage('Payment Success!');
-                deleteBasket(basket.id);
+                await deleteBasket(basket.id);
             }
 
         } catch (error) {

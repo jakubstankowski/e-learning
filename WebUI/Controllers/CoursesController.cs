@@ -57,6 +57,15 @@ namespace E_Learning.Controllers
             return Ok(course);
         }
 
+        [Authorize]
+        [HttpPost("User/{id}")]
+        public async Task<ActionResult> AddUserCourses(int id)
+        {
+            await _courseService.AddUserCourses(id);
+
+            return Ok();
+        }
+
 
         [HttpGet("{id}/Lessons")]
         public async Task<ActionResult<IEnumerable<LessonDto>>> GetCourseLessons(int id)
