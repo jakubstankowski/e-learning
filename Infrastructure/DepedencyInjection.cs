@@ -17,7 +17,8 @@ namespace Infrastructure
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ILessonService, LessonService>();
             services.AddScoped<IOrderService, OrderService>();
-            services.AddTransient<IPaymentService, PaymentService>();
+            services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<IUserCourseService, UserCourseService>();
 
             return services;
         }
