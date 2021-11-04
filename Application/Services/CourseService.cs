@@ -31,7 +31,7 @@ namespace E_Learning.Application.Services
             _userManager = userManager;
         }
 
-        public async Task<IEnumerable<CourseDto>> CreateCourseAsync(CourseDto courseDto)
+        public async Task<IEnumerable<Course>> CreateCourseAsync(CourseDto courseDto)
         {
             var course = new Course
             {
@@ -46,10 +46,10 @@ namespace E_Learning.Application.Services
 
             var courses = await _context.Courses.ToListAsync();
 
-            return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
+            return courses;
         }
 
-        public async Task<IEnumerable<CourseDto>> DeleteCourseAsync(int courseId)
+        public async Task<IEnumerable<Course>> DeleteCourseAsync(int courseId)
         {
             var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == courseId);
 
@@ -62,19 +62,15 @@ namespace E_Learning.Application.Services
 
             await _context.SaveChangesAsync();
 
-            var courses = await _context.Courses.ToListAsync();
-
-            return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
+            return await _context.Courses.ToListAsync();
         }
 
-        public async Task<IEnumerable<CourseDto>> GetCoursesAsync()
+        public async Task<IEnumerable<Course>> GetCoursesAsync()
         {
-            var courses = await _context.Courses.ToListAsync();
-
-            return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
+            return await _context.Courses.ToListAsync();
         }
 
-        public async Task<CourseDto> GetCourseByIdAsync(int courseId)
+        public async Task<Course> GetCourseByIdAsync(int courseId)
         {
             var course = await _context
                          .Courses.FirstOrDefaultAsync(c => c.Id == courseId);
@@ -84,10 +80,10 @@ namespace E_Learning.Application.Services
                 throw new NotFoundException(nameof(Course), courseId);
             }
 
-            return _mapper.Map<Course, CourseDto>(course);
+            return course;
         }
 
-        public async Task<IEnumerable<LessonDto>> GetCourseLessonsAsync(int courseId)
+        public async Task<IEnumerable<Lesson>> GetCourseLessonsAsync(int courseId)
         {
             var course = await _context
                          .Courses.FirstOrDefaultAsync(c => c.Id == courseId);
@@ -97,19 +93,12 @@ namespace E_Learning.Application.Services
                 throw new NotFoundException(nameof(Course), courseId);
             }
 
-            var lessons = await _context.Lessons
+            return await _context.Lessons
                .Where(l => l.CourseId == courseId)
                .ToListAsync();
-
-            return _mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons);
         }
 
-        public async Task<bool> SaveChangesAsync()
-        {
-            return (await _context.SaveChangesAsync() >= 0);
-        }
-
-        public async Task<IEnumerable<CourseDto>> UpdateCourseAsync(CourseDto courseDto)
+        public async Task<IEnumerable<Course>> UpdateCourseAsync(CourseDto courseDto)
         {
             var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == courseDto.Id);
 
@@ -126,12 +115,10 @@ namespace E_Learning.Application.Services
 
             await _context.SaveChangesAsync();
 
-            var courses = await _context.Courses.ToListAsync();
-
-            return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
+           return await _context.Courses.ToListAsync();
         }
 
-        public async Task<IEnumerable<CourseDto>> GetUserCoursesAsync()
+        public async Task<IEnumerable<Course>> GetUserCoursesAsync()
         {
             string userId = _identityService.GetUserId();
 
@@ -150,36 +137,7 @@ namespace E_Learning.Application.Services
             }
 
 
-            return _mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(courses);
-        }
-
-        public async Task<UserCoursesDto> AddUserCourses(int courseId)
-        {
-            var course = await _context
-                           .Courses.FirstOrDefaultAsync(c => c.Id == courseId);
-
-            if (course == null)
-            {
-                throw new NotFoundException(nameof(Course), courseId);
-            }
-
-            string userId = _identityService.GetUserId();
-            var user = await _userManager.FindByIdAsync(userId);
-
-
-
-            var userCourses = new UserCourses
-            {
-                Course = course,
-                IdentityUser = user
-            };
-
-            _context.UserCourses.Add(userCourses);
-
-            await _context.SaveChangesAsync();
-
-
-            return _mapper.Map<UserCourses, UserCoursesDto>(userCourses);
+            return courses;
         }
     }
 }
