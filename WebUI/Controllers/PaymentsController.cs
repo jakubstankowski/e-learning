@@ -57,15 +57,21 @@ namespace E_Learning.Controllers
                 if (stripeEvent.Type == Events.PaymentIntentPaymentFailed)
                 {
                     intent = (PaymentIntent)stripeEvent.Data.Object;
+
                     _logger.LogInformation("Payment Failed");
+
                     await _orderService.UpdateOrderPaymentFailed(intent.Id);
                 }
                 else if (stripeEvent.Type == Events.PaymentIntentSucceeded)
                 {
                     intent = (PaymentIntent)stripeEvent.Data.Object;
+
                     _logger.LogInformation("Payment Succeeded");
+
                     var succedPaymentOrder = await _orderService.UpdateOrderPaymentSucceeded(intent.Id);
+
                     await _userCourseService.AddUserCoursesFromOrderAsync(succedPaymentOrder);
+                    await _userCourseService.SaveChangesAsync();
                 }
 
                 return Ok();

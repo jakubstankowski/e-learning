@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using E_Learning.Application.ApplicationUser.Queries;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
@@ -25,24 +21,32 @@ namespace E_Learning.Application.Services
             _userManager = userManager;
         }
 
-        public async Task<UserCoursesDto> AddUserCoursesFromOrderAsync(Order order)
+        public async Task<UserCourses> AddUserCoursesFromOrderAsync(Order order)
         {
             string userId = order.BuyerId;
+
             var courseId = order.OrderItems
                 .Select(x => x.ItemOrdered.CourseId)
                 .FirstOrDefault();
 
             var course = await _courseService.GetCourseByIdAsync(courseId);
-            var user = await _userManager.FindByIdAsync(userId);
 
+            var user = await _userManager.FindByIdAsync(userId);
 
             var userCourses = new UserCourses()
             {
                 IdentityUser = user,
+                Course = course
             };
 
+            _context.UserCourses.Add(userCourses);
 
-            throw new NotImplementedException();
+            return userCourses;
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync() >= 0);
         }
     }
 }
