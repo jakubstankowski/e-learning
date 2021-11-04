@@ -110,7 +110,7 @@ namespace E_Learning.Controllers
                 return NotFound();
             }
 
-            await _courseService.DeleteCourseAsync(course);
+            _courseService.DeleteCourseAsync(course);
             await _courseService.SaveChangesAsync();
 
             return Ok();
