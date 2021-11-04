@@ -95,23 +95,6 @@ namespace E_Learning.Application.Services
 
             await _context.SaveChangesAsync();
         }
-
-        public async Task<Order> GetOrderByCourseIdAndUserIdAsync(int courseId, string userId)
-        {
-            var userOrders = await _context.Orders.Where(o => o.BuyerId == userId)
-                .Include(o => o.OrderItems)
-                .ToListAsync();
-
-            Order order = new();
-
-            foreach (var userOrder in userOrders)
-            {
-                //TODO: get user order and check it if is payment success
-            }
-
-            return order;
-        }
-
         public Task<Order> GetOrderByPaymentIntentAsync(string paymentId)
         {
             return _context.Orders.Where(o => o.PaymentIntentId == paymentId)

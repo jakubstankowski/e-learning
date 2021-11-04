@@ -23,7 +23,6 @@ namespace E_Learning.Application.Interfaces
 
         public Task<Order> UpdateOrderPaymentSucceeded(string paymentIntentId);
 
-        public Task<Order> GetOrderByCourseIdAndUserIdAsync(int courseId, string userId);
 
     }
 }

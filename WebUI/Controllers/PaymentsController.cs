@@ -62,7 +62,8 @@ namespace E_Learning.Controllers
                 {
                     intent = (PaymentIntent)stripeEvent.Data.Object;
                     _logger.LogInformation("Payment Succeeded");
-                    await _orderService.UpdateOrderPaymentSucceeded(intent.Id);
+                   var succedPaymentOrder = await _orderService.UpdateOrderPaymentSucceeded(intent.Id);
+
                 }
 
                 return Ok();
