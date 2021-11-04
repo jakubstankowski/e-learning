@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using E_Learning.Application.Common.Dto;
 using E_Learning.Application.Common.Exceptions;
+using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Interfaces;
 using E_Learning.Application.Lessons.Queries.GetLessons;
 using E_Learning.Domain.Entities;
@@ -15,10 +17,14 @@ namespace E_Learning.Controllers
     public class CoursesController : ControllerBase
     {
         private readonly ICourseService _courseService;
+        private readonly IMapper _mapper;
+        private readonly IIdentityService _identityService;
 
-        public CoursesController(ICourseService courseService)
+        public CoursesController(ICourseService courseService, IMapper mapper, IIdentityService identityService)
         {
             _courseService = courseService;
+            _mapper = mapper;
+            _identityService = identityService;
         }
 
 
@@ -27,44 +33,43 @@ namespace E_Learning.Controllers
         {
             var course = await _courseService.GetCourseByIdAsync(id);
 
-            return Ok(course);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return _mapper.Map<Course, CourseDto>(course);
         }
 
         [HttpGet("Home")]
-        public async Task<ActionResult<CourseDto>> GetHomeCourses()
+        public async Task<ActionResult<IEnumerable<CourseDto>>> GetHomeCourses()
         {
             var course = await _courseService.GetCoursesAsync();
 
-            return Ok(course);
+            return Ok(_mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(course));
         }
 
 
         [Authorize(Roles = "Admin")]
         [HttpGet("Admin")]
-        public async Task<ActionResult<CourseDto>> GetAdminCourses()
+        public async Task<ActionResult<IEnumerable<CourseDto>>> GetAdminCourses()
         {
             var course = await _courseService.GetCoursesAsync();
 
-            return Ok(course);
+            return Ok(_mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(course));
         }
 
         [Authorize]
         [HttpGet("User")]
-        public async Task<ActionResult<CourseDto>> GetUserCourses()
+        public async Task<ActionResult<IEnumerable<CourseDto>>> GetUserCourses()
         {
-            var course = await _courseService.GetUserCoursesAsync();
+            string userId = _identityService.GetUserId();
 
-            return Ok(course);
+            var course = await _courseService.GetCourseByUserIdAsync(userId);
+
+            return Ok(_mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(course));
         }
 
-        [Authorize]
-        [HttpPost("User/{id}")]
-        public async Task<ActionResult> AddUserCourses(int id)
-        {
-            await _courseService.AddUserCourses(id);
-
-            return Ok();
-        }
 
 
         [HttpGet("{id}/Lessons")]
@@ -72,32 +77,59 @@ namespace E_Learning.Controllers
         {
             var courseLessons = await _courseService.GetCourseLessonsAsync(id);
 
-            return Ok(courseLessons);
+            return Ok(_mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(courseLessons));
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<IEnumerable<CourseDto>>> CreateCourse(CourseDto courseDto)
         {
-            var course = await _courseService.CreateCourseAsync(courseDto);
+            var courseToCreate = new Course
+            {
+                Title = courseDto.Title,
+                Description = courseDto.Description,
+                Price = courseDto.Price,
+                ImageUrl = courseDto.ImageUrl
+            };
 
-            return Ok(course);
+            var courses = await _courseService.CreateCourseAsync(courseToCreate);
+
+            await _courseService.SaveChangesAsync();
+
+            return Ok(courses);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
-        public async Task<ActionResult<int>> DeleteCourse(int id)
+        public async Task<ActionResult> DeleteCourse(int id)
         {
-            await _courseService.DeleteCourseAsync(id);
+            var course = await _courseService.GetCourseByIdAsync(id);
+
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            await _courseService.DeleteCourseAsync(course);
+            await _courseService.SaveChangesAsync();
 
             return Ok();
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
-        public async Task<ActionResult<CourseDto>> UpdateCourse(CourseDto courseDto)
+        public async Task<ActionResult<CourseDto>> UpdateCourse(int id, CourseDto courseDto)
         {
-            var updatedCourse = await _courseService.UpdateCourseAsync(courseDto);
+            var course = await _courseService.GetCourseByIdAsync(id);
+
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            var updatedCourse = await _courseService.UpdateCourseAsync(course, courseDto);
+
+            await _courseService.SaveChangesAsync();
 
             return Ok(updatedCourse);
         }

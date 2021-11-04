@@ -7,19 +7,20 @@ namespace E_Learning.Application.Interfaces
 {
     public interface ICourseService
     {
-        public Task<IEnumerable<Course>> CreateCourseAsync(CourseDto courseDto);
+        public Task<IEnumerable<Course>> CreateCourseAsync(Course course);
 
-        public Task<IEnumerable<Course>> UpdateCourseAsync(CourseDto courseDto);
+        public Task<IEnumerable<Course>> UpdateCourseAsync(Course course, CourseDto courseDto);
 
-        public Task<IEnumerable<Course>> DeleteCourseAsync(int courseId);
+        public void DeleteCourseAsync(Course course);
 
         public Task<IEnumerable<Course>> GetCoursesAsync();
 
-        public Task<IEnumerable<Course>> GetUserCoursesAsync();
+        public Task<IEnumerable<Course>> GetCourseByUserIdAsync(string userId);
 
         public Task<Course> GetCourseByIdAsync(int courseId);
 
         public Task<IEnumerable<Lesson>> GetCourseLessonsAsync(int courseId);
 
+        public Task<bool> SaveChangesAsync();
     }
 }

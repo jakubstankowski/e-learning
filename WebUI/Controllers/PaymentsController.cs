@@ -20,14 +20,16 @@ namespace E_Learning.Controllers
         private readonly ILogger<PaymentsController> _logger;
         private readonly IConfiguration _configuration;
         private readonly string _whSecret;
+        private readonly IUserCourseService _userCourseService;
 
-        public PaymentsController(IPaymentService paymentService, IOrderService orderService, ILogger<PaymentsController> logger, IConfiguration configuration)
+        public PaymentsController(IPaymentService paymentService, IOrderService orderService, ILogger<PaymentsController> logger, IConfiguration configuration, IUserCourseService userCourseService)
         {
             _paymentService = paymentService;
             _orderService = orderService;
             _logger = logger;
             _configuration = configuration;
             _whSecret = _configuration["StripeSettings:EndpointSecret"];
+            _userCourseService = userCourseService;
         }
 
         [Authorize]
@@ -62,9 +64,8 @@ namespace E_Learning.Controllers
                 {
                     intent = (PaymentIntent)stripeEvent.Data.Object;
                     _logger.LogInformation("Payment Succeeded");
-                   var succedPaymentOrder = await _orderService.UpdateOrderPaymentSucceeded(intent.Id);
-
-
+                    var succedPaymentOrder = await _orderService.UpdateOrderPaymentSucceeded(intent.Id);
+                    await _userCourseService.AddUserCoursesFromOrderAsync(succedPaymentOrder);
                 }
 
                 return Ok();
