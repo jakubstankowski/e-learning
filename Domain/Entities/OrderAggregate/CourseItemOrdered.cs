@@ -13,13 +13,13 @@ namespace E_Learning.Domain.Entities.OrderAggregate
 
         }
 
-        public CourseItemOrdered(int courseItemId, string courseTitle)
+        public CourseItemOrdered(int courseId, string courseTitle)
         {
-            this.CourseItemId = courseItemId;
+            this.CourseId = courseId;
             this.CourseTitle = courseTitle;
         }
 
-        public int CourseItemId { get; set; }
+        public int CourseId { get; set; }
 
         public string CourseTitle { get; set; }
 
