@@ -11,7 +11,7 @@ namespace E_Learning.Application.Interfaces
 {
     public interface IOrderService
     {
-        public Task<Order> CreateOrderAsync(string basketId);
+        public Task<Order> CreateOrderAsync(CustomerBasket basket);
 
         public Task<IEnumerable<OrderDto>> GetOrdersByUserAsync();
 
@@ -22,6 +22,8 @@ namespace E_Learning.Application.Interfaces
         public Task<Order> UpdateOrderPaymentFailed(string paymentIntentId);
 
         public Task<Order> UpdateOrderPaymentSucceeded(string paymentIntentId);
+
+        public Task<bool> SaveChangesAsync();
 
 
     }

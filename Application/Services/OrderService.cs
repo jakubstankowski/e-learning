@@ -14,50 +14,36 @@ namespace E_Learning.Application.Services
 {
     public class OrderService : IOrderService
     {
-        private readonly IBasketService _basketService;
         private readonly IContext _context;
         private readonly IIdentityService _identityService;
         private readonly IMapper _mapper;
         private readonly IPaymentService _paymentService;
+        private readonly ICourseService _courseService;
 
-        public OrderService(IBasketService basketService, IContext context, IIdentityService identityService,
-            IMapper mapper, IPaymentService paymentService)
+        public OrderService(IContext context, IIdentityService identityService,
+            IMapper mapper, IPaymentService paymentService, ICourseService courseService)
         {
-            _basketService = basketService;
             _context = context;
             _identityService = identityService;
             _mapper = mapper;
             _paymentService = paymentService;
+            _courseService = courseService;
         }
 
 
-        public async Task<Order> CreateOrderAsync(string basketId)
+        public async Task<Order> CreateOrderAsync(CustomerBasket basket)
         {
-            var basket = await _basketService.GetBasketByIdAsync(basketId);
-
-
-            if (basket == null)
-            {
-                throw new NotFoundException(nameof(CustomerBasket), basketId);
-            }
-
             var items = new List<OrderItem>();
 
             foreach (var item in basket.Items)
             {
-                var courseItem = await _context.Courses.FirstOrDefaultAsync(c => c.Id == item.Id);
-
-                if (courseItem == null)
-                {
-                    throw new NotFoundException(nameof(Course), item.Id);
-                }
+                var courseItem = await _courseService.GetCourseByIdAsync(item.Id);
 
                 var itemOrdered = new CourseItemOrdered(courseItem.Id, courseItem.Title);
 
                 var orderItem = new OrderItem(itemOrdered, courseItem.Price);
 
                 items.Add(orderItem);
-
             }
 
 
@@ -83,18 +69,19 @@ namespace E_Learning.Application.Services
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
-
             return order;
         }
 
-        public async Task DeleteOrderByIdAsync(int id)
+        public void DeleteOrder(Order order)
         {
-            var order = await _context.Orders.Where(o => o.Id == id).FirstOrDefaultAsync();
-
             _context.Orders.Remove(order);
-
-            await _context.SaveChangesAsync();
         }
+
+        public Task DeleteOrderByIdAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Task<Order> GetOrderByPaymentIntentAsync(string paymentId)
         {
             return _context.Orders.Where(o => o.PaymentIntentId == paymentId)
@@ -114,6 +101,10 @@ namespace E_Learning.Application.Services
             return _mapper.Map<IEnumerable<Order>, IEnumerable<OrderDto>>(orders);
         }
 
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync() >= 0);
+        }
 
         public async Task<Order> UpdateOrderPaymentFailed(string paymentIntentId)
         {
