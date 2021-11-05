@@ -136,7 +136,7 @@ namespace E_Learning.Controllers
 
             await _courseService.SaveChangesAsync();
 
-            return Ok(updatedCourse);
+            return Ok(_mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(updatedCourse));
         }
 
 

@@ -67,25 +67,42 @@ namespace E_Learning.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
-        public async Task<ActionResult<int>> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var result = await _lessonService.DeleteLessonByIdAsync(id);
+            var lesson = await _lessonService.GetLessonByIdAsync(id);
+
+            if (lesson == null)
+            {
+                return NotFound();
+            }
+
+            _lessonService.DeleteLesson(lesson);
 
             return Ok();
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
-        public async Task<ActionResult<LessonDto>> Update(int id, LessonDto lessonDto)
+        public async Task<ActionResult<LessonDto>> UpdateLesson(int id, LessonDto lessonDto)
         {
             if (id != lessonDto.Id)
             {
                 return BadRequest();
             }
 
-            var lesson = await _lessonService.UpdateLessonAsync(lessonDto);
+            var lesson = await _lessonService.GetLessonByIdAsync(id);
 
-            return Ok(lesson);
+            if (lesson == null)
+            {
+                return NotFound();
+            }
+
+
+            var updatedLesson = await _lessonService.UpdateLessonAsync(lesson, lessonDto);
+
+            await _lessonService.SaveChangesAsync();
+
+            return Ok(_mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(updatedLesson));
         }
     }
 }

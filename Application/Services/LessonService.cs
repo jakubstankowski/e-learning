@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Interfaces;
 using E_Learning.Application.Lessons.Queries.GetLessons;
@@ -31,59 +28,14 @@ namespace E_Learning.Application.Services
                  .ToListAsync();
         }
 
-        public async Task<IEnumerable<LessonDto>> DeleteLessonByIdAsync(int id)
+        public void DeleteLesson(Lesson lesson)
         {
-            var lesson = await _context.Lessons.FirstOrDefaultAsync(l => l.Id == id);
-
-            if (lesson == null)
-            {
-                throw new NotFoundException(nameof(Lesson), id);
-            }
-
             _context.Lessons.Remove(lesson);
-
-            await _context.SaveChangesAsync();
-
-            var lessons = await _context.Lessons
-                .Where(l => l.CourseId == lesson.CourseId)
-                .ToListAsync();
-
-
-            return _mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons);
-        }
-
-        public void DeleteLessonByIdAsync(Lesson lesson)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<Lesson> GetLessonByIdAsync(int id)
         {
             return await _context.Lessons.FirstOrDefaultAsync(l => l.Id == id);
-
-            /* var lessonDto = _mapper.Map<Lesson, LessonDto>(lesson);*/
-
-            /* var lessons = await _context.Lessons
-                .Where(l => l.CourseId == lesson.CourseId)
-                .ToListAsync();
-
-
-             int indexOfActiveLesson = lessons.IndexOf(lesson);
-             int indexOfNextLesson = indexOfActiveLesson + 1;
-             int indexOfPreviousLesson = indexOfActiveLesson - 1;
-
-
-             if (indexOfNextLesson < lessons.Count)
-             {
-                 lessonDto.NextLessonId = lessons[indexOfNextLesson].Id;
-             }
-
-
-             if (indexOfPreviousLesson >= 0)
-             {
-                 lessonDto.PreviousLessonId = lessons[indexOfPreviousLesson].Id;
-             }*/
-
         }
 
         public async Task<bool> SaveChangesAsync()
@@ -91,48 +43,17 @@ namespace E_Learning.Application.Services
             return (await _context.SaveChangesAsync() >= 0);
         }
 
-        public async Task<IEnumerable<LessonDto>> UpdateLessonAsync(LessonDto lessonDto)
+        public async Task<IEnumerable<Lesson>> UpdateLessonAsync(Lesson lesson, LessonDto lessonDto)
         {
-            var course = await _context.Courses
-                    .FirstOrDefaultAsync(c => c.Id == lessonDto.CourseId);
-
-            if (course == null)
-            {
-                throw new NotFoundException(nameof(Course), lessonDto.CourseId);
-            }
-
-
-            var lesson = await _context.Lessons.FirstOrDefaultAsync(c => c.Id == lessonDto.Id);
-
-
-            if (lesson == null)
-            {
-                throw new NotFoundException(nameof(Lesson), lessonDto.Id);
-            }
-
             lesson.Title = lessonDto.Title;
             lesson.Description = lessonDto.Description;
             lesson.VideoUrl = lessonDto.VideoUrl;
             lesson.CourseId = lessonDto.CourseId;
 
-
-            await _context.SaveChangesAsync();
-
-            var lessons = await _context.Lessons
-               .Where(l => l.CourseId == lessonDto.CourseId)
-               .ToListAsync();
-
-            return _mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons);
+            return await _context.Lessons
+                .Where(l => l.CourseId == lessonDto.CourseId)
+                .ToListAsync();
         }
 
-        public Task<IEnumerable<Lesson>> UpdateLessonAsync(Lesson lesson, LessonDto lessonDto)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<Lesson> ILessonService.GetLessonByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

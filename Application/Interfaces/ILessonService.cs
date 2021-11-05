@@ -16,7 +16,7 @@ namespace E_Learning.Application.Interfaces
 
         public Task<IEnumerable<Lesson>> UpdateLessonAsync(Lesson lesson, LessonDto lessonDto);
 
-        public void DeleteLessonByIdAsync(Lesson lesson);
+        public void DeleteLesson(Lesson lesson);
 
         public Task<bool> SaveChangesAsync();
     }
