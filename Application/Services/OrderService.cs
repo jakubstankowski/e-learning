@@ -16,16 +16,13 @@ namespace E_Learning.Application.Services
     {
         private readonly IContext _context;
         private readonly IIdentityService _identityService;
-        private readonly IMapper _mapper;
         private readonly IPaymentService _paymentService;
         private readonly ICourseService _courseService;
 
-        public OrderService(IContext context, IIdentityService identityService,
-            IMapper mapper, IPaymentService paymentService, ICourseService courseService)
+        public OrderService(IContext context, IIdentityService identityService, IPaymentService paymentService, ICourseService courseService)
         {
             _context = context;
             _identityService = identityService;
-            _mapper = mapper;
             _paymentService = paymentService;
             _courseService = courseService;
         }
@@ -77,28 +74,18 @@ namespace E_Learning.Application.Services
             _context.Orders.Remove(order);
         }
 
-        public Task DeleteOrderByIdAsync(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public Task<Order> GetOrderByPaymentIntentAsync(string paymentId)
         {
             return _context.Orders.Where(o => o.PaymentIntentId == paymentId)
                  .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<OrderDto>> GetOrdersByUserAsync()
+        public async Task<IEnumerable<Order>> GetOrdersByUserIdAsync(string userId)
         {
-            string userId = _identityService.GetUserId();
-
-            var orders = await _context.Orders
-                .Where(o => o.BuyerId == userId)
-                .Include(o => o.OrderItems)
-                .ToListAsync();
-
-
-            return _mapper.Map<IEnumerable<Order>, IEnumerable<OrderDto>>(orders);
+            return await _context.Orders
+                  .Where(o => o.BuyerId == userId)
+                  .Include(o => o.OrderItems)
+                  .ToListAsync();
         }
 
         public async Task<bool> SaveChangesAsync()

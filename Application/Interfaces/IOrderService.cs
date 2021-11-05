@@ -13,9 +13,9 @@ namespace E_Learning.Application.Interfaces
     {
         public Task<Order> CreateOrderAsync(CustomerBasket basket);
 
-        public Task<IEnumerable<OrderDto>> GetOrdersByUserAsync();
+        public Task<IEnumerable<Order>> GetOrdersByUserIdAsync(string userId);
 
-        public Task DeleteOrderByIdAsync(int id);
+        public void DeleteOrder(Order order);
 
         public Task<Order> GetOrderByPaymentIntentAsync(string paymentId);
 
