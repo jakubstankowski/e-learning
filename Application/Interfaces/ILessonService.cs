@@ -4,17 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using E_Learning.Application.Lessons.Queries.GetLessons;
+using E_Learning.Domain.Entities;
 
 namespace E_Learning.Application.Interfaces
 {
     public interface ILessonService
     {
-        public Task<IEnumerable<LessonDto>> CreateLessonAsync(LessonDto lessonDto);
+        public Task<IEnumerable<Lesson>> AddLessonToCourseAsync(Lesson lesson, Course course);
 
-        public Task<LessonDto> GetLessonByIdAsync(int id);
+        public Task<Lesson> GetLessonByIdAsync(int id);
 
-        public Task<IEnumerable<LessonDto>> UpdateLessonAsync(LessonDto lessonDto);
+        public Task<IEnumerable<Lesson>> UpdateLessonAsync(Lesson lesson, LessonDto lessonDto);
 
-        public Task<IEnumerable<LessonDto>> DeleteLessonByIdAsync(int id);
+        public void DeleteLessonByIdAsync(Lesson lesson);
+
+        public Task<bool> SaveChangesAsync();
     }
 }

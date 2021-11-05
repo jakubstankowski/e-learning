@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using E_Learning.Application.Interfaces;
 using E_Learning.Application.Lessons.Queries.GetLessons;
+using E_Learning.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,19 +15,41 @@ namespace E_Learning.Controllers
     public class LessonController : ControllerBase
     {
         private readonly ILessonService _lessonService;
+        private readonly ICourseService _courseService;
+        private readonly IMapper _mapper;
 
-        public LessonController(ILessonService lessonService)
+        public LessonController(ILessonService lessonService, ICourseService courseService, IMapper mapper)
         {
             _lessonService = lessonService;
+            _courseService = courseService;
+            _mapper = mapper;
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<IEnumerable<LessonDto>>> Create(LessonDto lessonDto)
         {
-            var lesson = await _lessonService.CreateLessonAsync(lessonDto);
+            var course = await _courseService.GetCourseWithLessonsByLessonCourseIdAsync(lessonDto.CourseId);
 
-            return Ok(lesson);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            Lesson lessonToCreate = new()
+            {
+                CourseId = lessonDto.CourseId,
+                Description = lessonDto.Description,
+                Title = lessonDto.Title,
+                VideoUrl = lessonDto.VideoUrl
+            };
+
+
+            var lessons = await _lessonService.AddLessonToCourseAsync(lessonToCreate, course);
+
+            await _lessonService.SaveChangesAsync();
+
+            return Ok(_mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons));
         }
 
         [HttpGet("{id}")]
@@ -33,7 +57,12 @@ namespace E_Learning.Controllers
         {
             var lesson = await _lessonService.GetLessonByIdAsync(id);
 
-            return Ok(lesson);
+            if (lesson == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<Lesson, LessonDto>(lesson));
         }
 
         [Authorize(Roles = "Admin")]

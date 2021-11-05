@@ -21,7 +21,7 @@ namespace E_Learning.Application.Interfaces
 
         public Task<IEnumerable<Lesson>> GetCourseLessonsAsync(int courseId);
 
-        public Task<Course> GetCourseWithLessonsByLessonCourseId(int lessonCourseId);
+        public Task<Course> GetCourseWithLessonsByLessonCourseIdAsync(int lessonCourseId);
 
 
         public Task<bool> SaveChangesAsync();

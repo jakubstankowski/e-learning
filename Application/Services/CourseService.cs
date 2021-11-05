@@ -89,7 +89,7 @@ namespace E_Learning.Application.Services
             return (await _context.SaveChangesAsync() >= 0);
         }
 
-        public async Task<Course> GetCourseWithLessonsByLessonCourseId(int lessonCourseId)
+        public async Task<Course> GetCourseWithLessonsByLessonCourseIdAsync(int lessonCourseId)
         {
             return await _context.Courses
                    .Include(c => c.Lessons)

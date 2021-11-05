@@ -15,44 +15,20 @@ namespace E_Learning.Application.Services
     public class LessonService : ILessonService
     {
         private readonly IContext _context;
-        private readonly IMapper _mapper;
 
-        public LessonService(IContext context, IMapper mapper)
+        public LessonService(IContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
-        public async Task<IEnumerable<LessonDto>> CreateLessonAsync(LessonDto lessonDto)
+
+        public async Task<IEnumerable<Lesson>> AddLessonToCourseAsync(Lesson lesson, Course course)
         {
-            var course = await _context.Courses
-                  .Include(c => c.Lessons)
-                  .FirstOrDefaultAsync(c => c.Id == lessonDto.CourseId);
-
-            if (course == null)
-            {
-                throw new NotFoundException(nameof(Course), lessonDto.CourseId);
-            }
-
-
-            Lesson lesson = new Lesson
-            {
-                CourseId = lessonDto.CourseId,
-                Description = lessonDto.Description,
-                Title = lessonDto.Title,
-                VideoUrl = lessonDto.VideoUrl
-            };
-
-
             course.Lessons.Add(lesson);
 
-            await _context.SaveChangesAsync();
-
-            var lessons = await _context.Lessons
-                .Where(l => l.CourseId == lessonDto.CourseId)
-                .ToListAsync();
-
-            return _mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons);
+            return await _context.Lessons
+                 .Where(l => l.CourseId == lesson.CourseId)
+                 .ToListAsync();
         }
 
         public async Task<IEnumerable<LessonDto>> DeleteLessonByIdAsync(int id)
@@ -76,39 +52,43 @@ namespace E_Learning.Application.Services
             return _mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons);
         }
 
-        public async Task<LessonDto> GetLessonByIdAsync(int id)
+        public void DeleteLessonByIdAsync(Lesson lesson)
         {
-            var lesson = await _context.Lessons.FirstOrDefaultAsync(l => l.Id == id);
+            throw new NotImplementedException();
+        }
 
-            if (lesson == null)
-            {
-                throw new NotFoundException(nameof(Lesson), id);
-            }
+        public async Task<Lesson> GetLessonByIdAsync(int id)
+        {
+            return await _context.Lessons.FirstOrDefaultAsync(l => l.Id == id);
 
-            var lessonDto = _mapper.Map<Lesson, LessonDto>(lesson);
+            /* var lessonDto = _mapper.Map<Lesson, LessonDto>(lesson);*/
 
-            var lessons = await _context.Lessons
-               .Where(l => l.CourseId == lesson.CourseId)
-               .ToListAsync();
-
-
-            int indexOfActiveLesson = lessons.IndexOf(lesson);
-            int indexOfNextLesson = indexOfActiveLesson + 1;
-            int indexOfPreviousLesson = indexOfActiveLesson - 1;
+            /* var lessons = await _context.Lessons
+                .Where(l => l.CourseId == lesson.CourseId)
+                .ToListAsync();
 
 
-            if (indexOfNextLesson < lessons.Count)
-            {
-                lessonDto.NextLessonId = lessons[indexOfNextLesson].Id;
-            }
+             int indexOfActiveLesson = lessons.IndexOf(lesson);
+             int indexOfNextLesson = indexOfActiveLesson + 1;
+             int indexOfPreviousLesson = indexOfActiveLesson - 1;
 
 
-            if (indexOfPreviousLesson >= 0)
-            {
-                lessonDto.PreviousLessonId = lessons[indexOfPreviousLesson].Id;
-            }
+             if (indexOfNextLesson < lessons.Count)
+             {
+                 lessonDto.NextLessonId = lessons[indexOfNextLesson].Id;
+             }
 
-            return lessonDto;
+
+             if (indexOfPreviousLesson >= 0)
+             {
+                 lessonDto.PreviousLessonId = lessons[indexOfPreviousLesson].Id;
+             }*/
+
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync() >= 0);
         }
 
         public async Task<IEnumerable<LessonDto>> UpdateLessonAsync(LessonDto lessonDto)
@@ -143,6 +123,16 @@ namespace E_Learning.Application.Services
                .ToListAsync();
 
             return _mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons);
+        }
+
+        public Task<IEnumerable<Lesson>> UpdateLessonAsync(Lesson lesson, LessonDto lessonDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Lesson> ILessonService.GetLessonByIdAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
