@@ -34,7 +34,7 @@ namespace E_Learning.Application.Services
             return courses;
         }
 
-        public void DeleteCourseAsync(Course course)
+        public void DeleteCourse(Course course)
         {
             _context.Courses.Remove(course);
         }
@@ -89,11 +89,12 @@ namespace E_Learning.Application.Services
             return (await _context.SaveChangesAsync() >= 0);
         }
 
-        public async Task<Course> GetCourseWithLessonsByLessonCourseIdAsynck(int lessonCourseId)
+        public async Task<Course> GetCourseWithLessonsByLessonCourseIdAsync(int lessonCourseId)
         {
             return await _context.Courses
                    .Include(c => c.Lessons)
                    .FirstOrDefaultAsync(c => c.Id == lessonCourseId);
         }
+
     }
 }

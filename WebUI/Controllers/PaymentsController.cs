@@ -71,6 +71,7 @@ namespace E_Learning.Controllers
                     var succedPaymentOrder = await _orderService.UpdateOrderPaymentSucceeded(intent.Id);
 
                     await _userCourseService.AddUserCoursesFromOrderAsync(succedPaymentOrder);
+
                     await _userCourseService.SaveChangesAsync();
                 }
 

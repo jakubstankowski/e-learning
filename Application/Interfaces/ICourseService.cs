@@ -23,7 +23,6 @@ namespace E_Learning.Application.Interfaces
 
         public Task<Course> GetCourseWithLessonsByLessonCourseIdAsync(int lessonCourseId);
 
-
         public Task<bool> SaveChangesAsync();
     }
 }
