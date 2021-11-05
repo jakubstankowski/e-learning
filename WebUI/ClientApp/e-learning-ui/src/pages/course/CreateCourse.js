@@ -17,7 +17,7 @@ export default function CreateCourse() {
     const onSubmit = (values) => {
         postCourse(values)
             .then(() => {
-                navigate('/courses');
+                navigate('/dashboard');
             })
     };
 

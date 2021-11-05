@@ -31,7 +31,7 @@ export default function EditCourse() {
     const onSubmit = (course) => {
         updateCourse(courseId, course)
             .then(() => {
-                navigate('/courses');
+                navigate('/dashboard');
             })
     };
 
