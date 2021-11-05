@@ -1,10 +1,10 @@
 import React, {useContext, useEffect} from "react";
 import LessonsContext from "../../context/lessons/lessonsContext";
-import Spinner from "../spinner/Spinner";
+import Spinner from "../../components/spinner/Spinner";
 import {Link, useParams} from "@reach/router";
 import {makeStyles} from '@material-ui/core/styles';
 import Paper from "@material-ui/core/Paper";
-import LessonVideo from "./LessonVideo";
+import LessonVideo from "../../components/lessons/LessonVideo";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
