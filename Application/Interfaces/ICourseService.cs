@@ -11,7 +11,7 @@ namespace E_Learning.Application.Interfaces
 
         public Task<IEnumerable<Course>> UpdateCourseAsync(Course course, CourseDto courseDto);
 
-        public void DeleteCourseAsync(Course course);
+        public void DeleteCourse(Course course);
 
         public Task<IEnumerable<Course>> GetCoursesAsync();
 

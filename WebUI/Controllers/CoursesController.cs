@@ -110,7 +110,7 @@ namespace E_Learning.Controllers
                 return NotFound();
             }
 
-            _courseService.DeleteCourseAsync(course);
+            _courseService.DeleteCourse(course);
             await _courseService.SaveChangesAsync();
 
             return Ok();
@@ -120,6 +120,11 @@ namespace E_Learning.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<CourseDto>> UpdateCourse(int id, CourseDto courseDto)
         {
+            if (id != courseDto.Id)
+            {
+                return BadRequest();
+            }
+
             var course = await _courseService.GetCourseByIdAsync(id);
 
             if (course == null)
