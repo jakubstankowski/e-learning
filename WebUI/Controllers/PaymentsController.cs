@@ -60,7 +60,11 @@ namespace E_Learning.Controllers
 
                     _logger.LogInformation("Payment Failed");
 
-                    await _orderService.UpdateOrderPaymentFailed(intent.Id);
+                    var order = await _orderService.GetOrderByPaymentIntentAsync(intent.Id);
+
+                    _orderService.UpdateOrderPaymentFailed(order);
+
+                    await _orderService.SaveChangesAsync();
                 }
                 else if (stripeEvent.Type == Events.PaymentIntentSucceeded)
                 {
@@ -68,9 +72,11 @@ namespace E_Learning.Controllers
 
                     _logger.LogInformation("Payment Succeeded");
 
-                    var succedPaymentOrder = await _orderService.UpdateOrderPaymentSucceeded(intent.Id);
+                    var order = await _orderService.GetOrderByPaymentIntentAsync(intent.Id);
 
-                    await _userCourseService.AddUserCoursesFromOrderAsync(succedPaymentOrder);
+                    _orderService.UpdateOrderPaymentSuceeded(order);
+
+                    await _userCourseService.AddUserCoursesFromOrderAsync(order);
 
                     await _userCourseService.SaveChangesAsync();
                 }

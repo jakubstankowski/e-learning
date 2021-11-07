@@ -77,7 +77,7 @@ namespace E_Learning.Application.Services
         public Task<Order> GetOrderByPaymentIntentAsync(string paymentId)
         {
             return _context.Orders.Where(o => o.PaymentIntentId == paymentId)
-                 .FirstOrDefaultAsync();
+                    .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Order>> GetOrdersByUserIdAsync(string userId)
@@ -93,32 +93,15 @@ namespace E_Learning.Application.Services
             return (await _context.SaveChangesAsync() >= 0);
         }
 
-        public async Task<Order> UpdateOrderPaymentFailed(string paymentIntentId)
+        public static void UpdateOrderPaymentFailed(Order order)
         {
-            var order = await _context.Orders.Where(o => o.PaymentIntentId == paymentIntentId)
-                .FirstOrDefaultAsync();
-
-            if (order == null) return null;
-
             order.Status = OrderStatus.PaymentFailed;
-
-            await _context.SaveChangesAsync();
-
-            return order;
         }
 
-        public async Task<Order> UpdateOrderPaymentSucceeded(string paymentIntentId)
+        public static void UpdateOrderPaymentSucceeded(Order order)
         {
-            var order = await _context.Orders.Where(o => o.PaymentIntentId == paymentIntentId)
-               .FirstOrDefaultAsync();
-
-            if (order == null) return null;
-
-            order.Status = OrderStatus.PaymentRecevied;
-
-            await _context.SaveChangesAsync();
-
-            return order;
+            order.Status = OrderStatus.PaymentFailed;
         }
+
     }
 }
