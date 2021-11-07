@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Interfaces;
-using E_Learning.Application.Orders.Queries.GetOrders;
 using E_Learning.Domain.Entities;
 using E_Learning.Domain.Entities.OrderAggregate;
 using Microsoft.EntityFrameworkCore;
@@ -64,8 +61,7 @@ namespace E_Learning.Application.Services
             }
 
             _context.Orders.Add(order);
-            await _context.SaveChangesAsync();
-
+          
             return order;
         }
 

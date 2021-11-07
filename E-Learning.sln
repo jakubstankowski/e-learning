@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "WebUI\WebUI.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{69BA87D3-D285-4E03-954A-CB2D7E5CBF3A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.Api", "..\..\INNE\C#\Core\API\Catalog.Api\Catalog.Api.csproj", "{A5599B53-8B48-4BEA-ADB7-2391DCA2AF36}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{69BA87D3-D285-4E03-954A-CB2D7E5CBF3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69BA87D3-D285-4E03-954A-CB2D7E5CBF3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69BA87D3-D285-4E03-954A-CB2D7E5CBF3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A5599B53-8B48-4BEA-ADB7-2391DCA2AF36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A5599B53-8B48-4BEA-ADB7-2391DCA2AF36}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A5599B53-8B48-4BEA-ADB7-2391DCA2AF36}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A5599B53-8B48-4BEA-ADB7-2391DCA2AF36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
