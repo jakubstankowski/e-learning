@@ -4,6 +4,7 @@ using E_Learning.Application.Dtos.Basket;
 using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace E_Learning.Controllers
 {
@@ -12,10 +13,12 @@ namespace E_Learning.Controllers
     public class BasketController : ControllerBase
     {
         private readonly IBasketService _basketService;
+        private readonly ILogger _logger;
 
-        public BasketController(IBasketService basketService)
+        public BasketController(IBasketService basketService, ILogger logger)
         {
             _basketService = basketService;
+            _logger = logger;
         }
 
 
@@ -44,6 +47,8 @@ namespace E_Learning.Controllers
                 throw new NotFoundException(nameof(CustomerBasket), id);
             }
 
+            _logger.LogInformation($"Success get basket with id: {id}");
+
             return basket;
         }
 
@@ -52,7 +57,11 @@ namespace E_Learning.Controllers
         {
             var result = await _basketService.DeleteBasketAsync(id);
 
-            if (result) return Ok();
+            if (result)
+            {
+                _logger.LogInformation($"Success delete basket with id: {id}");
+                return Ok();
+            }
 
             return BadRequest(new ProblemDetails { Title = "Problem removing item from the basket" });
         }
