@@ -9,6 +9,7 @@ using E_Learning.Application.Lessons.Queries.GetLessons;
 using E_Learning.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace E_Learning.Controllers
 {
@@ -19,12 +20,14 @@ namespace E_Learning.Controllers
         private readonly ICourseService _courseService;
         private readonly IMapper _mapper;
         private readonly IIdentityService _identityService;
+        private readonly ILogger _logger;
 
-        public CoursesController(ICourseService courseService, IMapper mapper, IIdentityService identityService)
+        public CoursesController(ICourseService courseService, IMapper mapper, IIdentityService identityService, ILogger logger)
         {
             _courseService = courseService;
             _mapper = mapper;
             _identityService = identityService;
+            _logger = logger;
         }
 
 
@@ -38,6 +41,8 @@ namespace E_Learning.Controllers
                 return NotFound();
             }
 
+            _logger.LogInformation($"Success get course with id {id}");
+
             return _mapper.Map<Course, CourseDto>(course);
         }
 
@@ -45,6 +50,8 @@ namespace E_Learning.Controllers
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetHomeCourses()
         {
             var course = await _courseService.GetCoursesAsync();
+
+            _logger.LogInformation("Success get home courses");
 
             return Ok(_mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(course));
         }
@@ -55,6 +62,8 @@ namespace E_Learning.Controllers
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetAdminCourses()
         {
             var course = await _courseService.GetCoursesAsync();
+
+            _logger.LogInformation("Success get admin courses");
 
             return Ok(_mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(course));
         }
@@ -67,6 +76,8 @@ namespace E_Learning.Controllers
 
             var course = await _courseService.GetCourseByUserIdAsync(userId);
 
+            _logger.LogInformation("Success get user courses");
+
             return Ok(_mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(course));
         }
 
@@ -76,6 +87,8 @@ namespace E_Learning.Controllers
         public async Task<ActionResult<IEnumerable<LessonDto>>> GetCourseLessons(int id)
         {
             var courseLessons = await _courseService.GetCourseLessonsAsync(id);
+
+            _logger.LogInformation("Success get course lessons");
 
             return Ok(_mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(courseLessons));
         }
@@ -96,6 +109,8 @@ namespace E_Learning.Controllers
 
             await _courseService.SaveChangesAsync();
 
+            _logger.LogInformation("Success create new course");
+
             return Ok(courses);
         }
 
@@ -112,6 +127,8 @@ namespace E_Learning.Controllers
 
             _courseService.DeleteCourse(course);
             await _courseService.SaveChangesAsync();
+
+            _logger.LogInformation("Success delete course");
 
             return Ok();
         }
@@ -135,6 +152,8 @@ namespace E_Learning.Controllers
             var updatedCourse = await _courseService.UpdateCourseAsync(course, courseDto);
 
             await _courseService.SaveChangesAsync();
+
+            _logger.LogInformation($"Success update course with id {id}");
 
             return Ok(_mapper.Map<IEnumerable<Course>, IEnumerable<CourseDto>>(updatedCourse));
         }
