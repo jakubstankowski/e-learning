@@ -11,6 +11,7 @@ using E_Learning.Domain.Entities.OrderAggregate;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace E_Learning.Controllers
 {
@@ -23,13 +24,15 @@ namespace E_Learning.Controllers
         private readonly IMapper _mapper;
         private readonly IBasketService _basketService;
         private readonly IdentityService _identityService;
+        private readonly ILogger _logger;
 
-        public OrderController(IOrderService orderService, IMapper mapper, IBasketService basketService, IdentityService identityService)
+        public OrderController(IOrderService orderService, IMapper mapper, IBasketService basketService, IdentityService identityService, ILogger logger)
         {
             _orderService = orderService;
             _mapper = mapper;
             _basketService = basketService;
             _identityService = identityService;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -46,6 +49,8 @@ namespace E_Learning.Controllers
 
             await _orderService.SaveChangesAsync();
 
+            _logger.LogInformation("Success create order");
+
             return Ok();
         }
 
@@ -55,6 +60,8 @@ namespace E_Learning.Controllers
             string userId = _identityService.GetUserId();
 
             var order = await _orderService.GetOrdersByUserIdAsync(userId);
+
+            _logger.LogInformation("Success get user orders");
 
             return Ok(_mapper.Map<IEnumerable<Order>, IEnumerable<OrderDto>>(order));
         }
