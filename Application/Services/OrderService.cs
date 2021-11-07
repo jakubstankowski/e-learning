@@ -93,15 +93,14 @@ namespace E_Learning.Application.Services
             return (await _context.SaveChangesAsync() >= 0);
         }
 
-        public static void UpdateOrderPaymentFailed(Order order)
+        public void UpdateOrderPaymentFailed(Order order)
         {
             order.Status = OrderStatus.PaymentFailed;
         }
 
-        public static void UpdateOrderPaymentSucceeded(Order order)
+        public void UpdateOrderPaymentSucceeded(Order order)
         {
             order.Status = OrderStatus.PaymentFailed;
         }
-
     }
 }
