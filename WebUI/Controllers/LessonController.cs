@@ -6,6 +6,7 @@ using E_Learning.Application.Lessons.Queries.GetLessons;
 using E_Learning.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace E_Learning.Controllers
 {
@@ -17,12 +18,14 @@ namespace E_Learning.Controllers
         private readonly ILessonService _lessonService;
         private readonly ICourseService _courseService;
         private readonly IMapper _mapper;
+        private readonly ILogger _logger;
 
-        public LessonController(ILessonService lessonService, ICourseService courseService, IMapper mapper)
+        public LessonController(ILessonService lessonService, ICourseService courseService, IMapper mapper, ILogger logger)
         {
             _lessonService = lessonService;
             _courseService = courseService;
             _mapper = mapper;
+            _logger = logger;
         }
 
         [Authorize(Roles = "Admin")]
@@ -49,6 +52,8 @@ namespace E_Learning.Controllers
 
             await _lessonService.SaveChangesAsync();
 
+            _logger.LogInformation("Success create new lesson");
+
             return Ok(_mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(lessons));
         }
 
@@ -61,6 +66,8 @@ namespace E_Learning.Controllers
             {
                 return NotFound();
             }
+
+            _logger.LogInformation($"Success get lesson with id {id}");
 
             return Ok(_mapper.Map<Lesson, LessonDto>(lesson));
         }
@@ -77,6 +84,8 @@ namespace E_Learning.Controllers
             }
 
             _lessonService.DeleteLesson(lesson);
+
+            _logger.LogInformation("Success delete lesson");
 
             return Ok();
         }
@@ -101,6 +110,8 @@ namespace E_Learning.Controllers
             var updatedLesson = await _lessonService.UpdateLessonAsync(lesson, lessonDto);
 
             await _lessonService.SaveChangesAsync();
+
+            _logger.LogInformation($"Update lesson with id {id}");
 
             return Ok(_mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(updatedLesson));
         }
