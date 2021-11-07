@@ -21,7 +21,7 @@ export default function Login({history}) {
             if (isAdmin) {
                 return navigate('/dashboard');
             }
-             navigate('/user');
+             navigate('/user/my-courses');
         }
 
         // eslint-disable-next-line
