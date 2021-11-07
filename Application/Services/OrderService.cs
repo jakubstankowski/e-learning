@@ -98,9 +98,9 @@ namespace E_Learning.Application.Services
             order.Status = OrderStatus.PaymentFailed;
         }
 
-        public void UpdateOrderPaymentSucceeded(Order order)
+        public void UpdateOrderPaymentSuceeded(Order order)
         {
-            order.Status = OrderStatus.PaymentFailed;
+            order.Status = OrderStatus.PaymentRecevied;
         }
     }
 }
