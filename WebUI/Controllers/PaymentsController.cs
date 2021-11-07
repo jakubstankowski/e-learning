@@ -21,8 +21,9 @@ namespace E_Learning.Controllers
         private readonly IConfiguration _configuration;
         private readonly string _whSecret;
         private readonly IUserCourseService _userCourseService;
+        private readonly IBasketService _basketService;
 
-        public PaymentsController(IPaymentService paymentService, IOrderService orderService, ILogger<PaymentsController> logger, IConfiguration configuration, IUserCourseService userCourseService)
+        public PaymentsController(IPaymentService paymentService, IOrderService orderService, ILogger<PaymentsController> logger, IConfiguration configuration, IUserCourseService userCourseService, IBasketService basketService)
         {
             _paymentService = paymentService;
             _orderService = orderService;
@@ -30,15 +31,23 @@ namespace E_Learning.Controllers
             _configuration = configuration;
             _whSecret = _configuration["StripeSettings:EndpointSecret"];
             _userCourseService = userCourseService;
+            _basketService = basketService;
         }
 
         [Authorize]
         [HttpPost("{basketId}")]
         public async Task<ActionResult<CustomerBasket>> CreateOrUpdatePaymentIntent(string basketId)
         {
-            var basket = await _paymentService.CreateOrUpdatePaymentIntent(basketId);
+            var basket = await _basketService.GetBasketByIdAsync(basketId);
 
-            return Ok(basket);
+            if (basket == null)
+            {
+                return NotFound();
+            }
+
+            var createdBasket = await _paymentService.CreateOrUpdatePaymentIntent(basket);
+
+            return Ok(createdBasket);
         }
 
         [HttpPost("webhook")]

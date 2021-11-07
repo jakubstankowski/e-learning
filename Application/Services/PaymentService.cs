@@ -21,16 +21,9 @@ namespace E_Learning.Application.Services
             _basketService = basketService;
         }
 
-        public async Task<CustomerBasket> CreateOrUpdatePaymentIntent(string basketId)
+        public async Task<CustomerBasket> CreateOrUpdatePaymentIntent(CustomerBasket basket)
         {
             StripeConfiguration.ApiKey = _configuration["StripeSettings:SecretKey"];
-
-            var basket = await _basketService.GetBasketByIdAsync(basketId);
-
-            if (basket == null)
-            {
-                throw new NotFoundException(nameof(CustomerBasket), basketId);
-            }
 
             var service = new PaymentIntentService();
 
