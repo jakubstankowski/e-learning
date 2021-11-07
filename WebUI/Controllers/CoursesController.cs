@@ -20,9 +20,9 @@ namespace E_Learning.Controllers
         private readonly ICourseService _courseService;
         private readonly IMapper _mapper;
         private readonly IIdentityService _identityService;
-        private readonly ILogger _logger;
+        private readonly ILogger<CoursesController> _logger;
 
-        public CoursesController(ICourseService courseService, IMapper mapper, IIdentityService identityService, ILogger logger)
+        public CoursesController(ICourseService courseService, IMapper mapper, IIdentityService identityService, ILogger<CoursesController> logger)
         {
             _courseService = courseService;
             _mapper = mapper;

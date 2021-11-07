@@ -24,9 +24,9 @@ namespace E_Learning.Controllers
         private readonly IMapper _mapper;
         private readonly IBasketService _basketService;
         private readonly IdentityService _identityService;
-        private readonly ILogger _logger;
+        private readonly ILogger<OrderController> _logger;
 
-        public OrderController(IOrderService orderService, IMapper mapper, IBasketService basketService, IdentityService identityService, ILogger logger)
+        public OrderController(IOrderService orderService, IMapper mapper, IBasketService basketService, IdentityService identityService, ILogger<OrderController> logger)
         {
             _orderService = orderService;
             _mapper = mapper;

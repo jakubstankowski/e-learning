@@ -13,9 +13,9 @@ namespace E_Learning.Controllers
     public class BasketController : ControllerBase
     {
         private readonly IBasketService _basketService;
-        private readonly ILogger _logger;
+        private readonly ILogger<BasketController> _logger;
 
-        public BasketController(IBasketService basketService, ILogger logger)
+        public BasketController(IBasketService basketService, ILogger<BasketController> logger)
         {
             _basketService = basketService;
             _logger = logger;

@@ -6,6 +6,7 @@ using Infrastructure.Identity.dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace E_Learning.Controllers
 {
@@ -17,13 +18,15 @@ namespace E_Learning.Controllers
         private readonly IIdentityService _identityService;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ILogger<AccountController> _logger;
 
-        public AccountController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager, IIdentityService identityService)
+        public AccountController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager, IIdentityService identityService, ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _identityService = identityService;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _logger = logger;
         }
 
         [HttpPost("register")]
@@ -54,6 +57,7 @@ namespace E_Learning.Controllers
 
             await _userManager.AddToRoleAsync(user, "User");
 
+            _logger.LogInformation("Success register new user");
 
             return new UserDto
             {
@@ -62,8 +66,6 @@ namespace E_Learning.Controllers
                 IsAdmin = await _userManager.IsInRoleAsync(user, "Admin"),
                 Roles = await _userManager.GetRolesAsync(user)
             };
-
-
 
         }
 
@@ -85,6 +87,8 @@ namespace E_Learning.Controllers
             {
                 return Unauthorized();
             }
+
+            _logger.LogInformation("Success login user");
 
             return new UserDto
             {
@@ -110,6 +114,7 @@ namespace E_Learning.Controllers
                 throw new NotFoundException(userId);
             }
 
+            _logger.LogInformation("Success get current user");
 
             return new UserDto
             {
@@ -120,7 +125,7 @@ namespace E_Learning.Controllers
             };
         }
 
-
+        [Authorize]
         [HttpPost("roles")]
         public async Task<ActionResult> CreateNewRoles(RoleDto role)
         {
