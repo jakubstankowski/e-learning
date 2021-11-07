@@ -60,7 +60,7 @@ namespace E_Learning.Application.Services
             if (existingOrder != null)
             {
                 _context.Orders.Remove(order);
-                await _paymentService.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
+                await _paymentService.CreateOrUpdatePaymentIntent(basket);
             }
 
             _context.Orders.Add(order);
