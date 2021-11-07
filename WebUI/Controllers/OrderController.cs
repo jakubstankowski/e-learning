@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using E_Learning.Application.Common.Exceptions;
+using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Dtos;
 using E_Learning.Application.Interfaces;
 using E_Learning.Application.Orders.Queries.GetOrders;
 using E_Learning.Domain.Entities;
 using E_Learning.Domain.Entities.OrderAggregate;
-using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -23,10 +23,10 @@ namespace E_Learning.Controllers
         private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
         private readonly IBasketService _basketService;
-        private readonly IdentityService _identityService;
+        private readonly IIdentityService _identityService;
         private readonly ILogger<OrderController> _logger;
 
-        public OrderController(IOrderService orderService, IMapper mapper, IBasketService basketService, IdentityService identityService, ILogger<OrderController> logger)
+        public OrderController(IOrderService orderService, IMapper mapper, IBasketService basketService, IIdentityService identityService, ILogger<OrderController> logger)
         {
             _orderService = orderService;
             _mapper = mapper;
