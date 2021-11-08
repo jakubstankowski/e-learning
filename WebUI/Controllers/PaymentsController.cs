@@ -85,6 +85,8 @@ namespace E_Learning.Controllers
 
                     _orderService.UpdateOrderPaymentSuceeded(order);
 
+                    await _orderService.SaveChangesAsync();
+
                     await _userCourseService.AddUserCoursesFromOrderAsync(order);
 
                     await _userCourseService.SaveChangesAsync();
