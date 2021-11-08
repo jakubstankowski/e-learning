@@ -6,7 +6,7 @@ import Courses from "../../components/courses/Courses";
 
 export default function UserCourses() {
     const coursesContext = useContext(CoursesContext);
-    const {getUserCourses, courses, resetCourses} = coursesContext;
+    const {getUserCourses, resetCourses} = coursesContext;
 
     const authContext = useContext(AuthContext);
     const {isAuthenticated} = authContext;
@@ -17,6 +17,8 @@ export default function UserCourses() {
         if (isAuthenticated) {
             getUserCourses();
         }
+
+        // eslint-disable-next-line
     }, [isAuthenticated]);
 
     return (

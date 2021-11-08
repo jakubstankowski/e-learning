@@ -1,7 +1,5 @@
 import React, {useContext, useEffect} from "react";
-import Grid from "@material-ui/core/Grid";
 import HomeBillboard from "./HomeBillboard";
-import CourseItem from "../../components/courses/CourseItem";
 import CoursesContext from "../../context/courses/coursesContext";
 import BasketContext from "../../context/basket/basketContext";
 import Courses from "../../components/courses/Courses";
@@ -30,6 +28,8 @@ export default function Home() {
         }
 
         getHomeCourses();
+
+        // eslint-disable-next-line
     }, []);
 
     return (

@@ -19,6 +19,8 @@ export default function Dashboard() {
         if (isAuthenticated) {
             getAdminCourses();
         }
+
+        // eslint-disable-next-line
     }, [isAuthenticated]);
 
     return (

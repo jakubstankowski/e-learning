@@ -3,7 +3,7 @@ import OrderContext from "../../context/order/orderContext";
 
 export default function Order() {
     const orderContext = useContext(OrderContext);
-    const {order, getOrderByUser} = orderContext;
+    const {getOrderByUser} = orderContext;
 
     useEffect(() => {
         getOrderByUser();

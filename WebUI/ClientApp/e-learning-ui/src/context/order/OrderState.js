@@ -7,8 +7,6 @@ import React, {useReducer} from "react";
 import OrderReducer from "../order/orderReducer";
 import axios from "axios";
 import OrderContext from "../order/orderContext";
-import {navigate} from "@reach/router";
-
 
 export default function OrderState(props) {
     const initialState = {

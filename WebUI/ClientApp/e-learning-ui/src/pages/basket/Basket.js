@@ -4,7 +4,6 @@ import BasketContext from '../../context/basket/basketContext';
 import BasketItem from "../../components/basket/BasketItem";
 import AuthContext from "../../context/auth/authContext";
 import Button from "@material-ui/core/Button";
-import {Link} from "@reach/router";
 import OrderTotals from "../../components/order/OrderTotals";
 
 export default function Cart() {
