@@ -6,7 +6,7 @@ namespace E_Learning.Application.Interfaces
 {
     public interface IUserCourseService
     {
-        public Task<UserCourses> AddUserCoursesFromOrderAsync(Order order);
+        public Task<UserCourses> AddUserCoursesAsync(int courseId, string buyerId);
 
         public Task<bool> SaveChangesAsync();
     }

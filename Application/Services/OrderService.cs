@@ -61,7 +61,7 @@ namespace E_Learning.Application.Services
             }
 
             _context.Orders.Add(order);
-          
+
             return order;
         }
 
@@ -73,6 +73,7 @@ namespace E_Learning.Application.Services
         public Task<Order> GetOrderByPaymentIntentAsync(string paymentId)
         {
             return _context.Orders.Where(o => o.PaymentIntentId == paymentId)
+                    .Include(o => o.OrderItems)
                     .FirstOrDefaultAsync();
         }
 

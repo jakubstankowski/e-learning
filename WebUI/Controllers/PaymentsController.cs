@@ -87,9 +87,12 @@ namespace E_Learning.Controllers
 
                     await _orderService.SaveChangesAsync();
 
-                    await _userCourseService.AddUserCoursesFromOrderAsync(order);
+                    foreach (var item in order.OrderItems)
+                    {
+                        await _userCourseService.AddUserCoursesAsync(item.ItemOrdered.CourseId, order.BuyerId);
+                        await _userCourseService.SaveChangesAsync();
+                    }
 
-                    await _userCourseService.SaveChangesAsync();
                 }
 
                 return Ok();

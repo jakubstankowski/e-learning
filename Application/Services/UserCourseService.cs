@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
-using E_Learning.Domain.Entities.OrderAggregate;
 using Microsoft.AspNetCore.Identity;
 
 namespace E_Learning.Application.Services
@@ -21,13 +19,9 @@ namespace E_Learning.Application.Services
             _userManager = userManager;
         }
 
-        public async Task<UserCourses> AddUserCoursesFromOrderAsync(Order order)
+        public async Task<UserCourses> AddUserCoursesAsync(int courseId, string buyerId)
         {
-            string userId = order.BuyerId;
-
-            var courseId = order.OrderItems
-                .Select(x => x.ItemOrdered.CourseId)
-                .FirstOrDefault();
+            string userId = buyerId;
 
             var course = await _courseService.GetCourseByIdAsync(courseId);
 
