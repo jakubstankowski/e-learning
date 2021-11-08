@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
-using E_Learning.Domain.Entities.OrderAggregate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -79,20 +78,20 @@ namespace E_Learning.Controllers
                 {
                     intent = (PaymentIntent)stripeEvent.Data.Object;
 
-                    _logger.LogInformation("Payment Succeeded");
-
                     var order = await _orderService.GetOrderByPaymentIntentAsync(intent.Id);
 
                     _orderService.UpdateOrderPaymentSuceeded(order);
 
                     await _orderService.SaveChangesAsync();
 
+                    _logger.LogInformation("Payment Succeeded");
+
                     foreach (var item in order.OrderItems)
                     {
-                        await _userCourseService.AddUserCoursesAsync(item.ItemOrdered.CourseId, order.BuyerId);
-                        await _userCourseService.SaveChangesAsync();
+                        await _userCourseService.AddUserCoursesAsync(item.ItemOrdered.CourseId, order.BuyerId);                       
                     }
 
+                    await _userCourseService.SaveChangesAsync();
                 }
 
                 return Ok();
