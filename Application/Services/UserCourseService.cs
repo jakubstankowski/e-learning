@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Interfaces;
 using E_Learning.Domain.Entities;
@@ -19,7 +20,7 @@ namespace E_Learning.Application.Services
             _userManager = userManager;
         }
 
-        public async Task<UserCourses> AddUserCoursesAsync(int courseId, string buyerId)
+        public async Task AddUserCoursesAsync(int courseId, string buyerId)
         {
             string userId = buyerId;
 
@@ -27,16 +28,21 @@ namespace E_Learning.Application.Services
 
             var user = await _userManager.FindByIdAsync(userId);
 
-            var userCourses = new UserCourses()
+            var userCourse = _context.UserCourses.Where(uc => uc.IdentityUser == user && uc.Course == course).FirstOrDefault();
+
+            if (userCourse == null)
             {
-                IdentityUser = user,
-                Course = course
-            };
+                var userCourseToCreate = new UserCourses()
+                {
+                    IdentityUser = user,
+                    Course = course
+                };
 
-            _context.UserCourses.Add(userCourses);
+                _context.UserCourses.Add(userCourseToCreate);
+            }
 
-            return userCourses;
         }
+
 
         public async Task<bool> SaveChangesAsync()
         {
