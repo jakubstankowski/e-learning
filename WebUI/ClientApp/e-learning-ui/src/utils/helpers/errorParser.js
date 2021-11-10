@@ -4,10 +4,10 @@ export default {
 
         switch (status) {
             case 404: {
-                return 'Resource not found :(';
+                return 'Request failed. Request endpoint not found on the server';
             }
             case 500: {
-                return 'Houston we have a problem, please try again later';
+                return 'This is rephrased error message. Please try again later';
             }
         }
 
