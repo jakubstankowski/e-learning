@@ -45,70 +45,109 @@ function CoursesState(props) {
     }
 
     const getAdminCourses = async () => {
-        setLoading();
+        try {
+            setLoading();
 
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/courses/admin`);
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/courses/admin`);
 
-        dispatch({
-            type: GET_ADMIN_COURSES,
-            payload: res.data
-        });
+            dispatch({
+                type: GET_ADMIN_COURSES,
+                payload: res.data
+            });
+        } catch (error) {
+            dispatch({
+                type: COURSE_ERROR,
+                payload: errorParser.parse(error)
+            });
+        }
     }
 
     const getUserCourses = async () => {
-        state.courses = [];
+        try {
+            setLoading();
 
-        console.log('courses: ', state.courses);
-        setLoading();
-
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/courses/user`);
-        dispatch({
-            type: GET_USER_COURSES,
-            payload: res.data
-        });
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/courses/user`);
+            dispatch({
+                type: GET_USER_COURSES,
+                payload: res.data
+            });
+        } catch (error) {
+            dispatch({
+                type: COURSE_ERROR,
+                payload: errorParser.parse(error)
+            });
+        }
     }
 
     const getCourse = async (id) => {
-        setLoading();
+        try {
+            setLoading();
 
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/courses/${id}`);
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/courses/${id}`);
 
-        dispatch({
-            type: GET_COURSE,
-            payload: res.data
-        });
+            dispatch({
+                type: GET_COURSE,
+                payload: res.data
+            });
+        } catch (error) {
+            dispatch({
+                type: COURSE_ERROR,
+                payload: errorParser.parse(error)
+            });
+        }
     }
 
     const postCourse = async (course) => {
-        setLoading();
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/courses`, course)
+        try {
+            setLoading();
+            const res = await axios.post(`${process.env.REACT_APP_API_URL}/courses`, course)
 
-        dispatch({
-            type: POST_COURSE,
-            payload: res.data
-        });
+            dispatch({
+                type: POST_COURSE,
+                payload: res.data
+            });
+        } catch (error) {
+            dispatch({
+                type: COURSE_ERROR,
+                payload: errorParser.parse(error)
+            });
+        }
     }
 
     const deleteCourse = async (id) => {
-        setLoading();
+        try {
+            setLoading();
 
-        const res = await axios.delete(`${process.env.REACT_APP_API_URL}/courses/${id}`)
+            const res = await axios.delete(`${process.env.REACT_APP_API_URL}/courses/${id}`)
 
-        dispatch({
-            type: DELETE_COURSE,
-            payload: res.data
-        });
+            dispatch({
+                type: DELETE_COURSE,
+                payload: res.data
+            });
+        } catch (error) {
+            dispatch({
+                type: COURSE_ERROR,
+                payload: errorParser.parse(error)
+            });
+        }
     }
 
     const updateCourse = async (id, course) => {
-        setLoading();
+        try {
+            setLoading();
 
-        const res = await axios.put(`${process.env.REACT_APP_API_URL}/courses/${id}`, course)
+            const res = await axios.put(`${process.env.REACT_APP_API_URL}/courses/${id}`, course)
 
-        dispatch({
-            type: UPDATE_COURSE,
-            payload: res.data
-        });
+            dispatch({
+                type: UPDATE_COURSE,
+                payload: res.data
+            });
+        } catch (error) {
+            dispatch({
+                type: COURSE_ERROR,
+                payload: errorParser.parse(error)
+            });
+        }
     }
 
     const resetCourses = () => {

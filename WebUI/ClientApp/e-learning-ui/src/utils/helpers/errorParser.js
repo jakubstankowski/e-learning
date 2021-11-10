@@ -1,12 +1,13 @@
 export default {
     parse(error) {
         const status = error.response.status;
-        const message = error.response.message ? error.response.message : error.response.data;
-        const response = error.response;
 
-        switch(status){
+        switch (status) {
             case 404: {
-                return 'Resource not found :('
+                return 'Resource not found :(';
+            }
+            case 500: {
+                return 'Houston we have a problem, please try again later';
             }
         }
 
