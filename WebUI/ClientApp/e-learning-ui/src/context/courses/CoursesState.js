@@ -41,7 +41,6 @@ function CoursesState(props) {
                 payload: error.message
             });
         }
-
     }
 
     const getAdminCourses = async () => {
@@ -123,6 +122,7 @@ function CoursesState(props) {
         <CoursesContext.Provider
             value={{
                 courses: state.courses,
+                error: state.error,
                 course: state.course,
                 loading: state.loading,
                 getHomeCourses,

@@ -61,9 +61,14 @@ const reducer = (state, action) => {
                 courses: []
             };
         case COURSE_ERROR:
+            console.log('action.payload', action.payload);
+
+            console.log('error: ', state);
+
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                loading: false
             };
         case SET_LOADING:
             return {

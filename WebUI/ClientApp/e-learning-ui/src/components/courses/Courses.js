@@ -11,16 +11,20 @@ export default function Courses(props) {
 
     const {showAddToCartButton} = props;
 
-    const {loading, courses} = coursesContext;
+    const {loading, courses, error} = coursesContext;
 
 
     useEffect(() => {
         console.log('loading courses: ', loading);
+
+        console.log('error: ', error);
         // eslint-disable-next-line
     }, []);
 
 
     if (loading) return <Spinner size={120}/>
+
+    if (error) return <p>{error}</p>
 
     return (
         <Grid container spacing={4}>
