@@ -4,6 +4,7 @@ import CourseItem from "./CourseItem";
 import {useContext, useEffect} from "react";
 import CoursesContext from '../../context/courses/coursesContext';
 import Spinner from "../spinner/Spinner";
+import {Typography} from "@material-ui/core";
 
 
 export default function Courses(props) {
@@ -24,7 +25,9 @@ export default function Courses(props) {
 
     if (loading) return <Spinner size={120}/>
 
-    if (error) return <p>{error}</p>
+    if (error) return <Typography variant="h4" className="all-center">
+        {error}
+    </Typography>
 
     return (
         <Grid container spacing={4}>

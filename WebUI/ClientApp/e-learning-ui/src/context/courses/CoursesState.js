@@ -14,6 +14,7 @@ import {
     GET_ADMIN_COURSES,
     GET_USER_COURSES, RESET_COURSES
 } from '../types'
+import errorParser from "../../utils/helpers/errorParser";
 
 
 function CoursesState(props) {
@@ -38,7 +39,7 @@ function CoursesState(props) {
         } catch (error) {
             dispatch({
                 type: COURSE_ERROR,
-                payload: error.message
+                payload: errorParser.parse(error)
             });
         }
     }
