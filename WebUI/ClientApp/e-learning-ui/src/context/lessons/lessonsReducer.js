@@ -5,6 +5,7 @@ import {
     DELETE_LESSON,
     UPDATE_LESSON,
     SET_LOADING,
+    LESSON_ERROR
 } from '../types';
 
 const reducer = (state, action) => {
@@ -37,6 +38,12 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 lessons: action.payload,
+                loading: false
+            };
+        case LESSON_ERROR:
+            return {
+                ...state,
+                error: action.payload,
                 loading: false
             };
         case SET_LOADING:

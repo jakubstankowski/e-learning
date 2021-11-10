@@ -9,6 +9,9 @@ export default {
             case 500: {
                 return 'This is rephrased error message. Please try again later';
             }
+            case 401: {
+                return 'Authentication problem. Please try again'
+            }
         }
 
     }
