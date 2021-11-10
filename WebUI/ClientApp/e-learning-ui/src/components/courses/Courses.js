@@ -16,9 +16,6 @@ export default function Courses(props) {
 
 
     useEffect(() => {
-        console.log('loading courses: ', loading);
-
-        console.log('error: ', error);
         // eslint-disable-next-line
     }, []);
 

@@ -12,7 +12,7 @@ import Button from "@material-ui/core/Button";
 export default function Course() {
     const coursesContext = useContext(CoursesContext);
 
-    const {getCourse, course, loading, deleteCourse} = coursesContext;
+    const {getCourse, course, loading, deleteCourse, error} = coursesContext;
 
     const authContext = useContext(AuthContext);
     const {isAdmin} = authContext;
@@ -37,6 +37,10 @@ export default function Course() {
     const classes = useStyles();
 
     if (loading) return <Spinner size={120}/>
+
+    if (error) return <Typography variant="h4" className="all-center">
+        {error}
+    </Typography>
 
     const {title} = course;
 
