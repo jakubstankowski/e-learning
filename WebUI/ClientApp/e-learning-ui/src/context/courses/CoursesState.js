@@ -5,6 +5,7 @@ import CoursesReducer from './coursesReducer';
 
 import {
     GET_COURSE,
+    COURSE_ERROR,
     DELETE_COURSE,
     POST_COURSE,
     UPDATE_COURSE,
@@ -19,19 +20,28 @@ function CoursesState(props) {
     const initialState = {
         courses: [],
         course: {},
-        loading: true
+        loading: false,
+        error: null
     }
 
     const [state, dispatch] = useReducer(CoursesReducer, initialState);
 
     const getHomeCourses = async () => {
-        setLoading();
+        try {
+            setLoading();
 
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/courses/home`);
-        dispatch({
-            type: GET_HOME_COURSES,
-            payload: res.data
-        });
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/courses/home`);
+            dispatch({
+                type: GET_HOME_COURSES,
+                payload: res.data
+            });
+        } catch (error) {
+            dispatch({
+                type: COURSE_ERROR,
+                payload: error.message
+            });
+        }
+
     }
 
     const getAdminCourses = async () => {
@@ -46,6 +56,9 @@ function CoursesState(props) {
     }
 
     const getUserCourses = async () => {
+        state.courses = [];
+
+        console.log('courses: ', state.courses);
         setLoading();
 
         const res = await axios.get(`${process.env.REACT_APP_API_URL}/courses/user`);

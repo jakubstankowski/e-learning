@@ -3,6 +3,7 @@ export const GET_ADMIN_COURSES = 'GET_ADMIN_COURSES';
 export const GET_USER_COURSES = 'GET_USER_COURSES';
 export const GET_COURSE = 'GET_COURSE';
 export const RESET_COURSES = 'RESET_COURSES';
+export const COURSE_ERROR = 'COURSE_ERROR';
 export const GET_COURSE_LESSONS = 'GET_COURSE_LESSONS';
 export const GET_LESSON = 'GET_LESSON';
 export const POST_COURSE = 'POST_COURSE';

@@ -1,7 +1,7 @@
 import * as React from "react";
 import Grid from "@material-ui/core/Grid";
 import CourseItem from "./CourseItem";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import CoursesContext from '../../context/courses/coursesContext';
 import Spinner from "../spinner/Spinner";
 
@@ -13,9 +13,16 @@ export default function Courses(props) {
 
     const {loading, courses} = coursesContext;
 
+
+    useEffect(() => {
+        console.log('loading courses: ', loading);
+        // eslint-disable-next-line
+    }, []);
+
+
     if (loading) return <Spinner size={120}/>
 
-   return (
+    return (
         <Grid container spacing={4}>
             {
                 courses.map((course) =>

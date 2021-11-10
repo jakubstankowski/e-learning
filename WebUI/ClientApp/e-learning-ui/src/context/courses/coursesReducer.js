@@ -6,7 +6,9 @@ import {
     SET_LOADING,
     POST_COURSE,
     DELETE_COURSE,
-    UPDATE_COURSE, RESET_COURSES
+    COURSE_ERROR,
+    UPDATE_COURSE,
+    RESET_COURSES
 } from '../types';
 
 const reducer = (state, action) => {
@@ -57,6 +59,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 courses: []
+            };
+        case COURSE_ERROR:
+            return {
+                ...state,
+                error: action.payload
             };
         case SET_LOADING:
             return {
