@@ -126,6 +126,7 @@ function LessonsState(props) {
             value={{
                 lesson: state.lesson,
                 lessons: state.lessons,
+                error: state.error,
                 getCourseLessons,
                 getLesson,
                 postLesson,
