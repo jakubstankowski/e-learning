@@ -21,14 +21,15 @@ export default function Login({history}) {
             if (isAdmin) {
                 return navigate('/dashboard');
             }
-            navigate('/user/my-courses');
+             navigate('/user/my-courses');
         }
+
         // eslint-disable-next-line
     }, [isAdmin, error, isAuthenticated, history,]);
 
 
     const onSubmit = (values) => {
-        login(values);
+        login(values)
     };
 
     const validate = (values) => {
@@ -102,15 +103,6 @@ export default function Login({history}) {
 
                         </form>
                     )}/>
-                {
-                    error && <Typography className="mt-2 all-center"
-                                         component="h4"
-                                         variant="h4"
-                                         color="secondary">
-                        {error}
-                    </Typography>
-                }
-
             </article>
         </Container>
     );
