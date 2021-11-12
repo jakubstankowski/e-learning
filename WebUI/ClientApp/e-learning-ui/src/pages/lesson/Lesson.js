@@ -28,9 +28,6 @@ export default function Lesson() {
         // eslint-disable-next-line
     }, [lessonId, isAuthenticated])
 
-    if (error) return <Typography variant="h4" className="all-center">
-        {error}
-    </Typography>
 
     const useStyles = makeStyles((theme) => ({
         paper: {
@@ -47,6 +44,10 @@ export default function Lesson() {
     const classes = useStyles();
 
     if (loading) return <Spinner/>
+
+    if (error) return <Typography variant="h4" className="all-center">
+        {error}
+    </Typography>
 
     const {id, title, description, videoUrl, nextLessonId, previousLessonId} = lesson;
 
