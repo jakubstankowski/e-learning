@@ -92,6 +92,14 @@ export default function Register({history}) {
                             </Link>*/}
                         </form>
                     )}/>
+                {
+                    error && <Typography className="mt-2 all-center"
+                                         component="h4"
+                                         variant="h4"
+                                         color="secondary">
+                        {error}
+                    </Typography>
+                }
             </article>
         </Container>
     );
