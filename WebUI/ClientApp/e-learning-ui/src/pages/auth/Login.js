@@ -21,7 +21,11 @@ export default function Login({history}) {
             if (isAdmin) {
                 return navigate('/dashboard');
             }
-             navigate('/user/my-courses');
+            navigate('/user/my-courses');
+        }
+
+        if (error) {
+            alert('login error!');
         }
 
         // eslint-disable-next-line

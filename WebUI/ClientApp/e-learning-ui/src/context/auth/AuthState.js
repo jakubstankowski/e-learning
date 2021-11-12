@@ -14,6 +14,7 @@ import {
     AUTH_ERROR,
     LOGOUT
 } from '../types';
+import errorParser from "../../utils/helpers/errorParser";
 
 const AuthState = props => {
     const initialState = {
@@ -37,9 +38,11 @@ const AuthState = props => {
                 payload: res.data
             });
 
-
         } catch (err) {
-            dispatch({type: AUTH_ERROR});
+            dispatch({
+                type: AUTH_ERROR,
+                payload: errorParser.parse(err)
+            });
         }
     };
 
@@ -61,8 +64,8 @@ const AuthState = props => {
             loadUser();
         } catch (err) {
             dispatch({
-                type: REGISTER_FAIL,
-                payload: err.response.data.title
+                type: AUTH_ERROR,
+                payload: errorParser.parse(err)
             });
         }
     };
@@ -87,8 +90,8 @@ const AuthState = props => {
             return res.data;
         } catch (err) {
             dispatch({
-                type: LOGIN_FAIL,
-                payload: err.response.data.title
+                type: AUTH_ERROR,
+                payload: errorParser.parse(err)
             });
         }
     };
