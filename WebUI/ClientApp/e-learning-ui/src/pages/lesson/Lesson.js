@@ -14,7 +14,7 @@ import Button from "@material-ui/core/Button";
 
 export default function Lesson() {
     const lessonsContext = useContext(LessonsContext);
-    const {getLesson, lesson, loading, deleteLesson} = lessonsContext;
+    const {getLesson, lesson, loading, deleteLesson, error} = lessonsContext;
 
     const authContext = useContext(AuthContext);
     const {isAuthenticated, isAdmin} = authContext;
@@ -27,6 +27,10 @@ export default function Lesson() {
         }
         // eslint-disable-next-line
     }, [lessonId, isAuthenticated])
+
+    if (error) return <Typography variant="h4" className="all-center">
+        {error}
+    </Typography>
 
     const useStyles = makeStyles((theme) => ({
         paper: {

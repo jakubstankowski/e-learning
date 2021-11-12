@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using E_Learning.Application.Common.Dto;
-using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Interfaces;
 using E_Learning.Application.Lessons.Queries.GetLessons;

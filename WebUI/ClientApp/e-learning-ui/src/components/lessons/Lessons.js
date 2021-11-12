@@ -5,10 +5,11 @@ import LessonsContext from "../../context/lessons/lessonsContext";
 import Spinner from "../spinner/Spinner";
 import Grid from "@material-ui/core/Grid";
 import AuthContext from "../../context/auth/authContext";
+import {Typography} from "@material-ui/core";
 
 export default function Lessons() {
     const lessonsContext = useContext(LessonsContext);
-    const {getCourseLessons, lessons, loading} = lessonsContext;
+    const {getCourseLessons, lessons, loading, error} = lessonsContext;
 
     const authContext = useContext(AuthContext);
     const {isAuthenticated} = authContext;
@@ -25,6 +26,10 @@ export default function Lessons() {
 
 
     if (loading) return <Spinner/>
+
+    if (error) return <Typography variant="h4" className="all-center">
+        {error}
+    </Typography>
 
     return (
         <Grid container spacing={4}>
