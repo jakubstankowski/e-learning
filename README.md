@@ -6,8 +6,6 @@ E-Learning is platform for every people wanted start publish and sell e-learning
 - .NET Core 5
 - React.js
 
-
-
 ## Usage
 Run React.js frontend:
 

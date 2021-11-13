@@ -28,9 +28,9 @@ namespace E_Learning.Application.Services
 
             var user = await _userManager.FindByIdAsync(userId);
 
-            var userCourse = _context.UserCourses.Where(uc => uc.IdentityUser == user && uc.Course == course).FirstOrDefault();
+            bool isUserCourseUnique = !_context.UserCourses.Any(uc => uc.IdentityUser == user && uc.Course == course);
 
-            if (userCourse == null)
+            if (isUserCourseUnique)
             {
                 var userCourseToCreate = new UserCourses()
                 {
