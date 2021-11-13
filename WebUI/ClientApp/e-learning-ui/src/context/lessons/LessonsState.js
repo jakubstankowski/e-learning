@@ -25,24 +25,6 @@ function LessonsState(props) {
 
     const [state, dispatch] = useReducer(LessonsReducer, initialState);
 
-    const getCourseLessons = async (courseId) => {
-        try {
-            setLoading();
-
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/courses/${courseId}/lessons`);
-
-            dispatch({
-                type: GET_COURSE_LESSONS,
-                payload: res.data
-            })
-        } catch (error) {
-            dispatch({
-                type: LESSON_ERROR,
-                payload: errorParser.parse(error)
-            });
-        }
-    }
-
     const getLesson = async (id) => {
         try {
             setLoading();
@@ -125,9 +107,7 @@ function LessonsState(props) {
         <LessonsContext.Provider
             value={{
                 lesson: state.lesson,
-                lessons: state.lessons,
                 error: state.error,
-                getCourseLessons,
                 getLesson,
                 postLesson,
                 deleteLesson,
