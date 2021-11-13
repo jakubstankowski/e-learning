@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using E_Learning.Application.Common.Dto;
+using E_Learning.Application.Common.Exceptions;
 using E_Learning.Application.Common.Interfaces;
 using E_Learning.Application.Interfaces;
 using E_Learning.Application.Lessons.Queries.GetLessons;
@@ -81,16 +82,6 @@ namespace E_Learning.Controllers
         }
 
 
-
-        [HttpGet("{id}/Lessons")]
-        public async Task<ActionResult<IEnumerable<LessonDto>>> GetCourseLessons(int id)
-        {
-            var courseLessons = await _courseService.GetCourseLessonsAsync(id);
-
-            _logger.LogInformation("Success get course lessons");
-
-            return Ok(_mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDto>>(courseLessons));
-        }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]

@@ -42,13 +42,6 @@ namespace E_Learning.Application.Services
             return await _context.Courses.Include(c => c.Lessons).FirstOrDefaultAsync(c => c.Id == courseId);
         }
 
-        public async Task<IEnumerable<Lesson>> GetCourseLessonsAsync(int courseId)
-        {
-            return await _context.Lessons
-                .Where(l => l.CourseId == courseId)
-                .ToListAsync();
-        }
-
         public async Task<IEnumerable<Course>> UpdateCourseAsync(Course course, CourseDto courseDto)
         {
             course.Title = courseDto.Title;
