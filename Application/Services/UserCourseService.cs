@@ -30,7 +30,7 @@ namespace E_Learning.Application.Services
 
             bool isUserCourseUnique = !_context.UserCourses.Any(uc => uc.IdentityUser == user && uc.Course == course);
 
-            if (isUserCourseUnique)
+            if (isUserCourseUnique == true)
             {
                 var userCourseToCreate = new UserCourses()
                 {
