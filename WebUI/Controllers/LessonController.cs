@@ -42,6 +42,7 @@ namespace E_Learning.Controllers
             Lesson lessonToCreate = new()
             {
                 CourseId = lessonDto.CourseId,
+                IsDemo = lessonDto.IsDemo,
                 Description = lessonDto.Description,
                 Title = lessonDto.Title,
                 VideoUrl = lessonDto.VideoUrl
