@@ -39,7 +39,7 @@ namespace E_Learning.Application.Services
 
         public async Task<Course> GetCourseByIdAsync(int courseId)
         {
-            return await _context.Courses.FirstOrDefaultAsync(c => c.Id == courseId);
+            return await _context.Courses.Include(c => c.Lessons).FirstOrDefaultAsync(c => c.Id == courseId);
         }
 
         public async Task<IEnumerable<Lesson>> GetCourseLessonsAsync(int courseId)

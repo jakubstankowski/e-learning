@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 namespace E_Learning.Controllers
 {
     [ApiController]
-    [Authorize(Roles = "User")]
     [Route("api/[controller]")]
     public class LessonController : ControllerBase
     {
