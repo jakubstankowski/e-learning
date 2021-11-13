@@ -10,6 +10,8 @@ namespace E_Learning.Domain.Entities
     {
         public int Id { get; set; }
 
+        public bool IsDemo { get; set; } = false;
+
         public string Title { get; set; }
 
         public string Description { get; set; }
