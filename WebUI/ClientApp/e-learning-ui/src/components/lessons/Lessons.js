@@ -1,29 +1,14 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext} from "react";
 import LessonItem from "./LessonItem";
-import {useParams} from "@reach/router";
 import LessonsContext from "../../context/lessons/lessonsContext";
 import Spinner from "../spinner/Spinner";
 import Grid from "@material-ui/core/Grid";
-import AuthContext from "../../context/auth/authContext";
 import {Typography} from "@material-ui/core";
 
-export default function Lessons() {
+export default function Lessons(props) {
     const lessonsContext = useContext(LessonsContext);
-    const {getCourseLessons, lessons, loading, error} = lessonsContext;
-
-    const authContext = useContext(AuthContext);
-    const {isAuthenticated} = authContext;
-
-    const {courseId} = useParams();
-
-    useEffect(() => {
-        if (isAuthenticated) {
-            getCourseLessons(courseId);
-        }
-
-        // eslint-disable-next-line
-    }, [isAuthenticated]);
-
+    const {loading, error} = lessonsContext;
+    const {lessons} = props;
 
     if (loading) return <Spinner/>
 

@@ -74,7 +74,7 @@ export default function Course() {
                 </article>
             }
             <Container className={classes.lessons}>
-                <Lessons/>
+                {/*<Lessons/>*/}
             </Container>
         </Container>
     )
