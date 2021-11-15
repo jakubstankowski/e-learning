@@ -4,13 +4,12 @@ import LessonsContext from './lessonsContext';
 import LessonsReducer from './lessonsReducer';
 
 import {
-    GET_COURSE_LESSONS,
     GET_LESSON,
     DELETE_LESSON,
     POST_LESSON,
     UPDATE_LESSON,
     SET_LOADING,
-    LESSON_ERROR, COURSE_ERROR
+    LESSON_ERROR
 } from '../types'
 import errorParser from "../../utils/helpers/errorParser";
 
