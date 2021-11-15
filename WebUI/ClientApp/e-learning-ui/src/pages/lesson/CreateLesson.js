@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Button} from "@material-ui/core";
-import {TextField} from 'mui-rff';
+import {TextField, Checkboxes} from 'mui-rff';
 import {Form} from 'react-final-form'
 import Typography from "@material-ui/core/Typography";
 import {useContext} from "react";
@@ -22,6 +22,11 @@ export default function CreateLesson() {
                 navigate(`/course/${courseId}`);
             })
     };
+
+    const checkboxData = [
+        {label: 'Yes it is', value: true},
+        {label: 'No is not', value: false}
+    ];
 
     const validate = (values) => {
         const errors = {};
@@ -82,6 +87,12 @@ export default function CreateLesson() {
                                 name="videoUrl"
                                 fullWidth
                                 label="Video URL"
+                            />
+                            <Checkboxes
+                                label="Select if lessons is demo"
+                                name="isDemo"
+                                required={true}
+                                data={checkboxData}
                             />
                             <TextField
                                 variant="outlined"

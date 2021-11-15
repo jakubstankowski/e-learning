@@ -21,7 +21,6 @@ export default function Course() {
 
     useEffect(() => {
         getCourse(courseId);
-        console.log('course: ', course);
         // eslint-disable-next-line
     }, []);
 
