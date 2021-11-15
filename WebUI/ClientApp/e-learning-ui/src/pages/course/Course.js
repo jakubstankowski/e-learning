@@ -21,6 +21,7 @@ export default function Course() {
 
     useEffect(() => {
         getCourse(courseId);
+        console.log('course: ', course);
         // eslint-disable-next-line
     }, []);
 
@@ -42,7 +43,7 @@ export default function Course() {
         {error}
     </Typography>
 
-    const {title} = course;
+    const {title, lessons} = course;
 
     return (
         <Container className={classes.course}>
@@ -73,9 +74,13 @@ export default function Course() {
                     </Link>
                 </article>
             }
-            <Container className={classes.lessons}>
-                {/*<Lessons/>*/}
-            </Container>
+            {
+                lessons && lessons.length > 0 &&
+                <Container className={classes.lessons}>
+                    <Lessons lessons={lessons}/>
+                </Container>
+            }
+
         </Container>
     )
 
