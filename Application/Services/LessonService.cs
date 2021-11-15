@@ -49,6 +49,7 @@ namespace E_Learning.Application.Services
             lesson.Description = lessonDto.Description;
             lesson.VideoUrl = lessonDto.VideoUrl;
             lesson.CourseId = lessonDto.CourseId;
+            lesson.IsDemo = lessonDto.IsDemo && lessonDto.IsDemo;
 
             return await _context.Lessons
                 .Where(l => l.CourseId == lessonDto.CourseId)
