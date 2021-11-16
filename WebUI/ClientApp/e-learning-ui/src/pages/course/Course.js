@@ -11,7 +11,6 @@ import Button from "@material-ui/core/Button";
 
 export default function Course() {
     const coursesContext = useContext(CoursesContext);
-
     const {getCourse, course, loading, deleteCourse, error} = coursesContext;
 
     const authContext = useContext(AuthContext);
