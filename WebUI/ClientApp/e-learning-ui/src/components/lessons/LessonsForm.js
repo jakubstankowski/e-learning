@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import Button from "@material-ui/core/Button";
 import {useParams} from "@reach/router";
 import CoursesContext from "../../context/courses/coursesContext";
+import CourseItem from "../courses/CourseItem";
 
 export default function LessonsForm() {
     const coursesContext = useContext(CoursesContext);
@@ -33,8 +34,8 @@ export default function LessonsForm() {
 
     return (
         <>
-            course title: {course.title}
-            <form onSubmit={onSubmit}>
+            Course Title: {course.title}
+                <form onSubmit={onSubmit}>
                 <input
                     type='text'
                     placeholder='Title'
