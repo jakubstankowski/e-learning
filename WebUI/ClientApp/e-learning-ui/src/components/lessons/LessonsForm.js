@@ -29,8 +29,7 @@ export default function LessonsForm() {
                 value={title}
                 onChange={onChange}
             />
-            <input
-                type='text'
+            <textarea
                 placeholder='Description'
                 name='description'
                 value={description}

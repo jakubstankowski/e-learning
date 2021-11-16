@@ -87,6 +87,46 @@ a {
     margin-top: 2rem;
 }
 
+input {
+    display: block;
+    border: none;
+    font-size: 18px;
+    margin: 10px 0 20px 0;
+    max-width: 100%;
+    padding: 10px 14px;
+    box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px,
+    rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+    border-radius: 4px;
+    background: white;
+    color: #424770;
+    letter-spacing: 0.025em;
+    width: 500px;
+}
+
+input::placeholder {
+    color: #aab7c4;
+}
+
+textarea {
+    display: block;
+    border: none;
+    font-size: 18px;
+    margin: 10px 0 20px 0;
+    max-width: 100%;
+    padding: 10px 14px;
+    box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px,
+    rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+    border-radius: 4px;
+    background: white;
+    color: #424770;
+    letter-spacing: 0.025em;
+    width: 500px;
+}
+
+textarea::placeholder {
+    color: #aab7c4;
+}
+
 .navbar a {
     color: #fff;
 }
@@ -213,6 +253,6 @@ a {
     display: inline;
 }
 
-.w-100{
+.w-100 {
     width: 100%;
 }
