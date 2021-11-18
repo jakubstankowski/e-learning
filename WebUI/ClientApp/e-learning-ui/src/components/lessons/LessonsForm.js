@@ -9,17 +9,18 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 export default function LessonsForm() {
     const coursesContext = useContext(CoursesContext);
     const {getCourse, course} = coursesContext;
+    const {courseId} = useParams();
 
     const [lesson, setLesson] = useState({
         title: '',
         description: '',
         videoUrl: '',
-        courseId: null,
+        courseId: parseInt(courseId),
         isDemo: false
     });
 
     const {title, description, videoUrl, isDemo} = lesson;
-    const {courseId} = useParams();
+
 
     useEffect(() => {
         getCourse(courseId);

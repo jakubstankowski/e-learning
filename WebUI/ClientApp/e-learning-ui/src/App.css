@@ -11,6 +11,7 @@ html {
 :root {
     --primary-color: #3a739d;
     --secondary-color: #f16564;
+    --gray-color: #c8ced3;
     --dark-color: #3f4446;
     --light-color: #f4f4f4;
     --danger-color: #dc3545;
@@ -118,6 +119,14 @@ textarea::placeholder {
     color: #aab7c4;
 }
 
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='password']:focus,
+input[type='date']:focus,
+select:focus,
+textarea:focus {
+    outline: 1px solid var(--gray-color);
+}
 
 .navbar a {
     color: #fff;
