@@ -2,7 +2,9 @@ import React, {useContext, useEffect, useState} from "react";
 import Button from "@material-ui/core/Button";
 import {useParams} from "@reach/router";
 import CoursesContext from "../../context/courses/coursesContext";
-import CourseItem from "../courses/CourseItem";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 export default function LessonsForm() {
     const coursesContext = useContext(CoursesContext);
@@ -27,6 +29,8 @@ export default function LessonsForm() {
     const onChange = e =>
         setLesson({...lesson, [e.target.name]: e.target.value});
 
+    const onChangeChecbkox = () => setLesson({...lesson, isDemo: !isDemo});
+
     const onSubmit = e => {
         e.preventDefault();
         console.log('lesson: ', lesson);
@@ -35,7 +39,7 @@ export default function LessonsForm() {
     return (
         <>
             Course Title: {course.title}
-                <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit}>
                 <input
                     type='text'
                     placeholder='Title'
@@ -56,6 +60,13 @@ export default function LessonsForm() {
                     value={videoUrl}
                     onChange={onChange}
                 />
+                <FormGroup className="mb-2">
+                    <FormControlLabel control={
+                        <Checkbox
+                            checked={isDemo}
+                            onChange={onChangeChecbkox}
+                        />} label="Check if this is demo lesson"/>
+                </FormGroup>
                 <Button color="secondary"
                         variant="contained" className="w-100" type="submit">
                     Create

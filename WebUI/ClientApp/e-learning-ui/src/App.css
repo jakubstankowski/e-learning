@@ -88,8 +88,6 @@ a {
     margin-top: 2rem;
 }
 
-
-
 input[type='text'],
 input[type='email'],
 input[type='password'],
@@ -240,6 +238,14 @@ textarea::placeholder {
 
 .mt-2 {
     margin-top: 2rem;
+}
+
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
 }
 
 /*display*/
