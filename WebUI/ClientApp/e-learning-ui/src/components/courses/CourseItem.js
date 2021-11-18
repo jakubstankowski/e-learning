@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CourseItem(props) {
     const classes = useStyles();
     const {id, title, price, imageUrl} = props.course;
-    const {showAddToCartButton} = props;
+    const {showAddToCartButton, showEditButton, showCreateNewLessonButton, showDeleteButton} = props;
 
     const authContext = useContext(AuthContext);
     const {isAuthenticated, isAdmin} = authContext;
@@ -48,70 +48,77 @@ export default function CourseItem(props) {
     }, [isAuthenticated, isAdmin]);
 
     return (
-        /*<Grid item xs={12} md={4} className={classes.courseItem}>*/
-            <Card>
-                <CardActionArea className={classes.card}>
-                    <Link to={`/course/${id}`}
-                          style={{textDecoration: 'none'}}
-                    >
-                        <CardMedia
-                            className={classes.cardMedia}
-                            component="img"
-                            alt={`${title}-image`}
-                            title={title}
-                            src={imageUrl}
-                        />
-                        <article className={classes.cardDetails}>
-                            <Typography component="h2" variant="h5">
-                                {title} id: {id}
-                            </Typography>
-                            <Typography variant="subtitle1" paragraph>
-                                {price} $
-                            </Typography>
-                        </article>
-                    </Link>
-                </CardActionArea>
-                {
-                    showAddToCartButton &&
-                    <CardActions>
-                        <Button onClick={() => addItemToBasket(props.course)}
-                                color="secondary"
-                                variant="contained">
-                            Add To Cart
-                        </Button>
-                    </CardActions>
-                }
+        <Card>
+            <CardActionArea className={classes.card}>
+                <Link to={`/course/${id}`}
+                      style={{textDecoration: 'none'}}
+                >
+                    <CardMedia
+                        className={classes.cardMedia}
+                        component="img"
+                        alt={`${title}-image`}
+                        title={title}
+                        src={imageUrl}
+                    />
+                    <article className={classes.cardDetails}>
+                        <Typography component="h2" variant="h5">
+                            {title}
+                        </Typography>
+                        <Typography variant="subtitle1" paragraph>
+                            {price} $
+                        </Typography>
+                    </article>
+                </Link>
+            </CardActionArea>
+            {
+                showAddToCartButton &&
+                <CardActions>
+                    <Button onClick={() => addItemToBasket(props.course)}
+                            color="secondary"
+                            variant="contained">
+                        Add To Cart
+                    </Button>
+                </CardActions>
+            }
 
-                {
-                    isAdmin && isAuthenticated &&
-                    <CardActions>
-                        <Link to={`/course/${id}/edit`}
-                              style={{textDecoration: 'none'}}
+            {
+                isAdmin && isAuthenticated &&
+                <CardActions>
+                    {
+                        showEditButton && <Link to={`/course/${id}/edit`}
+                                                style={{textDecoration: 'none'}}
                         >
                             <Button color="primary" variant="contained">
                                 Edit
                             </Button>
                         </Link>
-                        <Button color="secondary"
-                                onClick={() => deleteCourse(id)}
-                                variant="contained">
+                    }
+                    {
+                        showDeleteButton && <Button color="secondary"
+                                                    onClick={() => deleteCourse(id)}
+                                                    variant="contained">
                             Delete
                         </Button>
-                        <Link to={`/course/${id}/lesson/create`}
-                              style={{textDecoration: 'none'}}
+                    }
+                    {
+                        showCreateNewLessonButton && <Link to={`/course/${id}/lesson/create`}
+                                                           style={{textDecoration: 'none'}}
                         >
                             <Button color="primary" variant="contained">
                                 Create New Lesson
                             </Button>
                         </Link>
-                    </CardActions>
-                }
-            </Card>
-        /*</Grid>*/
+                    }
+                </CardActions>
+            }
+        </Card>
     )
 }
 
 CourseItem.defaultProps = {
-    showAddToCartButton: false
+    showAddToCartButton: false,
+    showEditButton: false,
+    showDeleteButton: false,
+    showCreateNewLessonButton: false
 }
 

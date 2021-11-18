@@ -7,6 +7,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
 import CourseItem from "../courses/CourseItem";
+import Typography from "@material-ui/core/Typography";
 
 export default function LessonsForm() {
     const coursesContext = useContext(CoursesContext);
@@ -41,7 +42,17 @@ export default function LessonsForm() {
 
     return (
         <>
-            <Grid container spacing={4} >
+            <Grid container spacing={4}>
+                <Grid item lg={6} xs={12} className="all-center">
+                    <Typography component="h1" variant="h5" className="mb-2">
+                        Course:
+                    </Typography>
+                    <CourseItem
+                        className="w-100 mt-1"
+                        showAddToCartButton={false}
+                        course={course}
+                        key={course.id}/>
+                </Grid>
                 <Grid item lg={6} xs={12}>
                     <form onSubmit={onSubmit}>
                         <input
@@ -79,13 +90,6 @@ export default function LessonsForm() {
                             Create
                         </Button>
                     </form>
-                </Grid>
-                <Grid item lg={6} xs={12} className="all-center">
-                    <CourseItem
-                        className="w-100"
-                        showAddToCartButton={false}
-                        course={course}
-                        key={course.id}/>
                 </Grid>
             </Grid>
 
