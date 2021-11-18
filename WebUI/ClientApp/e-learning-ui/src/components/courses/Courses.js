@@ -10,7 +10,7 @@ import {Typography} from "@material-ui/core";
 export default function Courses(props) {
     const coursesContext = useContext(CoursesContext);
 
-    const {showAddToCartButton} = props;
+    const {showAddToCartButton, showEditButton, showCreateNewLessonButton, showDeleteButton} = props;
 
     const {loading, courses, error} = coursesContext;
 
@@ -32,6 +32,9 @@ export default function Courses(props) {
                 courses.map((course) =>
                     <CourseItem
                         showAddToCartButton={showAddToCartButton}
+                        showEditButton={showEditButton}
+                        showCreateNewLessonButton={showCreateNewLessonButton}
+                        showDeleteButton={showDeleteButton}
                         course={course}
                         key={course.id}/>
                 )

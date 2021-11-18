@@ -35,7 +35,11 @@ export default function Dashboard() {
                     Create New Course
                 </Button>
             </Link>
-            <Courses/>
+            <Courses
+                showEditButton={true}
+                showDeleteButton={true}
+                showCreateNewLessonButton={true}
+            />
         </Container>
     )
 }
