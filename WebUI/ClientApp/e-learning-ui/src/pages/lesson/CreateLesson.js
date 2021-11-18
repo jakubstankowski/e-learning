@@ -52,12 +52,14 @@ export default function CreateLesson() {
     };
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component="main">
             <article className="form-body">
-                <Typography component="h1" variant="h5">
-                    Create Lesson
+                <Typography component="h1" variant="h2" className="mb-2">
+                    Create New Lesson
                 </Typography>
-                <LessonsForm/>
+                <div className="all-center mt-2">
+                    <LessonsForm />
+                </div>
             </article>
         </Container>
     )

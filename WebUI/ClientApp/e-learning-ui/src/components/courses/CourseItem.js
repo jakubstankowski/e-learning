@@ -48,7 +48,7 @@ export default function CourseItem(props) {
     }, [isAuthenticated, isAdmin]);
 
     return (
-        <Grid item xs={12} md={4} className={classes.courseItem}>
+        /*<Grid item xs={12} md={4} className={classes.courseItem}>*/
             <Card>
                 <CardActionArea className={classes.card}>
                     <Link to={`/course/${id}`}
@@ -107,7 +107,7 @@ export default function CourseItem(props) {
                     </CardActions>
                 }
             </Card>
-        </Grid>
+        /*</Grid>*/
     )
 }
 

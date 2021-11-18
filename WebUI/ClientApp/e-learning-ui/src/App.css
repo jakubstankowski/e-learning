@@ -107,7 +107,7 @@ textarea {
     background: white;
     color: #424770;
     letter-spacing: 0.025em;
-    width: 500px;
+    min-width: 350px;
 }
 
 input[type='text'],

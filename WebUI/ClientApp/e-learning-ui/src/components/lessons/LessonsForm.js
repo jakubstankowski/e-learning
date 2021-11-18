@@ -5,6 +5,8 @@ import CoursesContext from "../../context/courses/coursesContext";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Grid from "@material-ui/core/Grid";
+import CourseItem from "../courses/CourseItem";
 
 export default function LessonsForm() {
     const coursesContext = useContext(CoursesContext);
@@ -39,40 +41,54 @@ export default function LessonsForm() {
 
     return (
         <>
-            Course Title: {course.title}
-            <form onSubmit={onSubmit}>
-                <input
-                    type='text'
-                    placeholder='Title'
-                    name='title'
-                    value={title}
-                    onChange={onChange}
-                />
-                <textarea
-                    placeholder='Description'
-                    name='description'
-                    value={description}
-                    onChange={onChange}
-                />
-                <input
-                    type='text'
-                    placeholder='Video Url'
-                    name='videoUrl'
-                    value={videoUrl}
-                    onChange={onChange}
-                />
-                <FormGroup className="mb-2">
-                    <FormControlLabel control={
-                        <Checkbox
-                            checked={isDemo}
-                            onChange={onChangeChecbkox}
-                        />} label="Check if this is demo lesson"/>
-                </FormGroup>
-                <Button color="secondary"
-                        variant="contained" className="w-100" type="submit">
-                    Create
-                </Button>
-            </form>
+            <Grid container spacing={4} >
+                <Grid item lg={6} xs={12}>
+                    <form onSubmit={onSubmit}>
+                        <input
+                            type='text'
+                            placeholder='Title'
+                            name='title'
+                            className="w-100"
+                            value={title}
+                            onChange={onChange}
+                        />
+                        <textarea
+                            placeholder='Description'
+                            name='description'
+                            className="w-100"
+                            value={description}
+                            onChange={onChange}
+                        />
+                        <input
+                            type='text'
+                            placeholder='Video Url'
+                            name='videoUrl'
+                            className="w-100"
+                            value={videoUrl}
+                            onChange={onChange}
+                        />
+                        <FormGroup className="mb-2">
+                            <FormControlLabel control={
+                                <Checkbox
+                                    checked={isDemo}
+                                    onChange={onChangeChecbkox}
+                                />} label="Check if this is demo lesson"/>
+                        </FormGroup>
+                        <Button color="secondary"
+                                variant="contained" className="w-100" type="submit">
+                            Create
+                        </Button>
+                    </form>
+                </Grid>
+                <Grid item lg={6} xs={12} className="all-center">
+                    <CourseItem
+                        className="w-100"
+                        showAddToCartButton={false}
+                        course={course}
+                        key={course.id}/>
+                </Grid>
+            </Grid>
+
         </>
     )
 }
