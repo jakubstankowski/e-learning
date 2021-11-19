@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import Button from "@material-ui/core/Button";
-import {useParams} from "@reach/router";
+import {navigate, useParams} from "@reach/router";
 import CoursesContext from "../../context/courses/coursesContext";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
@@ -15,6 +15,9 @@ export default function LessonsForm() {
 
     const coursesContext = useContext(CoursesContext);
     const {getCourse, course, updateCourse} = coursesContext;
+
+    const lessonsContext = useContext(LessonsContext);
+    const {postLesson} = lessonsContext;
 
     const [lesson, setLesson] = useState({
         title: '',
@@ -39,9 +42,11 @@ export default function LessonsForm() {
 
     const onSubmit = e => {
         e.preventDefault();
-        course.lessons.push(lesson);
 
-        console.log('course: ', course);
+        postLesson(lesson)
+            .then(() => {
+                navigate(`/course/${courseId}`);
+            });
     };
 
     return (
