@@ -3,7 +3,7 @@
 E-Learning is platform for every people wanted start publish and sell e-learning courses. In use cases is very simillar like udemy. This project have very intuitive user interface, and very great skallable and easy to maintain technology. Fell free to check it out how this work
 
 ## Technology:
-- .NET Core 5
+- .NET 5
 - React.js
 
 ## Usage
