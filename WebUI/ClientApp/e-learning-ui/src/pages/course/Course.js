@@ -37,10 +37,6 @@ export default function Course() {
 
     if (loading) return <Spinner size={120}/>
 
-    if (error) return <Typography variant="h4" className="all-center">
-        {error}
-    </Typography>
-
     const {title, lessons} = course;
 
     return (

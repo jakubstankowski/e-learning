@@ -35,6 +35,7 @@ export default function Home() {
     return (
         <section>
             <HomeBillboard post={mainFeaturedPost}/>
+
             <Courses
                 showAddToCartButton="true"
             />

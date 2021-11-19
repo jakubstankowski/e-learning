@@ -22,21 +22,20 @@ export default function Courses(props) {
 
     if (loading) return <Spinner size={120}/>
 
-    if (error) return <Typography variant="h4" className="all-center">
-        {error}
-    </Typography>
 
     return (
         <Grid container spacing={4}>
             {
                 courses.map((course) =>
-                    <CourseItem
-                        showAddToCartButton={showAddToCartButton}
-                        showEditButton={showEditButton}
-                        showCreateNewLessonButton={showCreateNewLessonButton}
-                        showDeleteButton={showDeleteButton}
-                        course={course}
-                        key={course.id}/>
+                    <Grid item lg={4} xs={12} className="all-center">
+                        <CourseItem
+                            showAddToCartButton={showAddToCartButton}
+                            showEditButton={showEditButton}
+                            showCreateNewLessonButton={showCreateNewLessonButton}
+                            showDeleteButton={showDeleteButton}
+                            course={course}
+                            key={course.id}/>
+                    </Grid>
                 )
             }
         </Grid>
