@@ -3,9 +3,7 @@ import React from 'react';
 import {Router} from "@reach/router";
 import Course from "./pages/course/Course";
 import CreateCourse from "./pages/course/CreateCourse";
-import CreateLesson from "./pages/lesson/CreateLesson";
 import EditCourse from "./pages/course/EditCourse";
-import EditLesson from "./pages/lesson/EditLesson";
 import CoursesState from "./context/courses/CoursesState";
 import LessonsState from "./context/lessons/LessonsState";
 import BasketState from './context/basket/BasketState';
@@ -40,8 +38,8 @@ function App() {
                                             <Lesson path="/course/:courseId/lesson/:lessonId"/>
                                             <CreateCourse path="/course/create"/>
                                             <EditCourse path="/course/:courseId/edit"/>
-                                            <CreateLesson path="/course/:courseId/lesson/create"/>
-                                            <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>
+                                            {/*<CreateLesson path="/course/:courseId/lesson/create"/>
+                                            <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>*/}
                                             <Login path="/login"/>
                                             <Register path="/register"/>
                                             <Basket path="/basket"/>
