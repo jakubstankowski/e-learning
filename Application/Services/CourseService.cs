@@ -48,7 +48,6 @@ namespace E_Learning.Application.Services
             course.Description = courseDto.Description;
             course.Price = courseDto.Price;
             course.ImageUrl = courseDto.ImageUrl;
-            course.Lessons = courseDto.Lessons;
 
             return await _context.Courses.ToListAsync();
         }
