@@ -38,7 +38,7 @@ export default function LessonsForm() {
     const onChange = e =>
         setLesson({...lesson, [e.target.name]: e.target.value});
 
-    const onChangeChecbkox = () => setLesson({...lesson, isDemo: !isDemo});
+    const onChangeCheckbox = () => setLesson({...lesson, isDemo: !isDemo});
 
     const onSubmit = e => {
         e.preventDefault();
@@ -91,7 +91,7 @@ export default function LessonsForm() {
                             <FormControlLabel control={
                                 <Checkbox
                                     checked={isDemo}
-                                    onChange={onChangeChecbkox}
+                                    onChange={onChangeCheckbox}
                                 />} label="Check if this is demo lesson"/>
                         </FormGroup>
                         <Button color="secondary"
