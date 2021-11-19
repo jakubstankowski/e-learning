@@ -16,7 +16,7 @@ namespace E_Learning.Application.Common.Dto
 
         public string ImageUrl { get; set; }
 
-        public ICollection<LessonDto> Lessons { get; set; }
+        public ICollection<Lesson> Lessons { get; set; }
 
     }
 }

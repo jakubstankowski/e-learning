@@ -83,7 +83,6 @@ namespace E_Learning.Controllers
 
 
 
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<IEnumerable<CourseDto>>> CreateCourse(CourseDto courseDto)
         {
@@ -104,7 +103,6 @@ namespace E_Learning.Controllers
             return Ok(courses);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCourse(int id)
         {
@@ -123,7 +121,6 @@ namespace E_Learning.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<ActionResult<CourseDto>> UpdateCourse(int id, CourseDto courseDto)
         {

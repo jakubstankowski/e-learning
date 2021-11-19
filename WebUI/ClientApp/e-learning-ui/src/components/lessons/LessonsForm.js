@@ -8,11 +8,13 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
 import CourseItem from "../courses/CourseItem";
 import Typography from "@material-ui/core/Typography";
+import LessonsContext from "../../context/lessons/lessonsContext";
 
 export default function LessonsForm() {
-    const coursesContext = useContext(CoursesContext);
-    const {getCourse, course} = coursesContext;
     const {courseId} = useParams();
+
+    const coursesContext = useContext(CoursesContext);
+    const {getCourse, course, updateCourse} = coursesContext;
 
     const [lesson, setLesson] = useState({
         title: '',
@@ -37,7 +39,9 @@ export default function LessonsForm() {
 
     const onSubmit = e => {
         e.preventDefault();
-        console.log('lesson: ', lesson);
+        course.lessons.push(lesson);
+
+        console.log('course: ', course);
     };
 
     return (
