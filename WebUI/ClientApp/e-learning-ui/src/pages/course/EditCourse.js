@@ -14,7 +14,7 @@ import {makeStyles} from "@material-ui/core/styles";
 export default function EditCourse() {
     const coursesContext = useContext(CoursesContext);
 
-    const {getCourse, course, updateCourse, loading} = coursesContext;
+    const {getCourse, course, updateCourse, loading, lessons} = coursesContext;
 
     const authContext = useContext(AuthContext);
     const {isAuthenticated} = authContext;
@@ -47,7 +47,7 @@ export default function EditCourse() {
             errors.price = 'Required';
         }
 
-        if(!values.imageUrl){
+        if (!values.imageUrl) {
             errors.imageUrl = 'Required';
         }
 
@@ -142,9 +142,13 @@ export default function EditCourse() {
                     </form>
                 )}
             />
-            <Container className={classes.lessons}>
-                <Lessons/>
-            </Container>
+            {
+                lessons && lessons.length > 0 &&
+                <Container className={classes.lessons}>
+                    <Lessons lessons={lessons}/>
+                </Container>
+            }
+
         </section>
     )
 
