@@ -35,7 +35,7 @@ namespace E_Learning.Application.Services
             {
                 var options = new PaymentIntentCreateOptions
                 {
-                    Amount = (long)basket.Items.Sum(i => i.Price * 100),
+                    Amount = CalculatePaymentAmount(basket),
                     Currency = "usd",
                     PaymentMethodTypes = new List<string> { "card" }
                 };
@@ -55,6 +55,11 @@ namespace E_Learning.Application.Services
             await _basketService.UpdateBasketAsync(basket);
 
             return basket;
+        }
+
+        static long CalculatePaymentAmount(CustomerBasket basket)
+        {
+            return (long)basket.Items.Sum(i => i.Price * 100);
         }
 
     }

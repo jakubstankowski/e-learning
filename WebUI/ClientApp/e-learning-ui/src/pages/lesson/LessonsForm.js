@@ -35,6 +35,7 @@ export default function LessonsForm() {
     useEffect(() => {
         getCourse(courseId);
 
+        console.log('lessons id: ', lessonId)
         if (lessonId) {
             setEditMode(true);
         } else {
@@ -43,7 +44,7 @@ export default function LessonsForm() {
 
         console.log('edit mode: ', editMode);
         // eslint-disable-next-line
-    }, []);
+    }, [lessonId]);
 
     const onChange = e =>
         setLesson({...lesson, [e.target.name]: e.target.value});
