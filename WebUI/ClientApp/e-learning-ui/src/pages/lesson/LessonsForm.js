@@ -11,13 +11,15 @@ import Typography from "@material-ui/core/Typography";
 import LessonsContext from "../../context/lessons/lessonsContext";
 
 export default function LessonsForm() {
-    const {courseId} = useParams();
+    const {courseId, lessonId} = useParams();
 
     const coursesContext = useContext(CoursesContext);
     const {getCourse, course, updateCourse} = coursesContext;
 
     const lessonsContext = useContext(LessonsContext);
     const {postLesson} = lessonsContext;
+
+    const [editMode, setEditMode] = useState(false);
 
     const [lesson, setLesson] = useState({
         title: '',
@@ -32,6 +34,14 @@ export default function LessonsForm() {
 
     useEffect(() => {
         getCourse(courseId);
+
+        if (lessonId) {
+            setEditMode(true);
+        } else {
+            setEditMode(false);
+        }
+
+        console.log('edit mode: ', editMode);
         // eslint-disable-next-line
     }, []);
 

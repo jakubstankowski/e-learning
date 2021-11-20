@@ -22,40 +22,43 @@ import OrderState from "./context/order/OrderState";
 import Order from "./pages/order/Order";
 import Layout from "./components/layout/Layout";
 import Checkout from "./pages/checkout/Checkout";
+import LessonsFrom from './pages/lesson/LessonsForm';
+import LessonsForm from "./pages/lesson/LessonsForm";
+
 
 function App() {
     return (
-            <AuthState>
-                <CoursesState>
-                    <BasketState>
-                        <OrderState>
-                                <LessonsState>
-                                    <Header title="E-Learning"/>
-                                    <Router>
-                                        <Layout path="/">
-                                            <Home path="/"/>
-                                            <Course path="/course/:courseId"/>
-                                            <Lesson path="/course/:courseId/lesson/:lessonId"/>
-                                            <CreateCourse path="/course/create"/>
-                                            <EditCourse path="/course/:courseId/edit"/>
-                                            {/*<CreateLesson path="/course/:courseId/lesson/create"/>
-                                            <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>*/}
-                                            <Login path="/login"/>
-                                            <Register path="/register"/>
-                                            <Basket path="/basket"/>
-                                            <Checkout path="/checkout"/>
-                                            <UserCourses path="/user/my-courses"/>
-                                            <Dashboard path="/dashboard"/>
-                                            <Order path="/order"/>
-                                            <NotFound path="*"/>
-                                        </Layout>
-                                    </Router>
-                                    <Footer title="Stantech"/>
-                                </LessonsState>
-                        </OrderState>
-                    </BasketState>
-                </CoursesState>
-            </AuthState>
+        <AuthState>
+            <CoursesState>
+                <BasketState>
+                    <OrderState>
+                        <LessonsState>
+                            <Header title="E-Learning"/>
+                            <Router>
+                                <Layout path="/">
+                                    <Home path="/"/>
+                                    <Course path="/course/:courseId"/>
+                                    <Lesson path="/course/:courseId/lesson/:lessonId"/>
+                                    <CreateCourse path="/course/create"/>
+                                    <EditCourse path="/course/:courseId/edit"/>
+                                    <LessonsForm path="/course/:courseId/lesson/create"/>
+                                    <LessonsForm path="/course/:courseId/lesson/:lessonId/edit"/>
+                                    <Login path="/login"/>
+                                    <Register path="/register"/>
+                                    <Basket path="/basket"/>
+                                    <Checkout path="/checkout"/>
+                                    <UserCourses path="/user/my-courses"/>
+                                    <Dashboard path="/dashboard"/>
+                                    <Order path="/order"/>
+                                    <NotFound path="*"/>
+                                </Layout>
+                            </Router>
+                            <Footer title="Stantech"/>
+                        </LessonsState>
+                    </OrderState>
+                </BasketState>
+            </CoursesState>
+        </AuthState>
     );
 }
 
