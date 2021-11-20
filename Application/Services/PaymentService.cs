@@ -29,8 +29,6 @@ namespace E_Learning.Application.Services
 
             PaymentIntent intent;
 
-            long amount = (long)basket.Items.Sum(i => i.Price * 100);
-
             if (string.IsNullOrEmpty(basket.PaymentIntentId))
             {
                 var options = new PaymentIntentCreateOptions
