@@ -13,6 +13,8 @@ import LessonsContext from "../../context/lessons/lessonsContext";
 export default function LessonsForm(props) {
     const {courseId} = useParams();
 
+    const {mode} = props;
+
     const coursesContext = useContext(CoursesContext);
     const {getCourse, course} = coursesContext;
 
@@ -21,16 +23,17 @@ export default function LessonsForm(props) {
 
     const [lesson, setLesson] = useState({
         title: props.lesson ? props.lesson.title : '',
-        description: '',
-        videoUrl: '',
-        courseId: parseInt(courseId),
-        isDemo: false
+        description: props.lesson ? props.lesson.description : '',
+        videoUrl: props.lesson ? props.lesson.videoUrl : '',
+        courseId: props.lesson ? props.lesson.courseId : '',
+        isDemo: props.lesson ? props.lesson.isDemo : false,
     });
 
     const {title, description, videoUrl, isDemo} = lesson;
 
     useEffect(() => {
         getCourse(courseId);
+        alert(mode);
         // eslint-disable-next-line
     }, []);
 
