@@ -10,16 +10,14 @@ import CourseItem from "../courses/CourseItem";
 import Typography from "@material-ui/core/Typography";
 import LessonsContext from "../../context/lessons/lessonsContext";
 
-export default function LessonsForm() {
-    const {courseId, lessonId} = useParams();
+export default function LessonsForm(props) {
+    const {courseId} = useParams();
 
     const coursesContext = useContext(CoursesContext);
-    const {getCourse, course, updateCourse} = coursesContext;
+    const {getCourse, course} = coursesContext;
 
     const lessonsContext = useContext(LessonsContext);
     const {postLesson} = lessonsContext;
-
-    const [editMode, setEditMode] = useState(false);
 
     const [lesson, setLesson] = useState({
         title: '',
@@ -31,20 +29,10 @@ export default function LessonsForm() {
 
     const {title, description, videoUrl, isDemo} = lesson;
 
-
     useEffect(() => {
         getCourse(courseId);
-
-        console.log('lessons id: ', lessonId)
-        if (lessonId) {
-            setEditMode(true);
-        } else {
-            setEditMode(false);
-        }
-
-        console.log('edit mode: ', editMode);
         // eslint-disable-next-line
-    }, [lessonId]);
+    }, []);
 
     const onChange = e =>
         setLesson({...lesson, [e.target.name]: e.target.value});
