@@ -22,8 +22,8 @@ import OrderState from "./context/order/OrderState";
 import Order from "./pages/order/Order";
 import Layout from "./components/layout/Layout";
 import Checkout from "./pages/checkout/Checkout";
-import LessonsFrom from './pages/lesson/LessonsForm';
-import LessonsForm from "./pages/lesson/LessonsForm";
+import LessonsFrom from './components/lessons/LessonsForm';
+import LessonsForm from "./components/lessons/LessonsForm";
 
 
 function App() {

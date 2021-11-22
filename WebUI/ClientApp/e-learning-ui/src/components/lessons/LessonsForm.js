@@ -6,7 +6,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
-import CourseItem from "../../components/courses/CourseItem";
+import CourseItem from "../courses/CourseItem";
 import Typography from "@material-ui/core/Typography";
 import LessonsContext from "../../context/lessons/lessonsContext";
 
