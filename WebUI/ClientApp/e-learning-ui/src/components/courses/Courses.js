@@ -27,7 +27,7 @@ export default function Courses(props) {
         <Grid container spacing={4}>
             {
                 courses.map((course) =>
-                    <Grid item lg={4} xs={12} className="all-center">
+                    <Grid item lg={4} md={6} sm={12} className="all-center">
                         <CourseItem
                             showAddToCartButton={showAddToCartButton}
                             showEditButton={showEditButton}

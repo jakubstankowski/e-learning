@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     card: {
         display: 'flex',
         overflow: 'auto',
-        width: 350
+        width: '100%'
     },
     cardDetails: {
         flex: 1,

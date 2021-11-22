@@ -22,8 +22,8 @@ import OrderState from "./context/order/OrderState";
 import Order from "./pages/order/Order";
 import Layout from "./components/layout/Layout";
 import Checkout from "./pages/checkout/Checkout";
-import LessonsFrom from './components/lessons/LessonsForm';
-import LessonsForm from "./components/lessons/LessonsForm";
+import CreateLesson from "./pages/lesson/CreateLesson";
+import EditLesson from "./pages/lesson/EditLesson";
 
 
 function App() {
@@ -41,8 +41,8 @@ function App() {
                                     <Lesson path="/course/:courseId/lesson/:lessonId"/>
                                     <CreateCourse path="/course/create"/>
                                     <EditCourse path="/course/:courseId/edit"/>
-                                    <LessonsForm path="/course/:courseId/lesson/create"/>
-                                    <LessonsForm path="/course/:courseId/lesson/:lessonId/edit"/>
+                                    <CreateLesson path="/course/:courseId/lesson/create"/>
+                                    <EditLesson path="/course/:courseId/lesson/:lessonId/edit"/>
                                     <Login path="/login"/>
                                     <Register path="/register"/>
                                     <Basket path="/basket"/>
