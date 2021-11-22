@@ -20,7 +20,7 @@ export default function LessonsForm(props) {
     const {postLesson} = lessonsContext;
 
     const [lesson, setLesson] = useState({
-        title: '',
+        title: props.lesson ? props.lesson.title : '',
         description: '',
         videoUrl: '',
         courseId: parseInt(courseId),

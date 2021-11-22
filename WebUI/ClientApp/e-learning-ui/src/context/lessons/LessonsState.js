@@ -34,6 +34,8 @@ function LessonsState(props) {
                 type: GET_LESSON,
                 payload: res.data
             });
+
+            return res.data;
         } catch (error) {
             dispatch({
                 type: LESSON_ERROR,
