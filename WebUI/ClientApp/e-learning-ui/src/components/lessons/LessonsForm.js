@@ -25,7 +25,7 @@ export default function LessonsForm(props) {
         title: props.lesson ? props.lesson.title : '',
         description: props.lesson ? props.lesson.description : '',
         videoUrl: props.lesson ? props.lesson.videoUrl : '',
-        courseId: props.lesson ? props.lesson.courseId : '',
+        courseId: courseId,
         isDemo: props.lesson ? props.lesson.isDemo : false,
     });
 
