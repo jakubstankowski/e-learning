@@ -90,14 +90,9 @@ namespace E_Learning.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<ActionResult<LessonDto>> UpdateLesson(int id, LessonDto lessonDto)
         {
-            if (id != lessonDto.Id)
-            {
-                return BadRequest();
-            }
 
             var lesson = await _lessonService.GetLessonByIdAsync(id);
 

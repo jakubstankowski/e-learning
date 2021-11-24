@@ -8,8 +8,6 @@ namespace E_Learning.Application.Lessons.Queries.GetLessons
 {
     public class LessonDto
     {
-        public int Id { get; set; }
-
         public bool IsDemo { get; set; }
 
         public string Title { get; set; }
