@@ -105,7 +105,7 @@ textarea {
     rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
     border-radius: 4px;
     background: white;
-    color: #424770;
+    color: var(--dark-color);
     letter-spacing: 0.025em;
     min-width: 350px;
 }
@@ -116,7 +116,7 @@ input[type='password'],
 input[type='date'],
 select,
 textarea::placeholder {
-    color: #aab7c4;
+    color: var(--dark-color);
 }
 
 input[type='text']:focus,
