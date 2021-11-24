@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import LessonsContext from "../../context/lessons/lessonsContext";
 
 export default function LessonsForm(props) {
-    const {courseId} = useParams();
+    const {courseId, lessonId} = useParams();
 
     const {mode} = props;
 
@@ -19,7 +19,7 @@ export default function LessonsForm(props) {
     const {getCourse, course} = coursesContext;
 
     const lessonsContext = useContext(LessonsContext);
-    const {postLesson} = lessonsContext;
+    const {postLesson, updateLesson} = lessonsContext;
 
     const [lesson, setLesson] = useState({
         title: props.lesson ? props.lesson.title : '',
@@ -44,10 +44,18 @@ export default function LessonsForm(props) {
     const onSubmit = e => {
         e.preventDefault();
 
-        postLesson(lesson)
-            .then(() => {
-                navigate(`/course/${courseId}`);
-            });
+        if (mode === 'create') {
+            postLesson(lesson)
+                .then(() => {
+                    navigate(`/course/${courseId}`);
+                });
+        } else {
+            updateLesson(lessonId, lesson)
+                .then(() => {
+                    navigate(`/course/${courseId}`);
+                });
+        }
+
     };
 
     return (
@@ -97,7 +105,7 @@ export default function LessonsForm(props) {
                         </FormGroup>
                         <Button color="secondary"
                                 variant="contained" className="w-100" type="submit">
-                            Create
+                            {mode === 'create' ? 'Create' : 'Update'}
                         </Button>
                     </form>
                 </Grid>
