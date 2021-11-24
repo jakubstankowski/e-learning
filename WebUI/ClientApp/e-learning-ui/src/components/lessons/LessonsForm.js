@@ -33,7 +33,6 @@ export default function LessonsForm(props) {
 
     useEffect(() => {
         getCourse(courseId);
-        alert(mode);
         // eslint-disable-next-line
     }, []);
 
