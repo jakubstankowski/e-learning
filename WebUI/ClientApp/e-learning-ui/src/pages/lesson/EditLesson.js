@@ -11,7 +11,7 @@ export default function EditLesson() {
     const lessonsContext = useContext(LessonsContext);
     const {loading, getLesson, lesson} = lessonsContext;
 
-    const [showLesson, setShowLesson] = useState(false);
+    const [showLessonForm, setShowLesson] = useState(false);
 
     useEffect(() => {
         getLesson(lessonId)
@@ -29,7 +29,7 @@ export default function EditLesson() {
                 Edit Lesson
             </Typography>
             {
-                showLesson && <LessonsForm lesson={lesson} mode="edit"/>
+                showLessonForm && <LessonsForm lesson={lesson} mode="edit"/>
             }
         </>
     )
