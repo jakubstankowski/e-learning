@@ -55,7 +55,7 @@ namespace E_Learning.Application.Services
             return basket;
         }
 
-        static long CalculatePaymentAmount(CustomerBasket basket)
+        public static long CalculatePaymentAmount(CustomerBasket basket)
         {
             return (long)basket.Items.Sum(i => i.Price * 100);
         }
